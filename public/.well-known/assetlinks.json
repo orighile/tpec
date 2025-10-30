@@ -1,0 +1,9 @@
+
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.lovable.de254497e4444207922fe36a367f9291.twa",
+    "sha256_cert_fingerprints": [""]
+  }
+}]

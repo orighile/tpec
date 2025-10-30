@@ -1,0 +1,120 @@
+name: Build and Deploy to IONOS
+
+on:
+  push:
+    branches: [ main, master ]
+    tags:
+      - 'v*.*.*'  # Triggers on version tags like v1.0.0
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run type checking
+      run: npx tsc --noEmit
+      continue-on-error: false
+      
+    - name: Run linting
+      run: npx eslint .
+      continue-on-error: true
+      
+    - name: Build application
+      run: npm run build
+      env:
+        NODE_ENV: production
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: dist-files-node-${{ matrix.node-version }}
+        path: dist/
+        retention-days: 30
+
+  deploy-to-ionos:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: dist-files-node-20.x
+        path: dist/
+        
+    - name: Display structure of downloaded files
+      run: ls -la dist/
+      
+    - name: Deploy to IONOS via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.IONOS_FTP_HOST }}
+        username: ${{ secrets.IONOS_FTP_USER }}
+        password: ${{ secrets.IONOS_FTP_PASSWORD }}
+        local-dir: ./dist/
+        server-dir: /  # Adjust this to your IONOS web root directory
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          
+    - name: Notify deployment success
+      if: success()
+      run: |
+        echo "🚀 Deployment to IONOS completed successfully!"
+        echo "📁 Files deployed from dist/ folder"
+        echo "🌐 Your app should now be live on your IONOS server"
+        
+    - name: Notify deployment failure
+      if: failure()
+      run: |
+        echo "❌ Deployment to IONOS failed!"
+        echo "Please check the logs above for more details"
+
+  # Optional: Create a release when deploying tags
+  create-release:
+    needs: [build, deploy-to-ionos]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          ## Changes in this Release
+          - Automated build and deployment to IONOS server
+          - Created from commit ${{ github.sha }}
+          
+          ## Deployment Info
+          - Built with Node.js 20.x
+          - Deployed to IONOS server automatically
+        draft: false
+        prerelease: false
