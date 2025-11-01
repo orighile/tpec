@@ -3,6 +3,7 @@ import { Star, MapPin, ArrowSquareOut, Calendar } from "phosphor-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import venueImg from "@/assets/venue-image-1.jpg";
 import cateringImg from "@/assets/catering-image.jpg";
 import decorationImg from "@/assets/decoration-image.jpg";
@@ -64,10 +65,11 @@ const VendorHighlights = () => {
           {vendors.map((vendor) => (
             <div key={vendor.id} className="tpec-card">
               <div className="relative h-48 overflow-hidden">
-                <img 
+                <OptimizedImage 
                   src={vendor.image} 
-                  alt={vendor.name} 
+                  alt={`${vendor.name} - ${vendor.category} services in ${vendor.location}`}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute top-4 left-4">
                   <Badge className="bg-white text-accent hover:bg-white">

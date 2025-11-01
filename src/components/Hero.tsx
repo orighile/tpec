@@ -86,6 +86,8 @@ const Hero = () => {
           src={heroImage}
           alt="Vibrant Nigerian event celebration with traditional decorations"
           className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+          fetchPriority="high"
         />
         {/* Subtle dark overlay for text readability only */}
         <div className="absolute inset-0 bg-black/30"></div>

@@ -1,4 +1,3 @@
-
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import BrowseCategories from "../components/BrowseCategories";
@@ -8,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import JaraBot from "../components/jarabot";
 import FeaturedEvents from "../components/FeaturedEvents";
 import CTA from "../components/CTA";
+import { SEO } from "@/components/SEO";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -27,6 +27,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="TPEC Events - Premier Event Planning Services in Lagos, Nigeria | Wedding & Corporate Events"
+        description="TPEC Events is Nigeria's leading event planning platform. Find verified vendors, plan weddings, corporate events & celebrations in Lagos, Abuja, Ibeju-Lekki. Book consultation today!"
+        keywords="event planning Nigeria, wedding planners Lagos, corporate events Abuja, Ibeju-Lekki events, Nigerian wedding vendors, event management Lagos, party planners Nigeria"
+      />
       <Navbar />
       <main className="flex-1">
         <Hero />

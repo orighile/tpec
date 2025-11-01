@@ -1,14 +1,32 @@
-
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FeaturedEvents from "../components/FeaturedEvents";
 import { Button } from "@/components/ui/button";
 import { PlusCircle, Filter, SlidersHorizontal } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 const EventsPage = () => {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "EventSeries",
+    "name": "Nigerian Events",
+    "description": "Discover weddings, corporate events, birthdays, and cultural celebrations across Nigeria",
+    "organizer": {
+      "@type": "Organization",
+      "name": "TPEC Events",
+      "url": "https://tpecevents.com"
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO 
+        title="Events in Nigeria - Weddings, Corporate & Cultural Celebrations | TPEC"
+        description="Discover and create memorable events in Nigeria. Browse weddings, corporate events, birthday parties, and cultural celebrations in Lagos, Abuja, and beyond."
+        keywords="Nigerian events, Lagos weddings, corporate events Nigeria, birthday parties, cultural celebrations, event discovery Nigeria"
+        jsonLd={jsonLd}
+      />
       <Navbar />
       <main className="flex-1 py-12 bg-gray-50">
         <div className="container mx-auto px-4">

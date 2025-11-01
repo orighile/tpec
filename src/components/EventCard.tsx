@@ -1,8 +1,8 @@
-
 import { Calendar, MapPin, Users, Heart } from "phosphor-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 type EventCardProps = {
   id: number;
@@ -34,10 +34,11 @@ const EventCard = ({
       className
     )}>
       <div className="relative overflow-hidden aspect-[4/3]">
-        <img 
+        <OptimizedImage 
           src={image} 
-          alt={title} 
+          alt={`${title} - ${category} event in ${location}`}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          loading="lazy"
         />
         
         {isFeatured && (
