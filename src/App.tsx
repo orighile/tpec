@@ -49,6 +49,9 @@ import GiftRegistryPage from "./pages/GiftRegistryPage";
 import FAQPage from "./pages/FAQPage";
 import VenuesPage from "./pages/VenuesPage";
 import PlannersPage from "./pages/PlannersPage";
+import JaraBotPage from "./pages/JaraBotPage";
+import CommunityPage from "./pages/CommunityPage";
+import GalleryPage from "./pages/GalleryPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -103,6 +106,9 @@ const App = () => (
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/venues" element={<VenuesPage />} />
               <Route path="/planners" element={<PlannersPage />} />
+              <Route path="/jarabot" element={<JaraBotPage />} />
+              <Route path="/community" element={<CommunityPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <TWAInstallPrompt />
