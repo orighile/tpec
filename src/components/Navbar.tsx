@@ -73,7 +73,7 @@ const Navbar = () => {
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
-                  Planning Tools
+                  Plan My Event
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="bg-white border shadow-md rounded-md">
                   <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -99,10 +99,12 @@ const Navbar = () => {
             </NavigationMenuList>
           </NavigationMenu>
            
-          <Link to="/planners" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Planners</Link>
-          <Link to="/vendors/marketplace" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Vendors</Link>
-          <Link to="/venues" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Venues</Link>
-          <Link to="/about" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">About Us</Link>
+          <Link to="/planners" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Find Event Planners</Link>
+          <Link to="/vendors/marketplace" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Browse Vendors</Link>
+          <Link to="/venues" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Find Venues</Link>
+          <Link to="/jarabot" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Ask JaraBot</Link>
+          <Link to="/community" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Community</Link>
+          <Link to="/gallery" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Event Inspiration</Link>
         </div>
 
         {/* Right section with CTA and user menu */}
@@ -203,7 +205,7 @@ const Navbar = () => {
               className="block w-full text-left text-base font-medium text-gray-700 hover:text-[#D4AF37]"
               onClick={() => document.getElementById('mobile-planning-tools')?.classList.toggle('hidden')}
             >
-              Planning Tools
+              Plan My Event
             </button>
             <div id="mobile-planning-tools" className="hidden pl-4 pt-2 space-y-2">
               {planningToolsLinks.map((tool) => (
@@ -219,10 +221,12 @@ const Navbar = () => {
             </div>
           </div>
           
-          <Link to="/planners" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Planners</Link>
-          <Link to="/vendors/marketplace" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Vendors</Link>
-          <Link to="/venues" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Venues</Link>
-          <Link to="/about" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">About Us</Link>
+          <Link to="/planners" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Find Event Planners</Link>
+          <Link to="/vendors/marketplace" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Browse Vendors</Link>
+          <Link to="/venues" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Find Venues</Link>
+          <Link to="/jarabot" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Ask JaraBot</Link>
+          <Link to="/community" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Community</Link>
+          <Link to="/gallery" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Event Inspiration</Link>
           
           {user ? (
             <div className="pt-4 pb-3 border-t border-gray-200">
