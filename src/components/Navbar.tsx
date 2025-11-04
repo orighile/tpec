@@ -184,100 +184,99 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile menu button */}
-        <div className="lg:hidden flex items-center space-x-2">
-          <Button asChild className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-white text-sm px-3 py-2" size="sm">
+        {/* Mobile menu - compact horizontal */}
+        <div className="lg:hidden flex items-center gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm" className="text-xs border-primary/30">
+                Menu
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56 bg-white z-50 border shadow-lg">
+              <DropdownMenuLabel>Navigation</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link to="/planners" className="cursor-pointer">Find Event Planners</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/vendors/marketplace" className="cursor-pointer">Browse Vendors</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/venues" className="cursor-pointer">Find Venues</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/jarabot" className="cursor-pointer">Ask JaraBot</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/community" className="cursor-pointer">Community</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/gallery" className="cursor-pointer">Event Inspiration</Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuLabel>Planning Tools</DropdownMenuLabel>
+              {planningToolsLinks.map((tool) => (
+                <DropdownMenuItem key={tool.title} asChild>
+                  <Link to={tool.href} onClick={handlePlanningToolsClick} className="cursor-pointer">
+                    {tool.title}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <Button asChild className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white text-xs px-3 py-2" size="sm">
             <Link to="/events/create">
               <CalendarPlus className="mr-1 h-3 w-3" />
               Create
             </Link>
           </Button>
           
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-[#D4AF37] hover:bg-gray-100 focus:outline-none"
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <List className="h-6 w-6" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {isOpen && (
-        <div className="lg:hidden pt-4 pb-3 space-y-1 px-4 border-t border-gray-200 mt-4">
-          <div className="py-2">
-            <button 
-              className="block w-full text-left text-base font-medium text-gray-700 hover:text-[#D4AF37]"
-              onClick={() => document.getElementById('mobile-planning-tools')?.classList.toggle('hidden')}
-            >
-              Plan My Event
-            </button>
-            <div id="mobile-planning-tools" className="hidden pl-4 pt-2 space-y-2">
-              {planningToolsLinks.map((tool) => (
-                <Link 
-                  key={tool.title} 
-                  to={tool.href} 
-                  onClick={handlePlanningToolsClick}
-                  className="block py-1 text-sm text-gray-600 hover:text-[#D4AF37]"
-                >
-                  {tool.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-          
-          <Link to="/planners" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Find Event Planners</Link>
-          <Link to="/vendors/marketplace" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Browse Vendors</Link>
-          <Link to="/venues" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Find Venues</Link>
-          <Link to="/jarabot" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Ask JaraBot</Link>
-          <Link to="/community" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Community</Link>
-          <Link to="/gallery" className="block py-2 text-base font-medium text-gray-700 hover:text-[#D4AF37]">Event Inspiration</Link>
-          
           {user ? (
-            <div className="pt-4 pb-3 border-t border-gray-200">
-              <div className="flex items-center px-4">
-                <div className="flex-shrink-0">
-                  <Avatar className="h-10 w-10">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full p-0">
+                  <Avatar className="h-8 w-8">
                     <AvatarImage src="/src/assets/avatar-1.jpg" alt="User" />
-                    <AvatarFallback className="bg-[#D4AF37] text-white">{userInitials}</AvatarFallback>
+                    <AvatarFallback className="bg-primary text-white text-xs">{userInitials}</AvatarFallback>
                   </Avatar>
-                </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium text-gray-800">{userEmail}</div>
-                </div>
-                <Button variant="ghost" size="icon" className="ml-auto">
-                  <Bell className="h-5 w-5" />
                 </Button>
-              </div>
-              <div className="mt-3 space-y-1 px-2">
-                <button 
-                  onClick={handleProfileClick}
-                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#D4AF37] hover:bg-gray-100"
-                >
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 bg-white z-50 border shadow-lg">
+                <DropdownMenuLabel>
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium">Account</p>
+                    <p className="text-xs text-muted-foreground">{userEmail}</p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleProfileClick} className="cursor-pointer">
+                  <User className="mr-2 h-4 w-4" />
                   Profile
-                </button>
-                <Link to="/tasks" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#D4AF37] hover:bg-gray-100">My Tasks</Link>
-                <button 
-                  onClick={handleSettingsClick}
-                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#D4AF37] hover:bg-gray-100"
-                >
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/tasks" className="cursor-pointer">
+                    <CalendarPlus className="mr-2 h-4 w-4" />
+                    My Tasks
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleSettingsClick} className="cursor-pointer">
+                  <Gear className="mr-2 h-4 w-4" />
                   Settings
-                </button>
-                <button 
-                  onClick={handleSignOut} 
-                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#D4AF37] hover:bg-gray-100"
-                >
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-red-600 focus:text-red-600">
                   Log out
-                </button>
-              </div>
-            </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
-            <div className="pt-4 border-t border-gray-200">
-              <Link to="/auth" className="block px-3 py-2 rounded-md text-base font-medium text-[#D4AF37] hover:bg-gray-100">Login / Register</Link>
-            </div>
+            <Button asChild size="sm" className="bg-primary hover:bg-primary/90 text-xs">
+              <Link to="/auth">Login</Link>
+            </Button>
           )}
         </div>
-      )}
+      </div>
     </nav>
   );
 };
