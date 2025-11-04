@@ -24,7 +24,6 @@ import {
 } from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
@@ -60,15 +59,13 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-border shadow-sm">
+    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-border shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center group">
-            <div className="relative transition-transform duration-300 group-hover:scale-105">
-              <TPECLogo size="lg" linkToHome={true} />
-            </div>
-          </div>
+          <Link to="/" className="flex items-center group transition-transform duration-300 hover:scale-105">
+            <TPECLogo size="lg" linkToHome={false} />
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="flex items-center space-x-1">
@@ -78,7 +75,7 @@ const Navbar = () => {
                   <NavigationMenuTrigger className="text-foreground hover:text-primary transition-all duration-200 font-medium bg-transparent hover:bg-primary/5 focus:bg-transparent data-[state=open]:bg-primary/10 data-[state=open]:text-primary rounded-lg px-4 h-10">
                     Plan My Event
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="bg-card/95 backdrop-blur-xl border border-border shadow-[var(--shadow-elegant)] rounded-xl">
+                  <NavigationMenuContent className="bg-card/98 backdrop-blur-xl border border-border shadow-[var(--shadow-elegant)] rounded-xl z-[100]">
                     <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {planningToolsLinks.map((tool) => (
                         <li key={tool.title}>
@@ -129,13 +126,6 @@ const Navbar = () => {
 
           {/* Right Actions */}
           <div className="flex items-center gap-3">
-            <Button asChild variant="premium" size="default" className="gap-2">
-              <Link to="/events/create">
-                <CalendarPlus className="h-4 w-4" weight="bold" />
-                <span>Create Event</span>
-              </Link>
-            </Button>
-
             <Button variant="ghost" size="icon" className="relative text-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-full">
               <Bell className="h-5 w-5" />
               <span className="absolute top-2 right-2 w-2 h-2 bg-accent rounded-full animate-pulse"></span>
@@ -151,7 +141,7 @@ const Navbar = () => {
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-card/95 backdrop-blur-xl border border-border shadow-[var(--shadow-elegant)] rounded-xl z-50">
+                <DropdownMenuContent align="end" className="w-56 bg-card/98 backdrop-blur-xl border border-border shadow-[var(--shadow-elegant)] rounded-xl z-[100]">
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-semibold leading-none">Account</p>
