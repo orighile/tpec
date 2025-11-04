@@ -196,144 +196,116 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Mobile Menu Toggle & Actions */}
-            <div className="lg:hidden flex items-center gap-2">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-lg hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 transition-all duration-300"
-              >
-                {isOpen ? <X className="h-6 w-6 text-foreground/80" /> : <List className="h-6 w-6 text-foreground/80" />}
-              </button>
-
-              <Button asChild size="sm" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white text-xs px-3 py-2 shadow-md">
+            {/* Mobile Navigation - Desktop Style */}
+            <div className="lg:hidden flex items-center gap-1.5 flex-shrink-0">
+              <Button asChild size="sm" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white text-xs px-3 py-1.5 h-8 shadow-md">
                 <Link to="/events/create">
-                  <CalendarPlus className="mr-1 h-3 w-3" />
-                  Create
+                  <CalendarPlus className="h-3 w-3" />
                 </Link>
               </Button>
               
               {user ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm" className="h-9 w-9 rounded-full p-0 ring-2 ring-primary/20">
-                      <Avatar className="h-9 w-9">
+                    <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full p-0 ring-2 ring-primary/20">
+                      <Avatar className="h-8 w-8">
                         <AvatarImage src="/src/assets/avatar-1.jpg" alt="User" />
                         <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white text-xs font-semibold">{userInitials}</AvatarFallback>
                       </Avatar>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56 bg-white/98 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-xl z-50">
+                  <DropdownMenuContent align="end" className="w-48 bg-white/98 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-xl z-50">
                     <DropdownMenuLabel>
                       <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-semibold">Account</p>
-                        <p className="text-xs text-muted-foreground">{userEmail}</p>
+                        <p className="text-xs font-semibold">Account</p>
+                        <p className="text-[10px] text-muted-foreground truncate">{userEmail}</p>
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator className="bg-primary/10" />
-                    <DropdownMenuItem onClick={handleProfileClick} className="cursor-pointer hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10">
-                      <User className="mr-2 h-4 w-4" />
+                    <DropdownMenuItem onClick={handleProfileClick} className="cursor-pointer text-xs hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10">
+                      <User className="mr-2 h-3 w-3" />
                       Profile
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link to="/tasks" className="cursor-pointer hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10">
-                        <CalendarPlus className="mr-2 h-4 w-4" />
+                      <Link to="/tasks" className="cursor-pointer text-xs hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10">
+                        <CalendarPlus className="mr-2 h-3 w-3" />
                         My Tasks
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleSettingsClick} className="cursor-pointer hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10">
-                      <Gear className="mr-2 h-4 w-4" />
+                    <DropdownMenuItem onClick={handleSettingsClick} className="cursor-pointer text-xs hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10">
+                      <Gear className="mr-2 h-3 w-3" />
                       Settings
                     </DropdownMenuItem>
                     <DropdownMenuSeparator className="bg-primary/10" />
-                    <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer hover:bg-red-50 text-red-600 focus:text-red-600">
+                    <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-xs hover:bg-red-50 text-red-600 focus:text-red-600">
                       Log out
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
-                <Button asChild size="sm" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-xs">
+                <Button asChild size="sm" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-xs h-8 px-2">
                   <Link to="/auth">Login</Link>
                 </Button>
               )}
             </div>
           </div>
 
-          {/* Mobile Dropdown Menu */}
-          {isOpen && (
-            <div className="lg:hidden border-t border-primary/10 mt-2 pt-4 pb-4 space-y-1 animate-fade-in">
-              <div className="space-y-1">
-                <button 
-                  className="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
-                  onClick={() => document.getElementById('mobile-planning-tools')?.classList.toggle('hidden')}
-                >
-                  Plan My Event
-                </button>
-                <div id="mobile-planning-tools" className="hidden space-y-1 pl-4">
-                  {planningToolsLinks.map((tool) => (
-                    <Link 
-                      key={tool.title} 
-                      to={tool.href} 
-                      onClick={(e) => {
-                        handlePlanningToolsClick(e);
-                        setIsOpen(false);
-                      }}
-                      className="block px-4 py-2 rounded-lg text-sm text-foreground/70 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
-                    >
-                      {tool.title}
-                    </Link>
-                  ))}
-                </div>
-              </div>
+          {/* Secondary Navigation Bar - Mobile/Tablet Only */}
+          <div className="lg:hidden border-t border-primary/10 overflow-x-auto scrollbar-hide">
+            <div className="flex items-center gap-0.5 px-2 py-2 min-w-max">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium text-xs bg-transparent hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 data-[state=open]:bg-gradient-to-r data-[state=open]:from-primary/10 data-[state=open]:to-accent/10 px-3 py-1.5 h-8">
+                      Tools
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent className="bg-white/98 backdrop-blur-xl border border-primary/20 shadow-2xl rounded-xl">
+                      <ul className="grid w-[280px] gap-2 p-3">
+                        {planningToolsLinks.map((tool) => (
+                          <li key={tool.title}>
+                            <NavigationMenuLink asChild>
+                              <Link
+                                to={tool.href}
+                                onClick={handlePlanningToolsClick}
+                                className="block select-none space-y-0.5 rounded-lg p-2.5 leading-none no-underline outline-none transition-all duration-300 hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10"
+                              >
+                                <div className="text-xs font-semibold leading-none text-foreground">{tool.title}</div>
+                                <p className="line-clamp-1 text-[10px] leading-snug text-muted-foreground">{tool.description}</p>
+                              </Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
               
-              <Link 
-                to="/planners" 
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
-              >
-                Find Event Planners
+              <Link to="/planners" className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium text-xs px-3 py-1.5 rounded-lg hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 whitespace-nowrap h-8 flex items-center">
+                Planners
               </Link>
               
-              <Link 
-                to="/vendors/marketplace" 
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
-              >
-                Browse Vendors
+              <Link to="/vendors/marketplace" className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium text-xs px-3 py-1.5 rounded-lg hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 whitespace-nowrap h-8 flex items-center">
+                Vendors
               </Link>
               
-              <Link 
-                to="/venues" 
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
-              >
-                Find Venues
+              <Link to="/venues" className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium text-xs px-3 py-1.5 rounded-lg hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 whitespace-nowrap h-8 flex items-center">
+                Venues
               </Link>
               
-              <Link 
-                to="/jarabot" 
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
-              >
-                Ask JaraBot
+              <Link to="/jarabot" className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium text-xs px-3 py-1.5 rounded-lg hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 whitespace-nowrap h-8 flex items-center">
+                Bot
               </Link>
               
-              <Link 
-                to="/community" 
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
-              >
+              <Link to="/community" className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium text-xs px-3 py-1.5 rounded-lg hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 whitespace-nowrap h-8 flex items-center">
                 Community
               </Link>
               
-              <Link 
-                to="/gallery" 
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
-              >
-                Event Inspiration
+              <Link to="/gallery" className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium text-xs px-3 py-1.5 rounded-lg hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 whitespace-nowrap h-8 flex items-center">
+                Gallery
               </Link>
             </div>
-          )}
+          </div>
         </div>
       </nav>
     </>
