@@ -79,10 +79,10 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5">
+    <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5">
       {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/8 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/8 rounded-full blur-3xl"></div>
       
       <div className="relative z-10 container mx-auto px-4 py-24 md:py-32">
         <div className="grid md:grid-cols-2 gap-12 items-center">

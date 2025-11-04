@@ -47,10 +47,10 @@ const Index = () => {
       <BrowseCategories />
       
       {/* Book a Consultation Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+      <section className="py-20 bg-gradient-to-br from-primary/8 via-background to-accent/8 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
