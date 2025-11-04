@@ -126,10 +126,12 @@ const Navbar = () => {
 
           {/* Right Actions */}
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" className="relative text-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-full">
-              <Bell className="h-5 w-5" />
-              <span className="absolute top-2 right-2 w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-            </Button>
+            {user && (
+              <Button variant="ghost" size="icon" className="relative text-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-full">
+                <Bell className="h-5 w-5" />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+              </Button>
+            )}
 
             {user ? (
               <DropdownMenu>
