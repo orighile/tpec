@@ -79,84 +79,118 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative overflow-hidden">
-      {/* Hero Image Section */}
-      <div className="relative h-[600px] md:h-[700px]">
-        <img 
-          src={heroImage}
-          alt="Vibrant Nigerian event celebration with traditional decorations"
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="eager"
-          fetchPriority="high"
-        />
-        {/* Subtle dark overlay for text readability only */}
-        <div className="absolute inset-0 bg-black/30"></div>
-        
-        <div className="container mx-auto px-4 relative z-10 h-full flex items-center">
-          <div className="max-w-3xl mx-auto text-center text-white">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Plan Your <span className="text-jara-gold">Nigerian Events</span> with Style and Ease
+    <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+      
+      <div className="relative z-10 container mx-auto px-4 py-24 md:py-32">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Content */}
+          <div className="space-y-8">
+            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full border border-primary/20">
+              <span className="text-sm font-semibold text-primary">🎉 Nigeria's #1 Event Planning Platform</span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+              Plan Your{" "}
+              <span className="gradient-text">
+                Dream Events
+              </span>{" "}
+              with Confidence
             </h1>
             
-            <p className="text-lg md:text-xl opacity-90 mb-10">
-              From corporate conferences to vibrant parties, 
-              TPEC helps you create unforgettable experiences.
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+              From vibrant Nigerian weddings to corporate excellence. 
+              Connect with verified vendors, explore stunning venues, and bring your vision to life.
             </p>
           
-          <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl max-w-xl mx-auto">
-            <form onSubmit={handleSearch} className="relative">
-              <MagnifyingGlass className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <input 
-                type="text" 
-                placeholder="Search for events, vendors, venues, or cultural info..." 
-                className="w-full py-3 pl-10 pr-4 bg-white text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-jara-gold"
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setShowSuggestions(true);
-                }}
-                onFocus={() => setShowSuggestions(true)}
-              />
-              <Button type="submit" className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-jara-green hover:bg-jara-green/90 h-10">
-                Search
-              </Button>
-              
-              {/* Enhanced Search suggestions */}
-              {showSuggestions && suggestions.length > 0 && (
-                <div className="absolute mt-1 w-full bg-white rounded-md shadow-lg z-50">
-                  <ul className="py-1">
-                    {suggestions.map((suggestion, index) => (
-                      <li 
-                        key={index}
-                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center text-left text-gray-800"
-                        onClick={() => handleSuggestionClick(suggestion)}
-                      >
-                        <MagnifyingGlass className="h-4 w-4 mr-2 text-gray-500" />
-                        {suggestion}
-                      </li>
-                    ))}
-                  </ul>
+            <div className="glass-card p-6 space-y-4">
+              <form onSubmit={handleSearch} className="relative">
+                <div className="relative">
+                  <MagnifyingGlass className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" weight="bold" />
+                  <input 
+                    type="text" 
+                    placeholder="Search events, vendors, venues, or cultural info..." 
+                    className="w-full py-4 pl-12 pr-32 bg-background border-2 border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground placeholder:text-muted-foreground transition-all"
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setShowSuggestions(true);
+                    }}
+                    onFocus={() => setShowSuggestions(true)}
+                  />
+                  <Button 
+                    type="submit" 
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 h-10 px-6"
+                  >
+                    Search
+                  </Button>
                 </div>
-              )}
-            </form>
+                
+                {/* Enhanced Search suggestions */}
+                {showSuggestions && suggestions.length > 0 && (
+                  <div className="absolute mt-2 w-full bg-card rounded-xl shadow-[var(--shadow-elegant)] border border-border z-50 overflow-hidden">
+                    <ul className="py-2">
+                      {suggestions.map((suggestion, index) => (
+                        <li 
+                          key={index}
+                          className="px-4 py-3 hover:bg-primary/5 cursor-pointer flex items-center text-left text-foreground transition-colors group"
+                          onClick={() => handleSuggestionClick(suggestion)}
+                        >
+                          <MagnifyingGlass className="h-4 w-4 mr-3 text-muted-foreground group-hover:text-primary transition-colors" />
+                          <span className="group-hover:text-primary transition-colors">{suggestion}</span>
+                          <CaretRight className="ml-auto h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </form>
+              
+              <div className="flex flex-wrap gap-2">
+                <span className="text-sm text-muted-foreground">Popular:</span>
+                {["Lagos Weddings", "Corporate Events", "Birthday Parties", "Venues"].map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={() => handleSuggestionClick(tag)}
+                    className="px-3 py-1 text-sm bg-primary/10 hover:bg-primary/20 text-primary rounded-full transition-colors"
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            <div className="flex flex-wrap gap-4">
+              <Link to="/vendors/marketplace">
+                <Button variant="premium" size="lg" className="gap-2">
+                  Explore Vendors
+                  <CaretRight weight="bold" />
+                </Button>
+              </Link>
+              <Link to="/planners">
+                <Button variant="outline" size="lg" className="gap-2">
+                  Find Planners
+                  <CaretRight weight="bold" />
+                </Button>
+              </Link>
+            </div>
           </div>
+
+          {/* Image */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-3xl blur-2xl"></div>
+            <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-[var(--shadow-elegant)] transform hover:scale-105 transition-transform duration-500">
+              <img 
+                src={heroImage}
+                alt="Vibrant Nigerian event celebration with traditional decorations"
+                className="w-full h-auto object-cover"
+                loading="eager"
+                fetchPriority="high"
+              />
+            </div>
           </div>
-        </div>
-        
-        {/* Curved bottom edge */}
-        <div className="absolute -bottom-1 left-0 right-0 h-12 md:h-16">
-          <svg 
-            viewBox="0 0 1440 48" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-full"
-            preserveAspectRatio="none"
-          >
-            <path 
-              d="M0 48H1440V0C1440 0 1144.5 48 720 48C295.5 48 0 0 0 0V48Z" 
-              fill="white"
-            />
-          </svg>
         </div>
       </div>
     </div>
