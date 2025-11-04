@@ -6,6 +6,12 @@ import decorationImg from "@/assets/decoration-image.jpg";
 import djImg from "@/assets/dj-image.jpg";
 import photographyImg from "@/assets/photography-image.jpg";
 import cakeImg from "@/assets/cake-image.jpg";
+import signatureCateringLogo from "@/assets/vendors/signature-catering-logo.png";
+import royalVenuesLogo from "@/assets/vendors/royal-venues-logo.png";
+import eleganceDecorLogo from "@/assets/vendors/elegance-decor-logo.png";
+import rhythmMastersLogo from "@/assets/vendors/rhythm-masters-logo.png";
+import momentsPhotoLogo from "@/assets/vendors/moments-photography-logo.png";
+import divineCakesLogo from "@/assets/vendors/divine-cakes-logo.png";
 
 // Sample vendors data with enhanced information
 export const vendors: Vendor[] = [
@@ -15,6 +21,7 @@ export const vendors: Vendor[] = [
     category: "Catering",
     description: "Premium catering service specializing in Nigerian and continental cuisines for all event types.",
     imageUrl: cateringImg,
+    logo: signatureCateringLogo,
     location: "Lagos, Nigeria",
     priceRange: "₦₦₦",
     rating: 4.8,
@@ -36,6 +43,7 @@ export const vendors: Vendor[] = [
     category: "Venue",
     description: "Luxurious event venues with state-of-the-art facilities for weddings, corporate events, and parties.",
     imageUrl: venueImg,
+    logo: royalVenuesLogo,
     location: "Abuja, Nigeria",
     priceRange: "₦₦₦₦",
     rating: 4.5,
@@ -57,6 +65,7 @@ export const vendors: Vendor[] = [
     category: "Decoration",
     description: "Transforming ordinary spaces into extraordinary experiences with creative and elegant decorations.",
     imageUrl: decorationImg,
+    logo: eleganceDecorLogo,
     location: "Port Harcourt, Nigeria",
     priceRange: "₦₦",
     rating: 4.6,
@@ -77,6 +86,7 @@ export const vendors: Vendor[] = [
     category: "Entertainment",
     description: "Professional DJ services with the latest sound equipment and an extensive music library for all events.",
     imageUrl: djImg,
+    logo: rhythmMastersLogo,
     location: "Lagos, Nigeria",
     priceRange: "₦₦",
     rating: 4.9,
@@ -98,6 +108,7 @@ export const vendors: Vendor[] = [
     category: "Photography",
     description: "Professional photography and videography services capturing the most precious moments of your events.",
     imageUrl: photographyImg,
+    logo: momentsPhotoLogo,
     location: "Kano, Nigeria",
     priceRange: "₦₦₦",
     rating: 4.7,
@@ -119,6 +130,7 @@ export const vendors: Vendor[] = [
     category: "Cakes & Desserts",
     description: "Delicious, custom-designed cakes and desserts for all occasions with a focus on quality and presentation.",
     imageUrl: cakeImg,
+    logo: divineCakesLogo,
     location: "Lagos, Nigeria",
     priceRange: "₦₦",
     rating: 4.6,

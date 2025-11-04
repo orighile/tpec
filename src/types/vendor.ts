@@ -5,6 +5,7 @@ export interface Vendor {
   category: string;
   description: string;
   imageUrl: string;
+  logo?: string;
   location: string;
   priceRange: string;
   rating: number;

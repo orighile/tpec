@@ -11,6 +11,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ekoHotelImg from "@/assets/venues/eko-hotel-lagos.jpg";
+import civicCentreImg from "@/assets/venues/civic-centre-lagos.jpg";
+import landmarkCentreImg from "@/assets/venues/landmark-centre-lagos.jpg";
+import transcorpHiltonImg from "@/assets/venues/transcorp-hilton-abuja.jpg";
+import iccAbujaImg from "@/assets/venues/icc-abuja.jpg";
+import hotelPresidentialImg from "@/assets/venues/hotel-presidential-ph.jpg";
+import leMeridienImg from "@/assets/venues/le-meridien-ph.jpg";
+import jogorCentreImg from "@/assets/venues/jogor-centre-ibadan.jpg";
+import tahirPalaceImg from "@/assets/venues/tahir-palace-kano.jpg";
+import nikeLakeImg from "@/assets/venues/nike-lake-resort-enugu.jpg";
 
 const VenuesPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Venues");
@@ -33,7 +43,7 @@ const VenuesPage = () => {
       contact: "+234 1 277 7000",
       email: "events@ekohotels.com",
       description: "Luxury 5-star hotel with world-class event facilities, perfect for grand weddings and corporate events.",
-      image: "/lovable-uploads/venue-image-1.jpg"
+      image: ekoHotelImg
     },
     {
       id: 2,
@@ -48,7 +58,7 @@ const VenuesPage = () => {
       contact: "+234 1 270 1261",
       email: "booking@civiccentrelagos.com",
       description: "Premier event center hosting high-profile weddings, conferences, and exhibitions in Lagos.",
-      image: "/lovable-uploads/venue-image-2.jpg"
+      image: civicCentreImg
     },
     {
       id: 3,
@@ -63,7 +73,7 @@ const VenuesPage = () => {
       contact: "+234 1 271 2005",
       email: "events@landmarkeventcentre.com",
       description: "State-of-the-art event facility with modern amenities for upscale events and celebrations.",
-      image: "/lovable-uploads/venue-image-3.jpg"
+      image: landmarkCentreImg
     },
     {
       id: 4,
@@ -78,7 +88,7 @@ const VenuesPage = () => {
       contact: "+234 9 461 3000",
       email: "abuja.events@hilton.com",
       description: "Abuja's most prestigious hotel offering exceptional service and elegant event spaces.",
-      image: "/lovable-uploads/venue-image-4.jpg"
+      image: transcorpHiltonImg
     },
     {
       id: 5,
@@ -93,7 +103,7 @@ const VenuesPage = () => {
       contact: "+234 9 314 6000",
       email: "booking@iccabuja.com",
       description: "Nigeria's premier conference facility hosting international events, weddings, and exhibitions.",
-      image: "/lovable-uploads/venue-image-1.jpg"
+      image: iccAbujaImg
     },
     {
       id: 6,
@@ -108,7 +118,7 @@ const VenuesPage = () => {
       contact: "+234 84 230 9000",
       email: "events@hotelpresidentialph.com",
       description: "Port Harcourt's finest hotel for weddings and corporate events with riverside ambiance.",
-      image: "/lovable-uploads/venue-image-2.jpg"
+      image: hotelPresidentialImg
     },
     {
       id: 7,
@@ -123,7 +133,7 @@ const VenuesPage = () => {
       contact: "+234 84 835 8000",
       email: "events.porthart@lemeridien.com",
       description: "International hotel brand offering sophisticated venues for all types of events.",
-      image: "/lovable-uploads/venue-image-3.jpg"
+      image: leMeridienImg
     },
     {
       id: 8,
@@ -138,7 +148,7 @@ const VenuesPage = () => {
       contact: "+234 2 810 3000",
       email: "events@jogorcentre.com",
       description: "Ibadan's leading event center for weddings, conferences, and social gatherings.",
-      image: "/lovable-uploads/venue-image-4.jpg"
+      image: jogorCentreImg
     },
     {
       id: 9,
@@ -153,7 +163,7 @@ const VenuesPage = () => {
       contact: "+234 64 632 900",
       email: "events@tahirguestpalace.com",
       description: "Premium hotel in Kano offering elegant venues for Northern Nigerian celebrations.",
-      image: "/lovable-uploads/venue-image-1.jpg"
+      image: tahirPalaceImg
     },
     {
       id: 10,
@@ -168,7 +178,7 @@ const VenuesPage = () => {
       contact: "+234 42 459 176",
       email: "events@nikelakeresort.com",
       description: "Stunning lakeside resort perfect for outdoor weddings and unique celebrations.",
-      image: "/lovable-uploads/venue-image-2.jpg"
+      image: nikeLakeImg
     },
   ];
 
