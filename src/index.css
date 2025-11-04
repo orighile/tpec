@@ -7,6 +7,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Force desktop layout on all devices */
+body {
+  min-width: 1024px;
+  overflow-x: auto;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
