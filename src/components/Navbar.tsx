@@ -196,8 +196,15 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Mobile Actions */}
+            {/* Mobile Menu Toggle & Actions */}
             <div className="lg:hidden flex items-center gap-2">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-2 rounded-lg hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 transition-all duration-300"
+              >
+                {isOpen ? <X className="h-6 w-6 text-foreground/80" /> : <List className="h-6 w-6 text-foreground/80" />}
+              </button>
+
               <Button asChild size="sm" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white text-xs px-3 py-2 shadow-md">
                 <Link to="/events/create">
                   <CalendarPlus className="mr-1 h-3 w-3" />
@@ -250,51 +257,83 @@ const Navbar = () => {
               )}
             </div>
           </div>
-        </div>
-      </nav>
 
-      {/* Mobile Bottom Navigation Bar */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/98 backdrop-blur-xl border-t border-primary/10 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
-        <div className="grid grid-cols-6 gap-1 px-2 py-3">
-          <Link to="/planners" className="flex flex-col items-center justify-center gap-1 px-2 py-1.5 rounded-lg hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 transition-all duration-300 group">
-            <UserPlus className="h-5 w-5 text-foreground/60 group-hover:text-primary transition-colors" />
-            <span className="text-[10px] font-medium text-foreground/60 group-hover:text-primary transition-colors">Planners</span>
-          </Link>
-          
-          <Link to="/vendors/marketplace" className="flex flex-col items-center justify-center gap-1 px-2 py-1.5 rounded-lg hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 transition-all duration-300 group">
-            <svg className="h-5 w-5 text-foreground/60 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-            </svg>
-            <span className="text-[10px] font-medium text-foreground/60 group-hover:text-primary transition-colors">Vendors</span>
-          </Link>
-          
-          <Link to="/venues" className="flex flex-col items-center justify-center gap-1 px-2 py-1.5 rounded-lg hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 transition-all duration-300 group">
-            <svg className="h-5 w-5 text-foreground/60 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            <span className="text-[10px] font-medium text-foreground/60 group-hover:text-primary transition-colors">Venues</span>
-          </Link>
-          
-          <Link to="/jarabot" className="flex flex-col items-center justify-center gap-1 px-2 py-1.5 rounded-lg hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 transition-all duration-300 group">
-            <svg className="h-5 w-5 text-foreground/60 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
-            <span className="text-[10px] font-medium text-foreground/60 group-hover:text-primary transition-colors">JaraBot</span>
-          </Link>
-          
-          <Link to="/community" className="flex flex-col items-center justify-center gap-1 px-2 py-1.5 rounded-lg hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 transition-all duration-300 group">
-            <svg className="h-5 w-5 text-foreground/60 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-            <span className="text-[10px] font-medium text-foreground/60 group-hover:text-primary transition-colors">Community</span>
-          </Link>
-          
-          <Link to="/gallery" className="flex flex-col items-center justify-center gap-1 px-2 py-1.5 rounded-lg hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 transition-all duration-300 group">
-            <svg className="h-5 w-5 text-foreground/60 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            <span className="text-[10px] font-medium text-foreground/60 group-hover:text-primary transition-colors">Gallery</span>
-          </Link>
+          {/* Mobile Dropdown Menu */}
+          {isOpen && (
+            <div className="lg:hidden border-t border-primary/10 mt-2 pt-4 pb-4 space-y-1 animate-fade-in">
+              <div className="space-y-1">
+                <button 
+                  className="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
+                  onClick={() => document.getElementById('mobile-planning-tools')?.classList.toggle('hidden')}
+                >
+                  Plan My Event
+                </button>
+                <div id="mobile-planning-tools" className="hidden space-y-1 pl-4">
+                  {planningToolsLinks.map((tool) => (
+                    <Link 
+                      key={tool.title} 
+                      to={tool.href} 
+                      onClick={(e) => {
+                        handlePlanningToolsClick(e);
+                        setIsOpen(false);
+                      }}
+                      className="block px-4 py-2 rounded-lg text-sm text-foreground/70 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
+                    >
+                      {tool.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              
+              <Link 
+                to="/planners" 
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
+              >
+                Find Event Planners
+              </Link>
+              
+              <Link 
+                to="/vendors/marketplace" 
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
+              >
+                Browse Vendors
+              </Link>
+              
+              <Link 
+                to="/venues" 
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
+              >
+                Find Venues
+              </Link>
+              
+              <Link 
+                to="/jarabot" 
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
+              >
+                Ask JaraBot
+              </Link>
+              
+              <Link 
+                to="/community" 
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
+              >
+                Community
+              </Link>
+              
+              <Link 
+                to="/gallery" 
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-2.5 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5 transition-all duration-300"
+              >
+                Event Inspiration
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
     </>
