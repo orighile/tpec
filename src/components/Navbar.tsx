@@ -60,11 +60,15 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white border-b border-gray-200 py-4 px-4 sm:px-6 lg:px-8 shadow-sm">
+    <nav className="sticky top-0 z-50 bg-gradient-to-r from-white via-purple-50/30 to-white border-b border-purple-100/50 backdrop-blur-sm py-4 px-4 sm:px-6 lg:px-8 shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo - now acts as home button */}
-        <div className="flex items-center">
-          <TPECLogo size="lg" linkToHome={true} />
+        {/* Logo - now acts as home button with enhanced styling */}
+        <div className="flex items-center group">
+          <div className="relative">
+            {/* Subtle glow effect behind logo */}
+            <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <TPECLogo size="lg" linkToHome={true} />
+          </div>
         </div>
 
         {/* Desktop navigation */}
@@ -72,10 +76,10 @@ const Navbar = () => {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
+                <NavigationMenuTrigger className="text-foreground/80 hover:text-primary transition-all duration-300 font-medium bg-transparent hover:bg-primary/5 focus:bg-transparent data-[state=open]:bg-primary/10 data-[state=open]:text-primary rounded-md px-3">
                   Plan My Event
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white border shadow-md rounded-md">
+                <NavigationMenuContent className="bg-white/95 backdrop-blur-md border border-primary/20 shadow-lg rounded-lg">
                   <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                     {planningToolsLinks.map((tool) => (
                       <li key={tool.title}>
@@ -99,25 +103,26 @@ const Navbar = () => {
             </NavigationMenuList>
           </NavigationMenu>
            
-          <Link to="/planners" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Find Event Planners</Link>
-          <Link to="/vendors/marketplace" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Browse Vendors</Link>
-          <Link to="/venues" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Find Venues</Link>
-          <Link to="/jarabot" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Ask JaraBot</Link>
-          <Link to="/community" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Community</Link>
-          <Link to="/gallery" className="text-gray-700 hover:text-[#D4AF37] transition-colors font-medium">Event Inspiration</Link>
+          <Link to="/planners" className="relative text-foreground/80 hover:text-primary transition-all duration-300 font-medium px-2 py-1 rounded-md hover:bg-primary/5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Find Event Planners</Link>
+          <Link to="/vendors/marketplace" className="relative text-foreground/80 hover:text-primary transition-all duration-300 font-medium px-2 py-1 rounded-md hover:bg-primary/5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Browse Vendors</Link>
+          <Link to="/venues" className="relative text-foreground/80 hover:text-primary transition-all duration-300 font-medium px-2 py-1 rounded-md hover:bg-primary/5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Find Venues</Link>
+          <Link to="/jarabot" className="relative text-foreground/80 hover:text-primary transition-all duration-300 font-medium px-2 py-1 rounded-md hover:bg-primary/5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Ask JaraBot</Link>
+          <Link to="/community" className="relative text-foreground/80 hover:text-primary transition-all duration-300 font-medium px-2 py-1 rounded-md hover:bg-primary/5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Community</Link>
+          <Link to="/gallery" className="relative text-foreground/80 hover:text-primary transition-all duration-300 font-medium px-2 py-1 rounded-md hover:bg-primary/5 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Event Inspiration</Link>
         </div>
 
         {/* Right section with CTA and user menu */}
         <div className="hidden lg:flex items-center space-x-4">
-          <Button asChild className="bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-white px-6 py-2">
+          <Button asChild className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white px-6 py-2 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
             <Link to="/events/create">
               <CalendarPlus className="mr-2 h-4 w-4" />
               Create Event
             </Link>
           </Button>
 
-          <Button variant="ghost" size="icon" className="text-gray-700">
+          <Button variant="ghost" size="icon" className="text-foreground/70 hover:text-primary hover:bg-primary/10 transition-all duration-300 relative">
             <Bell className="h-5 w-5" />
+            <span className="absolute top-1 right-1 w-2 h-2 bg-accent rounded-full animate-pulse"></span>
           </Button>
 
           {user ? (
