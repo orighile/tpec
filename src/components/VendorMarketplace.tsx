@@ -43,7 +43,7 @@ const VendorMarketplace = () => {
   const isMobile = windowWidth < 768;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <MarketplaceHeader />
       
       {isLoading ? (
@@ -52,36 +52,15 @@ const VendorMarketplace = () => {
           <span className="ml-3 text-lg">Loading vendors...</span>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6">
-        {!isMobile && (
-          <div className="space-y-6">
-            <SidebarCategories 
-              selectedCategory={filterOptions.category}
-              onCategoryChange={(category) => setFilterOptions({...filterOptions, category})}
-            />
-            
-            {selectedVendor && (
-              <SidebarVendorInfo 
-                vendor={selectedVendor}
-                isSaved={savedVendors.includes(selectedVendor.id)}
-                onToggleSave={toggleSaveVendor}
-                onContact={handleContactVendor}
-              />
-            )}
-          </div>
-        )}
-        
         <div className="space-y-6">
-          <div className="flex flex-col gap-4">
-            <MarketplaceTabs
-              activeTab={activeTab}
-              onTabChange={setActiveTab}
-              filters={filterOptions}
-              onFilterChange={setFilterOptions}
-              onReset={resetFilters}
-              savedVendorsCount={savedVendors.length}
-            />
-          </div>
+          <MarketplaceTabs
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+            filters={filterOptions}
+            onFilterChange={setFilterOptions}
+            onReset={resetFilters}
+            savedVendorsCount={savedVendors.length}
+          />
           
           <MarketplaceContent
             isMobile={isMobile}
@@ -94,7 +73,6 @@ const VendorMarketplace = () => {
             onResetFilters={resetFilters}
           />
         </div>
-      </div>
       )}
     </div>
   );
