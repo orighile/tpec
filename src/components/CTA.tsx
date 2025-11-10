@@ -7,8 +7,8 @@ const CTA = () => {
   return (
     <section className="py-12 relative overflow-hidden">
       {/* Background with pattern */}
-      <div className="absolute inset-0 bg-gradient-to-r from-jara-purple to-jara-green -z-10"></div>
-      <div className="absolute inset-0 naija-pattern opacity-10 -z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-jara-purple via-primary to-jara-green -z-10"></div>
+      <div className="absolute inset-0 bg-jara-purple/20 -z-10"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
