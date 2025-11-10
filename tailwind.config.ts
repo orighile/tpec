@@ -67,16 +67,16 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Nigerian-inspired color palette
-				jara: {
-					green: '#0A8544', // Nigerian green
-					white: '#FFFFFF', // Nigerian white
-					gold: '#D4AF37', // Updated rich gold for TPEC logo
-					purple: '#7A0BC0', // Rich purple for royal Ankara patterns
-					orange: '#FF6B35', // Vibrant Ankara orange
-					teal: '#05B2DC', // Bright coastal blue
-					red: '#EA4335', // Alert red
-				},
+			// Nigerian-inspired color palette
+			jara: {
+				green: 'hsl(145 83% 28%)', // Nigerian green
+				white: 'hsl(0 0% 100%)', // Nigerian white
+				gold: 'hsl(45 62% 52%)', // Updated rich gold for TPEC logo
+				purple: 'hsl(280 96% 39%)', // Rich purple for royal Ankara patterns
+				orange: 'hsl(14 100% 60%)', // Vibrant Ankara orange
+				teal: 'hsl(192 95% 45%)', // Bright coastal blue
+				red: 'hsl(4 82% 57%)', // Alert red
+			},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
