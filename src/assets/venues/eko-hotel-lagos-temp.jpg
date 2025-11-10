@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="assets/img/logo-footer.png">
+
+    <title>EKO Hotels & Suites</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Poppins:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- CSS Plugins -->
+    <link href="assets/plugins/lightbox/dist/css/lightbox.css" rel="stylesheet">
+	<link href="assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="assets/plugins/owl-carousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/plugins/owl-carousel/dist/assets/owl.theme.default.min.css">
+    <!-- CSS Global -->
+    <!--build:css assets/css/theme.min.css-->
+    <link rel="stylesheet" href="assets/css/app.css">
+	<!--endbuild-->
+	
+	  
+	<!-- ASKSUITE CODE START --> <script id="script-infochat" src='https://cdn.asksuite.com/infochat.js?dataConfig=https://control.asksuite.com/api/companies/eko-hotels'></script> <!-- ASKSUITE CODE END -->
+  </head>
+  <body>
+
+		<!-- Back to top button -->
+    <a id="back-to-top" href="#section__header" class="btn btn-top back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">
+	  	<i class="ion-android-arrow-up"></i>
+	</a>
+	<!-- Back to top button -->
+	  
+	<!-- PRELOADER -->
+    <div id="loader-wrapper">
+		  <div id="loader"></div>
+	</div>
+	<!-- PRELOADER -->  
+		
+	<!-- Info Section -->
+    <div class="section__info">
+			<div class="container">
+				<div class="section_info__body">
+					<div class="info__column-left visible-lg visible-md">
+						<div class="dropdown lang-menu">
+						  <a href="eko-gardens.php">EKO GARDENS</a>
+						  <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    <i class="icon ion-chevron-down"></i>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <li><a href="superior-room.php">Eko Garden Standard</a></li>
+						    <li><a href="classic-room.php">Eko Garden Classic</a></li>
+						  </ul>
+						</div> <!-- .lang-menu -->
+						
+						<div class="dropdown lang-menu">
+						  <a href="eko-hotel.php">EKO HOTEL</a>	
+						  <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    <i class="icon ion-chevron-down"></i>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <li><a href="classic-superior-room.php">Eko Classic Superior</a></li>
+						    <li><a href="atlantic-superior-room.php">Eko Atlantic Superior</a></li>
+							<li><a href="classic-suite.php">Classic Suite</a></li>  
+							<li><a href="diplomatic-suite.php">Diplomatic Suite</a></li>
+							<li><a href="presidential-suites.php">Presidential Suite</a></li>
+						  </ul>
+						</div> <!-- .lang-menu -->
+						
+						<div class="dropdown lang-menu">
+							<a href="eko-suites.php">EKO SUITES</a>
+						  <button class="dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    <i class="icon ion-chevron-down"></i>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <li><a href="deluxe-room.php">Deluxe Room</a></li>
+						    <li><a href="studio-suite.php">Studio Suite</a></li>
+							<li><a href="executive-suite.php">Executive Suite</a></li>  
+						  </ul>
+						</div> <!-- .lang-menu -->
+						
+						<div class="dropdown lang-menu">
+							<a href="eko-signature.php">EKO SIGNATURE</a>
+						  <button class="dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    <i class="icon ion-chevron-down"></i>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <li><a href="club-suites.php">Club Suite</a></li>
+						    <li><a href="premium-suites.php">Premium Suite</a></li>
+							<li><a href="signature-suites.php">Signature Suite</a></li>
+							<li><a href="signature-presidential-suites.php">Signature Presidential Suite</a></li>    
+						  </ul>
+						</div> <!-- .lang-menu -->
+						
+						<!--<div class="dropdown lang-menu">
+							<a href="javascript:void(0);">Eko Tower II</a>-->
+						  <!--<button class="dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    <i class="icon ion-chevron-down"></i>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <li><a href="club-suites.php">Club Suite</a></li>
+						    <li><a href="premium-suites.php">Premium Suite</a></li>
+							<li><a href="signature-suites.php">Signature Suite</a></li>
+							<li><a href="signature-presidential-suites.php">Signature Presidential Suite</a></li>    
+						  </ul>
+						</div> --><!-- .lang-menu -->
+						
+						<div class="dropdown lang-menu">
+							<a href="special-offers.php">SPECIAL OFFERS</a>
+						  <button class="dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    <i class="icon ion-chevron-down"></i>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <li><a href="javascript:void(0);">Group Booking/Tour Package</a></li>
+						    <li><a href="javascript:void(0);">Inside Eko Updates</a></li>  
+						  </ul>
+						</div> <!-- .lang-menu -->
+						
+					</div> <!-- .info__column-left -->
+					<div class="info__column-left visible-sm visible-xs">
+						<div class="dropdown lang-menu">
+						  <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    <a href="our-hotels-1.php">Our Hotels</a>
+						    <i class="icon ion-chevron-down"></i>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <li><a href="eko-hotels.php">Eko Hotel</a></li>
+						    <li><a href="eko-suites.php">Eko Suites</a></li>
+							<li><a href="eko-signature.php">Eko Signature</a></li>  
+							<li><a href="eko-gardens.php">Eko Gardens</a></li>
+							<li><a href="javascript:void(0);">Eko Tower II</a></li>  
+						  </ul>
+						</div> <!-- .lang-menu -->
+					</div>	
+					<div class="info__column-right visible-lg visible-md">
+						<ul class="social__icons">
+						  <li class="social-icons__item"><a href="javascript:void(0);" class="offer-link">The Company</a></li>	
+						  <!--<li class="social-icons__item"><a href="special-offers.php" class="offer-link">Special Offers</a></li>	-->
+						  <li class="social-icons__item"><a href="https://twitter.com/ekohotels/"><i class="icon ion-social-twitter" aria-hidden="true"></i></a></li>
+						  <li class="social-icons__item"><a href="https://www.facebook.com/EkoHotels/"><i class="icon ion-social-facebook" aria-hidden="true"></i></a></li>
+						  <li class="social-icons__item"><a href="https://www.instagram.com/ekohotels/"><i class="icon ion-social-instagram" aria-hidden="true"></i></a></li>
+						  <li class="social-icons__item"><a href="https://www.pinterest.com/ekohotels"><i class="icon ion-social-pinterest" aria-hidden="true"></i></a></li>	
+						</ul> <!-- .social__icons -->
+			      </div> <!-- .info__column-right -->
+				  <div class="info__column-right visible-sm visible-xs">
+						<ul class="social__icons">
+						  <li class="social-icons__item"><a href="special-offers.php" class="offer-link">Special Offers</a></li>	
+						</ul> <!-- .social__icons -->
+			      </div> <!-- .info__column-right -->	
+				</div> <!-- .section_info__body -->
+			</div> <!-- .container -->
+		</div> 
+	<!-- .section__info -->
+
+  	<!-- Navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container">
+    
+        <!-- Header -->
+        <div class="navbar-header">
+
+          <!-- Collapse toggle -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar__collapse" aria-expanded="false">
+            <span class="sr-only">Menu</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <!-- Logo -->
+          <a class="navbar-brand" href="/">
+            <img src="assets/img/logo-header.jpg" alt="Eko Hotels" style="width:240px; margin: 0 auto; padding: 12px;"/>
+          </a>
+
+        </div> <!-- / .navbar-header -->
+    
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbar__collapse">
+          <ul class="nav navbar-nav navbar-left visible-lg visible-md">
+          	<li class="dropdown">
+		          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <i class="icon ion-chevron-down"></i></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="about-us.php">About Us</a></li>
+		            <li><a href="contact.php">Contact Us</a></li>
+		          </ul>
+		        </li>
+			  	<li><a href="https://ekohotelsdelivery.com/">Dining</a></li>
+            <!--<li class="dropdown">
+	          <a href="https://ekohotelsdelivery.com/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dining <i class="icon ion-chevron-down"></i></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="the-sky-restaurant.php">Sky Restaurant</a></li>
+	            <li><a href="crossroads-restaurant.php">Crossroads Restaurant</a></li>
+	            <li><a href="lagos-irish-pub.php">Lagos Irish Pub</a></li>
+				<li><a href="88-restaurant.php">88 Restaurant</a></li>
+				<li><a href="prime-steakhouse.php">Prime Restaurant</a></li>
+				<li><a href="red-restaurant.php">Red Restaurant</a></li>
+				<li><a href="kuramo-sports-cafe.php">Kuramo Sports Café</a></li>
+				<li><a href="lagoon-breeze.php">Lagoon Breeze Restaurant</a></li>
+				<li><a href="calabash-bar.php">Calabash Bar</a></li>  
+	          </ul>
+	        </li>-->
+			<li class="dropdown">
+	          <a href="meeting-and-events.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Meetings & Banqueting <i class="icon ion-chevron-down"></i></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="grand-ballroom.php">Grand Ball Room</a></li>
+	            <li><a href="eko-convention-center.php">Eko Convention Centre</a></li>
+	            <li><a href="fantasia.php">Fantasia</a></li>
+				<li><a href="meeting-rooms.php">Meeting Rooms</a></li>
+	          </ul>
+	        </li>  
+          </ul>
+          <ul class="nav navbar-nav navbar-right visible-lg visible-md">
+            <li class="dropdown">
+		          <a href="recreational-services.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recreational Services <i class="icon ion-chevron-down"></i></a>
+		          <ul class="dropdown-menu">
+					<li><a href="swimming-pool.php">Swimming Pool</a></li>   
+		            <li><a href="gym.php">Gym</a></li>
+		            <li><a href="lawn-tennis-court.php">Tennis Courts</a></li>
+		            <li><a href="spa.php">Spa</a></li>
+		            <!--<li><a href="basketball-court.php">Basketball Court</a></li>
+		            <li><a href="volleyball-court.php">Volleyball Court</a></li>-->
+					<li><a href="salon-and-nail-studio.php">Salon & Nail Studio</a></li>  
+		          </ul>
+		     </li>
+			 <li class="dropdown">
+		          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events  <i class="icon ion-chevron-down"></i></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="https://ekohotelstropicalchristmas.ng/" target="_blank">Tropical Christmas Wonderland</a></li>
+					<li><a href="hippity-hoppity-easter.php">Hippity Hoppity Easter</a></li> 
+					<li><a href="javascript:void(0)">Haute Table</a></li> 
+					<li><a href="intimate-celebrations.php">Intimate Celebrations</a></li> 
+		          </ul>
+		     </li> 
+             <li><a href="gallery.php">Gallery</a></li>
+          </ul>
+			
+		  <ul class="nav navbar-nav visible-sm visible-xs">
+             <li><a href="/">Home</a></li> 
+			 <li><a href="https://ekohotelsdelivery.com/">Dining</a></li> 
+         	 <li><a href="meeting-and-events.php">Meetings & Events</a></li> 
+			 <li><a href="recreational-services.php">Recreational Services</a></li> 
+			 <li><a href="/blog/">Blog</a></li> 
+             <li><a href="gallery.php">Gallery</a></li>
+			 <li><a href="about-us.php">About Us</a></li> 
+			 <li><a href="contact.php">Contact Us</a></li> 
+          </ul>	
+        </div><!-- /.navbar-collapse -->
+		  
+		
+  
+
+      </div><!-- /.container -->
+    </nav>
+	<!-- Navbar -->    <!-- CONTENT
+      ================================================== -->
+
+    <!-- section home -->
+    <section class="section__home"  id="section__header">
+
+      <!-- CAROUSEL
+      ================================================== -->
+      <div id="carousel-example-generic" class="carousel carousel-fade slide" data-ride="carousel">
+
+        <!-- Indicators
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+		  <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+		  <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+		  <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+        </ol>-->
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+
+          <div class="item item__1 active">
+            <div class="item__container">
+              <div class="item-container__inner">
+
+				  <figure>
+					 <img src="assets/img/slider/eko-slide1.jpg" />
+				  </figure>
+
+              </div> <!-- / .item-container__inner -->
+            </div> <!-- / .item__container -->
+          </div> <!-- / .item -->
+
+		<!-- <div class="item item__2">
+            <div class="item__container">
+              <div class="item-container__inner">
+
+				  <figure>
+					 <img src="assets/img/slider/eko-slide2.jpg" />
+				  </figure>
+
+              </div> 
+          </div>  / .item -->
+		  
+		  <div class="item item__2">
+            <div class="item__container">
+              <div class="item-container__inner">
+
+				  <figure>
+					 <img src="assets/img/slider/eko-slide3.jpg" />
+				  </figure>
+
+              </div> <!-- / .item-container__inner -->
+            </div> <!-- / .item__container -->
+          </div> <!-- / .item -->
+			
+		  <div class="item item__2">
+            <div class="item__container">
+              <div class="item-container__inner">
+
+				  <figure>
+					 <img src="assets/img/slider/eko-slide4.jpg" />
+				  </figure>
+
+              </div> <!-- / .item-container__inner -->
+            </div> <!-- / .item__container -->
+          </div> <!-- / .item -->	
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <img src="assets/img/arrow_left.svg" alt="Prev">
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <img src="assets/img/arrow_right.svg" alt="Next">
+          </a>
+        </div><!-- /.carousel-inner -->
+      </div><!-- /.carousel -->
+    </section> <!-- / .section__home -->
+
+    <!-- section availability -->
+		<section class="section__availability visible-lg visible-md visible-sm">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-sm-12">
+
+						<!-- Reservation form 
+						<form class="reservation__form" target="_blank" action="https://reservations.ekohotels.com/" method="GET">-->						
+						<form class="reservation__form" target="_blank" action="https://be.synxis.com/" method="GET">
+							<div class="form-group">
+								<div class="form-group__inner">
+									<label for="DateIn">Arrival date</label>
+									<input type="text" class="form-control date from" name="arrive" id="reservation__check-in" placeholder="Arrival Date">
+								</div> <!-- / .form-group__inner -->
+							</div> <!-- / .form-group -->
+							<div class="form-group">
+								<div class="form-group__inner">
+									<label for="DateOut">Departure date</label>
+									<input type="text" class="form-control date to" name="depart" id="reservation__check-out" placeholder="Dept Date">
+								</div> <!-- / .form-group__inner -->
+							</div> <!-- / .form-group -->
+							<div class="form-group">
+								<div class="form-group__inner">
+									<label for="reservation__adults">Adults</label>
+									<input type="text" id="reservation__adults" name="adult">
+									<div class="dropdown reservation-dropdown">
+									  <button class="dropdown-toggle" type="button" id="adults-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									    <span>Choose Adult</span>
+									    <i class="icon ion-chevron-down"></i>
+									  </button>
+									  <ul class="dropdown-menu" aria-labelledby="adults-dropdown">
+									    <li><a href="#">1 Adult</a></li>
+									    <li><a href="#">2 Adults</a></li>
+									    <li><a href="#">3 Adults</a></li>
+									  </ul>
+									</div> <!-- . -->
+								</div> <!-- / .form-group__inner -->
+							</div> <!-- / .form-group -->
+							<div class="form-group">
+								<div class="form-group__inner">
+									<label for="reservation__children">Children</label>
+									<input type="text" id="reservation__children" name="child">
+									<div class="dropdown reservation-dropdown">
+									  <button class="dropdown-toggle" type="button" id="children-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									    <span >0 Child</span>
+									    <i class="icon ion-chevron-down"></i>
+									  </button>
+									  <ul class="dropdown-menu" aria-labelledby="children-dropdown">
+									    <li><a href="#">1 Child</a></li>
+									    <li><a href="#">2 Children</a></li>
+									    <li><a href="#">3 Children</a></li>
+									  </ul>
+									</div> <!-- . -->
+								</div> <!-- / .form-group__inner -->
+							</div> <!-- / .form-group -->
+
+					</div>
+				</div> <!-- / .row -->
+				<div class="row">
+					<div class="col-xs-12">
+						<input type="hidden" name="chain" value="31493">
+						<input type="hidden" name="config" value="EKO">
+						<input type="hidden" name="theme" value="EKO">
+						<!-- Reservation button -->
+						<div class="reservation__button">
+							<button type="submit" class="btn btn-reservation">Check availability</button>
+						</div> <!-- / .reservation__button -->
+
+					</div>
+				</div> <!-- / .row -->
+				</form> <!-- / .reservation__form -->
+			</div> <!-- / .container -->
+		</section> <!-- .section__availability -->
+	    <section class="section__availability  visible-xs">
+			<div class="container">
+				<div class="row">
+	   				<div class="col-xs-12">
+
+						<!-- Reservation button -->
+						<div class="reservation__button">
+							<!--<a href="https://reservations.ekohotels.com/?Chain=31493&config=EKO&theme=EKO" class="btn btn-reservation">Check availability</a>-->
+							<a href="https://be.synxis.com/?Chain=31493&config=EKO&theme=EKO" class="btn btn-reservation">Check availability</a>
+						</div> <!-- / .reservation__button -->
+
+					</div>
+				</div> <!-- / .row -->
+			</div> <!-- / .container -->
+		</section> <!-- .section__availability -->
+
+	  
+	  <section class="packages">
+		<div class="container">
+				<div class="row">
+	   				<div class="col-sm-12">
+    				<h2 class="section__title"><strong>Our</strong> Packages</h2>
+    				<div class="divider">
+    					<hr class="line1">
+    					<hr class="line2">
+    					<hr class="line1">
+    				</div> <!-- / .divider -->
+
+    		  		</div>
+				</div>	
+				<div class="package_content">
+				<div class="row">
+					<div class="col-sm-6 package">
+						<div class="pimg">
+						<img src="https://www.ekohotels.com/assets/img/park-offer.webp" class="img-responsive">
+						</div>	
+						<div class="pcontent">
+						<h3>Hakuna Matata Theme Park Pass</h3>
+						<p>Hakuna Matata Theme Park, located in Eko Atlantic City, Lagos, is West Africa's largest inflatable theme park, offering a diverse range of attractions suitable for all ages. Note that the theme park is closed on Mondays and Tuesdays.<br><br></p>					
+						<div class="pbook">
+							<a href="https://be.synxis.com/product?adult=1&chain=31493&child=0&config=EKO&currency=NGN&hotel=43664&level=chain&locale=en-US&productcurrency=NGN&productsku=THEMEPARKWEEKDAY&rooms=1&theme=EKO">Book Weekday</a>  
+							<a href="https://be.synxis.com/product?adult=1&chain=31493&child=0&config=EKO&currency=NGN&hotel=43664&level=chain&locale=en-US&productcurrency=NGN&productsku=THEMEPARKWEEKEND&rooms=1&theme=EKO">Book Weekend</a>
+						</div>
+						</div>	
+					</div>
+					<div class="col-sm-6 package">
+						<div class="pimg">
+						<img src="https://www.ekohotels.com/assets/img/gallery/ga-hotel-11.jpg" class="img-responsive">
+						</div>	
+						<div class="pcontent">	
+						<h3>Pool Pass</h3>
+						<p>Escape the heat and unwind in our stunning swimming pool, a perfect retreat for both relaxation and fun. Whether you're looking for a refreshing dip, a leisurely lounge by the water, or a family-friendly day out, our Pool Pass offers the ultimate experience. Package is inclusive of Lunch or Dinner Buffet at Kuramo BLD and 1 soft drink.</p>					
+						<div class="pbook">
+							<a href="https://be.synxis.com/product?adult=1&chain=31493&child=0&config=EKO&currency=NGN&hotel=43664&level=chain&locale=en-US&productcurrency=NGN&productsku=POOLPASSWEEKDAY&rooms=1&theme=EKO">Book Weekday</a>  
+							<a href="https://be.synxis.com/product?adult=1&chain=31493&child=0&config=EKO&currency=NGN&hotel=43664&level=chain&locale=en-US&productcurrency=NGN&productsku=POOLPASSWEEKEND&rooms=1&theme=EKO">Book Weekend</a>
+						</div>
+						</div>		
+					</div>
+				</div>	
+				</div>	
+		  </div>
+	  </section>
+
+		<!-- section about -->
+    <section class="section__about" id="section__about">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-sm-12">
+    				<h2 class="section__title"><strong>Welcome to </strong>Eko Hotels & Suites</h2>
+    				<div class="divider">
+    					<hr class="line1">
+    					<hr class="line2">
+    					<hr class="line1">
+    				</div> <!-- / .divider -->
+    			</div>
+    		</div> <!-- / .row -->
+    	</div> <!-- / .container -->
+    	<div class="container-fluid">
+    		<div class="row">
+		    	<div class="section_about__content">
+		    	  <div class="col-md-6">
+		    	  	<div class="about__pic">
+		    				<img src="assets/img/home-about.jpg" class="img-responsive" alt="...">
+		    			</div> <!-- / .about__pic -->
+		    	  </div>
+		    	  <div class="col-md-6">
+			    	  <div class="about__desc">
+			    	  	<p class="about_desc__subtitle">About us</p>
+			  				<h3 class="about_desc__title">The Most Preferred Hotel in West Africa</h3>
+								<p class="about_desc__desc">Eko Hotels & Suites is the most preferred hotel in West Africa, and it is all about the right mix! Located in the heart of Victoria Island, we offer our clients a perfect blend of business & leisure amenities with dining and recreational options delicately infused in one amazing space. We crown all these with services that meet the highest international standards.</p>
+								<p>Overlooking the new Eko Atlantic City and Atlantic Ocean, it is just a 10-minute drive to the City Centre and only 45minutes away from the Airport.</p>
+						  		<p>Our hotels are designed for your comfort and convenience. Your security is our primary concern and you will find our customer care second to none.</p>
+								<a href="about-us.php" class="btn btn-default">Learn More</a>
+			  			</div> <!-- / .about__desc -->
+		    	  </div>
+		    	</div> <!-- / .section_about__content -->
+		    </div> <!-- / .row -->
+    	</div>
+    </section> <!-- / .section__about -->
+
+		<!-- section best-rooms -->
+    <section class="section__best-rooms">
+    	<div class="container">
+    		<div class="row">
+    		  <div class="col-sm-12">
+    				<h2 class="section__title"><strong>Our</strong> Hotels</h2>
+    				<div class="divider">
+    					<hr class="line1">
+    					<hr class="line2">
+    					<hr class="line1">
+    				</div> <!-- / .divider -->
+
+    		  </div>
+    		</div> <!-- / .row -->
+    	</div> <!-- / .container -->
+    	<div class="container">
+    		<div class="best-rooms__content">
+		    	<div class="row">
+		    	  <div class="col-sm-6">
+		    	  	<figure class="best-rooms__item">
+	    	  			<img src="assets/img/eko-gardens.jpg" class="img-responsive" alt="...">
+								<figcaption>
+									<h3>Eko Gardens</h3>
+
+									<p class="item__desc">At Eko Gardens, the rooms are well appointed and designed to provide comfort and convenience.</p>
+									<a href="eko-gardens.php" class="btn-book" target="_blank">View More <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="https://be.synxis.com/?Chain=31493&config=EKO&theme=EKO&hotel=43663" class="btn-book" target="_blank">Book Now <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i></a>
+								</figcaption>
+							</figure> <!-- / .best-rooms__item -->
+		    	  </div>
+		    	  <div class="col-sm-6">
+		    	  	<figure class="best-rooms__item">
+								<img src="assets/img/eko-hotel.jpg" class="img-responsive" alt="...">
+								<figcaption>
+									<h3>Eko Hotel</h3>
+
+									<p class="item__desc">Eko Hotel rooms and suites are decorated and designed for your comfort and relaxation. </p>
+									<a href="eko-hotel.php" class="btn-book" target="_blank">View More <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="https://be.synxis.com/?Chain=31493&config=EKO&theme=EKO&hotel=43666" class="btn-book" target="_blank">Book Now <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i></a>
+								</figcaption>
+							</figure> <!-- / .best-rooms__item -->
+		    	  </div>
+		    	</div> <!-- / .row -->
+		    	<div class="row">
+		    	  <div class="col-sm-6">
+		    	  	<figure class="best-rooms__item">
+								<img src="assets/img/eko-suites.webp" class="img-responsive" alt="...">
+								<figcaption>
+									<h3>Eko Suites</h3>
+
+									<p class="item__desc">Eko Suites is tucked in the most discreet part of the property with 88 large suites. The property offers a peaceful, quiet and relaxing ambience.</p>
+									<a href="eko-suites.php" class="btn-book" target="_blank">View More <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="https://be.synxis.com/?Chain=31493&config=EKO&theme=EKO&hotel=43665" class="btn-book" target="_blank">Book Now <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i></a>
+								</figcaption>
+							</figure> <!-- / .best-rooms__item -->
+		    	  </div>
+		    	  <div class="col-sm-6">
+			    	  <figure class="best-rooms__item">
+								<img src="assets/img/eko-signature.webp" class="img-responsive" alt="...">
+								<figcaption>
+									<h3>Eko Signature</h3>
+
+									<p class="item__desc">Caring comes easily to those of us who are privileged to cater to you at Eko Signature. The vibrant colours of the furnishing indulges you</p>
+									<a href="eko-signature.php" class="btn-book" target="_blank">View More <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="https://be.synxis.com/?Chain=31493&config=EKO&theme=EKO&hotel=43664" class="btn-book" target="_blank">Book Now <i class="icon ion-chevron-right"></i><i class="icon ion-chevron-right"></i></a>
+								</figcaption>
+							</figure> <!-- / .best-rooms__item -->
+		    	  </div>
+		    	</div> <!-- / .row -->
+		    	<div class="row">
+			    	<div class="col-xs-12">
+			    		<div class="rooms__button">
+			    			<a href="our-hotels.php" class="btn">View All Hotels</a>
+			    		</div> <!-- / .rooms__button -->
+			    	</div>
+		    	</div> <!-- / .row -->
+		    </div> <!-- / .best-rooms__content -->
+	    </div> <!-- / .container -->
+    </section> <!-- / .section__best-rooms -->
+    <!-- section testimonials -->
+    <section class="section__testimonials">
+    	<div class="container">
+    		<div class="row">
+    		  <div class="col-sm-12">
+    				<h2 class="section__title"><font color="#FFFFFF">Recreational</font> Services</h2>
+    				<div class="divider">
+    					<hr class="line1">
+    					<hr class="line2">
+    					<hr class="line1">
+    				</div> <!-- / .divider -->
+
+    		  </div>
+    		</div> <!-- / .row -->
+    	</div> <!-- / .container -->
+    	<div class="container">
+    		<div class="row">
+					<div class="col-xs-12">
+		    		<div id="testimonials__carousel" class="owl-carousel owl-theme testimonials__body">
+		    			<div class="testimonials__wrapper">
+		    				<div class="testimonials__item">
+				    			<div class="testimonials__img">
+				    				<img src="assets/img/gym.webp" class="img-responsive" alt="...">
+				    			</div>
+							  	<div class="testimonials__caption">
+									<h3 class="testimonials_caption__name"><a href="gym.php">Gymnasium</a></h3>
+									<br>
+									<p class="testimonials_caption__text">Our well-equipped gym with sauna rooms are  accessible to our in-house fit fam junkies, and comes with an available instructor..</p>
+							  	</div> <!-- .testimonials__caption -->
+							</div> <!-- .testimonials__item -->
+		    			</div><!-- .testimonials__wrapper -->
+						<div class="testimonials__wrapper">
+						<div class="testimonials__item">
+						  <div class="testimonials__img">
+								<img src="assets/img/swimming-pool.jpg" class="img-responsive" alt="...">
+						  </div>
+						  <div class="testimonials__caption">
+							<h3 class="testimonials_caption__name"><a href="swimming-pool.php">Swimming Pool</a></h3>
+							<br>
+							<p class="testimonials_caption__text">Additional perks of being an in-house guest is to enjoy a day or night time swim. Access to the pool for outside guests are at an additional cost.</p>
+						  </div> <!-- .testimonials__caption -->
+						</div> <!-- .testimonials__item -->
+					  </div><!-- .testimonials__wrapper -->	
+		    			<div class="testimonials__wrapper">
+							<div class="testimonials__item">
+							  <div class="testimonials__img">
+											<img src="assets/img/tennis-court.webp" class="img-responsive" alt="...">
+										</div>
+							  <div class="testimonials__caption">
+								<h3 class="testimonials_caption__name"><a href="lawn-tennis-court.php">Tennis Court</a></h3>
+								 <br>
+								<p class="testimonials_caption__text">Our flood-lit court is accessible for more leisure time. Access to the court for outside guests, and tennis lessons are available at an additional cost per hour.</p>
+							  </div> <!-- .testimonials__caption -->
+							</div> <!-- .testimonials__item -->
+						</div><!-- .testimonials__wrapper -->
+					  	<div class="testimonials__wrapper">
+							<div class="testimonials__item">
+						  	<div class="testimonials__img">
+								<img src="assets/img/spa.webp" class="img-responsive" alt="...">
+							</div>
+						  	<div class="testimonials__caption">
+								<h3 class="testimonials_caption__name"><a href="spa.php">Spa</a></h3>
+								<br>
+								<p class="testimonials_caption__text">You are invited to experience a variety of relaxing wellness treatment, from massages to getting your hair and nails done. These pampering sessions guarantee a memorable stay with us.</p>
+						  	</div> <!-- .testimonials__caption -->
+							</div> <!-- .testimonials__item -->
+						</div><!-- .testimonials__wrapper -->
+						<!--<div class="testimonials__wrapper">
+							<div class="testimonials__item">
+						  		<div class="testimonials__img">
+									<img src="assets/img/basketball-court.jpg" class="img-responsive" alt="...">
+								</div>
+						  	<div class="testimonials__caption">
+							  <h3 class="testimonials_caption__name"><a href="basketball-court.php">Basketball Court</a></h3>
+								<br>
+								<p class="testimonials_caption__text">Enjoy shooting hoops at the court for more leisure time. Access to the court for outside guests are at an additional cost.</p>
+						  	</div>
+							</div>
+						</div>-->
+					<!--<div class="testimonials__wrapper">
+						<div class="testimonials__item">
+						  <div class="testimonials__img">
+								<img src="assets/img/volleyball-court.jpg" class="img-responsive" alt="...">
+						  </div>
+						  <div class="testimonials__caption">
+							<h3 class="testimonials_caption__name"><a href="volleyball-court.php">Volleyball Court</a></h3>
+							<br>
+							<p class="testimonials_caption__text">In-house guests have free access to the court to enjoy more recreational time. Access to the court for outside guests are at an additional cost.</p>
+						  </div> 
+						</div>
+					</div>-->
+					<div class="testimonials__wrapper">
+						<div class="testimonials__item">
+						  <div class="testimonials__img">
+								<img src="assets/img/saloon.jpg" class="img-responsive" alt="...">
+						  </div>
+						  <div class="testimonials__caption">
+							<h3 class="testimonials_caption__name"><a href="salon-and-nail-studio.php">Saloon & Nail Studio</a></h3>
+							<br>
+							<p class="testimonials_caption__text">You are invited to experience a variety of relaxing wellness treatment, from massages to getting your hair and nails done. These pampering sessions guarantee a memorable stay with us.</p>
+						  </div> <!-- .testimonials__caption -->
+						</div> <!-- .testimonials__item -->
+					  </div><!-- .testimonials__wrapper -->
+					
+					  
+						
+		    		</div> <!-- .testimonials__body -->
+		    	</div>
+		    </div> <!-- / .row -->
+	    </div> <!-- / .container -->
+    </section> <!-- / .section__testimonials -->
+
+    <!-- section Events -->
+    <section class="section__events">
+    	<div class="container">
+    		<div class="row">
+    		  <div class="col-sm-12">
+    				<h2 class="section__title">Eko <strong>Dining</strong></h2>
+    				<div class="divider">
+    					<hr class="line1">
+    					<hr class="line2">
+    					<hr class="line1">
+    				</div> <!-- / .divider -->
+    		  </div>
+    		</div> <!-- / .row -->
+    	</div> <!-- / .container -->
+    	<div class="container-fluid">
+    		<div class="row">
+    			<div class="col-xs-12 hidden-xs col-sm-6 col-md-6 col-lg-3 col-lg-push-9">
+						<div class="news__title">
+							<div>Dining</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-lg-pull-3">
+						<div class="events__item">
+							<div class="events-item__img">
+                <img src="assets/img/sky-restaurant.jpg" class="img-responsive" alt="...">
+              </div>
+              <div class="events-item__body">
+                <div class="events-item__header">
+                	<div class="events-item__content">
+                		<div class="events-item__title">
+		                  <h3>THE SKY RESTAURANT</h3>
+		                </div>
+                	</div> <!-- .events-item__content -->
+                </div> <!-- .events-item__header -->
+                <div class="events-item__text">
+                  Situated at the tallest Penthouse of Eko Hotel, the Sky Restaurant has a 'wow' factor that is hard to dispute. It's a...
+                </div> <!-- .events-item__text -->
+                <div class="events-item__link">
+                  <a href="the-sky-restaurant.php">Read More ➔</a>
+                </div> <!-- .events-item__link -->
+              </div> <!-- / .events-item__body -->
+						</div> <!-- .events__item -->
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-lg-pull-3">
+						<div class="events__item">
+							<div class="events-item__img">
+                <img src="assets/img/88-restaurant.jpg" class="img-responsive" alt="...">
+              </div>
+              <div class="events-item__body">
+                <div class="events-item__header">
+                	<div class="events-item__content">
+                		<div class="events-item__title">
+		                  <h3>ATARODO</h3>
+		                </div>
+                	</div> <!-- .events-item__content -->
+                </div> <!-- .events-item__header -->
+                <div class="events-item__text">
+                  The Atarodo is an infusion of afro-centric food culture. The menu is the brain-child of our British Nigerian c...
+                </div> <!-- .events-item__text -->
+                <div class="events-item__link">
+                  <a href="88-restaurant.php">Read More ➔</a>
+                </div> <!-- .events-item__link -->
+              </div> <!-- / .events-item__body -->
+						</div> <!-- .events__item -->
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-lg-pull-3">
+						<div class="events__item">
+							<div class="events-item__img">
+                <img src="assets/img/lagoon-breeze.jpg" class="img-responsive" alt="...">
+              </div>
+              <div class="events-item__body">
+                <div class="events-item__header">
+                	<div class="events-item__content">
+                		<div class="events-item__title">
+		                  <h3>LAGOON BREEZE</h3>
+		                </div>
+                	</div> <!-- .events-item__content -->
+                </div> <!-- .events-item__header -->
+                <div class="events-item__text">
+                  Located by the swimming pool, the Lagoon Breeze Restaurant is loved by those who know Lagos and appreciate nicely pre...
+                </div> <!-- .events-item__text -->
+                <div class="events-item__link">
+                  <a href="lagoon-breeze.php">Read More ➔</a>
+                </div> <!-- .events-item__link -->
+              </div> <!-- / .events-item__body -->
+						</div> <!-- .events__item -->
+					</div>
+	      </div> <!-- / .row -->
+	      <div class="row">
+	      	<div class="col-xs-12 hidden-xs col-sm-6 col-md-6 col-lg-3">
+	      		<div class="events__title">
+							<div>Eko</div>
+						</div>
+	      	</div>
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+						<div class="events__item ">
+							<div class="events-item__img">
+                <img src="assets/img/calabash-bar.jpg" class="img-responsive" alt="...">
+              </div>
+              <div class="events-item__body">
+                <div class="events-item__header">
+                	<div class="events-item__content">
+                		<div class="events-item__title">
+		                  <h3>CALABASH BAR</h3>
+		                </div>
+                	</div> <!-- .events-item__content -->
+                </div> <!-- .events-item__header -->
+                <div class="events-item__text">
+                  While watching a game on one of Kuramo Sports Café’s huge plasma screens, you can enjoy the best buffet in Lagos!
+                </div> <!-- .events-item__text -->
+                <div class="events-item__link">
+                  <a href="calabash-bar.php">Read More ➔</a>
+                </div> <!-- .events-item__link -->
+              </div> <!-- / .events-item__body -->
+						</div> <!-- .events__item -->
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+						<div class="events__item">
+							<div class="events-item__img">
+                <img src="assets/img/lagos-irish-pub.webp" class="img-responsive" alt="...">
+              </div>
+              <div class="events-item__body">
+                <div class="events-item__header">
+                	<div class="events-item__content">
+                		<div class="events-item__title">
+		                  <h3>LAGOS IRISH PUB</h3>
+		                </div>
+                	</div> <!-- .events-item__content -->
+                </div> <!-- .events-item__header -->
+                <div class="events-item__text">
+                  Lagos Irish Pub is a charming wooden traditional pub with live music and an outdoor patio. Enjoy a pint and a large s...
+                </div> <!-- .events-item__text -->
+                <div class="events-item__link">
+                  <a href="lagos-irish-pub.php">Read More ➔</a>
+                </div> <!-- .events-item__link -->
+              </div> <!-- / .events-item__body -->
+						</div> <!-- .events__item -->
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+						<div class="events__item">
+							<div class="events-item__img">
+                <img src="assets/img/red-chinese-restaurant.jpg" class="img-responsive" alt="...">
+              </div>
+              <div class="events-item__body">
+                <div class="events-item__header">
+                	<div class="events-item__content">
+                		<div class="events-item__title">
+		                  <h3>RED CHINESE RESTAURANT</h3>
+		                </div>
+                	</div> <!-- .events-item__content -->
+                </div> <!-- .events-item__header -->
+                <div class="events-item__text">
+                  RED Chinese Restaurant & Lounge offers a unique dining experience in the day time and becomes the perfect night Loung...
+                </div> <!-- .events-item__text -->
+                <div class="events-item__link">
+                  <a href="red-restaurant.php">Read More ➔</a>
+                </div> <!-- .events-item__link -->
+              </div> <!-- / .events-item__body -->
+						</div> <!-- .events__item -->
+					</div>
+	      </div> <!-- / .row -->
+      </div> <!-- / .container -->
+    </section> <!-- / .section__events -->
+
+
+	<!-- section gallery -->
+    <section class="section__gallery">
+    	<div class="container">
+    		<div class="row">
+    		  <div class="col-sm-12">
+    				<h2 class="section__title">Our <strong>Gallery</strong></h2>
+    				<div class="divider">
+    					<hr class="line1">
+    					<hr class="line2">
+    					<hr class="line1">
+    				</div> <!-- / .divider -->
+
+    		  </div>
+    		</div> <!-- / .row -->
+    	</div> <!-- / .container -->
+    	<div class="container-fluid">
+		    <div class="row">
+		    	<div class="col-xs-12">
+		    		<div id="gallery__carousel" class="owl-carousel owl-theme gallery__body">
+		    			<div class="gallery__item">
+	              <a href="assets/img/gallery_img1.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img1.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+	            <div class="gallery__item">
+	              <a href="assets/img/gallery_img2.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img2.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+	            <div class="gallery__item">
+	              <a href="assets/img/gallery_img3.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img3.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+	            <div class="gallery__item">
+	              <a href="assets/img/gallery_img4.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img4.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+	            <div class="gallery__item">
+	              <a href="assets/img/gallery_img5.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img5.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+	            <div class="gallery__item">
+	              <a href="assets/img/gallery_img6.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img6.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+	            <div class="gallery__item">
+	              <a href="assets/img/gallery_img7.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img7.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+	            <div class="gallery__item">
+	              <a href="assets/img/gallery_img8.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img8.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+	            <div class="gallery__item">
+	              <a href="assets/img/gallery_img9.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img9.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+	            <div class="gallery__item">
+	              <a href="assets/img/gallery_img10.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img10.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+	            <div class="gallery__item">
+	              <a href="assets/img/gallery_img11.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img11.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+	            <div class="gallery__item">
+	              <a href="assets/img/gallery_img12.jpg" data-lightbox="gallery" data-title="Your caption">
+	                <img src="assets/img/gallery_img12.jpg" class="img-responsive" alt="...">
+	              </a>
+	            </div> <!-- .gallery__item -->
+		    		</div> <!-- .gallery__body -->
+		    	</div>
+		    </div> <!-- / .row -->
+	    </div> <!-- / .container -->
+    </section> <!-- / .section__gallery -->
+
+
+		<!-- section Contacts -->
+    <section class="section__contacts">
+    	<div class="container">
+    		<div class="row">
+    		  <div class="col-sm-12">
+    				<h2 class="section__title"><strong>Contact</strong> us</h2>
+    				<div class="divider">
+    					<hr class="line1">
+    					<hr class="line2">
+    					<hr class="line1">
+    				</div> <!-- / .divider -->
+    		  </div>
+    		</div> <!-- / .row -->
+    	</div> <!-- / .container -->
+      <div class="section_row">
+        <div id="map-g"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7929.490602723426!2d3.430144!3d6.426760000000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5e34fe6a84cddd53!2sEko%20Hotels%20%26%20Suites!5e0!3m2!1sen!2sus!4v1602923523859!5m2!1sen!2sus" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></div>
+      </div> <!-- / .section_row -->
+      <div class="container">
+      	<div class="row">
+	        <div class="col-sm-5">
+						<div class="contacts__info">
+							<p class="contacts_info__title">Information</p>
+							<ul class="contacts_info__content">
+	              <li>
+	                <i class="icon ion-android-pin"></i>
+	                <div class="contact-info-content">
+	                  <div class="title">Address</div>
+	                  <div class="description">Plot 1415 Adetokunbo Ademola Street, PMB 12724, Victoria Island, Lagos Nigeria</div>
+	                </div>
+	              </li>
+	              <li>
+	                <i class="icon ion-android-call"></i>
+	                <div class="contact-info-content">
+	                  <div class="title">Phone / Fax</div>
+	                  <!--<div class="description">+234 1 2772700-25 , +234 1 460610 (ext.6125, 6203, 6079, 6297, 6215, 6124)</div>-->
+						<div class="description">International Calls: +234 201 2772700, National Calls: 0201 2772700</div>
+	                </div>
+	              </li>
+	              <li>
+	                <i class="icon ion-android-mail"></i>
+	                <div class="contact-info-content">
+	                  <div class="title">E-mail</div>
+	                  <div class="description">sales@ekohotels.com, reservation@ekohotels.com, banquet@ekohotels.com</div>
+	                </div>
+	              </li>
+	            </ul> <!-- .contacts_info__content -->
+						</div> <!-- / .contacts__info -->
+						<p class="subheading">If you have any questions don't hesitate to contact us.</p>
+	        </div>
+	        <div class="col-sm-7">
+	        	<div class="section-contacts__form_body">
+
+							<p class="section-contacts__title">Get in touch</p>
+
+              <!-- Please carefully read the README file in order to setup the PHP contact form properly -->
+
+              <!-- Alert message -->
+              <div class="alert" id="form_message" role="alert"></div>
+
+              <!-- Form -->
+							<form id="form_sendemail" class="contacts__form" method="post" action="contact-process.php">
+
+							  <!-- Email -->
+							  <div class="form-group">
+							    <label for="email" class="sr-only">Email address</label>
+							    <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email address" required>
+							    <span class="help-block"></span>
+							  </div>
+
+							  <!-- Name -->
+							  <div class="form-group">
+							    <label for="name" class="sr-only">Name</label>
+							    <input type="text" name="name" class="form-control" id="name" placeholder="Enter your name" required>
+							    <span class="help-block"></span>
+							  </div>
+
+							  <!-- Message -->
+							  <div class="form-group">
+							    <label for="message" class="sr-only">Message</label>
+							    <textarea name="message" class="form-control" id="message" rows="6" placeholder="Enter your message" required></textarea>
+							    <span class="help-block"></span>
+							  </div>
+
+							  <!-- Note -->
+							  <div class="form-group">
+							    <small class="text-muted">
+							      * All fields are mandatory.
+							    </small>
+							  </div>
+
+							  <!-- Submit -->
+							  <button type="submit" class="btn btn-default">
+							    Send Message
+							  </button>
+								<div class="col-sm-12 ">
+										<span class="output_message"></span>
+								 </div>	
+							</form> <!-- .contacts__form -->
+
+            </div> <!-- / .secction-contacts__form_body -->
+	        </div>
+	      </div> <!-- / .row -->
+	  </div> <!-- / .container -->
+	</section> <!-- / .section__contacts -->
+	
+	<!--<div id="mybutton">
+		<img src="assets/img/toast-coming-soon.jpg">
+	</div>-->
+<!-- section footer -->
+    <footer class="section__footer">
+    	<div class="container">
+    		<div class="footer__body">
+		  		<div class="row">
+		  			<div class="col-xs-12 col-sm-4 col-sm-push-4 col-md-6 col-md-push-3">
+		  				<div class="footer__item">
+
+						    <div class="footer_logo" style="text-align: center;"><img src="assets/img/logo-footer.png" width="100" alt="Eko Hotel"/>
+							<br><br>
+								<ul style="list-style: none; text-align: left; font-size: 13px; align-items: center; padding: 0; justify-content: center;color:#FFF;">
+									<li style="display: flex; align-items: center; font-size: 14px;"><i style="font-size: 20px; margin: 4px 10px;" class="icon ion-map" aria-hidden="true"></i> Plot 1415 Adetokunbo Ademola Street, PMB 12724, Victoria Island, Lagos Nigeria</li>
+									<!--<li style="display: flex; align-items: center;font-size: 14px;"><i style="font-size: 20px; margin: 4px 10px;" class="icon ion-ios-telephone" aria-hidden="true"></i> +234 1 2772700-25 , +234 1 460610 (ext.6125, 6203, 6079, 6297, 6215, 6124)</li>
+									<li style="display: flex; align-items: center;font-size: 14px;"><i style="font-size: 20px; margin: 4px 10px;" class="icon ion-ios-telephone" aria-hidden="true"></i>International Calls: +234 201 2772700, National Calls: 0201 2772700</li>-->
+									
+									<li style="display: flex; align-items: center;font-size: 14px;"><i style="font-size: 20px; margin: 4px 10px;" class="icon ion-ios-telephone" aria-hidden="true"></i>Call Us: <a style="color:#FFF; text-decoration:none;" href="tel:+234 9092772700">+234 9092772700</a>, <a style="color:#FFF; text-decoration:none;" href="tel:+234 8092772700">+234 8092772700</a></li>
+									<li style="display: flex; align-items: center;font-size: 14px;"><i style="font-size: 20px; margin: 4px 10px;" class="icon ion-ios-telephone" aria-hidden="true"></i> Fax: +234 1 2704071</li>
+									<li style="display: flex; align-items: center;font-size: 14px;"><i style="font-size: 20px; margin: 4px 10px;" class="icon ion-email" aria-hidden="true"></i>sales@ekohotels.com, reservation@ekohotels.com, banquet@ekohotels.com</li>
+								</ul>
+
+							</div>
+
+		  				</div> <!-- .footer__item -->
+		  		  </div>
+		  		  <div class="col-xs-12 col-sm-4 col-sm-pull-4 col-md-3 col-md-pull-6">
+		  		  	<div class="footer__item">
+		  					<ul class="footer__links">
+			  					<li><a href="about-us.php">About</a></li>
+								<li><a href="gallery.php">Gallery</a></li>
+								<li><a href="#">Our Events</a></li>
+								<li><a href="our-hotels.php">Our Hotels</a></li>
+								<li><a href="dining.php">Dining</a></li>
+			  					<li><a href="about-us.php">Our Vision & Mission</a></li>
+			  					<li><a href="contact.php">Contact Us</a></li>
+			  					<li><a href="terms-conditions.php">Terms & Conditions</a></li>
+			  				</ul> <!-- .footer__links -->
+		  				</div> <!-- .footer__item -->
+		  		  </div>
+		  		  <div class="col-xs-12 col-sm-4 col-md-3">
+		  		  	<div class="footer__item">
+		  					<h3 class="newsletter__title">Newsletter</h3>
+								<p class="newsletter__subtitle">Subscribe to our email newsletter to receive updates and news.</p>
+
+				        <!-- Newsletter form -->
+		            <div id="mc_embed_signup">
+		              <form class="newsletter__form" action="process-newsletter.php" method="post">
+		                <div id="mc_embed_signup_scroll">
+		                  <div class="mc-field-group form-group">
+		                    <label for="mce-EMAIL" class="sr-only">E-mail address</label>
+		                    <input type="email" value="" name="nemail" class="required email form-control newsletter_input" id="nemail" placeholder="Email address" required>
+		                  </div>
+		                  
+		                  <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+		                  <div class="clear">
+		                    <button type="submit" class="btn btn-default btn-newsletter" id="mc-embedded-subscribe">
+		                      <i class="icon ion-paper-airplane"></i>
+		                    </button>
+		                  </div>
+		                </div>
+		              </form>
+						<span class="output_newsletter"></span>
+		            </div> <!-- #mc_embed_signup -->
+						<ul class="social__icons">
+				          <li class="social-icons__item"><a href="https://www.facebook.com/EkoHotels/"><i class="icon ion-social-facebook" aria-hidden="true"></i></a></li>
+						  <li class="social-icons__item"><a href="https://www.instagram.com/ekohotels/"><i class="icon ion-social-instagram" aria-hidden="true"></i></a></li>
+						  <li class="social-icons__item"><a href="https://twitter.com/ekohotels/"><i class="icon ion-social-twitter" aria-hidden="true"></i></a></li>
+				          <li class="social-icons__item"><a href="https://www.pinterest.com/ekohotels"><i class="icon ion-social-pinterest" aria-hidden="true"></i></a></li>
+				        </ul> <!-- .social__icons -->
+		  				</div> <!-- .footer__item -->
+		  		  </div>
+		  		</div> <!-- / .row -->
+		  	</div> <!-- / .footer__body -->
+		  	<div class="footer__copyright">
+		  		<div class="row">
+	    		  <div class="col-xs-12">
+	    		  	<hr>
+					<p class="footer_copyright__text" style="text-align: center"><a href="javascript:void(0);" class="btn spl-link">THE COMPANY</a></p>
+	            	<p class="footer_copyright__text" style="text-align: center">Copyright &copy; 2019 Eko Hotels & Suites</p>
+	    		  </div>
+	    		</div> <!-- / .row -->
+		  	</div> <!-- / .footer__copyright -->
+
+    	</div> <!-- / .container -->
+    </footer>
+    <!-- .section__footer -->
+
+	<!-- JS Global -->
+    <script src="assets/plugins/jquery/jquery-1.12.4.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jquery-ui.min.js"></script>
+      
+
+    <!-- JS Plugins -->
+    <script src="assets/plugins/moment-develop/moment.js"></script>
+    <script src="assets/plugins/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="assets/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script src="assets/plugins/lightbox/dist/js/lightbox.min.js"></script>
+	<script src="assets/plugins/owl-carousel/dist/owl.carousel.min.js"></script>
+	<script src="assets/plugins/contact/contact.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+    <!-- JS Custom -->
+    <!--build:js assets/js/theme.min.js -->
+    <script src="assets/js/theme.js"></script>
+    <!-- endbuild -->
+	<script src="assets/js/google_maps.js"></script>
+
+	<script>
+
+		jQuery(function($) {
+		if (window.matchMedia('(min-width: 991px)').matches) {
+		$('.navbar .dropdown').hover(function() {
+		$(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
+
+		}, function() {
+		$(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp();
+
+		});
+
+		$('.navbar .dropdown > a').click(function(){
+		location.href = this.href;
+		});
+
+		}});
+
+		$('.popup-gallery').magnificPopup({
+		  delegate: 'a',
+		  type: 'image',
+		  gallery: {
+			enabled: true,
+			navigateByImgClick: true,
+			preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+		  },
+		  callbacks: {
+			elementParse: function(item) {
+			  console.log(item.el[0].className);
+			  if(item.el[0].className == 'video') {
+				item.type = 'iframe',
+				item.iframe = {
+				   patterns: {
+					 youtube: {
+					   index: 'youtube.com/', // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
+
+					   id: 'v=', // String that splits URL in a two parts, second part should be %id%
+						// Or null - full URL will be returned
+						// Or a function that should return %id%, for example:
+						// id: function(url) { return 'parsed id'; }
+
+					   src: '//www.youtube.com/embed/%id%?autoplay=1' // URL that will be set as a source for iframe.
+					 },
+					 vimeo: {
+					   index: 'vimeo.com/',
+					   id: '/',
+					   src: '//player.vimeo.com/video/%id%?autoplay=1'
+					 },
+					 gmaps: {
+					   index: '//maps.google.',
+					   src: '%id%&output=embed'
+					 }
+				   }
+				}
+			  } else {
+				 item.type = 'image',
+				 item.tLoading = 'Loading image #%curr%...',
+				 item.mainClass = 'mfp-img-mobile',
+				 item.image = {
+				   tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
+				 }
+			  }
+
+			}
+		  }
+		});
+	</script>
+
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTGnDWmYKPhKslCvPfkrcZDpgT_QMHT0s&callback=initMap" async defer></script>
+    <!-- validate -->
+    <script type="text/javascript" src="assets/js/script.js"></script>
+
+    <script type="text/javascript">
+			$(document).ready(function() {
+    				$('.newsletter__form').on('submit',function(){
+         
+        // Add text 'loading...' right after clicking on the submit button. 
+        			$('.output_newsletter').html('<div class="alert alert-warning">Processing.....</div>'); 
+         
+        			var form = $(this);
+        			$.ajax({
+           			 url: form.attr('action'),
+            			method: form.attr('method'),
+            			data: form.serialize(),
+            			success: function(result){
+                			if (result == 'success'){
+                    			$('.output_newsletter').html('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">×</button>Thank you for subscribing!</div>');  
+                			} else {
+                    			$('.output_newsletter').html('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>Something Went Wrong. Try Again!</div>');
+                			}
+            			}
+        			});
+         
+        // Prevents default submission of the form after clicking on the submit button. 
+        return false;   
+    			});
+			});
+		</script>
+
+
+
+ <!-- <script src="assets/plugins/jquery/jquery-1.12.4.min.js" type="text/javascript"></script>-->
+	  <script src="assets/plugins/moment-develop/moment.js"></script>
+    <script src="assets/plugins/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript">
+	jQuery(function($) {
+    "use strict";
+    datePicker();
+    function datePicker() {
+		var currentDate = new Date();
+		var formattedCurrentDate = ((currentDate.getMonth() > 8) ? (currentDate.getMonth() + 1) : ('0' + (currentDate.getMonth() + 1))) +
+		 '/' + ((currentDate.getDate() > 9) ? currentDate.getDate() : ('0' + currentDate.getDate())) + 
+		 '/' + currentDate.getFullYear(); 
+
+		var formattedNextDate = ((currentDate.getMonth() > 8) ? (currentDate.getMonth() + 1) : ('0' + (currentDate.getMonth() + 1))) +
+		 '/' + ((currentDate.getDate()+1 > 9) ? currentDate.getDate()+1 : ('0' + currentDate.getDate()+1)) + 
+		 '/' + currentDate.getFullYear(); 
+
+
+		$('#reservation__check-in').datetimepicker({
+			date: formattedCurrentDate,
+			format: 'MM/DD/YYYY',
+		});
+
+		$('#reservation__check-out').datetimepicker({
+			date: formattedNextDate,
+			format: 'MM/DD/YYYY',
+		});
+
+		$("#reservation__check-in").on("change",function(){
+    alert("It works!")});
+
+
+		$("#reservation__check-in").datetimepicker({
+			format: 'MM/DD/YYYY',
+			date: formattedCurrentDate,
+			// setStartDate: formattedCurrentDate,
+			onClose : function (selectedDate) {
+				var newDate = new Date(selectedDate);
+				console.log('selectedDate....', selectedDate);
+				var tomorrow = new Date(newDate.getTime() + 24 * 60 * 60 * 1000)
+				var nextDate = (tomorrow.getMonth() + 1) + '/' + tomorrow.getDate() + '/' + tomorrow.getFullYear();
+				console.log('nextDate...',nextDate);
+				
+				$("#reservation__check-out").datetimepicker()
+				$("#reservation__check-out").datetimepicker('setDate', nextDate);
+
+				// $("#reservation__check-out").val(nextDate);
+				// $('#reservation__check-out').datepicker('option', {minDate: nextDate});
+				// $("#reservation__check-out").focus();
+				$("#reservation__check-out").datetimepicker({
+					format: 'MM/DD/YYYY',
+					startDate: nextDate
+				}).focus();
+			}
+		});
+	}
+});
+	</script>
+	  <script type="text/javascript">
+			$(document).ready(function() {
+    				$('.contacts__form').on('submit',function(){
+         
+        // Add text 'loading...' right after clicking on the submit button. 
+        			$('.output_message').html('<div class="alert alert-warning">Sending Contact Request...</div>'); 
+         
+        			var form = $(this);
+        			$.ajax({
+           			 url: form.attr('action'),
+            			method: form.attr('method'),
+            			data: form.serialize(),
+            			success: function(result){
+                			if (result == 'success'){
+                    			$('.output_message').html('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">×</button>Thank you for contacting us! We will get back to you shortly.</div>');  
+                			} else {
+                    			$('.output_message').html('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>Something Went Wrong. E-Mail us at sales@ekohotels.com</div>');
+                			}
+            			}
+        			});
+         
+        // Prevents default submission of the form after clicking on the submit button. 
+        return false;   
+    			});
+			});
+		</script>  
+  </body>
+</html>
