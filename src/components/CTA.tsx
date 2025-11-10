@@ -29,8 +29,7 @@ const CTA = () => {
               <Link to="/planning-tools">Start Planning Now</Link>
             </Button>
             <Button 
-              variant="outline" 
-              className="border-white text-white hover:bg-white/10 text-base py-6 px-8"
+              className="bg-white text-jara-purple hover:bg-white/90 text-base py-6 px-8"
               onClick={() => {
                 document.querySelector('[role="button"][aria-label="Open JaraBot"]')?.dispatchEvent(
                   new MouseEvent('click', { bubbles: true })
