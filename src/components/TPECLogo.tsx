@@ -11,15 +11,15 @@ type LogoProps = {
 const TPECLogo = ({ className, size = 'md', isFooter = false, linkToHome = true }: LogoProps) => {
   // Size mapping for text
   const sizeMap = {
-    sm: 'text-xl',
-    md: 'text-2xl md:text-3xl',
-    lg: 'text-3xl md:text-4xl'
+    sm: 'text-base',
+    md: 'text-lg',
+    lg: 'text-xl'
   };
   
   const logoContent = (
-    <div className={cn("flex items-baseline tracking-widest", sizeMap[size], className)}>
-      <span className="font-black text-foreground">TPEC</span>
-      <span className="font-light text-foreground">EVENTS</span>
+    <div className={cn("flex items-baseline gap-1 tracking-wide", sizeMap[size], className)}>
+      <span className="font-bold text-primary">TPEC</span>
+      <span className="font-normal text-foreground/80">Events</span>
     </div>
   );
 
