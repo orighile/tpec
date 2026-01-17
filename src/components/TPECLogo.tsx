@@ -18,8 +18,8 @@ const TPECLogo = ({ className, size = 'md', isFooter = false, linkToHome = true 
   
   const logoContent = (
     <div className={cn("flex items-baseline gap-1 tracking-wide", sizeMap[size], className)}>
-      <span className="font-bold text-primary">TPEC</span>
-      <span className="font-normal text-foreground/80">Events</span>
+      <span className={cn("font-bold", isFooter ? "text-white" : "text-foreground")}>TPEC</span>
+      <span className={cn("font-normal", isFooter ? "text-white/80" : "text-foreground/80")}>Events</span>
     </div>
   );
 
