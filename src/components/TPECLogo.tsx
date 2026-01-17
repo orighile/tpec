@@ -21,7 +21,12 @@ const TPECLogo = ({ className, size = 'md', isFooter = false, linkToHome = true 
     <img 
       src="/lovable-uploads/tpec-logo-transparent.png" 
       alt="TPEC Events - Premier Event Planning" 
-      className={cn("object-contain mix-blend-multiply", sizeMap[size], className)}
+      className={cn(
+        "object-contain",
+        sizeMap[size],
+        isFooter ? "brightness-0 invert" : "drop-shadow-sm",
+        className
+      )}
     />
   );
 
