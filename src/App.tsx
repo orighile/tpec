@@ -66,51 +66,51 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/services/:id" element={<ServiceDetailPage />} />
-              <Route path="/events" element={<EventsPage />} />
-              <Route path="/events/create" element={<CreateEventPage />} />
-              <Route path="/events/:id" element={<EventDetailPage />} />
-              <Route path="/vendors" element={<VendorsPage />} />
-              <Route path="/vendors/marketplace" element={<VendorMarketplacePage />} />
-              <Route path="/vendor-onboarding" element={<VendorOnboardingPage />} />
-              <Route path="/vendors/onboarding" element={<VendorOnboardingPage />} />
-              <Route path="/vendors/:id/book" element={<VendorBookingPage />} />
-              <Route path="/vendors/:id" element={<VendorDetailPage />} />
-              <Route path="/budget" element={<BudgetPage />} />
-              <Route path="/checklist" element={<ChecklistPage />} />
-              <Route path="/guests" element={<GuestManagementPage />} />
-              <Route path="/seating" element={<SeatingChartPage />} />
-              <Route path="/tasks" element={<Tasks />} />
-              <Route path="/party-crew" element={<PartyCrew />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/planning-tools" element={<PlanningToolsPage />} />
-              <Route path="/testimonials" element={<TestimonialsPage />} />
-              <Route path="/blog" element={<BlogPage />} />
-              <Route path="/blog/:id" element={<BlogPostPage />} />
-              <Route path="/domains" element={<DomainsPage />} />
-              <Route path="/roadmap" element={<RoadmapPage />} />
-              <Route path="/social-and-trends" element={<SocialAndTrendsPage />} />
-              <Route path="/social-trends" element={<SocialAndTrendsPage />} />
-              <Route path="/advanced-features" element={<AdvancedFeaturesPage />} />
-              <Route path="/ai-recommendations" element={<AIRecommendationsPage />} />
+              <Route path="/" element={<Layout><Index /></Layout>} />
+              <Route path="/about" element={<Layout><AboutPage /></Layout>} />
+              <Route path="/services" element={<Layout><ServicesPage /></Layout>} />
+              <Route path="/services/:id" element={<Layout><ServiceDetailPage /></Layout>} />
+              <Route path="/events" element={<Layout><EventsPage /></Layout>} />
+              <Route path="/events/create" element={<Layout><CreateEventPage /></Layout>} />
+              <Route path="/events/:id" element={<Layout><EventDetailPage /></Layout>} />
+              <Route path="/vendors" element={<Layout><VendorsPage /></Layout>} />
+              <Route path="/vendors/marketplace" element={<Layout><VendorMarketplacePage /></Layout>} />
+              <Route path="/vendor-onboarding" element={<Layout><VendorOnboardingPage /></Layout>} />
+              <Route path="/vendors/onboarding" element={<Layout><VendorOnboardingPage /></Layout>} />
+              <Route path="/vendors/:id/book" element={<Layout><VendorBookingPage /></Layout>} />
+              <Route path="/vendors/:id" element={<Layout><VendorDetailPage /></Layout>} />
+              <Route path="/budget" element={<Layout><BudgetPage /></Layout>} />
+              <Route path="/checklist" element={<Layout><ChecklistPage /></Layout>} />
+              <Route path="/guests" element={<Layout><GuestManagementPage /></Layout>} />
+              <Route path="/seating" element={<Layout><SeatingChartPage /></Layout>} />
+              <Route path="/tasks" element={<Layout><Tasks /></Layout>} />
+              <Route path="/party-crew" element={<Layout><PartyCrew /></Layout>} />
+              <Route path="/search" element={<Layout><SearchPage /></Layout>} />
+              <Route path="/planning-tools" element={<Layout><PlanningToolsPage /></Layout>} />
+              <Route path="/testimonials" element={<Layout><TestimonialsPage /></Layout>} />
+              <Route path="/blog" element={<Layout><BlogPage /></Layout>} />
+              <Route path="/blog/:id" element={<Layout><BlogPostPage /></Layout>} />
+              <Route path="/domains" element={<Layout><DomainsPage /></Layout>} />
+              <Route path="/roadmap" element={<Layout><RoadmapPage /></Layout>} />
+              <Route path="/social-and-trends" element={<Layout><SocialAndTrendsPage /></Layout>} />
+              <Route path="/social-trends" element={<Layout><SocialAndTrendsPage /></Layout>} />
+              <Route path="/advanced-features" element={<Layout><AdvancedFeaturesPage /></Layout>} />
+              <Route path="/ai-recommendations" element={<Layout><AIRecommendationsPage /></Layout>} />
               <Route path="/auth" element={<Auth />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-              <Route path="/privacy" element={<PrivacyPolicyPage />} />
-              <Route path="/terms" element={<TermsOfServicePage />} />
-              <Route path="/disclaimer" element={<DisclaimerPage />} />
-              <Route path="/planning-tools/invitations" element={<DigitalInvitationsPage />} />
-              <Route path="/planning-tools/registry" element={<GiftRegistryPage />} />
-              <Route path="/faq" element={<FAQPage />} />
-              <Route path="/venues" element={<VenuesPage />} />
-              <Route path="/planners" element={<PlannersPage />} />
-              <Route path="/jarabot" element={<JaraBotPage />} />
-              <Route path="/community" element={<CommunityPage />} />
-              <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/profile" element={<Layout><ProfilePage /></Layout>} />
+              <Route path="/settings" element={<Layout><SettingsPage /></Layout>} />
+              <Route path="/privacy" element={<Layout><PrivacyPolicyPage /></Layout>} />
+              <Route path="/terms" element={<Layout><TermsOfServicePage /></Layout>} />
+              <Route path="/disclaimer" element={<Layout><DisclaimerPage /></Layout>} />
+              <Route path="/planning-tools/invitations" element={<Layout><DigitalInvitationsPage /></Layout>} />
+              <Route path="/planning-tools/registry" element={<Layout><GiftRegistryPage /></Layout>} />
+              <Route path="/faq" element={<Layout><FAQPage /></Layout>} />
+              <Route path="/venues" element={<Layout><VenuesPage /></Layout>} />
+              <Route path="/planners" element={<Layout><PlannersPage /></Layout>} />
+              <Route path="/jarabot" element={<Layout hideFooter><JaraBotPage /></Layout>} />
+              <Route path="/community" element={<Layout><CommunityPage /></Layout>} />
+              <Route path="/gallery" element={<Layout><GalleryPage /></Layout>} />
+              <Route path="*" element={<Layout><NotFound /></Layout>} />
             </Routes>
             <TWAInstallPrompt />
           </BrowserRouter>
