@@ -23,8 +23,12 @@ export const useGuestManager = (eventId: string) => {
     sendInvitation
   } = useSupabaseGuests(eventId);
 
-  // Use the query hook
+  // Use the query hook - but handle placeholder event IDs gracefully
+  const isPlaceholderEvent = eventId === "sample-event-id" || !eventId;
   const { data: guests = [], isLoading: loading, error } = useEventGuests();
+  
+  // For demo purposes, use sample data if it's a placeholder event
+  const effectiveLoading = isPlaceholderEvent ? false : loading;
 
   const handleAddGuest = async (guestData: NewGuestForm) => {
     try {
@@ -152,7 +156,7 @@ export const useGuestManager = (eventId: string) => {
 
   return {
     guests,
-    loading,
+    loading: effectiveLoading,
     error,
     searchTerm,
     setSearchTerm,
