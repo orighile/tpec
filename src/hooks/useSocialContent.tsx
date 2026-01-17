@@ -1,5 +1,4 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
 
@@ -31,102 +30,73 @@ export interface TrendingItem {
   updated_at: string;
 }
 
+// Mock data storage (in-memory for now until tables are created)
+const mockSocialPosts: SocialPost[] = [];
+const mockTrendingItems: TrendingItem[] = [];
+
 export const useSocialContent = () => {
   const { user } = useAuth();
   const { handleError, handleSuccess } = useErrorHandler();
   const queryClient = useQueryClient();
 
-  // Fetch trending social posts
+  // Fetch trending social posts (mock)
   const useTrendingSocialPosts = () => {
     return useQuery({
       queryKey: ["trending-social-posts"],
       queryFn: async (): Promise<SocialPost[]> => {
-        const { data, error } = await supabase
-          .from("social_posts")
-          .select("*")
-          .eq("is_trending", true)
-          .order("likes_count", { ascending: false })
-          .limit(10);
-
-        if (error) throw error;
-        return data || [];
+        return mockSocialPosts.filter(p => p.is_trending).slice(0, 10);
       },
     });
   };
 
-  // Fetch all social posts
+  // Fetch all social posts (mock)
   const useSocialPosts = () => {
     return useQuery({
       queryKey: ["social-posts"],
       queryFn: async (): Promise<SocialPost[]> => {
-        const { data, error } = await supabase
-          .from("social_posts")
-          .select("*")
-          .order("created_at", { ascending: false })
-          .limit(50);
-
-        if (error) throw error;
-        return data || [];
+        return mockSocialPosts.slice(0, 50);
       },
     });
   };
 
-  // Fetch user's social posts
+  // Fetch user's social posts (mock)
   const useUserSocialPosts = () => {
     return useQuery({
       queryKey: ["user-social-posts", user?.id],
       queryFn: async (): Promise<SocialPost[]> => {
         if (!user?.id) return [];
-
-        const { data, error } = await supabase
-          .from("social_posts")
-          .select("*")
-          .eq("user_id", user.id)
-          .order("created_at", { ascending: false });
-
-        if (error) throw error;
-        return data || [];
+        return mockSocialPosts.filter(p => p.user_id === user.id);
       },
       enabled: !!user?.id,
     });
   };
 
-  // Fetch trending items
+  // Fetch trending items (mock)
   const useTrendingItems = () => {
     return useQuery({
       queryKey: ["trending-items"],
       queryFn: async (): Promise<TrendingItem[]> => {
-        const { data, error } = await supabase
-          .from("trending_items")
-          .select("*")
-          .eq("is_active", true)
-          .order("trend_score", { ascending: false })
-          .limit(20);
-
-        if (error) throw error;
-        return data || [];
+        return mockTrendingItems.filter(i => i.is_active).slice(0, 20);
       },
     });
   };
 
-  // Create social post
+  // Create social post (mock)
   const createSocialPost = useMutation({
     mutationFn: async (postData: Omit<SocialPost, "id" | "created_at" | "updated_at" | "user_id" | "likes_count" | "shares_count">) => {
       if (!user?.id) throw new Error("Authentication required");
 
-      const { data, error } = await supabase
-        .from("social_posts")
-        .insert({
-          ...postData,
-          user_id: user.id,
-          likes_count: 0,
-          shares_count: 0,
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
+      const newPost: SocialPost = {
+        ...postData,
+        id: `post-${Date.now()}`,
+        user_id: user.id,
+        likes_count: 0,
+        shares_count: 0,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+      mockSocialPosts.push(newPost);
+      return newPost;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["social-posts"] });
@@ -138,22 +108,16 @@ export const useSocialContent = () => {
     },
   });
 
-  // Update social post engagement
+  // Update social post engagement (mock)
   const updatePostEngagement = useMutation({
     mutationFn: async ({ postId, likes, shares }: { postId: string; likes?: number; shares?: number }) => {
-      const updates: any = {};
-      if (likes !== undefined) updates.likes_count = likes;
-      if (shares !== undefined) updates.shares_count = shares;
+      const post = mockSocialPosts.find(p => p.id === postId);
+      if (!post) throw new Error("Post not found");
 
-      const { data, error } = await supabase
-        .from("social_posts")
-        .update(updates)
-        .eq("id", postId)
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
+      if (likes !== undefined) post.likes_count = likes;
+      if (shares !== undefined) post.shares_count = shares;
+      post.updated_at = new Date().toISOString();
+      return post;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["social-posts"] });
@@ -164,18 +128,15 @@ export const useSocialContent = () => {
     },
   });
 
-  // Mark post as trending (admin only)
+  // Mark post as trending (mock)
   const markPostAsTrending = useMutation({
     mutationFn: async (postId: string) => {
-      const { data, error } = await supabase
-        .from("social_posts")
-        .update({ is_trending: true })
-        .eq("id", postId)
-        .select()
-        .single();
+      const post = mockSocialPosts.find(p => p.id === postId);
+      if (!post) throw new Error("Post not found");
 
-      if (error) throw error;
-      return data;
+      post.is_trending = true;
+      post.updated_at = new Date().toISOString();
+      return post;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["trending-social-posts"] });
@@ -186,17 +147,17 @@ export const useSocialContent = () => {
     },
   });
 
-  // Create trending item (admin only)
+  // Create trending item (mock)
   const createTrendingItem = useMutation({
     mutationFn: async (itemData: Omit<TrendingItem, "id" | "created_at" | "updated_at">) => {
-      const { data, error } = await supabase
-        .from("trending_items")
-        .insert(itemData)
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
+      const newItem: TrendingItem = {
+        ...itemData,
+        id: `trending-${Date.now()}`,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+      mockTrendingItems.push(newItem);
+      return newItem;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["trending-items"] });
@@ -207,18 +168,15 @@ export const useSocialContent = () => {
     },
   });
 
-  // Delete social post
+  // Delete social post (mock)
   const deleteSocialPost = useMutation({
     mutationFn: async (postId: string) => {
       if (!user?.id) throw new Error("Authentication required");
 
-      const { error } = await supabase
-        .from("social_posts")
-        .delete()
-        .eq("id", postId)
-        .eq("user_id", user.id);
-
-      if (error) throw error;
+      const index = mockSocialPosts.findIndex(p => p.id === postId && p.user_id === user.id);
+      if (index !== -1) {
+        mockSocialPosts.splice(index, 1);
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["social-posts"] });

@@ -1,5 +1,4 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useErrorHandler } from "@/hooks/useErrorHandler";
 
@@ -43,107 +42,77 @@ export interface GiftPurchase {
   created_at: string;
 }
 
+// Mock data storage (in-memory for now until tables are created)
+const mockRegistries: GiftRegistry[] = [];
+const mockItems: GiftItem[] = [];
+const mockPurchases: GiftPurchase[] = [];
+
 export const useGiftRegistry = (eventId?: string) => {
   const { user } = useAuth();
   const { handleError, handleSuccess } = useErrorHandler();
   const queryClient = useQueryClient();
 
-  // Fetch user's gift registries
+  // Fetch user's gift registries (mock)
   const useGiftRegistries = () => {
     return useQuery({
       queryKey: ["gift-registries", user?.id],
       queryFn: async (): Promise<GiftRegistry[]> => {
         if (!user?.id) return [];
-
-        const { data, error } = await supabase
-          .from("gift_registries")
-          .select("*")
-          .eq("user_id", user.id)
-          .order("created_at", { ascending: false });
-
-        if (error) throw error;
-        return (data || []) as GiftRegistry[];
+        return mockRegistries.filter(r => r.user_id === user.id);
       },
       enabled: !!user?.id,
     });
   };
 
-  // Fetch public gift registry by event
+  // Fetch public gift registry by event (mock)
   const usePublicGiftRegistry = (eventId: string) => {
     return useQuery({
       queryKey: ["public-gift-registry", eventId],
       queryFn: async (): Promise<GiftRegistry | null> => {
-        const { data, error } = await supabase
-          .from("gift_registries")
-          .select("*")
-          .eq("event_id", eventId)
-          .eq("is_public", true)
-          .maybeSingle();
-
-        if (error) throw error;
-        return data as GiftRegistry | null;
+        return mockRegistries.find(r => r.event_id === eventId && r.is_public) || null;
       },
       enabled: !!eventId,
     });
   };
 
-  // Fetch gift items for a registry
+  // Fetch gift items for a registry (mock)
   const useGiftItems = (registryId: string) => {
     return useQuery({
       queryKey: ["gift-items", registryId],
       queryFn: async (): Promise<GiftItem[]> => {
-        const { data, error } = await supabase
-          .from("gift_items")
-          .select("*")
-          .eq("registry_id", registryId)
-          .order("priority", { ascending: false });
-
-        if (error) throw error;
-        return data || [];
+        return mockItems.filter(i => i.registry_id === registryId);
       },
       enabled: !!registryId,
     });
   };
 
-  // Fetch purchases for gift items (registry owner only)
+  // Fetch purchases for gift items (mock)
   const useGiftPurchases = (registryId: string) => {
     return useQuery({
       queryKey: ["gift-purchases", registryId],
       queryFn: async (): Promise<GiftPurchase[]> => {
         if (!user?.id) return [];
-
-        const { data, error } = await supabase
-          .from("gift_purchases")
-          .select(`
-            *,
-            gift_item:gift_items(*)
-          `)
-          .eq("gift_items.registry_id", registryId)
-          .order("created_at", { ascending: false });
-
-        if (error) throw error;
-        return data || [];
+        const itemIds = mockItems.filter(i => i.registry_id === registryId).map(i => i.id);
+        return mockPurchases.filter(p => itemIds.includes(p.gift_item_id));
       },
       enabled: !!user?.id && !!registryId,
     });
   };
 
-  // Create gift registry
+  // Create gift registry (mock)
   const createGiftRegistry = useMutation({
     mutationFn: async (registryData: Omit<GiftRegistry, "id" | "created_at" | "updated_at" | "user_id">) => {
       if (!user?.id) throw new Error("Authentication required");
 
-      const { data, error } = await supabase
-        .from("gift_registries")
-        .insert({
-          ...registryData,
-          user_id: user.id,
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
+      const newRegistry: GiftRegistry = {
+        ...registryData,
+        id: `registry-${Date.now()}`,
+        user_id: user.id,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+      mockRegistries.push(newRegistry);
+      return newRegistry;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["gift-registries", user?.id] });
@@ -154,20 +123,18 @@ export const useGiftRegistry = (eventId?: string) => {
     },
   });
 
-  // Add gift item
+  // Add gift item (mock)
   const addGiftItem = useMutation({
     mutationFn: async (itemData: Omit<GiftItem, "id" | "created_at" | "updated_at" | "quantity_purchased">) => {
-      const { data, error } = await supabase
-        .from("gift_items")
-        .insert({
-          ...itemData,
-          quantity_purchased: 0,
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
+      const newItem: GiftItem = {
+        ...itemData,
+        id: `item-${Date.now()}`,
+        quantity_purchased: 0,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+      mockItems.push(newItem);
+      return newItem;
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["gift-items", variables.registry_id] });
@@ -178,36 +145,24 @@ export const useGiftRegistry = (eventId?: string) => {
     },
   });
 
-  // Purchase gift item
+  // Purchase gift item (mock)
   const purchaseGiftItem = useMutation({
     mutationFn: async (purchaseData: Omit<GiftPurchase, "id" | "created_at">) => {
-      const { data, error } = await supabase
-        .from("gift_purchases")
-        .insert(purchaseData)
-        .select()
-        .single();
+      const newPurchase: GiftPurchase = {
+        ...purchaseData,
+        id: `purchase-${Date.now()}`,
+        created_at: new Date().toISOString(),
+      };
+      mockPurchases.push(newPurchase);
 
-      if (error) throw error;
-
-      // Update quantity purchased manually
-      const { data: currentItem } = await supabase
-        .from("gift_items")
-        .select("quantity_purchased")
-        .eq("id", purchaseData.gift_item_id)
-        .single();
-
-      const { error: updateError } = await supabase
-        .from("gift_items")
-        .update({ 
-          quantity_purchased: (currentItem?.quantity_purchased || 0) + purchaseData.quantity 
-        })
-        .eq("id", purchaseData.gift_item_id);
-
-      if (updateError) throw updateError;
-      return data;
+      // Update quantity purchased
+      const item = mockItems.find(i => i.id === purchaseData.gift_item_id);
+      if (item) {
+        item.quantity_purchased += purchaseData.quantity;
+      }
+      return newPurchase;
     },
-    onSuccess: (_, variables) => {
-      // Find registry_id from the gift_item to invalidate the right query
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["gift-items"] });
       queryClient.invalidateQueries({ queryKey: ["gift-purchases"] });
       handleSuccess("Gift purchased successfully! Thank you!", "Success");
@@ -217,21 +172,16 @@ export const useGiftRegistry = (eventId?: string) => {
     },
   });
 
-  // Update gift registry
+  // Update gift registry (mock)
   const updateGiftRegistry = useMutation({
     mutationFn: async ({ id, updates }: { id: string; updates: Partial<GiftRegistry> }) => {
       if (!user?.id) throw new Error("Authentication required");
 
-      const { data, error } = await supabase
-        .from("gift_registries")
-        .update(updates)
-        .eq("id", id)
-        .eq("user_id", user.id)
-        .select()
-        .single();
+      const index = mockRegistries.findIndex(r => r.id === id && r.user_id === user.id);
+      if (index === -1) throw new Error("Registry not found");
 
-      if (error) throw error;
-      return data;
+      mockRegistries[index] = { ...mockRegistries[index], ...updates, updated_at: new Date().toISOString() };
+      return mockRegistries[index];
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["gift-registries", user?.id] });
@@ -242,15 +192,13 @@ export const useGiftRegistry = (eventId?: string) => {
     },
   });
 
-  // Delete gift item
+  // Delete gift item (mock)
   const deleteGiftItem = useMutation({
     mutationFn: async ({ itemId, registryId }: { itemId: string; registryId: string }) => {
-      const { error } = await supabase
-        .from("gift_items")
-        .delete()
-        .eq("id", itemId);
-
-      if (error) throw error;
+      const index = mockItems.findIndex(i => i.id === itemId);
+      if (index !== -1) {
+        mockItems.splice(index, 1);
+      }
       return { itemId, registryId };
     },
     onSuccess: (data) => {

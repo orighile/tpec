@@ -9,9 +9,8 @@ export const useSecurityLogger = () => {
   ) => {
     try {
       await supabase.rpc('log_security_event', {
-        _event_type: eventType,
-        _event_data: eventData || null,
-        _user_id: userId || null
+        event_type: eventType,
+        event_details: eventData || null,
       });
     } catch (error) {
       console.error('Failed to log security event:', error);
