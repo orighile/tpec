@@ -10,18 +10,18 @@ type LogoProps = {
 };
 
 const TPECLogo = ({ className, size = 'md', isFooter = false, linkToHome = true }: LogoProps) => {
-  // Size mapping for logo height
+  // Size mapping for logo height - made larger for better visibility
   const sizeMap = {
-    sm: 'h-10',
-    md: 'h-16',
-    lg: 'h-20'
+    sm: 'h-12',
+    md: 'h-20',
+    lg: 'h-24'
   };
   
   const logoContent = (
     <img 
-      src="/lovable-uploads/tpec-logo-option2.png" 
+      src="/lovable-uploads/tpec-logo-transparent.png" 
       alt="TPEC Events - Premier Event Planning" 
-      className={cn("object-contain", sizeMap[size], className)}
+      className={cn("object-contain mix-blend-multiply", sizeMap[size], className)}
     />
   );
 
