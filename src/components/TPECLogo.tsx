@@ -10,38 +10,19 @@ type LogoProps = {
 };
 
 const TPECLogo = ({ className, size = 'md', isFooter = false, linkToHome = true }: LogoProps) => {
-  // Size mapping for text sizes
+  // Size mapping for logo height - made larger for better visibility
   const sizeMap = {
-    sm: 'text-xl',
-    md: 'text-3xl',
-    lg: 'text-4xl'
-  };
-
-  const underlineSize = {
-    sm: 'h-0.5 w-24',
-    md: 'h-0.5 w-32',
-    lg: 'h-1 w-40'
+    sm: 'h-12',
+    md: 'h-20',
+    lg: 'h-24'
   };
   
   const logoContent = (
-    <div className={cn("flex flex-col items-start", className)}>
-      <span 
-        className={cn(
-          "font-bold tracking-wide",
-          sizeMap[size],
-          isFooter ? "text-white" : "text-purple-800"
-        )}
-        style={{ fontFamily: "'Anton', sans-serif" }}
-      >
-        TPEC EVENTS
-      </span>
-      <div 
-        className={cn(
-          "bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 rounded-full mt-1",
-          underlineSize[size]
-        )}
-      />
-    </div>
+    <img 
+      src="/lovable-uploads/tpec-logo-transparent.png" 
+      alt="TPEC Events - Premier Event Planning" 
+      className={cn("object-contain mix-blend-multiply", sizeMap[size], className)}
+    />
   );
 
   return linkToHome ? (
