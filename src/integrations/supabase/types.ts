@@ -78,6 +78,7 @@ export type Database = {
       }
       blog_categories: {
         Row: {
+          color: string | null
           created_at: string
           description: string | null
           id: string
@@ -85,6 +86,7 @@ export type Database = {
           slug: string
         }
         Insert: {
+          color?: string | null
           created_at?: string
           description?: string | null
           id?: string
@@ -92,6 +94,7 @@ export type Database = {
           slug: string
         }
         Update: {
+          color?: string | null
           created_at?: string
           description?: string | null
           id?: string
@@ -99,6 +102,41 @@ export type Database = {
           slug?: string
         }
         Relationships: []
+      }
+      blog_comments: {
+        Row: {
+          author_id: string
+          content: string
+          created_at: string
+          id: string
+          post_id: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          content: string
+          created_at?: string
+          id?: string
+          post_id: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          content?: string
+          created_at?: string
+          id?: string
+          post_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_comments_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       blog_posts: {
         Row: {
@@ -114,6 +152,7 @@ export type Database = {
           status: string | null
           title: string
           updated_at: string
+          views: number | null
         }
         Insert: {
           author_id: string
@@ -128,6 +167,7 @@ export type Database = {
           status?: string | null
           title: string
           updated_at?: string
+          views?: number | null
         }
         Update: {
           author_id?: string
@@ -142,6 +182,7 @@ export type Database = {
           status?: string | null
           title?: string
           updated_at?: string
+          views?: number | null
         }
         Relationships: []
       }
@@ -457,6 +498,45 @@ export type Database = {
           },
         ]
       }
+      invitation_templates: {
+        Row: {
+          created_at: string
+          description: string | null
+          design_data: Json | null
+          id: string
+          is_premium: boolean | null
+          name: string
+          price: number | null
+          template_type: string
+          thumbnail_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          design_data?: Json | null
+          id?: string
+          is_premium?: boolean | null
+          name: string
+          price?: number | null
+          template_type: string
+          thumbnail_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          design_data?: Json | null
+          id?: string
+          is_premium?: boolean | null
+          name?: string
+          price?: number | null
+          template_type?: string
+          thumbnail_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       order_items: {
         Row: {
           created_at: string
@@ -543,6 +623,7 @@ export type Database = {
           role: string | null
           updated_at: string
           user_id: string
+          username: string | null
         }
         Insert: {
           avatar_url?: string | null
@@ -555,6 +636,7 @@ export type Database = {
           role?: string | null
           updated_at?: string
           user_id: string
+          username?: string | null
         }
         Update: {
           avatar_url?: string | null
@@ -567,6 +649,7 @@ export type Database = {
           role?: string | null
           updated_at?: string
           user_id?: string
+          username?: string | null
         }
         Relationships: []
       }
@@ -601,7 +684,15 @@ export type Database = {
           user_id?: string
           vendor_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "fk_reviews_vendor"
+            columns: ["vendor_id"]
+            isOneToOne: false
+            referencedRelation: "vendors"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       tasks: {
         Row: {
@@ -641,6 +732,57 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      user_invitations: {
+        Row: {
+          created_at: string
+          customizations: Json | null
+          delivery_status: string | null
+          event_id: string | null
+          id: string
+          sent_count: number | null
+          template_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          customizations?: Json | null
+          delivery_status?: string | null
+          event_id?: string | null
+          id?: string
+          sent_count?: number | null
+          template_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          customizations?: Json | null
+          delivery_status?: string | null
+          event_id?: string | null
+          id?: string
+          sent_count?: number | null
+          template_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_invitations_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_invitations_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "invitation_templates"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       vendor_bookings: {
         Row: {
