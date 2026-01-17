@@ -1,7 +1,5 @@
 
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import SeatingPlanner from "@/components/SeatingPlanner";
 import { Button } from "@/components/ui/button";
 import { Download, Save, Share2 } from "lucide-react";
@@ -76,13 +74,12 @@ const SeatingChartPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1 py-12 bg-gray-50">
+    <>
+      <div className="flex-1 py-12 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="mb-8">
             <h1 className="text-4xl md:text-5xl font-bold mb-2">Seating Chart</h1>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-muted-foreground">
               Design your event floor plan and arrange guests at tables
             </p>
           </div>
@@ -142,12 +139,12 @@ const SeatingChartPage = () => {
           
           <SeatingPlanner />
           
-          <div className="mt-8 bg-white p-6 rounded-lg shadow-sm">
+          <div className="mt-8 bg-card p-6 rounded-lg shadow-sm">
             <h2 className="text-2xl font-bold mb-4">Seating Chart Tips</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold mb-2 text-primary">Strategic Seating</h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                   <li>Seat guests with others they'll enjoy talking to</li>
                   <li>Keep guests with mobility issues close to entrances</li>
                   <li>Consider age when creating table assignments</li>
@@ -156,7 +153,7 @@ const SeatingChartPage = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold mb-2 text-primary">Layout Considerations</h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                   <li>Allow sufficient space between tables (at least 60 inches)</li>
                   <li>Keep high-traffic areas clear of tables</li>
                   <li>Consider proximity to dance floor, buffet, and restrooms</li>
@@ -166,10 +163,9 @@ const SeatingChartPage = () => {
             </div>
           </div>
         </div>
-      </main>
-      <Footer />
+      </div>
       <JaraBot />
-    </div>
+    </>
   );
 };
 
