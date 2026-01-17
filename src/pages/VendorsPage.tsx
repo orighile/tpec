@@ -18,13 +18,13 @@ const VendorsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Vendors");
   const [selectedCity, setSelectedCity] = useState("All Cities");
 
-  // Categories - Removed "Event Planning" and "Venue" as requested
+  // Categories - Only removed "Venue" (Planners wasn't in the original list)
   const categories = [
     "All Vendors", 
     "Catering", 
+    "Decoration", 
     "Entertainment", 
     "Photography", 
-    "Decoration", 
     "Cakes & Desserts"
   ];
   
