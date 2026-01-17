@@ -273,34 +273,58 @@ export type Database = {
       }
       checklist_items: {
         Row: {
-          checklist_id: string
+          assigned_to: string | null
+          category: string | null
+          checklist_id: string | null
+          completed: boolean | null
+          completed_at: string | null
           created_at: string
+          description: string | null
           due_date: string | null
+          event_id: string | null
           id: string
           is_completed: boolean | null
+          notes: string | null
           priority: string | null
           title: string
           updated_at: string
+          user_id: string | null
         }
         Insert: {
-          checklist_id: string
+          assigned_to?: string | null
+          category?: string | null
+          checklist_id?: string | null
+          completed?: boolean | null
+          completed_at?: string | null
           created_at?: string
+          description?: string | null
           due_date?: string | null
+          event_id?: string | null
           id?: string
           is_completed?: boolean | null
+          notes?: string | null
           priority?: string | null
           title: string
           updated_at?: string
+          user_id?: string | null
         }
         Update: {
-          checklist_id?: string
+          assigned_to?: string | null
+          category?: string | null
+          checklist_id?: string | null
+          completed?: boolean | null
+          completed_at?: string | null
           created_at?: string
+          description?: string | null
           due_date?: string | null
+          event_id?: string | null
           id?: string
           is_completed?: boolean | null
+          notes?: string | null
           priority?: string | null
           title?: string
           updated_at?: string
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -308,6 +332,13 @@ export type Database = {
             columns: ["checklist_id"]
             isOneToOne: false
             referencedRelation: "checklists"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "checklist_items_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
             referencedColumns: ["id"]
           },
         ]
