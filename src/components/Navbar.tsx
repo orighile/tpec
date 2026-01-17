@@ -1,13 +1,12 @@
-
 import { useState } from "react";
 import { Bell, CalendarPlus, User, Gear } from "phosphor-react";
-import { 
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger 
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -29,25 +28,25 @@ const Navbar = () => {
 
   const userInitials = user?.email ? user.email.charAt(0).toUpperCase() : "U";
   const userEmail = user?.email || "Guest";
-  
+
   const handlePlanningToolsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!user) {
       e.preventDefault();
-      window.location.href = '/auth';
+      window.location.href = "/auth";
     }
   };
 
   const handleProfileClick = () => {
-    navigate('/profile');
+    navigate("/profile");
   };
 
   const handleSettingsClick = () => {
-    navigate('/settings');
+    navigate("/settings");
   };
 
   const handleSignOut = async () => {
     await signOut();
-    navigate('/');
+    navigate("/");
   };
 
   const planningToolsLinks = [
@@ -85,7 +84,9 @@ const Navbar = () => {
                               onClick={handlePlanningToolsClick}
                               className="block select-none space-y-1 rounded-xl p-4 leading-none no-underline outline-none transition-all duration-200 hover:bg-primary/5 hover:shadow-sm focus:bg-primary/5 border border-transparent hover:border-primary/10"
                             >
-                              <div className="text-sm font-semibold leading-none text-foreground mb-1">{tool.title}</div>
+                              <div className="text-sm font-semibold leading-none text-foreground mb-1">
+                                {tool.title}
+                              </div>
                               <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
                                 {tool.description}
                               </p>
@@ -98,36 +99,58 @@ const Navbar = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            
-            <Link to="/planners" className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center">
-              Find Planners
+
+            <Link
+              to="/planners"
+              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
+            >
+              Planners
             </Link>
-            
-            <Link to="/vendors/marketplace" className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center">
-              Browse Vendors
+
+            <Link
+              to="/vendors/marketplace"
+              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
+            >
+              Vendors
             </Link>
-            
-            <Link to="/venues" className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center">
+
+            <Link
+              to="/venues"
+              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
+            >
               Venues
             </Link>
-            
-            <Link to="/jarabot" className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center">
+
+            <Link
+              to="/jarabot"
+              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
+            >
               JaraBot
             </Link>
-            
-            <Link to="/community" className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center">
+
+            <Link
+              to="/community"
+              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
+            >
               Community
             </Link>
-            
-            <Link to="/gallery" className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center">
-              Inspiration
+
+            <Link
+              to="/gallery"
+              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
+            >
+              Inspo
             </Link>
           </div>
 
           {/* Right Actions */}
           <div className="flex items-center gap-3">
             {user && (
-              <Button variant="ghost" size="icon" className="relative text-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-full">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="relative text-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-full"
+              >
                 <Bell className="h-5 w-5" />
                 <span className="absolute top-2 right-2 w-2 h-2 bg-accent rounded-full animate-pulse"></span>
               </Button>
@@ -136,14 +159,22 @@ const Navbar = () => {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-10 w-10 rounded-full ring-2 ring-border hover:ring-primary/40 transition-all duration-200">
+                  <Button
+                    variant="ghost"
+                    className="relative h-10 w-10 rounded-full ring-2 ring-border hover:ring-primary/40 transition-all duration-200"
+                  >
                     <Avatar className="h-10 w-10">
                       <AvatarImage src="/src/assets/avatar-1.jpg" alt="User" />
-                      <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground font-semibold">{userInitials}</AvatarFallback>
+                      <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground font-semibold">
+                        {userInitials}
+                      </AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-card/98 backdrop-blur-xl border border-border shadow-[var(--shadow-elegant)] rounded-xl z-[100]">
+                <DropdownMenuContent
+                  align="end"
+                  className="w-56 bg-card/98 backdrop-blur-xl border border-border shadow-[var(--shadow-elegant)] rounded-xl z-[100]"
+                >
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-semibold leading-none">Account</p>
@@ -151,22 +182,34 @@ const Navbar = () => {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator className="bg-border" />
-                  <DropdownMenuItem onClick={handleProfileClick} className="cursor-pointer hover:bg-primary/5 focus:bg-primary/5 rounded-lg">
+                  <DropdownMenuItem
+                    onClick={handleProfileClick}
+                    className="cursor-pointer hover:bg-primary/5 focus:bg-primary/5 rounded-lg"
+                  >
                     <User className="mr-2 h-4 w-4" />
                     Profile
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/tasks" className="flex items-center cursor-pointer hover:bg-primary/5 focus:bg-primary/5 w-full rounded-lg">
+                    <Link
+                      to="/tasks"
+                      className="flex items-center cursor-pointer hover:bg-primary/5 focus:bg-primary/5 w-full rounded-lg"
+                    >
                       <CalendarPlus className="mr-2 h-4 w-4" />
                       My Tasks
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleSettingsClick} className="cursor-pointer hover:bg-primary/5 focus:bg-primary/5 rounded-lg">
+                  <DropdownMenuItem
+                    onClick={handleSettingsClick}
+                    className="cursor-pointer hover:bg-primary/5 focus:bg-primary/5 rounded-lg"
+                  >
                     <Gear className="mr-2 h-4 w-4" />
                     Settings
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="bg-border" />
-                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer hover:bg-destructive/10 focus:bg-destructive/10 text-destructive focus:text-destructive rounded-lg">
+                  <DropdownMenuItem
+                    onClick={handleSignOut}
+                    className="cursor-pointer hover:bg-destructive/10 focus:bg-destructive/10 text-destructive focus:text-destructive rounded-lg"
+                  >
                     Log out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
