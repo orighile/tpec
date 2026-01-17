@@ -1,6 +1,4 @@
 import { useParams, Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { ArrowLeft, User, Calendar, Clock, Share, BookOpen } from "phosphor-react";
 
 const blogPosts = [
@@ -163,7 +161,6 @@ const blogPosts = [
     readTime: "5 min read",
     tags: ["Budget", "Planning", "Finance", "Tips"]
   },
-  // Add more blog posts as needed...
 ];
 
 const BlogPostPage = () => {
@@ -172,133 +169,125 @@ const BlogPostPage = () => {
 
   if (!post) {
     return (
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-1 flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Blog post not found</h1>
-            <Link to="/blog" className="text-primary hover:underline">
-              ← Back to Blog
-            </Link>
-          </div>
-        </main>
-        <Footer />
-      </div>
+      <main className="flex-1 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Blog post not found</h1>
+          <Link to="/blog" className="text-primary hover:underline">
+            ← Back to Blog
+          </Link>
+        </div>
+      </main>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1">
-        {/* Header */}
-        <div className="bg-primary/5 py-8">
-          <div className="container mx-auto px-4">
-            <Link to="/blog" className="inline-flex items-center text-primary hover:text-primary/80 mb-6">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Blog
-            </Link>
+    <main className="flex-1">
+      {/* Header */}
+      <div className="bg-primary/5 py-8">
+        <div className="container mx-auto px-4">
+          <Link to="/blog" className="inline-flex items-center text-primary hover:text-primary/80 mb-6">
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Blog
+          </Link>
+          
+          <div className="max-w-4xl">
+            <div className="mb-4">
+              <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
+                {post.category}
+              </span>
+            </div>
             
-            <div className="max-w-4xl">
-              <div className="mb-4">
-                <span className="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
-                  {post.category}
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">{post.title}</h1>
+            
+            <div className="flex flex-wrap items-center gap-6 text-muted-foreground">
+              <div className="flex items-center">
+                <User className="h-4 w-4 mr-2" />
+                {post.author}
+              </div>
+              <div className="flex items-center">
+                <Calendar className="h-4 w-4 mr-2" />
+                {post.date}
+              </div>
+              <div className="flex items-center">
+                <Clock className="h-4 w-4 mr-2" />
+                {post.readTime}
+              </div>
+              <button className="flex items-center text-primary hover:text-primary/80">
+                <Share className="h-4 w-4 mr-2" />
+                Share
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Featured Image */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden rounded-xl mb-8">
+            <img 
+              src={post.image} 
+              alt={post.title}
+              className="object-cover w-full h-full"
+            />
+          </div>
+
+          {/* Content */}
+          <div className="prose prose-lg max-w-none">
+            <div className="whitespace-pre-line text-muted-foreground leading-relaxed">
+              {post.content}
+            </div>
+          </div>
+
+          {/* Tags */}
+          <div className="mt-8 pt-8 border-t border-border">
+            <div className="flex items-center gap-2 mb-4">
+              <BookOpen className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm font-medium text-muted-foreground">Tags:</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {post.tags?.map(tag => (
+                <span key={tag} className="bg-muted text-muted-foreground px-3 py-1 rounded-full text-sm">
+                  {tag}
                 </span>
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">{post.title}</h1>
-              
-              <div className="flex flex-wrap items-center gap-6 text-gray-600">
-                <div className="flex items-center">
-                  <User className="h-4 w-4 mr-2" />
-                  {post.author}
-                </div>
-                <div className="flex items-center">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  {post.date}
-                </div>
-                <div className="flex items-center">
-                  <Clock className="h-4 w-4 mr-2" />
-                  {post.readTime}
-                </div>
-                <button className="flex items-center text-primary hover:text-primary/80">
-                  <Share className="h-4 w-4 mr-2" />
-                  Share
-                </button>
-              </div>
+              ))}
             </div>
           </div>
-        </div>
 
-        {/* Featured Image */}
-        <div className="container mx-auto px-4 py-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden rounded-xl mb-8">
-              <img 
-                src={post.image} 
-                alt={post.title}
-                className="object-cover w-full h-full"
-              />
-            </div>
-
-            {/* Content */}
-            <div className="prose prose-lg max-w-none">
-              <div className="whitespace-pre-line text-gray-700 leading-relaxed">
-                {post.content}
-              </div>
-            </div>
-
-            {/* Tags */}
-            <div className="mt-8 pt-8 border-t border-gray-200">
-              <div className="flex items-center gap-2 mb-4">
-                <BookOpen className="h-4 w-4 text-gray-500" />
-                <span className="text-sm font-medium text-gray-500">Tags:</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {post.tags?.map(tag => (
-                  <span key={tag} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Related Posts */}
-            <div className="mt-12 pt-8 border-t border-gray-200">
-              <h3 className="text-2xl font-bold mb-6">Related Articles</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {blogPosts
-                  .filter(p => p.id !== post.id)
-                  .slice(0, 2)
-                  .map(relatedPost => (
-                    <Link key={relatedPost.id} to={`/blog/${relatedPost.id}`} className="group">
-                      <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                        <div className="relative h-40 overflow-hidden">
-                          <img 
-                            src={relatedPost.image} 
-                            alt={relatedPost.title}
-                            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                        <div className="p-4">
-                          <span className="bg-primary text-white px-2 py-1 rounded text-xs font-medium">
-                            {relatedPost.category}
-                          </span>
-                          <h4 className="text-lg font-bold mt-3 mb-2 group-hover:text-primary transition-colors">
-                            {relatedPost.title}
-                          </h4>
-                          <p className="text-gray-600 text-sm">{relatedPost.excerpt}</p>
-                        </div>
+          {/* Related Posts */}
+          <div className="mt-12 pt-8 border-t border-border">
+            <h3 className="text-2xl font-bold mb-6">Related Articles</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {blogPosts
+                .filter(p => p.id !== post.id)
+                .slice(0, 2)
+                .map(relatedPost => (
+                  <Link key={relatedPost.id} to={`/blog/${relatedPost.id}`} className="group">
+                    <div className="bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                      <div className="relative h-40 overflow-hidden">
+                        <img 
+                          src={relatedPost.image} 
+                          alt={relatedPost.title}
+                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                        />
                       </div>
-                    </Link>
-                  ))}
-              </div>
+                      <div className="p-4">
+                        <span className="bg-primary text-primary-foreground px-2 py-1 rounded text-xs font-medium">
+                          {relatedPost.category}
+                        </span>
+                        <h4 className="text-lg font-bold mt-3 mb-2 group-hover:text-primary transition-colors">
+                          {relatedPost.title}
+                        </h4>
+                        <p className="text-muted-foreground text-sm">{relatedPost.excerpt}</p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
             </div>
           </div>
         </div>
-      </main>
-      <Footer />
-    </div>
+      </div>
+    </main>
   );
 };
 

@@ -1,7 +1,4 @@
-
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import EventChecklist from "@/components/EventChecklist";
 import { Button } from "@/components/ui/button";
 import { 
@@ -12,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FileText, Download, Share2 } from "lucide-react";
+import { FileText, Share2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,7 +31,6 @@ const ChecklistPage = () => {
 
     setIsSharing(true);
     
-    // Simulate API call
     setTimeout(() => {
       setIsSharing(false);
       toast({
@@ -51,7 +47,6 @@ const ChecklistPage = () => {
       description: "Your checklist is being exported. It will download shortly.",
     });
     
-    // Simulate download delay
     setTimeout(() => {
       toast({
         title: "Export complete",
@@ -61,13 +56,12 @@ const ChecklistPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1 py-12 bg-gray-50">
+    <>
+      <main className="flex-1 py-12 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="mb-8">
             <h1 className="text-4xl md:text-5xl font-bold mb-2">Event Checklist</h1>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-muted-foreground">
               Keep track of all your event tasks and never miss a deadline
             </p>
           </div>
@@ -117,12 +111,12 @@ const ChecklistPage = () => {
           
           <EventChecklist />
           
-          <div className="mt-8 bg-white p-6 rounded-lg shadow-sm">
+          <div className="mt-8 bg-card p-6 rounded-lg shadow-sm">
             <h2 className="text-2xl font-bold mb-4">Checklist Tips</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold mb-2 text-primary">Stay Organized</h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                   <li>Set clear deadlines for each task</li>
                   <li>Categorize tasks based on priority</li>
                   <li>Review your checklist regularly</li>
@@ -131,7 +125,7 @@ const ChecklistPage = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold mb-2 text-primary">Time Management</h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                   <li>Start with the most critical tasks</li>
                   <li>Break down large tasks into smaller steps</li>
                   <li>Use reminders for approaching deadlines</li>
@@ -142,8 +136,7 @@ const ChecklistPage = () => {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 };
 
