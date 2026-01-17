@@ -1,10 +1,7 @@
-
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import GuestManager from "@/components/GuestManager";
 import { Button } from "@/components/ui/button";
-import { Users, FileSpreadsheet, Upload, Download } from "lucide-react";
+import { Upload, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Dialog,
@@ -20,9 +17,6 @@ import { Input } from "@/components/ui/input";
 const GuestManagementPage = () => {
   const { toast } = useToast();
   const [isImporting, setIsImporting] = useState(false);
-  
-  // TODO: Get this from the current user's events or route params
-  // For now, we'll use a placeholder - in a real app this would come from the route or user selection
   const eventId = "sample-event-id";
   
   const handleExportGuestList = () => {
@@ -31,7 +25,6 @@ const GuestManagementPage = () => {
       description: "Your guest list is being exported. It will download shortly.",
     });
     
-    // Simulate download delay
     setTimeout(() => {
       toast({
         title: "Export complete",
@@ -43,7 +36,6 @@ const GuestManagementPage = () => {
   const handleImportGuestList = () => {
     setIsImporting(true);
     
-    // Simulate import process
     setTimeout(() => {
       setIsImporting(false);
       toast({
@@ -54,13 +46,12 @@ const GuestManagementPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1 py-12 bg-gray-50">
+    <>
+      <main className="flex-1 py-12 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="mb-8">
             <h1 className="text-4xl md:text-5xl font-bold mb-2">Guest Management</h1>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-muted-foreground">
               Organize your guest list, track RSVPs, and manage guest details
             </p>
           </div>
@@ -105,12 +96,12 @@ const GuestManagementPage = () => {
           
           <GuestManager eventId={eventId} />
           
-          <div className="mt-8 bg-white p-6 rounded-lg shadow-sm">
+          <div className="mt-8 bg-card p-6 rounded-lg shadow-sm">
             <h2 className="text-2xl font-bold mb-4">Guest Management Tips</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold mb-2 text-primary">Collecting RSVPs</h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                   <li>Set a clear RSVP deadline</li>
                   <li>Provide multiple ways to RSVP (online, phone, email)</li>
                   <li>Follow up with guests who haven't responded</li>
@@ -119,7 +110,7 @@ const GuestManagementPage = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold mb-2 text-primary">Guest Communication</h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                   <li>Send save-the-dates 6-8 months in advance</li>
                   <li>Mail formal invitations 6-8 weeks before the event</li>
                   <li>Create a wedding website for additional details</li>
@@ -130,8 +121,7 @@ const GuestManagementPage = () => {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 };
 
