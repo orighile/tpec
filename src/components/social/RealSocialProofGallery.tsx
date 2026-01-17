@@ -60,10 +60,7 @@ const RealSocialProofGallery = () => {
           rating,
           created_at,
           user_id,
-          vendors (
-            name,
-            category
-          )
+          vendor_id
         `)
         .not('comment', 'is', null)
         .order('created_at', { ascending: false })
@@ -72,18 +69,17 @@ const RealSocialProofGallery = () => {
       if (error) throw error;
 
       // Transform reviews into social posts
-      const transformedPosts: SocialPost[] = (reviews || []).map((review) => ({
+      const transformedPosts: SocialPost[] = (reviews || []).map((review: any) => ({
         id: review.id,
         userId: review.user_id,
-        username: `User_${review.user_id.slice(0, 8)}`,
+        username: `User_${review.user_id?.slice(0, 8) || 'Anonymous'}`,
         userAvatar: "/placeholder.svg",
         content: review.comment || "Great experience with this vendor!",
         date: new Date(review.created_at),
         likes: Math.floor(Math.random() * 50) + 5,
         comments: [],
-        tags: [review.vendors?.category || "General", "Review", "Experience"],
-        eventType: review.vendors?.category === "Photography" ? "Wedding" : 
-                  review.vendors?.category === "Catering" ? "Corporate" : "Birthday"
+        tags: ["Review", "Experience", "Vendor"],
+        eventType: "Event"
       }));
 
       setPosts(transformedPosts);

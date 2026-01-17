@@ -41,12 +41,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const { data, error } = await supabase
         .from('profiles')
-        .select('id, username, full_name, avatar_url, role')
-        .eq('id', userId)
-        .single();
+        .select('id, user_id, username, full_name, avatar_url, role')
+        .eq('user_id', userId)
+        .maybeSingle();
       
       if (error) throw error;
-      setProfile(data);
+      setProfile(data as Profile | null);
     } catch (error) {
       console.error('Error fetching profile:', error);
       setProfile(null);
@@ -63,8 +63,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logSecurityEvent = async (eventType: string, eventData?: any) => {
     try {
       await supabase.rpc('log_security_event', {
-        _event_type: eventType,
-        _event_data: eventData || null
+        event_type: eventType,
+        event_details: eventData || null
       });
     } catch (error) {
       console.error('Failed to log security event:', error);
