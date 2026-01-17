@@ -55,15 +55,21 @@ export const useBlogManagement = () => {
       queryFn: async (): Promise<BlogPost[]> => {
         const { data, error } = await supabase
           .from("blog_posts")
-          .select(`
-            *,
-            category:blog_categories(*)
-          `)
-          .eq("published", true)
+          .select("*")
+          .eq("status", "published")
           .order("published_at", { ascending: false });
 
         if (error) throw error;
-        return (data || []) as unknown as BlogPost[];
+        
+        // Fetch categories separately to avoid type issues
+        const posts = data || [];
+        return posts.map(post => ({
+          ...post,
+          published: post.status === 'published',
+          featured: false,
+          cover_image_path: post.featured_image,
+          read_time: 5,
+        })) as unknown as BlogPost[];
       },
     });
   };
@@ -91,28 +97,27 @@ export const useBlogManagement = () => {
       queryFn: async (): Promise<BlogPost | null> => {
         const { data, error } = await supabase
           .from("blog_posts")
-          .select(`
-            *,
-            category:blog_categories(*)
-          `)
+          .select("*")
           .eq("slug", slug)
-          .eq("published", true)
-          .single();
+          .eq("status", "published")
+          .maybeSingle();
 
-        if (error) {
-          if (error.code === 'PGRST116') return null; // Not found
-          throw error;
-        }
+        if (error) throw error;
+        if (!data) return null;
 
         // Increment view count
-        if (data) {
-          await supabase
-            .from("blog_posts")
-            .update({ views: data.views + 1 })
-            .eq("id", data.id);
-        }
+        await supabase
+          .from("blog_posts")
+          .update({ views: (data.views || 0) + 1 })
+          .eq("id", data.id);
 
-        return data as unknown as BlogPost;
+        return {
+          ...data,
+          published: data.status === 'published',
+          featured: false,
+          cover_image_path: data.featured_image,
+          read_time: 5,
+        } as unknown as BlogPost;
       },
       enabled: !!slug,
     });

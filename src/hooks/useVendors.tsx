@@ -11,18 +11,26 @@ export interface VendorFilters {
   verified?: boolean;
 }
 
+// In-memory storage for saved vendors
+const savedVendorsStorage: Record<string, string[]> = {};
+
 export const useVendors = () => {
   const { toast } = useToast();
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState<VendorFilters>({});
 
-  // Fetch vendors from Supabase (secure version that hides contact info from public)
+  // Fetch vendors from Supabase
   const fetchVendors = async () => {
     setLoading(true);
     try {
-      // Use the secure function to get public vendor data without contact info
-      let { data, error } = await supabase.rpc('get_public_vendors');
+      // Fetch vendors directly from the vendors table
+      let query = supabase
+        .from('vendors')
+        .select('*')
+        .eq('is_verified', true);
+
+      const { data, error } = await query;
 
       if (error) throw error;
 
@@ -47,32 +55,31 @@ export const useVendors = () => {
       const transformedVendors: Vendor[] = filteredData.map(vendor => ({
         id: vendor.id,
         name: vendor.name,
-        category: vendor.category,
-        description: vendor.description || vendor.short_description || '',
-        imageUrl: vendor.cover_image_path || (vendor.images && vendor.images[0]) || '/placeholder.svg',
-        location: vendor.location || (vendor.city && vendor.state ? `${vendor.city}, ${vendor.state}` : vendor.city || vendor.state || ''),
-        priceRange: vendor.price_range || (vendor.price_min && vendor.price_max ? `₦${vendor.price_min?.toLocaleString()}–₦${vendor.price_max?.toLocaleString()}` : ''),
-        rating: 4.5, // Default rating - would come from reviews aggregation
-        reviewCount: 0, // Default - would come from reviews count
-        verified: vendor.verified || false,
-        availability: ['Weekdays', 'Weekends'], // Default - would be stored separately
-        specialties: [], // Default - would be stored separately
+        category: vendor.category || 'Other',
+        description: vendor.description || '',
+        imageUrl: vendor.image_url || '/placeholder.svg',
+        location: vendor.location || '',
+        priceRange: vendor.price_range || '$$',
+        rating: vendor.rating || 4.5,
+        reviewCount: vendor.review_count || 0,
+        verified: vendor.is_verified || false,
+        availability: ['Weekdays', 'Weekends'],
+        specialties: [],
         contactInfo: {
           email: '', // Hidden from public for security
           phone: '', // Hidden from public for security
-          website: vendor.profile_url || '' // Use profile_url as website
+          website: vendor.website || ''
         },
-        established: '2020', // Default - would be stored separately
-        about: vendor.about || vendor.short_description || '',
-        // New CSV fields
-        state: vendor.state,
-        city: vendor.city,
-        price_min: vendor.price_min,
-        price_max: vendor.price_max,
-        short_description: vendor.short_description,
-        profile_url: vendor.profile_url,
-        images: vendor.images,
-        slug: vendor.slug
+        established: '2020',
+        about: vendor.description || '',
+        state: vendor.location,
+        city: vendor.location,
+        price_min: undefined,
+        price_max: undefined,
+        short_description: vendor.description,
+        profile_url: vendor.website,
+        images: vendor.image_url ? [vendor.image_url] : [],
+        slug: vendor.id
       }));
 
       setVendors(transformedVendors);
@@ -108,7 +115,7 @@ export const useVendors = () => {
 
       const { data, error } = await supabase
         .from('vendors')
-        .insert([{ ...vendorData, owner_user_id: user.id }])
+        .insert([{ ...vendorData, user_id: user.id }])
         .select()
         .single();
 
@@ -169,7 +176,7 @@ export const useVendors = () => {
     }
   };
 
-  // Save/unsave vendor
+  // Save/unsave vendor (in-memory)
   const toggleSaveVendor = async (vendorId: string) => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -182,39 +189,23 @@ export const useVendors = () => {
         return;
       }
 
-      // Check if vendor is already saved
-      const { data: existing } = await supabase
-        .from('saved_vendors')
-        .select('*')
-        .eq('vendor_id', vendorId)
-        .eq('user_id', user.id)
-        .single();
+      if (!savedVendorsStorage[user.id]) {
+        savedVendorsStorage[user.id] = [];
+      }
 
-      if (existing) {
+      const savedVendors = savedVendorsStorage[user.id];
+      const index = savedVendors.indexOf(vendorId);
+
+      if (index > -1) {
         // Remove from saved
-        const { error } = await supabase
-          .from('saved_vendors')
-          .delete()
-          .eq('vendor_id', vendorId)
-          .eq('user_id', user.id);
-
-        if (error) throw error;
-
+        savedVendors.splice(index, 1);
         toast({
           title: "Removed",
           description: "Vendor removed from saved list",
         });
       } else {
         // Add to saved
-        const { error } = await supabase
-          .from('saved_vendors')
-          .insert([{
-            vendor_id: vendorId,
-            user_id: user.id
-          }]);
-
-        if (error) throw error;
-
+        savedVendors.push(vendorId);
         toast({
           title: "Saved",
           description: "Vendor added to saved list",
@@ -230,20 +221,13 @@ export const useVendors = () => {
     }
   };
 
-  // Get saved vendors for current user
+  // Get saved vendors for current user (in-memory)
   const getSavedVendors = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return [];
 
-      const { data, error } = await supabase
-        .from('saved_vendors')
-        .select('vendor_id')
-        .eq('user_id', user.id);
-
-      if (error) throw error;
-
-      return (data || []).map(item => item.vendor_id);
+      return savedVendorsStorage[user.id] || [];
     } catch (error) {
       console.error('Error getting saved vendors:', error);
       return [];

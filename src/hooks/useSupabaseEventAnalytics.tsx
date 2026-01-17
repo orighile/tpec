@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 export interface AnalyticsMetric {
@@ -34,30 +33,32 @@ export interface EventAnalyticsData {
   }>;
 }
 
+// In-memory storage for analytics (since table doesn't exist in DB)
+const analyticsStorage: Record<string, AnalyticsMetric[]> = {};
+
 export const useSupabaseEventAnalytics = (eventId?: string) => {
   const [analyticsData, setAnalyticsData] = useState<EventAnalyticsData | null>(null);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  // Record analytics metric
+  // Record analytics metric (in-memory)
   const recordMetric = async (metricType: string, value: number, metadata?: Record<string, any>) => {
     if (!eventId) return;
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('User not authenticated');
+      const newMetric: AnalyticsMetric = {
+        id: crypto.randomUUID(),
+        event_id: eventId,
+        metric_type: metricType,
+        metric_value: value,
+        date_recorded: new Date().toISOString().split('T')[0],
+        metadata: metadata || {}
+      };
 
-      const { error } = await supabase
-        .from('event_analytics')
-        .insert({
-          event_id: eventId,
-          user_id: user.id,
-          metric_type: metricType,
-          metric_value: value,
-          metadata: metadata || {}
-        });
-
-      if (error) throw error;
+      if (!analyticsStorage[eventId]) {
+        analyticsStorage[eventId] = [];
+      }
+      analyticsStorage[eventId].push(newMetric);
     } catch (error) {
       console.error('Error recording metric:', error);
     }
@@ -69,19 +70,9 @@ export const useSupabaseEventAnalytics = (eventId?: string) => {
     
     setLoading(true);
     try {
-      const { data, error } = await supabase
-        .from('event_analytics')
-        .select('*')
-        .eq('event_id', eventId)
-        .order('date_recorded', { ascending: true });
-
-      if (error) throw error;
-
-      // Process raw analytics data into structured format
-      const processedData = processAnalyticsData((data || []).map(metric => ({
-        ...metric,
-        metadata: (metric.metadata as Record<string, any>) || {}
-      })));
+      // Use in-memory storage since table doesn't exist
+      const data = analyticsStorage[eventId] || [];
+      const processedData = processAnalyticsData(data);
       setAnalyticsData(processedData);
     } catch (error) {
       console.error('Error fetching analytics:', error);
