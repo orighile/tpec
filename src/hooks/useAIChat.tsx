@@ -35,17 +35,12 @@ export const useAIChat = (eventId?: string) => {
       queryFn: async (): Promise<AIConversation[]> => {
         if (!user?.id) return [];
 
-        let query = supabase
+        const { data, error } = await supabase
           .from("ai_conversations")
           .select("*")
           .eq("user_id", user.id)
-          .eq("is_active", true);
-
-        if (eventId) {
-          query = query.eq("event_id", eventId);
-        }
-
-        const { data, error } = await query.order("updated_at", { ascending: false });
+          .eq("is_active", true)
+          .order("updated_at", { ascending: false });
 
         if (error) throw error;
         return (data || []) as AIConversation[];
@@ -80,7 +75,9 @@ export const useAIChat = (eventId?: string) => {
       const { data, error } = await supabase
         .from("ai_conversations")
         .insert({
-          ...conversationData,
+          title: conversationData.title,
+          context_data: conversationData.context_data,
+          is_active: conversationData.is_active,
           user_id: user.id,
         })
         .select()
@@ -103,7 +100,11 @@ export const useAIChat = (eventId?: string) => {
     mutationFn: async (messageData: Omit<AIMessage, "id" | "created_at">) => {
       const { data, error } = await supabase
         .from("ai_messages")
-        .insert(messageData)
+        .insert({
+          conversation_id: messageData.conversation_id,
+          role: messageData.role,
+          content: messageData.content,
+        })
         .select()
         .single();
 
@@ -138,7 +139,6 @@ export const useAIChat = (eventId?: string) => {
           conversation_id: conversationId,
           role: "user",
           content,
-          metadata: context || {},
         })
         .select()
         .single();
@@ -155,7 +155,6 @@ export const useAIChat = (eventId?: string) => {
           conversation_id: conversationId,
           role: "assistant",
           content: aiResponse,
-          metadata: { response_time: new Date().toISOString() },
         })
         .select()
         .single();

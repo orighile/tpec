@@ -28,7 +28,7 @@ export interface BlogCategory {
   name: string;
   slug: string;
   description?: string;
-  color: string;
+  color?: string;
   created_at: string;
 }
 

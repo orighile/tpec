@@ -36,12 +36,15 @@ export interface FixedElement {
   rotation: number;
 }
 
+// In-memory storage for seating arrangements until table is created
+const seatingArrangements: Map<string, { tables: TableItem[]; fixedElements: FixedElement[] }> = new Map();
+
 export const useSeatingChart = (eventId?: string) => {
   const { user } = useAuth();
   const { handleError, handleSuccess } = useErrorHandler();
   const queryClient = useQueryClient();
 
-  // Fetch seating arrangement for an event
+  // Fetch seating arrangement for an event (using in-memory storage)
   const seatingQuery = useQuery({
     queryKey: ["seating-arrangement", eventId],
     queryFn: async () => {
@@ -49,19 +52,8 @@ export const useSeatingChart = (eventId?: string) => {
         return { tables: [], fixedElements: [] };
       }
 
-      const { data, error } = await supabase
-        .from("seating_arrangements")
-        .select("*")
-        .eq("event_id", eventId)
-        .eq("user_id", user.id)
-        .maybeSingle();
-
-      if (error) throw error;
-
-      return {
-        tables: (data?.tables as unknown as TableItem[]) || [],
-        fixedElements: (data?.fixed_elements as unknown as FixedElement[]) || [],
-      };
+      const key = `${eventId}-${user.id}`;
+      return seatingArrangements.get(key) || { tables: [], fixedElements: [] };
     },
     enabled: !!eventId && !!user?.id,
   });
@@ -81,35 +73,25 @@ export const useSeatingChart = (eventId?: string) => {
 
       return data.map(guest => ({
         id: guest.id,
-        fullName: guest.full_name,
-        group: guest.guest_group || "General",
-        tableId: guest.table_assignment,
-        email: guest.email,
-        phone: guest.phone,
+        fullName: guest.name || "Unknown",
+        group: "General",
+        tableId: guest.table_number ? `table-${guest.table_number}` : null,
+        email: guest.email || undefined,
+        phone: guest.phone || undefined,
         rsvpStatus: guest.rsvp_status as 'pending' | 'confirmed' | 'declined',
       })) as Guest[];
     },
     enabled: !!eventId && !!user?.id,
   });
 
-  // Save seating arrangement
+  // Save seating arrangement (in-memory)
   const saveSeatingArrangement = useMutation({
     mutationFn: async ({ tables, fixedElements }: { tables: TableItem[]; fixedElements: FixedElement[] }) => {
       if (!eventId || !user?.id) throw new Error("Event ID and user required");
 
-      const { data, error } = await supabase
-        .from("seating_arrangements")
-        .upsert({
-          event_id: eventId,
-          user_id: user.id,
-          tables: tables as any,
-          fixed_elements: fixedElements as any,
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-      return data;
+      const key = `${eventId}-${user.id}`;
+      seatingArrangements.set(key, { tables, fixedElements });
+      return { tables, fixedElements };
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["seating-arrangement", eventId] });
@@ -193,9 +175,12 @@ export const useSeatingChart = (eventId?: string) => {
   // Assign guest to table
   const assignGuestToTableMutation = useMutation({
     mutationFn: async ({ guestId, tableId }: { guestId: string; tableId: string | null }) => {
+      // Extract table number from tableId (e.g., "table-123" -> 123)
+      const tableNumber = tableId ? parseInt(tableId.replace('table-', ''), 10) || null : null;
+      
       const { error } = await supabase
         .from("guests")
-        .update({ table_assignment: tableId })
+        .update({ table_number: tableNumber })
         .eq("id", guestId);
 
       if (error) throw error;

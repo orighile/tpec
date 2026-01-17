@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 export interface BudgetItem {
@@ -27,30 +26,22 @@ export interface BudgetSummary {
   itemsByStatus: Record<string, BudgetItem[]>;
 }
 
+// In-memory storage for budget items
+const budgetStorage: Map<string, BudgetItem[]> = new Map();
+
 export const useSupabaseBudgetManagement = (eventId?: string) => {
   const [budgetItems, setBudgetItems] = useState<BudgetItem[]>([]);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  // Fetch budget items from database
+  // Fetch budget items from in-memory storage
   const fetchBudgetItems = async () => {
     if (!eventId) return;
     
     setLoading(true);
     try {
-      const { data, error } = await supabase
-        .from('budget_items')
-        .select('*')
-        .eq('event_id', eventId)
-        .order('created_at', { ascending: true });
-
-      if (error) throw error;
-
-      setBudgetItems((data || []).map(item => ({
-        ...item,
-        status: item.status as 'planned' | 'booked' | 'paid' | 'cancelled',
-        priority: item.priority as 'low' | 'medium' | 'high'
-      })));
+      const items = budgetStorage.get(eventId) || [];
+      setBudgetItems(items);
     } catch (error) {
       console.error('Error fetching budget items:', error);
       toast({
@@ -63,40 +54,23 @@ export const useSupabaseBudgetManagement = (eventId?: string) => {
     }
   };
 
-  // Add budget item to database
+  // Add budget item to in-memory storage
   const addBudgetItem = async (itemData: Omit<BudgetItem, 'id'>) => {
     if (!eventId) return;
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('User not authenticated');
+      const newItem: BudgetItem = {
+        ...itemData,
+        id: `budget-${Date.now()}`,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
 
-      const { data, error } = await supabase
-        .from('budget_items')
-        .insert({
-          event_id: eventId,
-          user_id: user.id,
-          category: itemData.category,
-          title: itemData.title,
-          description: itemData.description,
-          estimated_amount: itemData.estimated_amount,
-          actual_amount: itemData.actual_amount || 0,
-          paid_amount: itemData.paid_amount || 0,
-          status: itemData.status,
-          priority: itemData.priority,
-          due_date: itemData.due_date,
-          notes: itemData.notes
-        })
-        .select()
-        .single();
+      const items = budgetStorage.get(eventId) || [];
+      items.push(newItem);
+      budgetStorage.set(eventId, items);
 
-      if (error) throw error;
-
-      setBudgetItems(prev => [...prev, {
-        ...data,
-        status: data.status as 'planned' | 'booked' | 'paid' | 'cancelled',
-        priority: data.priority as 'low' | 'medium' | 'high'
-      }]);
+      setBudgetItems(prev => [...prev, newItem]);
       toast({
         title: "Success",
         description: "Budget item added successfully",
@@ -111,40 +85,30 @@ export const useSupabaseBudgetManagement = (eventId?: string) => {
     }
   };
 
-  // Update budget item in database
+  // Update budget item in storage
   const updateBudgetItem = async (id: string, itemData: Partial<BudgetItem>) => {
+    if (!eventId) return;
+
     try {
-      const { data, error } = await supabase
-        .from('budget_items')
-        .update({
-          category: itemData.category,
-          title: itemData.title,
-          description: itemData.description,
-          estimated_amount: itemData.estimated_amount,
-          actual_amount: itemData.actual_amount,
-          paid_amount: itemData.paid_amount,
-          status: itemData.status,
-          priority: itemData.priority,
-          due_date: itemData.due_date,
-          notes: itemData.notes
-        })
-        .eq('id', id)
-        .select()
-        .single();
+      const items = budgetStorage.get(eventId) || [];
+      const index = items.findIndex(item => item.id === id);
+      
+      if (index !== -1) {
+        items[index] = { 
+          ...items[index], 
+          ...itemData, 
+          updated_at: new Date().toISOString() 
+        };
+        budgetStorage.set(eventId, items);
 
-      if (error) throw error;
-
-      setBudgetItems(prev => 
-        prev.map(item => item.id === id ? {
-          ...data,
-          status: data.status as 'planned' | 'booked' | 'paid' | 'cancelled',
-          priority: data.priority as 'low' | 'medium' | 'high'
-        } : item)
-      );
-      toast({
-        title: "Success",
-        description: "Budget item updated successfully",
-      });
+        setBudgetItems(prev => 
+          prev.map(item => item.id === id ? items[index] : item)
+        );
+        toast({
+          title: "Success",
+          description: "Budget item updated successfully",
+        });
+      }
     } catch (error) {
       console.error('Error updating budget item:', error);
       toast({
@@ -155,15 +119,14 @@ export const useSupabaseBudgetManagement = (eventId?: string) => {
     }
   };
 
-  // Delete budget item from database
+  // Delete budget item from storage
   const deleteBudgetItem = async (id: string) => {
-    try {
-      const { error } = await supabase
-        .from('budget_items')
-        .delete()
-        .eq('id', id);
+    if (!eventId) return;
 
-      if (error) throw error;
+    try {
+      const items = budgetStorage.get(eventId) || [];
+      const filtered = items.filter(item => item.id !== id);
+      budgetStorage.set(eventId, filtered);
 
       setBudgetItems(prev => prev.filter(item => item.id !== id));
       toast({
