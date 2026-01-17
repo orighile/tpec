@@ -215,9 +215,14 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button asChild variant="outline">
-                <Link to="/auth">Login</Link>
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button asChild variant="outline">
+                  <Link to="/auth">Login</Link>
+                </Button>
+                <Button asChild>
+                  <Link to="/auth?tab=signup">Sign Up</Link>
+                </Button>
+              </div>
             )}
           </div>
         </div>
