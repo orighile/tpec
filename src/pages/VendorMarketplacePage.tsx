@@ -15,17 +15,24 @@ import JaraBot from "@/components/jarabot";
 import { vendors } from "@/data/vendors/vendorsList";
 
 const VendorMarketplacePage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All Vendors");
+  const [selectedCategory, setSelectedCategory] = useState("All Services");
   const [selectedCity, setSelectedCity] = useState("All Cities");
 
-  // Categories - Only removed "Venue" (Planners wasn't in the original list)
+  // Categories - Removed "Event Planning" and "Venue" as requested (12 categories remaining)
   const categories = [
-    "All Vendors", 
-    "Catering", 
-    "Decoration", 
-    "Entertainment", 
-    "Photography", 
-    "Cakes & Desserts"
+    "All Services",
+    "Catering",
+    "Music & DJ",
+    "Video & Photo",
+    "Decoration",
+    "Aso Ebi",
+    "Makeup & Beauty",
+    "Staffing",
+    "Entertainment",
+    "Rentals",
+    "Tailoring",
+    "Transportation",
+    "Printing"
   ];
   
   const cities = ["All Cities", "Lagos", "Abuja", "Port Harcourt", "Ibadan", "Kano", "Enugu"];
@@ -37,7 +44,7 @@ const VendorMarketplacePage = () => {
   }));
 
   const filteredVendors = vendorsWithCity.filter(vendor => {
-    const categoryMatch = selectedCategory === "All Vendors" || vendor.category === selectedCategory;
+    const categoryMatch = selectedCategory === "All Services" || vendor.category === selectedCategory;
     const cityMatch = selectedCity === "All Cities" || vendor.city === selectedCity;
     return categoryMatch && cityMatch;
   });
@@ -189,7 +196,7 @@ const VendorMarketplacePage = () => {
         {filteredVendors.length === 0 && (
           <div className="text-center py-16">
             <p className="text-xl text-muted-foreground mb-4">No vendors found matching your criteria</p>
-            <Button variant="outline" onClick={() => { setSelectedCategory("All Vendors"); setSelectedCity("All Cities"); }}>
+            <Button variant="outline" onClick={() => { setSelectedCategory("All Services"); setSelectedCity("All Cities"); }}>
               Reset Filters
             </Button>
           </div>
