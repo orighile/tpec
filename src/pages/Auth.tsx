@@ -144,6 +144,7 @@ const Auth = () => {
       
       const query = new URLSearchParams(location.search);
       const type = query.get('type');
+      const tab = query.get('tab');
       
       if (type === 'recovery') {
         console.log("Password reset token detected in query params");
@@ -152,6 +153,8 @@ const Auth = () => {
           title: "Update your password",
           description: "Please enter a new password below.",
         });
+      } else if (tab === 'signup') {
+        setActiveTab('signup');
       }
     };
     
