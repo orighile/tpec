@@ -18,7 +18,7 @@ const planningTools = [
     title: "Budget Calculator",
     description: "Easily track expenses and manage your event budget with automated calculations",
     action: "Create Budget",
-    link: "/planning-tools/budget",
+    link: "/budget",
     enabled: true
   },
   {
@@ -26,7 +26,7 @@ const planningTools = [
     title: "Checklist",
     description: "Never miss a detail with our comprehensive event planning checklists",
     action: "Start Checklist",
-    link: "/planning-tools/checklist",
+    link: "/checklist",
     enabled: true
   },
   {
@@ -34,7 +34,7 @@ const planningTools = [
     title: "Guest Management",
     description: "Manage invitations, track RSVPs, and organize attendee information",
     action: "Manage Guests",
-    link: "/planning-tools/guests",
+    link: "/guests",
     enabled: true
   },
   {
@@ -42,7 +42,23 @@ const planningTools = [
     title: "Seating Chart",
     description: "Create and customize your event seating arrangements with our intuitive tool",
     action: "Design Layout",
-    link: "/planning-tools/seating",
+    link: "/seating",
+    enabled: true
+  },
+  {
+    icon: Users,
+    title: "Party Crew Builder",
+    description: "Organize your event team and assign responsibilities",
+    action: "Build Crew",
+    link: "/party-crew",
+    enabled: true
+  },
+  {
+    icon: CheckSquare,
+    title: "Task Management",
+    description: "Keep track of all tasks and assignments for your event",
+    action: "Manage Tasks",
+    link: "/tasks",
     enabled: true
   }
 ];
@@ -104,7 +120,7 @@ const PlanningTools = () => {
           </TabsList>
           
           <TabsContent value="planning" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {planningTools.map((tool, index) => (
                 <div key={index} className="bg-white rounded-lg shadow-sm p-6">
                   <div className="rounded-full bg-primary/10 w-14 h-14 flex items-center justify-center mb-5">
