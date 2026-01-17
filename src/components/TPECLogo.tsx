@@ -19,8 +19,8 @@ const TPECLogo = ({ className, size = 'md', isFooter = false, linkToHome = true 
   
   const logoContent = (
     <img 
-      src="/lovable-uploads/tpec-logo.png" 
-      alt="TPEC Events Consulting - Celebrating Africa" 
+      src="/lovable-uploads/tpec-logo-option1.png" 
+      alt="TPEC Events - Premier Event Planning" 
       className={cn("object-contain", sizeMap[size], className)}
     />
   );
