@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
@@ -10,23 +9,22 @@ type LogoProps = {
 };
 
 const TPECLogo = ({ className, size = 'md', isFooter = false, linkToHome = true }: LogoProps) => {
-  // Size mapping for logo height - made larger for better visibility
+  // Size mapping for text
   const sizeMap = {
-    sm: 'h-12',
-    md: 'h-20',
-    lg: 'h-24'
+    sm: 'text-xl',
+    md: 'text-2xl md:text-3xl',
+    lg: 'text-3xl md:text-4xl'
   };
   
   const logoContent = (
-    <img 
-      src="/lovable-uploads/tpec-logo-transparent.png" 
-      alt="TPEC Events - Premier Event Planning" 
-      className={cn("object-contain mix-blend-multiply", sizeMap[size], className)}
-    />
+    <div className={cn("flex items-baseline tracking-widest", sizeMap[size], className)}>
+      <span className="font-black text-foreground">TPEC</span>
+      <span className="font-light text-foreground">EVENTS</span>
+    </div>
   );
 
   return linkToHome ? (
-    <Link to="/" className="flex-shrink-0">
+    <Link to="/" className="flex-shrink-0 hover:opacity-80 transition-opacity">
       {logoContent}
     </Link>
   ) : (
