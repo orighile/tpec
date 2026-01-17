@@ -5,7 +5,6 @@ import { useToast } from "@/hooks/use-toast";
 import type { Database } from "@/integrations/supabase/types";
 
 type VendorBooking = Database["public"]["Tables"]["vendor_bookings"]["Row"];
-type CreateVendorBookingForm = Database["public"]["Tables"]["vendor_bookings"]["Insert"];
 
 interface BookingFormData {
   vendor_id: string;
@@ -44,15 +43,8 @@ export const useVendorBookings = () => {
         
         const { data, error } = await supabase
           .from("vendor_bookings")
-          .select(`
-            *,
-            vendors:vendor_id (
-              name,
-              category,
-              location
-            )
-          `)
-          .eq("event_id", user.id) // This would need to be adjusted based on your event relationship
+          .select("*")
+          .eq("user_id", user.id)
           .order("created_at", { ascending: false });
           
         if (error) throw error;
@@ -63,7 +55,7 @@ export const useVendorBookings = () => {
   };
 
   // Get vendor's received bookings
-  const useVendorBookings = (vendorId?: string) => {
+  const useVendorBookingsQuery = (vendorId?: string) => {
     return useQuery({
       queryKey: ["vendor-bookings", vendorId],
       queryFn: async (): Promise<VendorBooking[]> => {
@@ -71,13 +63,7 @@ export const useVendorBookings = () => {
         
         const { data, error } = await supabase
           .from("vendor_bookings")
-          .select(`
-            *,
-            events:event_id (
-              title,
-              starts_at
-            )
-          `)
+          .select("*")
           .eq("vendor_id", vendorId)
           .order("created_at", { ascending: false });
           
@@ -104,11 +90,10 @@ export const useVendorBookings = () => {
           .insert({
             title: `Booking with vendor - ${new Date().toISOString()}`,
             description: `Temporary event for vendor booking`,
-            owner_user_id: user.id,
-            published: false,
-            starts_at: bookingData.booking_details.event_date,
+            user_id: user.id,
+            is_public: false,
+            event_date: bookingData.booking_details.event_date,
             location: bookingData.booking_details.location,
-            capacity: bookingData.booking_details.guest_count,
           })
           .select()
           .single();
@@ -122,10 +107,10 @@ export const useVendorBookings = () => {
         .from("vendor_bookings")
         .insert({
           vendor_id: bookingData.vendor_id,
-          event_id: eventId,
-          package_id: bookingData.package_id,
-          amount: bookingData.amount,
-          currency: bookingData.currency || 'NGN',
+          user_id: user.id,
+          event_date: bookingData.booking_details.event_date,
+          event_type: 'booking',
+          total_amount: bookingData.amount,
           status: 'pending',
           notes: JSON.stringify(bookingData.booking_details),
         })
@@ -189,7 +174,7 @@ export const useVendorBookings = () => {
 
   return {
     useUserBookings,
-    useVendorBookings,
+    useVendorBookings: useVendorBookingsQuery,
     createVendorBooking,
     updateBookingStatus,
   };

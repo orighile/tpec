@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Vendor, VendorFilterOptions } from "@/types/vendor";
@@ -37,37 +36,37 @@ export const useVendorMarketplace = () => {
         const { data, error } = await supabase
           .from('vendors')
           .select('*')
-          .eq('verified', true);
+          .eq('is_verified', true);
 
         if (error) throw error;
 
         const formattedVendors: Vendor[] = (data || []).map(v => ({
           id: v.id,
           name: v.name,
-          category: v.category,
-          description: v.description || v.short_description || '',
-          imageUrl: v.cover_image_path || (v.images && v.images[0]) || '/placeholder.svg',
-          location: v.city || v.state || v.location || 'Nigeria',
+          category: v.category || 'Other',
+          description: v.description || '',
+          imageUrl: v.image_url || '/placeholder.svg',
+          location: v.location || 'Nigeria',
           priceRange: v.price_range || '$$',
-          rating: 4.5,
-          reviewCount: 0,
-          verified: v.verified || false,
+          rating: v.rating || 4.5,
+          reviewCount: v.review_count || 0,
+          verified: v.is_verified || false,
           availability: ['Weekdays', 'Weekends'],
           specialties: [],
           contactInfo: {
             phone: v.contact_phone || '',
             email: v.contact_email || '',
-            website: v.website || v.profile_url || ''
+            website: v.website || ''
           },
-          about: v.about || v.description || '',
-          state: v.state,
-          city: v.city,
-          price_min: v.price_min,
-          price_max: v.price_max,
-          short_description: v.short_description,
-          profile_url: v.profile_url,
-          images: v.images || [],
-          slug: v.slug
+          about: v.description || '',
+          state: v.location,
+          city: v.location,
+          price_min: undefined,
+          price_max: undefined,
+          short_description: v.description,
+          profile_url: v.website,
+          images: v.image_url ? [v.image_url] : [],
+          slug: v.id
         }));
 
         setVendors(formattedVendors);

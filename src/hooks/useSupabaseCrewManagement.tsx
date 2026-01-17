@@ -8,8 +8,20 @@ export interface CrewMemberData {
   role: string;
   email?: string;
   phone?: string;
-  tasks: string[];
+  tasks?: string[];
+  notes?: string;
 }
+
+// Helper to transform DB data to CrewMemberData
+const transformCrewMember = (dbData: any): CrewMemberData => ({
+  id: dbData.id,
+  name: dbData.name,
+  role: dbData.role || '',
+  email: dbData.email,
+  phone: dbData.phone,
+  tasks: [],
+  notes: dbData.notes,
+});
 
 export const useSupabaseCrewManagement = (eventId?: string) => {
   const [crewMembers, setCrewMembers] = useState<CrewMemberData[]>([]);
@@ -30,7 +42,7 @@ export const useSupabaseCrewManagement = (eventId?: string) => {
 
       if (error) throw error;
 
-      setCrewMembers(data || []);
+      setCrewMembers((data || []).map(transformCrewMember));
     } catch (error) {
       console.error('Error fetching crew members:', error);
       toast({
@@ -67,7 +79,7 @@ export const useSupabaseCrewManagement = (eventId?: string) => {
 
       if (error) throw error;
 
-      setCrewMembers(prev => [...prev, data]);
+      setCrewMembers(prev => [...prev, transformCrewMember(data)]);
       toast({
         title: "Success",
         description: "Crew member added successfully",
@@ -101,7 +113,7 @@ export const useSupabaseCrewManagement = (eventId?: string) => {
       if (error) throw error;
 
       setCrewMembers(prev => 
-        prev.map(member => member.id === id ? data : member)
+        prev.map(member => member.id === id ? transformCrewMember(data) : member)
       );
       toast({
         title: "Success",
