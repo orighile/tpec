@@ -1,22 +1,14 @@
-import { MapPin, Star, Phone, Mail, Calendar, Building2, Tag } from "lucide-react";
+import { MapPin, Star, Phone, Mail, Calendar, Tag } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SEO } from "@/components/SEO";
 import { useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import JaraBot from "@/components/jarabot";
 import { vendors } from "@/data/vendors/vendorsList";
 
 const VendorMarketplacePage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Services");
-  const [selectedCity, setSelectedCity] = useState("All Cities");
 
   // Categories - Removed "Event Planning" and "Venue" as requested (12 categories remaining)
   const categories = [
@@ -34,19 +26,9 @@ const VendorMarketplacePage = () => {
     "Transportation",
     "Printing"
   ];
-  
-  const cities = ["All Cities", "Lagos", "Abuja", "Port Harcourt", "Ibadan", "Kano", "Enugu"];
 
-  // Transform vendor data to extract city from location
-  const vendorsWithCity = vendors.map(vendor => ({
-    ...vendor,
-    city: vendor.location.split(",")[0].trim()
-  }));
-
-  const filteredVendors = vendorsWithCity.filter(vendor => {
-    const categoryMatch = selectedCategory === "All Services" || vendor.category === selectedCategory;
-    const cityMatch = selectedCity === "All Cities" || vendor.city === selectedCity;
-    return categoryMatch && cityMatch;
+  const filteredVendors = vendors.filter(vendor => {
+    return selectedCategory === "All Services" || vendor.category === selectedCategory;
   });
 
   const jsonLd = {
@@ -76,39 +58,19 @@ const VendorMarketplacePage = () => {
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-col md:flex-row items-center gap-4 mb-12 justify-center">
-          {/* City Dropdown */}
-          <div className="flex items-center gap-2">
-            <Building2 className="h-5 w-5 text-muted-foreground" />
-            <Select value={selectedCity} onValueChange={setSelectedCity}>
-              <SelectTrigger className="w-[180px] rounded-full">
-                <SelectValue placeholder="Select city" />
-              </SelectTrigger>
-              <SelectContent className="bg-card/98 backdrop-blur-xl border border-border z-[100]">
-                {cities.map((city) => (
-                  <SelectItem key={city} value={city}>
-                    {city}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Category Buttons */}
-          <div className="flex items-center gap-3 flex-wrap justify-center">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category)}
-                size="default"
-                className="rounded-full"
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
+        {/* Category Filters */}
+        <div className="flex items-center gap-3 flex-wrap justify-center mb-12">
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={selectedCategory === category ? "default" : "outline"}
+              onClick={() => setSelectedCategory(category)}
+              size="default"
+              className="rounded-full"
+            >
+              {category}
+            </Button>
+          ))}
         </div>
 
         {/* Vendors Grid */}
@@ -196,7 +158,7 @@ const VendorMarketplacePage = () => {
         {filteredVendors.length === 0 && (
           <div className="text-center py-16">
             <p className="text-xl text-muted-foreground mb-4">No vendors found matching your criteria</p>
-            <Button variant="outline" onClick={() => { setSelectedCategory("All Services"); setSelectedCity("All Cities"); }}>
+            <Button variant="outline" onClick={() => setSelectedCategory("All Services")}>
               Reset Filters
             </Button>
           </div>
