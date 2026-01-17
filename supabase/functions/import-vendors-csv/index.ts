@@ -244,12 +244,12 @@ async function importVendorsFromCSV(csvContent?: string): Promise<ImportStats> {
           }
         }
       } catch (rowError) {
-        stats.errors.push(`Row ${i + 2}: ${rowError.message}`);
+        stats.errors.push(`Row ${i + 2}: ${rowError instanceof Error ? rowError.message : 'Unknown error'}`);
         stats.skipped++;
       }
     }
   } catch (error) {
-    stats.errors.push(`CSV processing failed: ${error.message}`);
+    stats.errors.push(`CSV processing failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 
   return stats;
@@ -284,7 +284,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         success: false,
-        error: error.message
+        error: error instanceof Error ? error.message : 'Unknown error'
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
