@@ -122,11 +122,8 @@ const BudgetCalculator = () => {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            Budget Overview
-          </CardTitle>
           <CardDescription>
-            Manage your event budget and track expenses
+            Set your budget and add expenses to track your spending
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

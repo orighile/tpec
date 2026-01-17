@@ -45,7 +45,10 @@ const GuestManager = ({ eventId }: GuestManagerProps) => {
   const filteredGuests = getFilteredGuests();
   const stats = getRsvpStats();
 
-  if (loading) {
+  // Show empty state if no guests (including when eventId is a placeholder)
+  const isPlaceholderEvent = eventId === "sample-event-id" || !eventId;
+  
+  if (loading && !isPlaceholderEvent) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>

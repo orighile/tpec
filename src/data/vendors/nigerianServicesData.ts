@@ -1,3 +1,5 @@
+import zapphaireLogo from "@/assets/vendors/zapphaire-events-logo.png";
+
 export interface NigerianService {
   category: string;
   name: string;
@@ -8,6 +10,7 @@ export interface NigerianService {
   instagramUrl: string | null;
   location: string;
   website: string | null;
+  localImage?: string;
 }
 
 export const nigerianServices: NigerianService[] = [
@@ -21,7 +24,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: "@zapphaire_events",
     instagramUrl: "https://www.instagram.com/zapphaire_events/",
     location: "Lagos",
-    website: null
+    website: null,
+    localImage: zapphaireLogo
   },
   {
     category: "event-planning",

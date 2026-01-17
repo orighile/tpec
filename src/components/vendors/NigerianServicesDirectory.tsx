@@ -97,14 +97,16 @@ const NigerianServicesDirectory = () => {
       {/* Services Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredServices.map((service, index) => {
-          const imageUrl = getImage(service.name);
+          const fetchedImage = getImage(service.name);
           const loading = isLoading(service.name);
+          // Use local image if available, otherwise use fetched image
+          const imageUrl = service.localImage || fetchedImage;
 
           return (
             <div key={`${service.name}-${index}`} className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
               {/* Image Section */}
               <div className="relative w-full h-[280px] bg-muted">
-                {loading ? (
+                {loading && !service.localImage ? (
                   <Skeleton className="w-full h-full" />
                 ) : imageUrl ? (
                   <img
