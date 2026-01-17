@@ -121,19 +121,6 @@ const Navbar = () => {
               Venues
             </Link>
 
-            <Link
-              to="/jarabot"
-              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
-            >
-              JaraBot
-            </Link>
-
-            <Link
-              to="/community"
-              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
-            >
-              Community
-            </Link>
 
             <Link
               to="/gallery"
