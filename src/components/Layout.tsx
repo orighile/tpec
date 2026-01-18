@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import FloatingVendorCTA from "./FloatingVendorCTA";
 
 interface LayoutProps {
   children: ReactNode;
@@ -15,6 +16,7 @@ const Layout = ({ children, hideFooter = false }: LayoutProps) => {
         {children}
       </main>
       {!hideFooter && <Footer />}
+      <FloatingVendorCTA />
     </div>
   );
 };
