@@ -1,51 +1,51 @@
 import EventCard from "./EventCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import techSummitImg from "@/assets/events/lagos-tech-summit.jpg";
-import culturalFestivalImg from "@/assets/events/adire-cultural-festival.jpg";
-import summerPartyImg from "@/assets/events/afrobeats-party.jpg";
-import weddingExpoImg from "@/assets/events/wedding-expo-lagos.jpg";
+import lagosFashionWeekImg from "@/assets/events/lagos-fashion-week.jpg";
+import artXLagosImg from "@/assets/events/art-x-lagos.jpg";
+import felabrationImg from "@/assets/events/felabration.jpg";
+import gtcoFoodFestivalImg from "@/assets/events/gtco-food-festival.jpg";
 
 const events = [
   {
     id: 1,
-    title: "Lagos Tech Summit 2023",
-    image: techSummitImg,
-    date: "Oct 15, 2023 • 09:00 AM",
-    location: "Eko Convention Center, Lagos",
-    attendees: 1250,
-    category: "Conference",
+    title: "Lagos Fashion Week 2024",
+    image: lagosFashionWeekImg,
+    date: "Oct 29 - Nov 2, 2024",
+    location: "Federal Palace Hotel, Victoria Island",
+    attendees: 5000,
+    category: "Fashion",
     isFeatured: true
   },
   {
     id: 2,
-    title: "Adire Cultural Festival",
-    image: culturalFestivalImg,
-    date: "Nov 5, 2023 • 11:00 AM",
-    location: "Abeokuta, Ogun State",
-    attendees: 850,
-    category: "Cultural",
+    title: "ART X Lagos",
+    image: artXLagosImg,
+    date: "Nov 6-9, 2024",
+    location: "Federal Palace Hotel, Lagos",
+    attendees: 3500,
+    category: "Art Fair",
     isFeatured: false
   },
   {
     id: 3,
-    title: "Afrobeats Summer Party",
-    image: summerPartyImg,
-    date: "Dec 18, 2023 • 08:00 PM",
-    location: "Landmark Beach, Victoria Island",
-    attendees: 2000,
-    category: "Entertainment",
-    isFeatured: false
+    title: "Felabration 2024",
+    image: felabrationImg,
+    date: "Oct 14-20, 2024",
+    location: "New Afrika Shrine, Lagos",
+    attendees: 50000,
+    category: "Music Festival",
+    isFeatured: true
   },
   {
     id: 4,
-    title: "Nigerian Wedding Expo",
-    image: weddingExpoImg,
-    date: "Jan 7, 2024 • 10:00 AM",
-    location: "Eko Hotels & Suites, Lagos",
-    attendees: 1500,
-    category: "Expo",
-    isFeatured: true
+    title: "GTCO Food & Drink Festival",
+    image: gtcoFoodFestivalImg,
+    date: "May 1-2, 2024",
+    location: "Federal Palace Hotel, Lagos",
+    attendees: 25000,
+    category: "Food Festival",
+    isFeatured: false
   }
 ];
 

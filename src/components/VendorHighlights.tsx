@@ -1,49 +1,48 @@
-
 import { Star, MapPin, ArrowSquareOut, Calendar } from "phosphor-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { OptimizedImage } from "@/components/ui/optimized-image";
-import venueImg from "@/assets/venue-image-1.jpg";
 import cateringImg from "@/assets/catering-image.jpg";
+import djImg from "@/assets/dj-image.jpg";
 import decorationImg from "@/assets/decoration-image.jpg";
 
 const vendors = [
   {
-    id: 1,
-    name: "Premier Event Venues",
-    category: "Venue",
-    image: venueImg,
+    id: "v1",
+    name: "Signature Catering",
+    category: "Catering",
+    image: cateringImg,
     rating: 4.8,
     reviews: 124,
-    location: "Ibeju-Lekki, Lagos",
-    specialties: ["Wedding Venues", "Corporate Spaces", "Outdoor Events"],
-    profileLink: "/vendors/1",
-    bookingLink: "/vendors/1/book"
+    location: "Lagos, Nigeria",
+    specialties: ["Nigerian Cuisine", "Continental", "Finger Foods", "Desserts"],
+    profileLink: "/vendors/v1",
+    bookingLink: "/vendors/v1/book"
   },
   {
-    id: 2,
-    name: "Elite Sound & Lighting",
+    id: "v4",
+    name: "Rhythm DJs",
     category: "Entertainment",
-    image: cateringImg,
+    image: djImg,
     rating: 4.9,
-    reviews: 87,
-    location: "Lekki, Lagos",
-    specialties: ["Sound Systems", "Lighting Design", "DJ Services"],
-    profileLink: "/vendors/2",
-    bookingLink: "/vendors/2/book"
+    reviews: 156,
+    location: "Lagos, Nigeria",
+    specialties: ["Wedding Reception", "Corporate Parties", "Club Events"],
+    profileLink: "/vendors/v4",
+    bookingLink: "/vendors/v4/book"
   },
   {
-    id: 3,
-    name: "Elegant Decor Solutions",
+    id: "v3",
+    name: "Perfect Decor",
     category: "Decoration",
     image: decorationImg,
-    rating: 4.7,
-    reviews: 62,
-    location: "Victoria Island, Lagos",
-    specialties: ["Wedding Decor", "Corporate Styling", "Themed Events"],
-    profileLink: "/vendors/3",
-    bookingLink: "/vendors/3/book"
+    rating: 4.6,
+    reviews: 87,
+    location: "Port Harcourt, Nigeria",
+    specialties: ["Wedding Decor", "Corporate Branding", "Traditional Ceremonies"],
+    profileLink: "/vendors/v3",
+    bookingLink: "/vendors/v3/book"
   }
 ];
 
