@@ -1,7 +1,4 @@
-
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, MapPin, Tag } from "lucide-react";
@@ -65,102 +62,98 @@ const SearchPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1 py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-8 text-center">Search</h1>
-          
-          <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-8">
-            <div className="flex gap-2">
-              <div className="flex-1">
-                <Input
-                  type="text"
-                  placeholder="Search for venues, vendors, events, cultural info..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full"
-                />
-              </div>
-              <Button type="submit" disabled={isSearching}>
-                <Search className="h-4 w-4 mr-2" />
-                {isSearching ? "Searching..." : "Search"}
-              </Button>
+    <div className="py-12 bg-muted/30 min-h-screen">
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl font-bold mb-8 text-center">Search</h1>
+        
+        <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-8">
+          <div className="flex gap-2">
+            <div className="flex-1">
+              <Input
+                type="text"
+                placeholder="Search for venues, vendors, events, cultural info..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full"
+              />
             </div>
-          </form>
-          
-          <div className="max-w-4xl mx-auto">
-            {isSearching ? (
-              <div className="space-y-4">
-                {[1, 2, 3].map((i) => (
-                  <Card key={i} className="bg-white overflow-hidden">
-                    <CardContent className="p-6">
-                      <div className="space-y-2">
-                        <Skeleton className="h-4 w-20 rounded" />
-                        <Skeleton className="h-6 w-full rounded" />
-                        <Skeleton className="h-4 w-4/5 rounded" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <>
-                {searchResults.length > 0 ? (
-                  <div className="space-y-6">
-                    <h2 className="text-xl font-semibold mb-4">Search Results ({searchResults.length})</h2>
-                    {searchResults.map((result) => (
-                      <Card key={result.id} className="bg-white overflow-hidden hover:shadow-md transition-shadow">
-                        <CardContent className="p-6">
-                          <div className="flex items-center mb-2">
-                            <Badge className={getTypeColor(result.type)}>
-                              {getIcon(result.type)}
-                              {result.type.charAt(0).toUpperCase() + result.type.slice(1)}
-                            </Badge>
-                            {result.location && (
-                              <div className="ml-2 text-sm text-gray-500 flex items-center">
-                                <MapPin className="h-3 w-3 mr-1" />
-                                {result.location}
-                              </div>
-                            )}
-                          </div>
-                          <h3 className="text-xl font-medium mb-2">{result.title}</h3>
-                          <p className="text-gray-600 mb-3">{result.description}</p>
-                          
-                          {result.tags && result.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-1 mt-2">
-                              {result.tags.map((tag, idx) => (
-                                <Badge key={idx} variant="outline" className="bg-gray-50">
-                                  {tag}
-                                </Badge>
-                              ))}
+            <Button type="submit" disabled={isSearching}>
+              <Search className="h-4 w-4 mr-2" />
+              {isSearching ? "Searching..." : "Search"}
+            </Button>
+          </div>
+        </form>
+        
+        <div className="max-w-4xl mx-auto">
+          {isSearching ? (
+            <div className="space-y-4">
+              {[1, 2, 3].map((i) => (
+                <Card key={i} className="bg-white overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-20 rounded" />
+                      <Skeleton className="h-6 w-full rounded" />
+                      <Skeleton className="h-4 w-4/5 rounded" />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <>
+              {searchResults.length > 0 ? (
+                <div className="space-y-6">
+                  <h2 className="text-xl font-semibold mb-4">Search Results ({searchResults.length})</h2>
+                  {searchResults.map((result) => (
+                    <Card key={result.id} className="bg-white overflow-hidden hover:shadow-md transition-shadow">
+                      <CardContent className="p-6">
+                        <div className="flex items-center mb-2">
+                          <Badge className={getTypeColor(result.type)}>
+                            {getIcon(result.type)}
+                            {result.type.charAt(0).toUpperCase() + result.type.slice(1)}
+                          </Badge>
+                          {result.location && (
+                            <div className="ml-2 text-sm text-muted-foreground flex items-center">
+                              <MapPin className="h-3 w-3 mr-1" />
+                              {result.location}
                             </div>
                           )}
-                        </CardContent>
-                        <CardFooter className="px-6 py-3 bg-gray-50 border-t">
-                          <Button variant="link" className="p-0 h-auto text-jara-green" asChild>
-                            <a href="#">View Details</a>
-                          </Button>
-                        </CardFooter>
-                      </Card>
-                    ))}
+                        </div>
+                        <h3 className="text-xl font-medium mb-2">{result.title}</h3>
+                        <p className="text-muted-foreground mb-3">{result.description}</p>
+                        
+                        {result.tags && result.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-1 mt-2">
+                            {result.tags.map((tag, idx) => (
+                              <Badge key={idx} variant="outline" className="bg-muted/50">
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                      <CardFooter className="px-6 py-3 bg-muted/30 border-t">
+                        <Button variant="link" className="p-0 h-auto text-primary" asChild>
+                          <a href="#">View Details</a>
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                hasSearched && (
+                  <div className="text-center py-12 bg-card rounded-lg shadow">
+                    <h2 className="text-xl font-semibold mb-2">No results found</h2>
+                    <p className="text-muted-foreground">
+                      No matches found for "{searchTerm}". Try different keywords or browse our categories.
+                    </p>
                   </div>
-                ) : (
-                  hasSearched && (
-                    <div className="text-center py-12 bg-white rounded-lg shadow">
-                      <h2 className="text-xl font-semibold mb-2">No results found</h2>
-                      <p className="text-gray-600">
-                        No matches found for "{searchTerm}". Try different keywords or browse our categories.
-                      </p>
-                    </div>
-                  )
-                )}
-              </>
-            )}
-          </div>
+                )
+              )}
+            </>
+          )}
         </div>
-      </main>
-      <Footer />
+      </div>
       <JaraBot />
     </div>
   );
