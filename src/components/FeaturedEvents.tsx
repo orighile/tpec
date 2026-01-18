@@ -1,11 +1,10 @@
-
 import EventCard from "./EventCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import techSummitImg from "@/assets/tech-summit-event.jpg";
-import culturalFestivalImg from "@/assets/cultural-festival.jpg";
-import summerPartyImg from "@/assets/summer-party.jpg";
-import weddingExpoImg from "@/assets/wedding-expo.jpg";
+import techSummitImg from "@/assets/events/lagos-tech-summit.jpg";
+import culturalFestivalImg from "@/assets/events/adire-cultural-festival.jpg";
+import summerPartyImg from "@/assets/events/afrobeats-party.jpg";
+import weddingExpoImg from "@/assets/events/wedding-expo-lagos.jpg";
 
 const events = [
   {

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import venueImage from "@/assets/venue-image-1.jpg";
-import cateringImage from "@/assets/catering-image.jpg";
-import decorationImage from "@/assets/decoration-image.jpg";
-import weddingExpo from "@/assets/wedding-expo.jpg";
+import venueImage from "@/assets/categories/venue-category.jpg";
+import vendorsImage from "@/assets/categories/vendors-category.jpg";
+import plannersImage from "@/assets/categories/planners-category.jpg";
+import ideasImage from "@/assets/categories/ideas-category.jpg";
 
 const categories = [
   {
@@ -12,17 +12,17 @@ const categories = [
   },
   {
     title: "Browse Vendors",
-    image: cateringImage,
+    image: vendorsImage,
     link: "/vendors/marketplace",
   },
   {
     title: "Find Planners",
-    image: decorationImage,
+    image: plannersImage,
     link: "/planners",
   },
   {
     title: "Get Ideas",
-    image: weddingExpo,
+    image: ideasImage,
     link: "/blog",
   },
 ];
