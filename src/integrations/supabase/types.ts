@@ -76,6 +76,27 @@ export type Database = {
           },
         ]
       }
+      blocked_dates: {
+        Row: {
+          blocked_date: string
+          created_at: string
+          id: string
+          reason: string | null
+        }
+        Insert: {
+          blocked_date: string
+          created_at?: string
+          id?: string
+          reason?: string | null
+        }
+        Update: {
+          blocked_date?: string
+          created_at?: string
+          id?: string
+          reason?: string | null
+        }
+        Relationships: []
+      }
       blog_categories: {
         Row: {
           color: string | null
@@ -183,6 +204,39 @@ export type Database = {
           title?: string
           updated_at?: string
           views?: number | null
+        }
+        Relationships: []
+      }
+      booking_availability: {
+        Row: {
+          created_at: string
+          day_of_week: number
+          end_time: string
+          id: string
+          is_available: boolean
+          slot_duration_minutes: number
+          start_time: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          day_of_week: number
+          end_time?: string
+          id?: string
+          is_available?: boolean
+          slot_duration_minutes?: number
+          start_time?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          day_of_week?: number
+          end_time?: string
+          id?: string
+          is_available?: boolean
+          slot_duration_minutes?: number
+          start_time?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -375,6 +429,62 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "events"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      consultation_bookings: {
+        Row: {
+          booking_date: string
+          booking_time: string
+          consultation_type: string
+          created_at: string
+          email: string
+          event_type: string | null
+          id: string
+          message: string | null
+          name: string
+          phone: string | null
+          status: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          booking_date: string
+          booking_time: string
+          consultation_type?: string
+          created_at?: string
+          email: string
+          event_type?: string | null
+          id?: string
+          message?: string | null
+          name: string
+          phone?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          booking_date?: string
+          booking_time?: string
+          consultation_type?: string
+          created_at?: string
+          email?: string
+          event_type?: string | null
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "consultation_bookings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
           },
         ]
       }
