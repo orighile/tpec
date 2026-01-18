@@ -1,70 +1,65 @@
-
 import { Sparkle, UserPlus } from "phosphor-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const CTA = () => {
   return (
-    <section className="py-12 relative overflow-hidden">
-      {/* Vendor Registration - TOP PRIORITY */}
-      <div className="bg-gradient-to-r from-jara-gold via-amber-500 to-jara-gold py-10 mb-0">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
-              <UserPlus className="h-5 w-5 text-white" weight="bold" />
-              <span className="text-white font-bold text-sm uppercase tracking-wide">For Vendors</span>
+    <section className="py-16 bg-gradient-to-br from-jara-purple via-jara-purple to-purple-900 relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-64 h-64 bg-jara-gold/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-jara-gold/10 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-4xl mx-auto text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Create an Unforgettable Event?
+          </h2>
+          <p className="text-white/90 text-lg max-w-2xl mx-auto">
+            Whether you're planning an event or offering services, TPEC is your home for Nigerian celebrations.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {/* For Event Planners */}
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 text-center">
+            <div className="inline-flex items-center gap-2 bg-white/20 px-3 py-1 rounded-full mb-4">
+              <Sparkle className="h-4 w-4 text-jara-gold" />
+              <span className="text-white text-sm font-medium">For Planners</span>
             </div>
-            
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Grow Your Event Business With TPEC
-            </h2>
-            
-            <p className="text-white/95 text-lg mb-6 max-w-2xl mx-auto">
-              Join Nigeria's premier event marketplace. Showcase your services to thousands of event planners and get more bookings.
+            <h3 className="text-xl font-bold text-white mb-3">Plan Your Perfect Event</h3>
+            <p className="text-white/80 text-sm mb-5">
+              Access planning tools, find vendors, and make your celebration truly Nigerian.
             </p>
-            
-            <Button 
-              size="lg"
-              className="bg-white text-jara-gold hover:bg-white/90 text-lg font-bold py-6 px-10 shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
-              asChild
-            >
-              <Link to="/vendor-onboarding">
-                <UserPlus className="mr-2 h-5 w-5" weight="bold" />
-                Register as a Vendor — It's Free
+            <Button className="bg-white text-jara-purple hover:bg-white/90 font-bold w-full" asChild>
+              <Link to="/planning-tools">
+                <Sparkle className="mr-2 h-4 w-4" />
+                Start Planning Now
               </Link>
             </Button>
-            
-            <p className="text-white/80 text-sm mt-4">
-              ✓ Free listing  ✓ Direct bookings  ✓ Verified badge  ✓ Analytics dashboard
+          </div>
+          
+          {/* For Vendors */}
+          <div className="bg-gradient-to-br from-jara-gold/20 to-amber-500/20 backdrop-blur-sm rounded-2xl p-6 border border-jara-gold/30 text-center">
+            <div className="inline-flex items-center gap-2 bg-jara-gold/30 px-3 py-1 rounded-full mb-4">
+              <UserPlus className="h-4 w-4 text-white" weight="bold" />
+              <span className="text-white text-sm font-medium">For Vendors</span>
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Grow Your Business</h3>
+            <p className="text-white/80 text-sm mb-5">
+              Join Nigeria's premier marketplace and get more bookings. It's free!
             </p>
+            <Button className="bg-jara-gold hover:bg-amber-500 text-white font-bold w-full" asChild>
+              <Link to="/vendor-onboarding">
+                <UserPlus className="mr-2 h-4 w-4" weight="bold" />
+                Register as a Vendor
+              </Link>
+            </Button>
           </div>
         </div>
-      </div>
-      
-      {/* Event Planners CTA */}
-      <div className="bg-jara-purple py-12">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-jara-purple/30 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <Sparkle className="h-4 w-4 text-jara-gold" />
-              <span className="text-white font-medium text-sm">Plan Your Next Event with Confidence</span>
-            </div>
-            
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Create an Unforgettable Event?
-            </h2>
-            
-            <p className="text-white/90 text-lg mb-8">
-              From traditional ceremonies to modern celebrations, our culturally aware planning tools and JaraBot AI assistant make event planning simple, collaborative, and truly Nigerian.
-            </p>
-            
-            <div className="flex justify-center">
-              <Button className="bg-white text-jara-purple hover:bg-white/90 text-base py-6 px-8" asChild>
-                <Link to="/planning-tools">Start Planning Now</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
+        
+        <p className="text-white/60 text-xs text-center mt-6">
+          ✓ Free listing  ✓ Direct bookings  ✓ Verified badge  ✓ Analytics dashboard
+        </p>
       </div>
     </section>
   );
