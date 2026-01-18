@@ -58,19 +58,9 @@ const CTA = () => {
               From traditional ceremonies to modern celebrations, our culturally aware planning tools and JaraBot AI assistant make event planning simple, collaborative, and truly Nigerian.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <Button className="bg-white text-jara-purple hover:bg-white/90 text-base py-6 px-8" asChild>
                 <Link to="/planning-tools">Start Planning Now</Link>
-              </Button>
-              <Button 
-                className="bg-white text-jara-purple hover:bg-white/90 text-base py-6 px-8"
-                onClick={() => {
-                  document.querySelector('[role="button"][aria-label="Open JaraBot"]')?.dispatchEvent(
-                    new MouseEvent('click', { bubbles: true })
-                  );
-                }}
-              >
-                Talk to JaraBot
               </Button>
             </div>
           </div>
