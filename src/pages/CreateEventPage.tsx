@@ -33,8 +33,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 
 const eventCategories = [
@@ -136,10 +134,8 @@ const CreateEventPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1 py-12 bg-gray-50">
-        <div className="container mx-auto px-4 max-w-3xl">
+    <main className="flex-1 py-12 bg-muted/30">
+      <div className="container mx-auto px-4 max-w-3xl">
           <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-bold mb-2">Create New Event</h1>
             <p className="text-gray-600">
@@ -384,11 +380,9 @@ const CreateEventPage = () => {
                 </div>
               </form>
             </Form>
-          </div>
         </div>
-      </main>
-      <Footer />
-    </div>
+      </div>
+    </main>
   );
 };
 
