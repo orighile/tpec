@@ -31,11 +31,14 @@ const CTA = () => {
               Access planning tools, find vendors, and make your celebration truly Nigerian.
             </p>
             <Button className="bg-white text-jara-purple hover:bg-white/90 font-bold w-full" asChild>
-              <Link to="/planning-tools">
+              <Link to="/planner-benefits">
                 <Sparkle className="mr-2 h-4 w-4" />
                 Start Planning Now
               </Link>
             </Button>
+            <Link to="/planner-benefits" className="block mt-2 text-white/80 text-xs hover:text-white transition-colors">
+              Learn more →
+            </Link>
           </div>
           
           {/* For Vendors */}
@@ -49,11 +52,14 @@ const CTA = () => {
               Join Nigeria's premier marketplace and get more bookings. It's free!
             </p>
             <Button className="bg-jara-gold hover:bg-amber-500 text-white font-bold w-full" asChild>
-              <Link to="/vendor-onboarding">
+              <Link to="/vendor-benefits">
                 <UserPlus className="mr-2 h-4 w-4" weight="bold" />
                 Register as a Vendor
               </Link>
             </Button>
+            <Link to="/vendor-benefits" className="text-white/80 text-xs hover:text-white transition-colors">
+              Learn more →
+            </Link>
           </div>
         </div>
         
