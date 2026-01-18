@@ -72,7 +72,7 @@ const Navbar = () => {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-foreground hover:text-primary transition-all duration-200 font-medium bg-transparent hover:bg-primary/5 focus:bg-primary/5 data-[state=open]:bg-primary/10 data-[state=open]:text-primary focus:text-foreground rounded-lg px-4 h-10">
-                    Plan Event
+                    Planning Tools
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="bg-card/98 backdrop-blur-xl border border-border shadow-[var(--shadow-elegant)] rounded-xl z-[100]">
                     <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
