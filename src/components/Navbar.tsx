@@ -131,10 +131,28 @@ const Navbar = () => {
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
+            {!user && (
+              <>
+                <Link
+                  to="/auth"
+                  className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
+                >
+                  Login
+                </Link>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-primary text-primary hover:bg-primary/5 rounded-full px-6"
+                >
+                  <Link to="/auth?tab=signup">Sign Up</Link>
+                </Button>
+              </>
+            )}
+            
             <Button
               asChild
-              className="bg-amber-500 hover:bg-amber-600 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200"
+              className="bg-gradient-to-r from-primary via-purple-500 to-amber-500 hover:from-primary/90 hover:via-purple-500/90 hover:to-amber-500/90 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 rounded-full px-6"
             >
               <Link to="/create-event">Create Event</Link>
             </Button>
@@ -150,7 +168,7 @@ const Navbar = () => {
               </Button>
             )}
 
-            {user ? (
+            {user && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -208,15 +226,6 @@ const Navbar = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
-              <div className="flex items-center gap-2">
-                <Button asChild variant="outline">
-                  <Link to="/auth">Login</Link>
-                </Button>
-                <Button asChild>
-                  <Link to="/auth?tab=signup">Sign Up</Link>
-                </Button>
-              </div>
             )}
           </div>
         </div>
