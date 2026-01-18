@@ -64,7 +64,7 @@ const Index = () => {
             variant="premium"
             size="lg"
             className="text-lg px-10 py-6 h-auto"
-            onClick={() => window.open("https://calendly.com/ladyadeolaighile/meet-and-greet", "_blank")}
+            onClick={() => navigate("/book-consultation")}
           >
             Book Your Free Consultation
           </Button>

@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     question: "How do I book a consultation with TPEC Events?",
-    answer: "You can book a consultation through our Calendly scheduling system on our website, or by sending an inquiry through our contact form. Our team will reach out to confirm your appointment and provide further details about the consultation process."
+    answer: "You can book a consultation through our online booking system on our website by clicking 'Book a Consultation'. Select your preferred consultation type, date, and time, and fill in your details. Our team will confirm your appointment via email."
   },
   {
     question: "What areas do you serve?",

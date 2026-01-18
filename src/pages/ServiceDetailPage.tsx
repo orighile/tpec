@@ -1,6 +1,6 @@
 
 import { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -153,6 +153,7 @@ const servicesData = {
 
 const ServiceDetailPage = () => {
   const { serviceType } = useParams<{ serviceType: string }>();
+  const navigate = useNavigate();
   const service = serviceType ? servicesData[serviceType as keyof typeof servicesData] : null;
   
   useEffect(() => {
@@ -218,7 +219,7 @@ const ServiceDetailPage = () => {
               
               <Button 
                 className="bg-primary hover:bg-primary/90 text-white px-6 py-6 h-auto text-lg"
-                onClick={() => window.open("https://calendly.com/ladyadeolaighile/meet-and-greet", "_blank")}
+                onClick={() => navigate("/book-consultation")}
               >
                 Book a Consultation
               </Button>
@@ -257,7 +258,7 @@ const ServiceDetailPage = () => {
             <div className="flex justify-center">
               <Button 
                 className="bg-primary hover:bg-primary/90 text-white px-6 py-6 h-auto text-lg"
-                onClick={() => window.open("https://calendly.com/ladyadeolaighile/meet-and-greet", "_blank")}
+                onClick={() => navigate("/book-consultation")}
               >
                 Schedule a Free Consultation
               </Button>

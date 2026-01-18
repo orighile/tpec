@@ -8,7 +8,7 @@ import {
   CalendarClock 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const services = [
   {
@@ -56,6 +56,7 @@ const services = [
 ];
 
 const Services = () => {
+  const navigate = useNavigate();
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -102,7 +103,7 @@ const Services = () => {
         <div className="mt-12 text-center">
           <Button 
             className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg"
-            onClick={() => window.open("https://calendly.com/ladyadeolaighile/meet-and-greet", "_blank")}
+            onClick={() => navigate("/book-consultation")}
           >
             Book a Consultation
           </Button>
