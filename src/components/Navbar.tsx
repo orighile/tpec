@@ -132,6 +132,13 @@ const Navbar = () => {
 
           {/* Right Actions */}
           <div className="flex items-center gap-3">
+            <Button
+              asChild
+              className="bg-amber-500 hover:bg-amber-600 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200"
+            >
+              <Link to="/create-event">Create Event</Link>
+            </Button>
+
             {user && (
               <Button
                 variant="ghost"
