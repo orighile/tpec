@@ -100,35 +100,56 @@ const mockEvents = [
     title: "Lagos Fashion Week",
     description: "The premier fashion event showcasing Nigeria's top designers and emerging talent",
     location: "Lagos",
-    tags: ["fashion", "cultural", "networking"]
+    tags: ["fashion", "cultural", "networking", "lagos"]
   },
   {
     id: "evt-2",
     title: "Abuja Food Festival",
     description: "A celebration of Nigerian cuisine featuring top chefs and food vendors",
     location: "Abuja",
-    tags: ["food", "festival", "catering"]
+    tags: ["food", "festival", "catering", "abuja"]
   },
   {
     id: "evt-3",
     title: "Port Harcourt Cultural Festival",
     description: "Annual festival celebrating the rich cultural heritage of Rivers State",
     location: "Port Harcourt",
-    tags: ["cultural", "music", "dance"]
+    tags: ["cultural", "music", "dance", "port harcourt"]
   },
   {
     id: "evt-4",
     title: "Corporate Leadership Summit",
     description: "Nigeria's biggest gathering of business leaders and entrepreneurs",
     location: "Lagos",
-    tags: ["business", "corporate", "networking"]
+    tags: ["business", "corporate", "networking", "lagos"]
   },
   {
     id: "evt-5",
-    title: "Nigerian Wedding Expo",
+    title: "Lagos Wedding Expo 2024",
     description: "The ultimate wedding planning event featuring vendors, fashion shows, and workshops",
     location: "Lagos",
-    tags: ["wedding", "planning", "expo"]
+    tags: ["wedding", "planning", "expo", "lagos", "weddings"]
+  },
+  {
+    id: "evt-6",
+    title: "Lagos Weddings & Events Fair",
+    description: "Premier wedding showcase featuring top vendors, planners, and venues in Lagos",
+    location: "Lagos",
+    tags: ["wedding", "weddings", "lagos", "events", "fair"]
+  },
+  {
+    id: "evt-7",
+    title: "Traditional Wedding Showcase Lagos",
+    description: "Experience the beauty of Nigerian traditional wedding ceremonies with live demonstrations",
+    location: "Lagos",
+    tags: ["traditional", "wedding", "weddings", "lagos", "culture"]
+  },
+  {
+    id: "evt-8",
+    title: "Destination Wedding Lagos",
+    description: "Planning your dream destination wedding in Lagos - venue tours and vendor meet-ups",
+    location: "Lagos",
+    tags: ["destination", "wedding", "weddings", "lagos", "luxury"]
   }
 ];
 
@@ -136,21 +157,21 @@ const mockEvents = [
 const mockBlogs = [
   {
     id: "blog-1",
-    title: "Top 10 Wedding Trends in Nigeria",
+    title: "Top 10 Wedding Trends in Lagos 2024",
     description: "Discover the latest wedding trends that are taking Nigerian ceremonies to the next level",
-    tags: ["wedding", "trends", "planning"]
+    tags: ["wedding", "weddings", "trends", "planning", "lagos"]
   },
   {
     id: "blog-2",
-    title: "Planning Your Traditional Wedding",
-    description: "A comprehensive guide to planning a traditional Nigerian wedding ceremony",
-    tags: ["traditional", "wedding", "planning"]
+    title: "Planning Your Traditional Wedding in Lagos",
+    description: "A comprehensive guide to planning a traditional Nigerian wedding ceremony in Lagos",
+    tags: ["traditional", "wedding", "weddings", "planning", "lagos"]
   },
   {
     id: "blog-3",
     title: "Cost-Saving Tips for Nigerian Events",
     description: "Smart ways to manage your event budget without compromising on quality",
-    tags: ["budget", "planning", "tips"]
+    tags: ["budget", "planning", "tips", "events"]
   },
   {
     id: "blog-4",
@@ -163,6 +184,18 @@ const mockBlogs = [
     title: "Nigerian Party Food: What to Serve",
     description: "Popular food options that will impress guests at your Nigerian party",
     tags: ["food", "catering", "party"]
+  },
+  {
+    id: "blog-6",
+    title: "Best Lagos Wedding Venues 2024",
+    description: "Top-rated wedding venues in Lagos for your special day, from luxury to budget-friendly options",
+    tags: ["lagos", "wedding", "weddings", "venues", "best"]
+  },
+  {
+    id: "blog-7",
+    title: "Lagos Beach Weddings: A Complete Guide",
+    description: "Everything you need to know about planning a beautiful beach wedding in Lagos",
+    tags: ["lagos", "beach", "wedding", "weddings", "guide"]
   }
 ];
 
