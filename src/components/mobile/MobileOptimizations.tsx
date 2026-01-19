@@ -41,10 +41,10 @@ const MobileOptimizations: React.FC = () => {
   ];
 
   const quickActions: QuickAction[] = [
-    { id: 'create-event', title: 'Create Event', icon: <Plus className="h-6 w-6" />, color: 'bg-blue-500', href: '/events/create' },
-    { id: 'find-vendor', title: 'Find Vendor', icon: <Search className="h-6 w-6" />, color: 'bg-green-500', href: '/vendors' },
-    { id: 'book-service', title: 'Book Service', icon: <Calendar className="h-6 w-6" />, color: 'bg-purple-500', href: '/services' },
-    { id: 'get-quote', title: 'Get Quote', icon: <MessageCircle className="h-6 w-6" />, color: 'bg-orange-500', href: '/quote' }
+    { id: 'create-event', title: 'Create Event', icon: <Plus className="h-6 w-6" />, color: 'bg-primary', href: '/events/create' },
+    { id: 'find-vendor', title: 'Find Vendor', icon: <Search className="h-6 w-6" />, color: 'bg-secondary', href: '/vendors' },
+    { id: 'book-service', title: 'Book Service', icon: <Calendar className="h-6 w-6" />, color: 'bg-accent', href: '/services' },
+    { id: 'get-quote', title: 'Get Quote', icon: <MessageCircle className="h-6 w-6" />, color: 'bg-muted-foreground', href: '/quote' }
   ];
 
   const sampleEvents = [
@@ -109,7 +109,7 @@ const MobileOptimizations: React.FC = () => {
   }, []);
 
   const MobileHeader = () => (
-    <div className="lg:hidden bg-white border-b sticky top-0 z-40">
+    <div className="lg:hidden bg-background border-b sticky top-0 z-40">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-3">
           <Button
@@ -125,7 +125,7 @@ const MobileOptimizations: React.FC = () => {
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" className="p-2">
             <Bell className="h-5 w-5" />
-            <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-xs">
+            <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-destructive text-xs">
               3
             </Badge>
           </Button>
@@ -143,7 +143,7 @@ const MobileOptimizations: React.FC = () => {
       ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
     `}>
       <div className={`
-        fixed left-0 top-0 h-full w-80 bg-white shadow-xl transform transition-transform duration-300
+        fixed left-0 top-0 h-full w-80 bg-background shadow-xl transform transition-transform duration-300
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="p-4 border-b">
@@ -170,7 +170,7 @@ const MobileOptimizations: React.FC = () => {
               {item.icon}
               <span>{item.label}</span>
               {item.badge && (
-                <Badge className="ml-auto bg-red-500 text-white">
+                <Badge className="ml-auto bg-destructive text-destructive-foreground">
                   {item.badge}
                 </Badge>
               )}
@@ -187,15 +187,15 @@ const MobileOptimizations: React.FC = () => {
   );
 
   const MobileSearchBar = () => (
-    <div className="lg:hidden p-4 bg-gray-50">
+    <div className="lg:hidden p-4 bg-muted">
       <div className="relative">
-        <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+        <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
         <input
           type="text"
           placeholder="Search events, vendors, services..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full pl-10 pr-4 py-2 border border-input bg-background rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
         />
         <Button
           variant="ghost"
@@ -207,7 +207,7 @@ const MobileOptimizations: React.FC = () => {
         </Button>
       </div>
       {showFilters && (
-        <div className="mt-3 p-3 bg-white rounded-lg border space-y-2">
+        <div className="mt-3 p-3 bg-background rounded-lg border space-y-2">
           <div className="flex gap-2 flex-wrap">
             <Badge variant="outline" className="cursor-pointer">Category</Badge>
             <Badge variant="outline" className="cursor-pointer">Location</Badge>
@@ -256,17 +256,17 @@ const MobileOptimizations: React.FC = () => {
               <Share2 className="h-4 w-4" />
             </Button>
           </div>
-          <Badge className="absolute bottom-2 left-2 bg-blue-500">
+          <Badge className="absolute bottom-2 left-2 bg-primary">
             {event.category}
           </Badge>
         </div>
         <div className="p-4">
           <h3 className="font-semibold text-lg mb-2">{event.name}</h3>
-          <div className="flex items-center gap-1 mb-2 text-sm text-gray-600">
+          <div className="flex items-center gap-1 mb-2 text-sm text-muted-foreground">
             <MapPin className="h-4 w-4" />
             {event.location}
           </div>
-          <div className="flex items-center gap-1 mb-3 text-sm text-gray-600">
+          <div className="flex items-center gap-1 mb-3 text-sm text-muted-foreground">
             <Calendar className="h-4 w-4" />
             {new Date(event.date).toLocaleDateString()}
           </div>
@@ -274,9 +274,9 @@ const MobileOptimizations: React.FC = () => {
             <div className="flex items-center gap-1">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
               <span className="text-sm font-medium">{event.rating}</span>
-              <span className="text-sm text-gray-600">({event.reviews})</span>
+              <span className="text-sm text-muted-foreground">({event.reviews})</span>
             </div>
-            <span className="text-lg font-bold text-green-600">{event.price}</span>
+            <span className="text-lg font-bold text-primary">{event.price}</span>
           </div>
           <div className="flex gap-2 mt-3">
             <Button className="flex-1">View Details</Button>
@@ -303,18 +303,18 @@ const MobileOptimizations: React.FC = () => {
                 <Badge variant="secondary" className="text-xs">✓</Badge>
               )}
             </div>
-            <p className="text-xs text-gray-600 mb-1">{vendor.category}</p>
+            <p className="text-xs text-muted-foreground mb-1">{vendor.category}</p>
             <div className="flex items-center gap-1 mb-2">
-              <MapPin className="h-3 w-3 text-gray-400" />
-              <span className="text-xs text-gray-600">{vendor.location}</span>
+              <MapPin className="h-3 w-3 text-muted-foreground" />
+              <span className="text-xs text-muted-foreground">{vendor.location}</span>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1">
                 <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                 <span className="text-xs font-medium">{vendor.rating}</span>
-                <span className="text-xs text-gray-500">({vendor.reviews})</span>
+                <span className="text-xs text-muted-foreground">({vendor.reviews})</span>
               </div>
-              <span className="text-sm font-bold text-green-600">{vendor.price}</span>
+              <span className="text-sm font-bold text-primary">{vendor.price}</span>
             </div>
           </div>
         </div>
@@ -332,9 +332,9 @@ const MobileOptimizations: React.FC = () => {
   );
 
   const ViewToggle = () => (
-    <div className="lg:hidden flex items-center justify-between p-4 bg-gray-50">
+    <div className="lg:hidden flex items-center justify-between p-4 bg-muted">
       <span className="text-sm font-medium">View</span>
-      <div className="flex bg-white rounded-lg border p-1">
+      <div className="flex bg-background rounded-lg border p-1">
         <Button
           variant={activeView === 'grid' ? 'default' : 'ghost'}
           size="sm"
@@ -356,7 +356,7 @@ const MobileOptimizations: React.FC = () => {
   );
 
   const MobileBottomNav = () => (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t z-40">
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background border-t z-40">
       <div className="grid grid-cols-5 py-2">
         {navItems.map((item) => (
           <Button
@@ -367,7 +367,7 @@ const MobileOptimizations: React.FC = () => {
             {item.icon}
             <span className="text-xs">{item.label}</span>
             {item.badge && (
-              <Badge className="absolute top-2 right-2 h-4 w-4 text-xs bg-red-500">
+              <Badge className="absolute top-2 right-2 h-4 w-4 text-xs bg-destructive">
                 {item.badge}
               </Badge>
             )}
@@ -378,7 +378,7 @@ const MobileOptimizations: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-muted">
       <MobileHeader />
       <MobileMenu />
       
@@ -414,14 +414,14 @@ const MobileOptimizations: React.FC = () => {
                     />
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold truncate">{event.name}</h3>
-                      <p className="text-sm text-gray-600">{event.location}</p>
-                      <p className="text-sm text-gray-600">{new Date(event.date).toLocaleDateString()}</p>
+                      <p className="text-sm text-muted-foreground">{event.location}</p>
+                      <p className="text-sm text-muted-foreground">{new Date(event.date).toLocaleDateString()}</p>
                       <div className="flex items-center justify-between mt-2">
                         <div className="flex items-center gap-1">
                           <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                           <span className="text-sm">{event.rating}</span>
                         </div>
-                        <span className="font-bold text-green-600">{event.price}</span>
+                        <span className="font-bold text-primary">{event.price}</span>
                       </div>
                     </div>
                   </div>
@@ -449,12 +449,12 @@ const MobileOptimizations: React.FC = () => {
       
       {/* Desktop View Message */}
       <div className="hidden lg:block p-8 text-center">
-        <Monitor className="h-16 w-16 mx-auto mb-4 text-gray-400" />
+        <Monitor className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
         <h2 className="text-2xl font-bold mb-2">Mobile Optimization Preview</h2>
-        <p className="text-gray-600 mb-4">
+        <p className="text-muted-foreground mb-4">
           This component demonstrates mobile-optimized interfaces for the TPEC Events platform.
         </p>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-muted-foreground">
           Resize your browser window or view on a mobile device to see the mobile interface.
         </p>
       </div>
