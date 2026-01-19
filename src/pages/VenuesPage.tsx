@@ -1,4 +1,4 @@
-import { MapPin, Users, Star, Phone, Mail, Calendar, Building2, Search, Sparkles } from "lucide-react";
+import { MapPin, Users, Star, Phone, Mail, Calendar, Building2, Search, Sparkles, ChevronLeft, ChevronRight, Globe } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,24 +23,87 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import ekoHotelImg from "@/assets/venues/eko-hotel-lagos.jpg";
-import civicCentreImg from "@/assets/venues/civic-centre-lagos.jpg";
-import landmarkCentreImg from "@/assets/venues/landmark-centre-lagos.jpg";
-import transcorpHiltonImg from "@/assets/venues/transcorp-hilton-abuja.jpg";
-import iccAbujaImg from "@/assets/venues/icc-abuja.jpg";
-import hotelPresidentialImg from "@/assets/venues/hotel-presidential-ph.jpg";
-import leMeridienImg from "@/assets/venues/le-meridien-ph.jpg";
-import jogorCentreImg from "@/assets/venues/jogor-centre-ibadan.jpg";
-import tahirPalaceImg from "@/assets/venues/tahir-palace-kano.jpg";
-import nikeLakeImg from "@/assets/venues/nike-lake-resort-enugu.jpg";
+
+// Eko Hotel & Suites images
+import ekoExterior from "@/assets/venues/eko-hotel-exterior.jpg";
+import ekoBallroom from "@/assets/venues/eko-hotel-ballroom.jpg";
+import ekoGarden from "@/assets/venues/eko-hotel-garden.jpg";
+
+// Civic Centre images
+import civicExterior from "@/assets/venues/civic-centre-exterior.jpg";
+import civicHall from "@/assets/venues/civic-centre-hall.jpg";
+
+// Landmark Centre images
+import landmarkExterior from "@/assets/venues/landmark-exterior.jpg";
+import landmarkHall from "@/assets/venues/landmark-hall.jpg";
+
+// Transcorp Hilton images
+import transcorpExterior from "@/assets/venues/transcorp-exterior.jpg";
+import transcorpBallroom from "@/assets/venues/transcorp-ballroom.jpg";
+
+// ICC Abuja images
+import iccExterior from "@/assets/venues/icc-exterior.jpg";
+import iccHall from "@/assets/venues/icc-hall.jpg";
+
+// Hotel Presidential images
+import presidentialExterior from "@/assets/venues/presidential-exterior.jpg";
+import presidentialHall from "@/assets/venues/presidential-hall.jpg";
+
+// Le Meridien images
+import meridienExterior from "@/assets/venues/meridien-exterior.jpg";
+import meridienHall from "@/assets/venues/meridien-hall.jpg";
+
+// Jogor Centre images
+import jogorExterior from "@/assets/venues/jogor-exterior.jpg";
+import jogorHall from "@/assets/venues/jogor-hall.jpg";
+
+// Tahir Guest Palace images
+import tahirExterior from "@/assets/venues/tahir-exterior.jpg";
+import tahirHall from "@/assets/venues/tahir-hall.jpg";
+
+// Nike Lake Resort images
+import nikeLakeExterior from "@/assets/venues/nike-lake-exterior.jpg";
+import nikeLakeGarden from "@/assets/venues/nike-lake-garden.jpg";
+import nikeLakeCruise from "@/assets/venues/nike-lake-cruise.jpg";
+
+// Protea Hotel Benin City images
+import proteaBeninExterior from "@/assets/venues/protea-benin-exterior.jpg";
+import proteaBeninHall from "@/assets/venues/protea-benin-hall.jpg";
+
+// Grand Central Hotel Asaba images
+import grandCentralExterior from "@/assets/venues/grand-central-asaba-exterior.jpg";
+import grandCentralHall from "@/assets/venues/grand-central-asaba-hall.jpg";
+
+interface VenueImage {
+  src: string;
+  label: string;
+}
+
+interface Venue {
+  id: number;
+  name: string;
+  location: string;
+  city: string;
+  category: string;
+  capacity: string;
+  rating: number;
+  reviews: number;
+  features: string[];
+  contact: string;
+  email: string;
+  website?: string;
+  description: string;
+  images: VenueImage[];
+}
 
 const VenuesPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Venues");
   const [selectedCity, setSelectedCity] = useState("All Cities");
   const [searchQuery, setSearchQuery] = useState("");
-  const [bookingVenue, setBookingVenue] = useState<typeof nigerianVenues[0] | null>(null);
+  const [bookingVenue, setBookingVenue] = useState<Venue | null>(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isRecommendationOpen, setIsRecommendationOpen] = useState(false);
+  const [imageIndices, setImageIndices] = useState<Record<number, number>>({});
   
   // Booking form state
   const [bookingForm, setBookingForm] = useState({
@@ -63,9 +126,9 @@ const VenuesPage = () => {
   });
 
   const categories = ["All Venues", "Wedding Halls", "Hotels", "Outdoor Spaces", "Conference Centers", "Banquet Halls"];
-  const cities = ["All Cities", "Lagos", "Abuja", "Port Harcourt", "Ibadan", "Kano", "Enugu"];
+  const cities = ["All Cities", "Lagos", "Abuja", "Port Harcourt", "Ibadan", "Kano", "Enugu", "Benin City", "Asaba"];
 
-  const nigerianVenues = [
+  const nigerianVenues: Venue[] = [
     {
       id: 1,
       name: "Eko Hotel & Suites",
@@ -78,8 +141,13 @@ const VenuesPage = () => {
       features: ["Ocean View", "Grand Ballroom", "Outdoor Garden", "Parking", "AC Halls"],
       contact: "+234 1 277 7000",
       email: "events@ekohotels.com",
+      website: "https://www.ekohotels.com",
       description: "Luxury 5-star hotel with world-class event facilities, perfect for grand weddings and corporate events.",
-      image: ekoHotelImg
+      images: [
+        { src: ekoExterior, label: "Hotel Exterior" },
+        { src: ekoBallroom, label: "Grand Ballroom" },
+        { src: ekoGarden, label: "Garden Venue" }
+      ]
     },
     {
       id: 2,
@@ -93,8 +161,12 @@ const VenuesPage = () => {
       features: ["Large Hall", "Stage Setup", "Sound System", "Parking", "Central Location"],
       contact: "+234 1 270 1261",
       email: "booking@civiccentrelagos.com",
+      website: "https://www.theciviccentre.com",
       description: "Premier event center hosting high-profile weddings, conferences, and exhibitions in Lagos.",
-      image: civicCentreImg
+      images: [
+        { src: civicExterior, label: "Building Exterior" },
+        { src: civicHall, label: "Grand Banquet Hall" }
+      ]
     },
     {
       id: 3,
@@ -108,8 +180,12 @@ const VenuesPage = () => {
       features: ["Modern Design", "Multiple Halls", "VIP Lounges", "Generator", "Security"],
       contact: "+234 1 271 2005",
       email: "events@landmarkeventcentre.com",
+      website: "https://landmarklagos.com",
       description: "State-of-the-art event facility with modern amenities for upscale events and celebrations.",
-      image: landmarkCentreImg
+      images: [
+        { src: landmarkExterior, label: "Centre Exterior" },
+        { src: landmarkHall, label: "Event Hall" }
+      ]
     },
     {
       id: 4,
@@ -123,8 +199,12 @@ const VenuesPage = () => {
       features: ["Luxury Ballroom", "Presidential Suite", "Garden", "5-Star Service", "Catering"],
       contact: "+234 9 461 3000",
       email: "abuja.events@hilton.com",
+      website: "https://www.hilton.com/en/hotels/abuhitw-transcorp-hilton-abuja",
       description: "Abuja's most prestigious hotel offering exceptional service and elegant event spaces.",
-      image: transcorpHiltonImg
+      images: [
+        { src: transcorpExterior, label: "Hotel Exterior" },
+        { src: transcorpBallroom, label: "Luxury Ballroom" }
+      ]
     },
     {
       id: 5,
@@ -138,8 +218,12 @@ const VenuesPage = () => {
       features: ["Massive Halls", "International Standard", "Tech Equipment", "Ample Parking"],
       contact: "+234 9 314 6000",
       email: "booking@iccabuja.com",
+      website: "https://myfctagov.ng/directory/abuja-international-conference-centre",
       description: "Nigeria's premier conference facility hosting international events, weddings, and exhibitions.",
-      image: iccAbujaImg
+      images: [
+        { src: iccExterior, label: "ICC Building" },
+        { src: iccHall, label: "Africa Hall" }
+      ]
     },
     {
       id: 6,
@@ -153,8 +237,12 @@ const VenuesPage = () => {
       features: ["Riverside View", "Elegant Halls", "Full Catering", "Parking", "Security"],
       contact: "+234 84 230 9000",
       email: "events@hotelpresidentialph.com",
+      website: "https://hotelpresidential.com",
       description: "Port Harcourt's finest hotel for weddings and corporate events with riverside ambiance.",
-      image: hotelPresidentialImg
+      images: [
+        { src: presidentialExterior, label: "Hotel Exterior" },
+        { src: presidentialHall, label: "Banquet Hall" }
+      ]
     },
     {
       id: 7,
@@ -168,8 +256,12 @@ const VenuesPage = () => {
       features: ["Luxury Ballroom", "Modern Facilities", "Professional Catering", "Valet Service"],
       contact: "+234 84 835 8000",
       email: "events.porthart@lemeridien.com",
+      website: "https://www.marriott.com/en-us/hotels/phlmd-le-meridien-ogeyi-place",
       description: "International hotel brand offering sophisticated venues for all types of events.",
-      image: leMeridienImg
+      images: [
+        { src: meridienExterior, label: "Hotel Exterior" },
+        { src: meridienHall, label: "Akuma Hall" }
+      ]
     },
     {
       id: 8,
@@ -183,8 +275,12 @@ const VenuesPage = () => {
       features: ["Large Halls", "Modern Facilities", "Sound Systems", "Parking Space"],
       contact: "+234 2 810 3000",
       email: "events@jogorcentre.com",
+      website: "https://jogorcentre.com",
       description: "Ibadan's leading event center for weddings, conferences, and social gatherings.",
-      image: jogorCentreImg
+      images: [
+        { src: jogorExterior, label: "Centre Exterior" },
+        { src: jogorHall, label: "Hall of Grace" }
+      ]
     },
     {
       id: 9,
@@ -198,8 +294,12 @@ const VenuesPage = () => {
       features: ["Grand Halls", "Traditional & Modern", "Full Services", "Secure Parking"],
       contact: "+234 64 632 900",
       email: "events@tahirguestpalace.com",
+      website: "https://tahirguestpalace.com",
       description: "Premium hotel in Kano offering elegant venues for Northern Nigerian celebrations.",
-      image: tahirPalaceImg
+      images: [
+        { src: tahirExterior, label: "Palace Exterior" },
+        { src: tahirHall, label: "Grand Wedding Hall" }
+      ]
     },
     {
       id: 10,
@@ -213,8 +313,51 @@ const VenuesPage = () => {
       features: ["Lakeside View", "Gardens", "Boat Cruise", "Open Air", "Accommodation"],
       contact: "+234 42 459 176",
       email: "events@nikelakeresort.com",
+      website: "https://nikelakeresorthotel.com.ng",
       description: "Stunning lakeside resort perfect for outdoor weddings and unique celebrations.",
-      image: nikeLakeImg
+      images: [
+        { src: nikeLakeExterior, label: "Resort Aerial View" },
+        { src: nikeLakeGarden, label: "Garden Wedding Setup" },
+        { src: nikeLakeCruise, label: "Lake Cruise Event" }
+      ]
+    },
+    {
+      id: 11,
+      name: "Protea Hotel by Marriott",
+      location: "GRA, Benin City",
+      city: "Benin City",
+      category: "Hotels",
+      capacity: "800 guests",
+      rating: 4.5,
+      reviews: 134,
+      features: ["Modern Design", "Elegant Ballroom", "Professional Catering", "Ample Parking", "AC Halls"],
+      contact: "+234 52 250 8000",
+      email: "events@proteabenin.com",
+      website: "https://www.marriott.com/hotels/travel/bninb-protea-hotel-benin-city",
+      description: "International standard hotel in Edo State offering sophisticated event spaces for weddings and conferences.",
+      images: [
+        { src: proteaBeninExterior, label: "Hotel Exterior" },
+        { src: proteaBeninHall, label: "Elegant Ballroom" }
+      ]
+    },
+    {
+      id: 12,
+      name: "Grand Central Hotel",
+      location: "Okpanam Road",
+      city: "Asaba",
+      category: "Hotels",
+      capacity: "1000 guests",
+      rating: 4.6,
+      reviews: 167,
+      features: ["Grand Ballroom", "VIP Lounge", "Full Catering", "Security", "Generator"],
+      contact: "+234 56 280 5000",
+      email: "events@grandcentralasaba.com",
+      website: "https://grandcentralasaba.com",
+      description: "Delta State's premier hotel venue for elegant weddings, corporate events, and celebrations.",
+      images: [
+        { src: grandCentralExterior, label: "Hotel Exterior" },
+        { src: grandCentralHall, label: "Wedding Hall" }
+      ]
     },
   ];
 
@@ -228,7 +371,7 @@ const VenuesPage = () => {
     return categoryMatch && cityMatch && searchMatch;
   });
 
-  const handleBookVenue = (venue: typeof nigerianVenues[0]) => {
+  const handleBookVenue = (venue: Venue) => {
     setBookingVenue(venue);
     setIsBookingOpen(true);
   };
@@ -269,6 +412,22 @@ const VenuesPage = () => {
     });
   };
 
+  const nextImage = (venueId: number, totalImages: number) => {
+    setImageIndices(prev => ({
+      ...prev,
+      [venueId]: ((prev[venueId] || 0) + 1) % totalImages
+    }));
+  };
+
+  const prevImage = (venueId: number, totalImages: number) => {
+    setImageIndices(prev => ({
+      ...prev,
+      [venueId]: ((prev[venueId] || 0) - 1 + totalImages) % totalImages
+    }));
+  };
+
+  const getCurrentImageIndex = (venueId: number) => imageIndices[venueId] || 0;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -280,8 +439,8 @@ const VenuesPage = () => {
     <>
       <SEO 
         title="Top Event Venues in Nigeria - Lagos, Abuja & Port Harcourt Wedding Halls | TPEC Events"
-        description="Discover premium event venues in Lagos, Abuja, Port Harcourt and across Nigeria. Find the perfect space for weddings, corporate events, parties, and celebrations. Book your venue today."
-        keywords="event venues Nigeria, wedding venues Lagos, conference halls Abuja, party venues Port Harcourt, banquet halls Nigeria, event spaces Lagos, Eko Hotel events, Transcorp Hilton, Landmark Centre"
+        description="Discover premium event venues in Lagos, Abuja, Port Harcourt, Benin City, Asaba and across Nigeria. Find the perfect space for weddings, corporate events, parties, and celebrations. Book your venue today."
+        keywords="event venues Nigeria, wedding venues Lagos, conference halls Abuja, party venues Port Harcourt, banquet halls Nigeria, event spaces Lagos, Eko Hotel events, Transcorp Hilton, Landmark Centre, Benin City venues, Asaba venues"
         jsonLd={jsonLd}
       />
 
@@ -357,82 +516,151 @@ const VenuesPage = () => {
         {/* Venues Grid */}
         {filteredVenues.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredVenues.map((venue) => (
-              <Card key={venue.id} className="tpec-card overflow-hidden group hover:shadow-[var(--shadow-elegant)] transition-all duration-300">
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={venue.image}
-                    alt={venue.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <Badge className="absolute top-4 right-4 bg-primary/90 backdrop-blur-sm">
-                    {venue.category}
-                  </Badge>
-                  <Badge className="absolute top-4 left-4 bg-secondary/90 backdrop-blur-sm text-secondary-foreground">
-                    {venue.city}
-                  </Badge>
-                </div>
+            {filteredVenues.map((venue) => {
+              const currentIndex = getCurrentImageIndex(venue.id);
+              const currentImage = venue.images[currentIndex];
+              
+              return (
+                <Card key={venue.id} className="tpec-card overflow-hidden group hover:shadow-[var(--shadow-elegant)] transition-all duration-300">
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={currentImage.src}
+                      alt={`${venue.name} - ${currentImage.label}`}
+                      className="w-full h-full object-cover transition-transform duration-500"
+                    />
+                    
+                    {/* Image Navigation */}
+                    {venue.images.length > 1 && (
+                      <>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            prevImage(venue.id, venue.images.length);
+                          }}
+                          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1.5 rounded-full transition-all opacity-0 group-hover:opacity-100"
+                          aria-label="Previous image"
+                        >
+                          <ChevronLeft className="h-5 w-5" />
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            nextImage(venue.id, venue.images.length);
+                          }}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1.5 rounded-full transition-all opacity-0 group-hover:opacity-100"
+                          aria-label="Next image"
+                        >
+                          <ChevronRight className="h-5 w-5" />
+                        </button>
+                        
+                        {/* Image Indicators */}
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                          {venue.images.map((_, idx) => (
+                            <button
+                              key={idx}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setImageIndices(prev => ({ ...prev, [venue.id]: idx }));
+                              }}
+                              className={`w-2 h-2 rounded-full transition-all ${
+                                idx === currentIndex 
+                                  ? 'bg-white w-4' 
+                                  : 'bg-white/50 hover:bg-white/75'
+                              }`}
+                              aria-label={`View image ${idx + 1}`}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
 
-                <CardHeader>
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <CardTitle className="text-xl font-bold text-foreground">
-                      {venue.name}
-                    </CardTitle>
-                    <div className="flex items-center gap-1 text-sm">
-                      <Star className="h-4 w-4 fill-secondary text-secondary" />
-                      <span className="font-semibold">{venue.rating}</span>
-                      <span className="text-muted-foreground">({venue.reviews})</span>
+                    {/* Image Label */}
+                    <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs px-2 py-1 rounded">
+                      {currentImage.label}
                     </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
-                    <span className="text-sm">{venue.location}</span>
-                  </div>
-                </CardHeader>
 
-                <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {venue.description}
-                  </p>
-
-                  <div className="flex items-center gap-2 text-sm">
-                    <Users className="h-4 w-4 text-primary" />
-                    <span className="font-medium">Capacity: {venue.capacity}</span>
+                    <Badge className="absolute top-4 right-4 bg-primary/90 backdrop-blur-sm">
+                      {venue.category}
+                    </Badge>
+                    <Badge className="absolute top-4 left-4 bg-secondary/90 backdrop-blur-sm text-secondary-foreground">
+                      {venue.city}
+                    </Badge>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    {venue.features.slice(0, 3).map((feature, idx) => (
-                      <Badge key={idx} variant="secondary" className="text-xs">
-                        {feature}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  <div className="pt-4 border-t border-border">
-                    <div className="space-y-2 text-xs text-muted-foreground mb-4">
-                      <div className="flex items-center gap-2">
-                        <Phone className="h-3 w-3" />
-                        <span>{venue.contact}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Mail className="h-3 w-3" />
-                        <span className="truncate">{venue.email}</span>
+                  <CardHeader>
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <CardTitle className="text-xl font-bold text-foreground">
+                        {venue.name}
+                      </CardTitle>
+                      <div className="flex items-center gap-1 text-sm">
+                        <Star className="h-4 w-4 fill-secondary text-secondary" />
+                        <span className="font-semibold">{venue.rating}</span>
+                        <span className="text-muted-foreground">({venue.reviews})</span>
                       </div>
                     </div>
+                    
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <MapPin className="h-4 w-4" />
+                      <span className="text-sm">{venue.location}</span>
+                    </div>
+                  </CardHeader>
 
-                    <Button 
-                      className="w-full gap-2" 
-                      variant="default"
-                      onClick={() => handleBookVenue(venue)}
-                    >
-                      <Calendar className="h-4 w-4" />
-                      Book Venue
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {venue.description}
+                    </p>
+
+                    <div className="flex items-center gap-2 text-sm">
+                      <Users className="h-4 w-4 text-primary" />
+                      <span className="font-medium">Capacity: {venue.capacity}</span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      {venue.features.slice(0, 3).map((feature, idx) => (
+                        <Badge key={idx} variant="secondary" className="text-xs">
+                          {feature}
+                        </Badge>
+                      ))}
+                    </div>
+
+                    <div className="pt-4 border-t border-border">
+                      <div className="space-y-2 text-xs text-muted-foreground mb-4">
+                        <div className="flex items-center gap-2">
+                          <Phone className="h-3 w-3" />
+                          <span>{venue.contact}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Mail className="h-3 w-3" />
+                          <span className="truncate">{venue.email}</span>
+                        </div>
+                        {venue.website && (
+                          <div className="flex items-center gap-2">
+                            <Globe className="h-3 w-3" />
+                            <a 
+                              href={venue.website} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="text-primary hover:underline truncate"
+                            >
+                              Visit Website
+                            </a>
+                          </div>
+                        )}
+                      </div>
+
+                      <Button 
+                        className="w-full gap-2" 
+                        variant="default"
+                        onClick={() => handleBookVenue(venue)}
+                      >
+                        <Calendar className="h-4 w-4" />
+                        Book Venue
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         ) : (
           <div className="text-center py-16">
