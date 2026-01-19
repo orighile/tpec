@@ -28,10 +28,10 @@ const AIRecommendationEngine = ({ eventId, eventData }: { eventId?: string; even
   };
 
   const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 90) return "bg-green-500";
-    if (confidence >= 75) return "bg-blue-500";
-    if (confidence >= 60) return "bg-yellow-500";
-    return "bg-red-500";
+    if (confidence >= 90) return "bg-primary";
+    if (confidence >= 75) return "bg-accent";
+    if (confidence >= 60) return "bg-secondary";
+    return "bg-destructive";
   };
 
   const getCategoryIcon = (category: string) => {

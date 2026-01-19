@@ -77,19 +77,19 @@ const TicketingSystem: React.FC<TicketingSystemProps> = ({
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-green-100 text-green-800';
-      case 'paused': return 'bg-yellow-100 text-yellow-800';
-      case 'sold_out': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'active': return 'bg-primary/10 text-primary';
+      case 'paused': return 'bg-secondary/50 text-secondary-foreground';
+      case 'sold_out': return 'bg-destructive/10 text-destructive';
+      default: return 'bg-muted text-muted-foreground';
     }
   };
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'vip': return 'bg-purple-100 text-purple-800';
-      case 'early_bird': return 'bg-blue-100 text-blue-800';
-      case 'group': return 'bg-orange-100 text-orange-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'vip': return 'bg-accent text-accent-foreground';
+      case 'early_bird': return 'bg-primary/10 text-primary';
+      case 'group': return 'bg-secondary text-secondary-foreground';
+      default: return 'bg-muted text-muted-foreground';
     }
   };
 

@@ -203,24 +203,24 @@ const AdvancedNotificationSystem: React.FC = () => {
 
   const getTypeColor = (type: string) => {
     const colors = {
-      booking: 'bg-blue-100 text-blue-800',
-      payment: 'bg-green-100 text-green-800',
-      event: 'bg-purple-100 text-purple-800',
-      review: 'bg-yellow-100 text-yellow-800',
-      system: 'bg-red-100 text-red-800',
-      marketing: 'bg-pink-100 text-pink-800'
+      booking: 'bg-primary/10 text-primary',
+      payment: 'bg-primary/10 text-primary',
+      event: 'bg-accent text-accent-foreground',
+      review: 'bg-secondary text-secondary-foreground',
+      system: 'bg-destructive/10 text-destructive',
+      marketing: 'bg-accent/50 text-accent-foreground'
     };
-    return colors[type as keyof typeof colors] || 'bg-gray-100 text-gray-800';
+    return colors[type as keyof typeof colors] || 'bg-muted text-muted-foreground';
   };
 
   const getPriorityColor = (priority: string) => {
     const colors = {
-      low: 'bg-gray-100 text-gray-800',
-      medium: 'bg-blue-100 text-blue-800',
-      high: 'bg-orange-100 text-orange-800',
-      urgent: 'bg-red-100 text-red-800'
+      low: 'bg-muted text-muted-foreground',
+      medium: 'bg-primary/10 text-primary',
+      high: 'bg-secondary text-secondary-foreground',
+      urgent: 'bg-destructive/10 text-destructive'
     };
-    return colors[priority as keyof typeof colors] || 'bg-gray-100 text-gray-800';
+    return colors[priority as keyof typeof colors] || 'bg-muted text-muted-foreground';
   };
 
   const getChannelIcon = (type: string) => {

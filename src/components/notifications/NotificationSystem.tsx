@@ -117,10 +117,10 @@ const NotificationSystem: React.FC = () => {
 
   const getBadgeColor = (type: string) => {
     switch (type) {
-      case 'success': return 'bg-green-100 text-green-800';
-      case 'warning': return 'bg-yellow-100 text-yellow-800';
-      case 'error': return 'bg-red-100 text-red-800';
-      default: return 'bg-blue-100 text-blue-800';
+      case 'success': return 'bg-primary/10 text-primary';
+      case 'warning': return 'bg-secondary text-secondary-foreground';
+      case 'error': return 'bg-destructive/10 text-destructive';
+      default: return 'bg-muted text-muted-foreground';
     }
   };
 

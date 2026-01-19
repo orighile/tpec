@@ -43,17 +43,17 @@ const BudgetSummary = ({ totalBudget, expenses }: BudgetSummaryProps) => {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-slate-50 p-4 rounded-lg">
-            <p className="text-sm text-gray-500 mb-1">Total Budget</p>
+          <div className="bg-muted p-4 rounded-lg">
+            <p className="text-sm text-muted-foreground mb-1">Total Budget</p>
             <p className="text-2xl font-bold text-primary">₦{totalBudget.toLocaleString()}</p>
           </div>
-          <div className="bg-slate-50 p-4 rounded-lg">
-            <p className="text-sm text-gray-500 mb-1">Total Expenses</p>
-            <p className="text-2xl font-bold text-orange-500">₦{totalExpenses.toLocaleString()}</p>
+          <div className="bg-muted p-4 rounded-lg">
+            <p className="text-sm text-muted-foreground mb-1">Total Expenses</p>
+            <p className="text-2xl font-bold text-secondary-foreground">₦{totalExpenses.toLocaleString()}</p>
           </div>
-          <div className="bg-slate-50 p-4 rounded-lg">
-            <p className="text-sm text-gray-500 mb-1">Remaining</p>
-            <p className={`text-2xl font-bold ${remainingBudget >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+          <div className="bg-muted p-4 rounded-lg">
+            <p className="text-sm text-muted-foreground mb-1">Remaining</p>
+            <p className={`text-2xl font-bold ${remainingBudget >= 0 ? 'text-primary' : 'text-destructive'}`}>
               ₦{remainingBudget.toLocaleString()}
             </p>
           </div>
@@ -66,12 +66,12 @@ const BudgetSummary = ({ totalBudget, expenses }: BudgetSummaryProps) => {
           </div>
           <Progress 
             value={budgetProgress > 100 ? 100 : budgetProgress} 
-            className={`h-2 ${budgetProgress > 90 ? 'bg-red-200' : 'bg-slate-200'}`}
+            className={`h-2 ${budgetProgress > 90 ? 'bg-destructive/20' : 'bg-muted'}`}
           />
         </div>
 
         {/* Category breakdown */}
-        <div className="bg-slate-50 p-4 rounded-lg">
+        <div className="bg-muted p-4 rounded-lg">
           <h3 className="font-medium mb-3">Expense Breakdown</h3>
           <div className="space-y-2">
             {Object.entries(categoryTotals).map(([category, amount]) => (

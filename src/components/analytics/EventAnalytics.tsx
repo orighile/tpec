@@ -125,11 +125,11 @@ const EventAnalytics: React.FC<EventAnalyticsProps> = ({ eventId, eventName }) =
                 <p className="text-sm font-medium text-muted-foreground">Avg Ticket Price</p>
                 <p className="text-2xl font-bold">{formatCurrency(avgTicketPrice)}</p>
               </div>
-              <Users className="h-8 w-8 text-purple-600" />
+              <Users className="h-8 w-8 text-accent-foreground" />
             </div>
             <div className="flex items-center mt-2">
-              <TrendingDown className="h-4 w-4 text-red-600 mr-1" />
-              <span className="text-sm text-red-600">-2.1%</span>
+              <TrendingDown className="h-4 w-4 text-destructive mr-1" />
+              <span className="text-sm text-destructive">-2.1%</span>
             </div>
           </CardContent>
         </Card>
@@ -141,11 +141,11 @@ const EventAnalytics: React.FC<EventAnalyticsProps> = ({ eventId, eventName }) =
                 <p className="text-sm font-medium text-muted-foreground">Conversion Rate</p>
                 <p className="text-2xl font-bold">{conversionRate.toFixed(1)}%</p>
               </div>
-              <Star className="h-8 w-8 text-orange-600" />
+              <Star className="h-8 w-8 text-secondary-foreground" />
             </div>
             <div className="flex items-center mt-2">
-              <TrendingUp className="h-4 w-4 text-green-600 mr-1" />
-              <span className="text-sm text-green-600">+0.5%</span>
+              <TrendingUp className="h-4 w-4 text-primary mr-1" />
+              <span className="text-sm text-primary">+0.5%</span>
             </div>
           </CardContent>
         </Card>

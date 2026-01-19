@@ -13,10 +13,10 @@ const TaskItem = ({ task, onClick, statusIcon }: TaskItemProps) => {
     <div 
       className={`
         flex items-center gap-3 p-3 rounded-md transition-all 
-        ${task.isCritical ? 'border-2 border-red-500/70' : 'border border-gray-200'}
-        ${task.status === 'completed' ? 'bg-jara-green/5' : ''}
-        ${task.status === 'in-progress' ? 'bg-jara-teal/5' : ''}
-        ${task.status === 'blocked' ? 'bg-jara-orange/5' : ''}
+        ${task.isCritical ? 'border-2 border-destructive/70' : 'border border-border'}
+        ${task.status === 'completed' ? 'bg-primary/5' : ''}
+        ${task.status === 'in-progress' ? 'bg-accent/5' : ''}
+        ${task.status === 'blocked' ? 'bg-secondary/5' : ''}
       `}
     >
       <button 
@@ -27,11 +27,11 @@ const TaskItem = ({ task, onClick, statusIcon }: TaskItemProps) => {
       </button>
       <div className="flex-grow">
         <div className="flex items-center gap-2">
-          <span className={task.status === 'completed' ? 'line-through text-gray-500' : ''}>
+          <span className={task.status === 'completed' ? 'line-through text-muted-foreground' : ''}>
             {task.name}
           </span>
           {task.isCritical && (
-            <span className="bg-red-100 text-red-700 text-xs px-2 py-0.5 rounded-full">
+            <span className="bg-destructive/10 text-destructive text-xs px-2 py-0.5 rounded-full">
               Critical
             </span>
           )}
@@ -39,9 +39,9 @@ const TaskItem = ({ task, onClick, statusIcon }: TaskItemProps) => {
             <span 
               className={`
                 text-xs px-2 py-0.5 rounded-full
-                ${task.riskLevel === 'high' ? 'bg-red-100 text-red-700' : ''}
-                ${task.riskLevel === 'medium' ? 'bg-amber-100 text-amber-700' : ''}
-                ${task.riskLevel === 'low' ? 'bg-green-100 text-green-700' : ''}
+                ${task.riskLevel === 'high' ? 'bg-destructive/10 text-destructive' : ''}
+                ${task.riskLevel === 'medium' ? 'bg-secondary text-secondary-foreground' : ''}
+                ${task.riskLevel === 'low' ? 'bg-primary/10 text-primary' : ''}
               `}
             >
               {task.riskLevel} risk
