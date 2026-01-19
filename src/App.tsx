@@ -57,6 +57,8 @@ import GalleryPage from "./pages/GalleryPage";
 import BookConsultationPage from "./pages/BookConsultationPage";
 import VendorBenefitsPage from "./pages/VendorBenefitsPage";
 import PlannerBenefitsPage from "./pages/PlannerBenefitsPage";
+import PrimeVendorsPage from "./pages/PrimeVendorsPage";
+import PrimePlannersPage from "./pages/PrimePlannersPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -120,6 +122,8 @@ const App = () => (
               <Route path="/book-consultation" element={<BookConsultationPage />} />
               <Route path="/vendor-benefits" element={<Layout><VendorBenefitsPage /></Layout>} />
               <Route path="/planner-benefits" element={<Layout><PlannerBenefitsPage /></Layout>} />
+              <Route path="/prime-vendors" element={<Layout><PrimeVendorsPage /></Layout>} />
+              <Route path="/prime-planners" element={<Layout><PrimePlannersPage /></Layout>} />
               <Route path="*" element={<Layout><NotFound /></Layout>} />
             </Routes>
             <TWAInstallPrompt />

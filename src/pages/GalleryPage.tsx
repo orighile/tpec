@@ -1,4 +1,4 @@
-import { Image, Heart, MessageCircle, Share2, Filter, Search, X, Upload, Trash2 } from "lucide-react";
+import { Image, Heart, MessageCircle, Share2, Filter, Search, X } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,8 +13,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useLocalGallery, LocalGalleryItem } from "@/hooks/useLocalGallery";
-import { UploadDialog } from "@/components/gallery/UploadDialog";
 import traditionalWedding from "@/assets/gallery/nigerian-traditional-wedding.jpg";
 import birthdayCelebration from "@/assets/gallery/nigerian-birthday-celebration.jpg";
 import corporateEvent from "@/assets/gallery/nigerian-corporate-event.jpg";
@@ -26,25 +24,20 @@ import graduationParty from "@/assets/gallery/nigerian-graduation-party.jpg";
 import whiteWedding from "@/assets/gallery/nigerian-white-wedding.jpg";
 
 interface GalleryItem {
-  id: number | string;
+  id: number;
   image: string;
   title: string;
   eventType: string;
   likes: number;
   comments: number;
   tags: string[];
-  isLiked?: boolean;
-  isUserUpload?: boolean;
 }
 
 const GalleryPage = () => {
   const [selectedFilter, setSelectedFilter] = useState("All Events");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
-  const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
-  const [likedItems, setLikedItems] = useState<Set<number | string>>(new Set());
-  
-  const { userUploads, uploadPhoto, deleteUpload, isUploading } = useLocalGallery();
+  const [likedItems, setLikedItems] = useState<Set<number>>(new Set());
 
   const filters = ["All Events", "Weddings", "Birthdays", "Corporate", "Traditional", "Outdoor"];
 
@@ -132,22 +125,7 @@ const GalleryPage = () => {
     },
   ];
 
-  // Combine user uploads with static gallery items
-  const allGalleryItems: GalleryItem[] = [
-    ...userUploads.map((upload): GalleryItem => ({
-      id: upload.id,
-      image: upload.image,
-      title: upload.title,
-      eventType: upload.eventType,
-      likes: upload.likes,
-      comments: upload.comments,
-      tags: upload.tags,
-      isUserUpload: true,
-    })),
-    ...galleryItems,
-  ];
-
-  const filteredItems = allGalleryItems.filter(item => {
+  const filteredItems = galleryItems.filter(item => {
     const filterMatch = selectedFilter === "All Events" || item.eventType === selectedFilter;
     const searchMatch = searchQuery === "" || 
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -155,7 +133,7 @@ const GalleryPage = () => {
     return filterMatch && searchMatch;
   });
 
-  const handleLike = (itemId: number | string) => {
+  const handleLike = (itemId: number) => {
     setLikedItems(prev => {
       const newSet = new Set(prev);
       if (newSet.has(itemId)) {
@@ -167,11 +145,6 @@ const GalleryPage = () => {
       }
       return newSet;
     });
-  };
-
-  const handleDeleteUpload = (id: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    deleteUpload(id);
   };
 
   const handleShare = async (item: GalleryItem) => {
@@ -282,25 +255,10 @@ const GalleryPage = () => {
                   alt={item.title}
                   className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute top-4 right-4 flex gap-2">
-                  {item.isUserUpload && (
-                    <Button
-                      variant="destructive"
-                      size="icon"
-                      className="h-8 w-8"
-                      onClick={(e) => handleDeleteUpload(item.id as string, e)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  )}
+                <div className="absolute top-4 right-4">
                   <Badge className="bg-primary/90 backdrop-blur-sm">
                     {item.eventType}
                   </Badge>
-                  {item.isUserUpload && (
-                    <Badge className="bg-green-500/90 backdrop-blur-sm">
-                      Your Upload
-                    </Badge>
-                  )}
                 </div>
               </div>
               <CardContent className="p-6">
@@ -358,24 +316,6 @@ const GalleryPage = () => {
             </Button>
           </div>
         )}
-
-        {/* Upload CTA */}
-        <Card className="bg-gradient-to-br from-primary/8 via-background to-accent/8 border-2 border-dashed border-primary/30 overflow-hidden relative">
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent rounded-full blur-3xl"></div>
-          </div>
-          <CardContent className="p-12 text-center relative z-10">
-            <Upload className="h-16 w-16 text-primary mx-auto mb-6" />
-            <h3 className="text-3xl font-bold mb-3 text-foreground">Share Your Event</h3>
-            <p className="text-lg text-muted-foreground mb-6 max-w-xl mx-auto">
-              Celebrate your special day with the community and help inspire others planning their dream events!
-            </p>
-            <Button variant="premium" size="lg" onClick={() => setIsUploadDialogOpen(true)}>
-              Upload Photos
-            </Button>
-          </CardContent>
-        </Card>
       </div>
 
       {/* Image Lightbox Modal */}
@@ -431,14 +371,6 @@ const GalleryPage = () => {
           )}
         </DialogContent>
       </Dialog>
-
-      {/* Upload Dialog */}
-      <UploadDialog
-        open={isUploadDialogOpen}
-        onOpenChange={setIsUploadDialogOpen}
-        onUpload={uploadPhoto}
-        isUploading={isUploading}
-      />
     </>
   );
 };
