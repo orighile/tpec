@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Bell, CalendarPlus, User, Gear } from "phosphor-react";
+import { Bell, CalendarPlus, User, Gear, List, X } from "phosphor-react";
+import { Menu, ChevronDown } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,10 +22,24 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 const Navbar = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [planningToolsOpen, setPlanningToolsOpen] = useState(false);
 
   const userInitials = user?.email ? user.email.charAt(0).toUpperCase() : "U";
   const userEmail = user?.email || "Guest";
@@ -34,6 +49,10 @@ const Navbar = () => {
       e.preventDefault();
       window.location.href = "/auth";
     }
+  };
+
+  const handleMobileLinkClick = () => {
+    setMobileMenuOpen(false);
   };
 
   const handleProfileClick = () => {
@@ -57,6 +76,13 @@ const Navbar = () => {
     { title: "Party Crew", href: "/party-crew", description: "Organize your event team and assignments" },
   ];
 
+  const mainNavLinks = [
+    { title: "Planners", href: "/planners" },
+    { title: "Vendors", href: "/vendors/marketplace" },
+    { title: "Venues", href: "/venues" },
+    { title: "Inspo", href: "/gallery" },
+  ];
+
   return (
     <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-border shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,7 +93,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="flex items-center space-x-1">
+          <div className="hidden lg:flex items-center space-x-1">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -100,40 +126,22 @@ const Navbar = () => {
               </NavigationMenuList>
             </NavigationMenu>
 
-            <Link
-              to="/planners"
-              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
-            >
-              Planners
-            </Link>
-
-            <Link
-              to="/vendors/marketplace"
-              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
-            >
-              Vendors
-            </Link>
-
-            <Link
-              to="/venues"
-              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
-            >
-              Venues
-            </Link>
-
-
-            <Link
-              to="/gallery"
-              className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
-            >
-              Inspo
-            </Link>
+            {mainNavLinks.map((link) => (
+              <Link
+                key={link.title}
+                to={link.href}
+                className="relative text-foreground hover:text-primary transition-colors duration-200 font-medium px-4 py-2 rounded-lg hover:bg-primary/5 h-10 inline-flex items-center"
+              >
+                {link.title}
+              </Link>
+            ))}
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
+            {/* Desktop Auth Links */}
             {!user && (
-              <>
+              <div className="hidden sm:flex items-center gap-4">
                 <Link
                   to="/auth"
                   className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
@@ -147,12 +155,12 @@ const Navbar = () => {
                 >
                   <Link to="/auth?tab=signup">Sign Up</Link>
                 </Button>
-              </>
+              </div>
             )}
             
             <Button
               asChild
-              className="bg-gradient-to-r from-primary via-purple-500 to-amber-500 hover:from-primary/90 hover:via-purple-500/90 hover:to-amber-500/90 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 rounded-full px-6"
+              className="hidden sm:inline-flex bg-gradient-to-r from-primary via-purple-500 to-amber-500 hover:from-primary/90 hover:via-purple-500/90 hover:to-amber-500/90 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 rounded-full px-6"
             >
               <Link to="/create-event">Create Event</Link>
             </Button>
@@ -227,6 +235,87 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
+
+            {/* Mobile Menu Button */}
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="lg:hidden text-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-lg"
+                >
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[350px] bg-background/98 backdrop-blur-xl">
+                <SheetHeader className="text-left pb-6 border-b border-border">
+                  <SheetTitle className="text-lg font-bold">Menu</SheetTitle>
+                </SheetHeader>
+                
+                <div className="flex flex-col py-6 space-y-2">
+                  {/* Planning Tools Collapsible */}
+                  <Collapsible open={planningToolsOpen} onOpenChange={setPlanningToolsOpen}>
+                    <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-3 text-foreground hover:text-primary hover:bg-primary/5 rounded-lg font-medium transition-colors">
+                      <span>Planning Tools</span>
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${planningToolsOpen ? 'rotate-180' : ''}`} />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="pl-4 space-y-1 mt-1">
+                      {planningToolsLinks.map((tool) => (
+                        <Link
+                          key={tool.title}
+                          to={tool.href}
+                          onClick={handleMobileLinkClick}
+                          className="block px-4 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
+                        >
+                          {tool.title}
+                        </Link>
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+
+                  {/* Main Nav Links */}
+                  {mainNavLinks.map((link) => (
+                    <Link
+                      key={link.title}
+                      to={link.href}
+                      onClick={handleMobileLinkClick}
+                      className="px-4 py-3 text-foreground hover:text-primary hover:bg-primary/5 rounded-lg font-medium transition-colors"
+                    >
+                      {link.title}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Mobile Auth & Actions */}
+                <div className="border-t border-border pt-6 space-y-3">
+                  <Button
+                    asChild
+                    className="w-full bg-gradient-to-r from-primary via-purple-500 to-amber-500 hover:from-primary/90 hover:via-purple-500/90 hover:to-amber-500/90 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 rounded-full"
+                  >
+                    <Link to="/create-event" onClick={handleMobileLinkClick}>Create Event</Link>
+                  </Button>
+                  
+                  {!user && (
+                    <>
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="w-full border-primary text-primary hover:bg-primary/5 rounded-full"
+                      >
+                        <Link to="/auth" onClick={handleMobileLinkClick}>Login</Link>
+                      </Button>
+                      <Button
+                        asChild
+                        variant="ghost"
+                        className="w-full text-foreground hover:text-primary hover:bg-primary/5 rounded-full"
+                      >
+                        <Link to="/auth?tab=signup" onClick={handleMobileLinkClick}>Sign Up</Link>
+                      </Button>
+                    </>
+                  )}
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
