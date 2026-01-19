@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import TPECLogo from "./TPECLogo";
+import { ThemeToggle } from "./theme-toggle";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -138,8 +139,9 @@ const Navbar = () => {
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2 sm:gap-4">
-            {/* Desktop Auth Links */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Theme Toggle */}
+            <ThemeToggle />
             {!user && (
               <div className="hidden sm:flex items-center gap-4">
                 <Link
