@@ -48,12 +48,12 @@ const vendors = [
 
 const VendorHighlights = () => {
   return (
-    <section className="py-10 bg-white">
+    <section className="py-10 bg-background">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-10">
           <div>
-            <h2 className="text-3xl font-bold">Featured Vendors</h2>
-            <p className="text-gray-600 mt-2">Premium service providers for your next event</p>
+            <h2 className="text-3xl font-bold text-foreground">Featured Vendors</h2>
+            <p className="text-muted-foreground mt-2">Premium service providers for your next event</p>
           </div>
           <Button variant="link" className="text-primary font-medium hidden md:block" asChild>
             <Link to="/vendors">Browse All Vendors</Link>
@@ -71,7 +71,7 @@ const VendorHighlights = () => {
                   loading="lazy"
                 />
                 <div className="absolute top-4 left-4">
-                  <Badge className="bg-white text-accent hover:bg-white">
+                  <Badge className="bg-background text-accent hover:bg-background">
                     {vendor.category}
                   </Badge>
                 </div>
@@ -82,11 +82,11 @@ const VendorHighlights = () => {
                 
                 <div className="flex items-center text-sm mb-3">
                   <div className="flex items-center mr-3">
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1" />
-                    <span className="font-medium">{vendor.rating}</span>
-                    <span className="text-gray-500 ml-1">({vendor.reviews} reviews)</span>
+                    <Star className="w-4 h-4 fill-secondary text-secondary mr-1" />
+                    <span className="font-medium text-foreground">{vendor.rating}</span>
+                    <span className="text-muted-foreground ml-1">({vendor.reviews} reviews)</span>
                   </div>
-                  <div className="flex items-center text-gray-600">
+                  <div className="flex items-center text-muted-foreground">
                     <MapPin className="w-4 h-4 mr-1" />
                     <span>{vendor.location}</span>
                   </div>
@@ -96,7 +96,7 @@ const VendorHighlights = () => {
                   {vendor.specialties.map((specialty, index) => (
                     <span 
                       key={index} 
-                      className="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded"
+                      className="inline-block bg-muted text-foreground text-xs px-2 py-1 rounded"
                     >
                       {specialty}
                     </span>
@@ -104,13 +104,13 @@ const VendorHighlights = () => {
                 </div>
                 
                 <div className="flex gap-2">
-                  <Button className="flex-1 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white" asChild>
+                  <Button className="flex-1 flex items-center justify-center gap-2" asChild>
                     <Link to={vendor.profileLink}>
                       <span>View Profile</span> 
                       <ArrowSquareOut className="w-4 h-4" />
                     </Link>
                   </Button>
-                  <Button variant="outline" className="flex items-center justify-center gap-2 border-primary text-primary" asChild>
+                  <Button variant="outline" className="flex items-center justify-center gap-2" asChild>
                     <Link to={vendor.bookingLink}>
                       <Calendar className="w-4 h-4" />
                       <span>Book</span>

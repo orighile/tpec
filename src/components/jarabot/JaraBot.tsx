@@ -40,34 +40,34 @@ const Chief = () => {
       {!isOpen && (
         <button 
           onClick={toggleChat}
-          className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full bg-jara-green text-white shadow-lg hover:bg-jara-green/90 transition-all duration-300 hover:scale-105 animate-pulse-gentle"
+          className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105 animate-pulse-gentle"
         >
           <Sparkles className="w-6 h-6" />
-          <Badge className="absolute -top-2 -right-2 bg-jara-purple">AI</Badge>
+          <Badge className="absolute -top-2 -right-2 bg-secondary text-secondary-foreground">AI</Badge>
         </button>
       )}
 
       {isOpen && (
         <div 
           className={cn(
-            "fixed z-50 bg-white rounded-lg shadow-xl flex flex-col transition-all duration-300",
+            "fixed z-50 bg-card rounded-lg shadow-xl flex flex-col transition-all duration-300",
             isExpanded 
               ? "inset-4 md:inset-10 lg:inset-20" 
               : "bottom-6 right-6 w-80 md:w-96 h-[500px]"
           )}
         >
-          <div className="flex items-center justify-between p-4 border-b">
+          <div className="flex items-center justify-between p-4 border-b border-border">
             <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 border-2 border-jara-green">
+              <Avatar className="h-10 w-10 border-2 border-primary">
                 <AvatarImage src="/src/assets/bot-avatar.jpg" alt="Chief" />
-                <AvatarFallback className="bg-jara-green text-white">CH</AvatarFallback>
+                <AvatarFallback className="bg-primary text-primary-foreground">CH</AvatarFallback>
               </Avatar>
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="font-bold text-gray-900">Chief</h3>
-                  <Badge className="bg-jara-purple">AI</Badge>
+                  <h3 className="font-bold text-foreground">Chief</h3>
+                  <Badge className="bg-secondary text-secondary-foreground">AI</Badge>
                 </div>
-                <p className="text-xs text-gray-500">Your Nigerian event expert</p>
+                <p className="text-xs text-muted-foreground">Your Nigerian event expert</p>
               </div>
             </div>
             <div className="flex gap-1">
@@ -107,9 +107,9 @@ const Chief = () => {
               <div className="flex gap-3">
                 <Avatar className="h-8 w-8 mt-1 flex-shrink-0">
                   <AvatarImage src="/src/assets/bot-avatar.jpg" alt="Chief" />
-                  <AvatarFallback className="bg-jara-green text-white text-xs">CH</AvatarFallback>
+                  <AvatarFallback className="bg-primary text-primary-foreground text-xs">CH</AvatarFallback>
                 </Avatar>
-                <div className="p-3 rounded-lg bg-gray-100 text-gray-800">
+                <div className="p-3 rounded-lg bg-muted text-foreground">
                   <p>Hello! I'm Chief, your Nigerian event planning expert. 🎉</p>
                   <p className="mt-2">I can help you with:</p>
                   <ul className="list-disc list-inside mt-1 text-sm">
@@ -135,15 +135,15 @@ const Chief = () => {
                 {message.role === "assistant" && (
                   <Avatar className="h-8 w-8 mt-1 flex-shrink-0">
                     <AvatarImage src="/src/assets/bot-avatar.jpg" alt="Chief" />
-                    <AvatarFallback className="bg-jara-green text-white text-xs">CH</AvatarFallback>
+                    <AvatarFallback className="bg-primary text-primary-foreground text-xs">CH</AvatarFallback>
                   </Avatar>
                 )}
                 <div 
                   className={cn(
                     "p-3 rounded-lg whitespace-pre-wrap",
                     message.role === "user" 
-                      ? "bg-jara-green text-white" 
-                      : "bg-gray-100 text-gray-800"
+                      ? "bg-primary text-primary-foreground" 
+                      : "bg-muted text-foreground"
                   )}
                 >
                   {message.content}
@@ -151,7 +151,7 @@ const Chief = () => {
                 {message.role === "user" && (
                   <Avatar className="h-8 w-8 mt-1 flex-shrink-0">
                     <AvatarImage src="/src/assets/avatar-4.jpg" alt="You" />
-                    <AvatarFallback className="bg-jara-purple text-white text-xs">YOU</AvatarFallback>
+                    <AvatarFallback className="bg-secondary text-secondary-foreground text-xs">YOU</AvatarFallback>
                   </Avatar>
                 )}
               </div>
@@ -161,13 +161,13 @@ const Chief = () => {
               <div className="flex gap-3">
                 <Avatar className="h-8 w-8 mt-1 flex-shrink-0">
                   <AvatarImage src="/src/assets/bot-avatar.jpg" alt="Chief" />
-                  <AvatarFallback className="bg-jara-green text-white text-xs">CH</AvatarFallback>
+                  <AvatarFallback className="bg-primary text-primary-foreground text-xs">CH</AvatarFallback>
                 </Avatar>
-                <div className="p-3 rounded-lg bg-gray-100 text-gray-800">
+                <div className="p-3 rounded-lg bg-muted text-foreground">
                   <div className="flex space-x-2">
-                    <div className="w-2 h-2 rounded-full bg-jara-green animate-bounce" style={{ animationDelay: "0ms" }}></div>
-                    <div className="w-2 h-2 rounded-full bg-jara-green animate-bounce" style={{ animationDelay: "300ms" }}></div>
-                    <div className="w-2 h-2 rounded-full bg-jara-green animate-bounce" style={{ animationDelay: "600ms" }}></div>
+                    <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "0ms" }}></div>
+                    <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "300ms" }}></div>
+                    <div className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "600ms" }}></div>
                   </div>
                 </div>
               </div>
@@ -175,7 +175,7 @@ const Chief = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="p-4 border-t">
+          <div className="p-4 border-t border-border">
             <div className="flex items-center gap-2">
               <div className="relative flex-1">
                 <input
@@ -183,13 +183,13 @@ const Chief = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && !isLoading && handleSendMessage()}
-                  className="w-full rounded-full border border-gray-300 py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-jara-green"
+                  className="w-full rounded-full border border-border bg-background text-foreground py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Ask Chief anything about your event..."
                   disabled={isLoading}
                 />
               </div>
               <Button 
-                className="bg-jara-green text-white flex-shrink-0 hover:bg-jara-green/90" 
+                className="flex-shrink-0" 
                 size="icon"
                 onClick={handleSendMessage}
                 disabled={isLoading || !input.trim()}
@@ -201,7 +201,7 @@ const Chief = () => {
                 )}
               </Button>
             </div>
-            <p className="text-xs text-gray-500 mt-2 text-center">
+            <p className="text-xs text-muted-foreground mt-2 text-center">
               Chief is powered by AI and specializes in Nigerian event planning
             </p>
           </div>
