@@ -2,3 +2,6 @@ project_id = "xnunwgrtiffwqhechnwf"
 
 [functions.send-notification-email]
 verify_jwt = false
+
+[functions.chief-chat]
+verify_jwt = false
