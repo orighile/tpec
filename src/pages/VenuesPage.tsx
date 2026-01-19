@@ -74,6 +74,35 @@ import proteaBeninHall from "@/assets/venues/protea-benin-hall.jpg";
 import grandCentralExterior from "@/assets/venues/grand-central-asaba-exterior.jpg";
 import grandCentralHall from "@/assets/venues/grand-central-asaba-hall.jpg";
 
+// Precious Palm Royal Hotel Benin City images
+import preciousPalmExterior from "@/assets/venues/precious-palm-benin-exterior.jpg";
+import preciousPalmHall from "@/assets/venues/precious-palm-benin-hall.jpg";
+
+// Westend Hotel Warri images
+import westendWarriExterior from "@/assets/venues/westend-warri-exterior.jpg";
+import westendWarriHall from "@/assets/venues/westend-warri-hall.jpg";
+
+// Best Choice Hotel Warri images
+import bestChoiceWarriExterior from "@/assets/venues/best-choice-warri-exterior.jpg";
+import bestChoiceWarriHall from "@/assets/venues/best-choice-warri-hall.jpg";
+
+// Transcorp Hotels Calabar images
+import transcorpCalabarExterior from "@/assets/venues/transcorp-calabar-exterior.jpg";
+import transcorpCalabarBallroom from "@/assets/venues/transcorp-calabar-ballroom.jpg";
+import transcorpCalabarGarden from "@/assets/venues/transcorp-calabar-garden.jpg";
+
+// Tinapa Lakeside Hotel Calabar images
+import tinapaCalabarExterior from "@/assets/venues/tinapa-calabar-exterior.jpg";
+import tinapaCalabarHall from "@/assets/venues/tinapa-calabar-hall.jpg";
+
+// Rockview Hotel Owerri images
+import rockviewOwerriExterior from "@/assets/venues/rockview-owerri-exterior.jpg";
+import rockviewOwerriHall from "@/assets/venues/rockview-owerri-hall.jpg";
+import rockviewOwerriPoolside from "@/assets/venues/rockview-owerri-poolside.jpg";
+
+// Concorde Hotel Owerri images
+import concordeOwerriExterior from "@/assets/venues/concorde-owerri-exterior.jpg";
+import concordeOwerriHall from "@/assets/venues/concorde-owerri-hall.jpg";
 interface VenueImage {
   src: string;
   label: string;
@@ -126,7 +155,7 @@ const VenuesPage = () => {
   });
 
   const categories = ["All Venues", "Wedding Halls", "Hotels", "Outdoor Spaces", "Conference Centers", "Banquet Halls"];
-  const cities = ["All Cities", "Lagos", "Abuja", "Port Harcourt", "Ibadan", "Kano", "Enugu", "Benin City", "Asaba"];
+  const cities = ["All Cities", "Lagos", "Abuja", "Port Harcourt", "Ibadan", "Kano", "Enugu", "Benin City", "Asaba", "Warri", "Calabar", "Owerri"];
 
   const nigerianVenues: Venue[] = [
     {
@@ -357,6 +386,141 @@ const VenuesPage = () => {
       images: [
         { src: grandCentralExterior, label: "Hotel Exterior" },
         { src: grandCentralHall, label: "Wedding Hall" }
+      ]
+    },
+    {
+      id: 13,
+      name: "Precious Palm Royal Hotel",
+      location: "Sapele Road, GRA",
+      city: "Benin City",
+      category: "Wedding Halls",
+      capacity: "1200 guests",
+      rating: 4.6,
+      reviews: 189,
+      features: ["Royal Ballroom", "Crystal Chandeliers", "Bridal Suite", "Catering", "Ample Parking"],
+      contact: "+234 52 250 9500",
+      email: "events@preciouspalmroyal.com",
+      website: "https://preciouspalmroyal.com",
+      description: "Elegant hotel in Benin City known for its stunning ballroom and impeccable wedding services.",
+      images: [
+        { src: preciousPalmExterior, label: "Hotel Exterior" },
+        { src: preciousPalmHall, label: "Royal Wedding Hall" }
+      ]
+    },
+    {
+      id: 14,
+      name: "Westend Hotel",
+      location: "Airport Road",
+      city: "Warri",
+      category: "Hotels",
+      capacity: "900 guests",
+      rating: 4.4,
+      reviews: 156,
+      features: ["Grand Ballroom", "Professional Staff", "Modern AC", "Generator", "Security"],
+      contact: "+234 53 252 5000",
+      email: "events@westendhotelwarri.com",
+      website: "https://westendhotelwarri.com",
+      description: "Premier hotel in Delta State's oil city offering world-class event facilities.",
+      images: [
+        { src: westendWarriExterior, label: "Hotel Exterior" },
+        { src: westendWarriHall, label: "Grand Ballroom" }
+      ]
+    },
+    {
+      id: 15,
+      name: "Best Choice Hotel",
+      location: "Effurun",
+      city: "Warri",
+      category: "Banquet Halls",
+      capacity: "600 guests",
+      rating: 4.3,
+      reviews: 98,
+      features: ["Modern Design", "Cocktail Lounge", "Catering", "Parking", "AC Halls"],
+      contact: "+234 53 253 2000",
+      email: "events@bestchoicewarri.com",
+      website: "https://bestchoicehotelwarri.com",
+      description: "Contemporary hotel with elegant banquet facilities for weddings and corporate events.",
+      images: [
+        { src: bestChoiceWarriExterior, label: "Hotel Exterior" },
+        { src: bestChoiceWarriHall, label: "Banquet Hall" }
+      ]
+    },
+    {
+      id: 16,
+      name: "Transcorp Hotels Calabar",
+      location: "MCC Road, Calabar",
+      city: "Calabar",
+      category: "Hotels",
+      capacity: "1500 guests",
+      rating: 4.7,
+      reviews: 234,
+      features: ["Ocean View", "Grand Ballroom", "Outdoor Garden", "Spa", "Fine Dining"],
+      contact: "+234 87 232 5000",
+      email: "events@transcorpcalabar.com",
+      website: "https://transcorphotels.com/calabar",
+      description: "Cross River State's premier luxury hotel offering exquisite event venues with coastal ambiance.",
+      images: [
+        { src: transcorpCalabarExterior, label: "Hotel Exterior" },
+        { src: transcorpCalabarBallroom, label: "Grand Ballroom" },
+        { src: transcorpCalabarGarden, label: "Garden Event Space" }
+      ]
+    },
+    {
+      id: 17,
+      name: "Tinapa Lakeside Hotel",
+      location: "Tinapa Resort",
+      city: "Calabar",
+      category: "Outdoor Spaces",
+      capacity: "2000 guests",
+      rating: 4.5,
+      reviews: 178,
+      features: ["Lakeside View", "Conference Center", "Waterfront Events", "Entertainment Zone", "Accommodation"],
+      contact: "+234 87 231 8000",
+      email: "events@tinapalakelside.com",
+      website: "https://tinapalakesidehotel.com",
+      description: "Unique resort venue at Tinapa offering stunning lakeside settings for memorable celebrations.",
+      images: [
+        { src: tinapaCalabarExterior, label: "Resort Lakeside View" },
+        { src: tinapaCalabarHall, label: "Conference Center" }
+      ]
+    },
+    {
+      id: 18,
+      name: "Rockview Hotel Owerri",
+      location: "Wetheral Road, GRA",
+      city: "Owerri",
+      category: "Hotels",
+      capacity: "1000 guests",
+      rating: 4.6,
+      reviews: 212,
+      features: ["Elegant Ballroom", "Poolside Events", "Catering", "VIP Lounge", "Modern Facilities"],
+      contact: "+234 83 232 4000",
+      email: "events@rockviewowerri.com",
+      website: "https://rockviewhotels.com/owerri",
+      description: "Imo State's leading hotel offering versatile event spaces from grand ballrooms to poolside venues.",
+      images: [
+        { src: rockviewOwerriExterior, label: "Hotel Exterior" },
+        { src: rockviewOwerriHall, label: "Grand Ballroom" },
+        { src: rockviewOwerriPoolside, label: "Poolside Event Area" }
+      ]
+    },
+    {
+      id: 19,
+      name: "Concorde Hotel Owerri",
+      location: "Port Harcourt Road",
+      city: "Owerri",
+      category: "Wedding Halls",
+      capacity: "800 guests",
+      rating: 4.5,
+      reviews: 145,
+      features: ["Elegant Decor", "Crystal Chandeliers", "Bridal Suite", "Full Catering", "Ample Parking"],
+      contact: "+234 83 233 5000",
+      email: "events@concordeowerri.com",
+      website: "https://concordehotelowerri.com",
+      description: "Beautiful wedding venue in Owerri known for its elegant halls and exceptional service.",
+      images: [
+        { src: concordeOwerriExterior, label: "Hotel Entrance" },
+        { src: concordeOwerriHall, label: "Wedding Reception Hall" }
       ]
     },
   ];
