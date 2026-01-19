@@ -36,9 +36,9 @@ const tools = [
   },
   {
     icon: Robot,
-    title: "JaraBot AI Assistant",
-    description: "Get instant answers and recommendations from our culturally-aware AI assistant.",
-    link: "/jarabot"
+    title: "Chief AI Assistant",
+    description: "Get instant answers and recommendations from our Nigerian event expert AI.",
+    link: "/chief"
   },
   {
     icon: Envelope,
@@ -76,7 +76,7 @@ const testimonials = [
     event: "Birthday Party",
     location: "Port Harcourt",
     image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face",
-    quote: "JaraBot suggested the perfect owambe theme for my 40th birthday! The guest management feature made tracking 200+ RSVPs a breeze. Highly recommend!",
+    quote: "Chief suggested the perfect owambe theme for my 40th birthday! The guest management feature made tracking 200+ RSVPs a breeze. Highly recommend!",
     rating: 5
   }
 ];
@@ -93,7 +93,7 @@ const successStories = [
   {
     title: "Perfect Naming Ceremony",
     planner: "The Okonkwo Family",
-    story: "First-time parents used TPEC's checklist feature to plan their baby's naming ceremony. JaraBot provided cultural insights on Yoruba naming traditions they had almost forgotten.",
+    story: "First-time parents used TPEC's checklist feature to plan their baby's naming ceremony. Chief provided cultural insights on Yoruba naming traditions they had almost forgotten.",
     metric: "Zero stress",
     guests: "150 guests",
     image: "https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=400&h=300&fit=crop"

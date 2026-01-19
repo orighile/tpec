@@ -95,6 +95,7 @@ export type JaraBotIntent =
   | 'guest-management'
   | 'venue-selection'
   | 'vendor-recommendation'
+  | 'cultural-advice'
   | 'unknown';
 
 // Nigerian event venue type
