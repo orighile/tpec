@@ -108,7 +108,7 @@ const VoiceCommands: React.FC<VoiceCommandsProps> = ({
         </CardContent>
         <CardFooter className="flex flex-col">
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-blue-800 text-sm w-full">
-            <p className="font-medium">Voice Technology Powered by JaraBot AI</p>
+            <p className="font-medium">Voice Technology Powered by Chief AI</p>
             <p className="mt-1">
               Our voice recognition system is specifically trained on Nigerian accents and local terminology for accurate results.
             </p>

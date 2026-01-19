@@ -43,7 +43,7 @@ const useTestimonials = () => {
           id: "3",
           name: "Oluwaseun Adeyemi",
           avatarUrl: "/placeholder.svg",
-          testimonial: "JaraBot's suggestions for my event budget helped me save over 20% on costs without compromising quality. Highly recommend!",
+          testimonial: "Chief's suggestions for my event budget helped me save over 20% on costs without compromising quality. The AI really knows Nigerian vendors!",
           eventType: "Birthday Party",
           rating: 5
         }

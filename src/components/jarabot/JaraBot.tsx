@@ -28,26 +28,31 @@ declare global {
   }
 }
 
-const JaraBotFeatures: JaraBotFeature[] = [
+const ChiefFeatures: JaraBotFeature[] = [
   {
     name: "Context-aware responses",
     status: "available",
-    description: "JaraBot understands what page you're on and provides relevant help"
+    description: "Chief understands what page you're on and provides relevant help"
   },
   {
     name: "Voice recognition",
     status: "beta",
-    description: "Speak to JaraBot and get responses (may not work in all browsers)"
+    description: "Speak to Chief and get responses (may not work in all browsers)"
   },
   {
     name: "Nigerian event culture knowledge",
     status: "available",
-    description: "JaraBot understands Nigerian event terminology and customs"
+    description: "Chief is trained on Nigerian event industry - owambe, aso-ebi, traditional ceremonies, and more"
   },
   {
-    name: "Roadmap assistance",
+    name: "Vendor expertise",
     status: "available",
-    description: "Get insights about the project roadmap and progress"
+    description: "Get recommendations for caterers, DJs, MCs, decorators, and venues across Nigeria"
+  },
+  {
+    name: "Budget guidance",
+    status: "available",
+    description: "Chief knows typical costs for Nigerian events from Lagos to Kano"
   },
   {
     name: "AI event recommendations",
@@ -56,7 +61,7 @@ const JaraBotFeatures: JaraBotFeature[] = [
   }
 ];
 
-const JaraBot = () => {
+const Chief = () => {
   const [state, setState] = useState<ChatState>({
     isOpen: false,
     isExpanded: false,
@@ -64,7 +69,7 @@ const JaraBot = () => {
     isListening: false,
     input: "",
     messages: [
-      createMessage("bot", "Heyyy! JaraBot don land! How I fit help you plan your next lit event?")
+      createMessage("bot", "How far, na Chief dey here! 🎉 Your personal Nigerian event guru. Wetin you wan plan today - owambe, wedding, corporate gig, or birthday bash?")
     ]
   });
   
@@ -285,15 +290,15 @@ const JaraBot = () => {
           <div className="flex items-center justify-between p-4 border-b">
             <div className="flex items-center gap-3">
               <Avatar className="h-10 w-10 border-2 border-jara-green">
-                 <AvatarImage src="/src/assets/bot-avatar.jpg" alt="JaraBot" />
-                <AvatarFallback className="bg-jara-green text-white">JB</AvatarFallback>
+                 <AvatarImage src="/src/assets/bot-avatar.jpg" alt="Chief" />
+                <AvatarFallback className="bg-jara-green text-white">CH</AvatarFallback>
               </Avatar>
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="font-bold text-gray-900">JaraBot</h3>
-                  <Badge className="bg-jara-purple">Beta</Badge>
+                  <h3 className="font-bold text-gray-900">Chief</h3>
+                  <Badge className="bg-jara-purple">AI</Badge>
                 </div>
-                <p className="text-xs text-gray-500">Your Nigerian event assistant</p>
+                <p className="text-xs text-gray-500">Your Nigerian event expert</p>
               </div>
             </div>
             <div className="flex gap-1">
@@ -338,8 +343,8 @@ const JaraBot = () => {
               >
                 {message.type === "bot" && (
                   <Avatar className="h-8 w-8 mt-1 flex-shrink-0">
-                     <AvatarImage src="/src/assets/bot-avatar.jpg" alt="JaraBot" />
-                    <AvatarFallback className="bg-jara-green text-white text-xs">JB</AvatarFallback>
+                     <AvatarImage src="/src/assets/bot-avatar.jpg" alt="Chief" />
+                    <AvatarFallback className="bg-jara-green text-white text-xs">CH</AvatarFallback>
                   </Avatar>
                 )}
                 <div 
@@ -371,8 +376,8 @@ const JaraBot = () => {
             {isProcessing && (
               <div className="flex gap-3">
                 <Avatar className="h-8 w-8 mt-1 flex-shrink-0">
-                  <AvatarImage src="/src/assets/bot-avatar.jpg" alt="JaraBot" />
-                  <AvatarFallback className="bg-jara-green text-white text-xs">JB</AvatarFallback>
+                  <AvatarImage src="/src/assets/bot-avatar.jpg" alt="Chief" />
+                  <AvatarFallback className="bg-jara-green text-white text-xs">CH</AvatarFallback>
                 </Avatar>
                 <div className="p-3 rounded-lg bg-gray-100 text-gray-800">
                   <div className="flex space-x-2">
@@ -407,7 +412,7 @@ const JaraBot = () => {
                   onChange={(e) => setState(prev => ({ ...prev, input: e.target.value }))}
                   onKeyDown={(e) => e.key === 'Enter' && !isProcessing && handleSendMessage()}
                   className="w-full rounded-full border border-gray-300 py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-jara-green"
-                  placeholder="Ask JaraBot for help..."
+                  placeholder="Ask Chief anything about your event..."
                   disabled={isProcessing}
                 />
               </div>
@@ -425,7 +430,7 @@ const JaraBot = () => {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-2 text-center">
-              JaraBot speaks Pidgin and understands Nigerian events!
+              Chief speaks Pidgin, knows Nigerian vendors, and understands local event culture!
             </p>
           </div>
         </div>
@@ -434,4 +439,4 @@ const JaraBot = () => {
   );
 };
 
-export default JaraBot;
+export default Chief;

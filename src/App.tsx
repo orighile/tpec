@@ -50,7 +50,7 @@ import GiftRegistryPage from "./pages/GiftRegistryPage";
 import FAQPage from "./pages/FAQPage";
 import VenuesPage from "./pages/VenuesPage";
 import PlannersPage from "./pages/PlannersPage";
-import JaraBotPage from "./pages/JaraBotPage";
+import ChiefPage from "./pages/ChiefPage";
 import CommunityPage from "./pages/CommunityPage";
 import GalleryPage from "./pages/GalleryPage";
 import BookConsultationPage from "./pages/BookConsultationPage";
@@ -111,7 +111,8 @@ const App = () => (
               <Route path="/faq" element={<Layout><FAQPage /></Layout>} />
               <Route path="/venues" element={<Layout><VenuesPage /></Layout>} />
               <Route path="/planners" element={<Layout><PlannersPage /></Layout>} />
-              <Route path="/jarabot" element={<Layout hideFooter><JaraBotPage /></Layout>} />
+              <Route path="/chief" element={<Layout hideFooter><ChiefPage /></Layout>} />
+              <Route path="/jarabot" element={<Layout hideFooter><ChiefPage /></Layout>} />
               <Route path="/community" element={<Layout><CommunityPage /></Layout>} />
               <Route path="/gallery" element={<Layout><GalleryPage /></Layout>} />
               <Route path="/book-consultation" element={<BookConsultationPage />} />

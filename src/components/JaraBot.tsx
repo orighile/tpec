@@ -15,19 +15,20 @@ type Message = {
 };
 
 const SAMPLE_RESPONSES = [
-  "Oga, you've booked a caterer but no DJ – should I suggest top-rated vendors near you?",
-  "Abeg, what's your budget? No shaking, I go fit hack am!",
-  "You don blow 70% on decor – cut back or earn 'Ballers Club' points for discounts!",
-  "Send 50 invites before Friday to avoid 'African Time' drama!",
-  "For your Yoruba wedding, would you like me to recommend some aso ebi vendors?",
-  "You need a sound system for your Lagos beach party? I get people wey sabi!",
-  "You're planning a corporate event? Make I help you find venue wey get proper AC!",
-  "How many guests you dey expect? Small gathering or proper Owambe?",
-  "I see you're looking at the roadmap. Phase 3 (my development) is currently in progress!",
-  "Would you like me to help you understand which phases of the project are critical?"
+  "Oga, you've booked a caterer but no DJ – should I suggest top-rated vendors near Surulere or Ikeja?",
+  "Abeg, what's your budget range? From ₦500k small chops to ₦10M owambe, I sabi hack am!",
+  "You don blow 70% on decor – make we cut back or find you better deals from verified vendors!",
+  "For Yoruba traditional wedding, you go need aso-ebi coordinator, drummers, and alaga ijoko. Make I connect you?",
+  "Lagos beach party? I know the best sound engineers and DJs wey dey cover Elegushi, Oniru, and Tarkwa Bay!",
+  "Corporate event for how many people? I fit recommend venues with generator backup and proper AC!",
+  "Small gathering or proper Owambe with 500+ guests? Different budget levels, different vendor recommendations!",
+  "For Igbo Igba Nkwu, you need palm wine suppliers, traditional attire vendors, and experienced MCs. I get contacts!",
+  "Port Harcourt wedding? I know top caterers wey sabi cook proper Niger Delta cuisine – fisherman soup, native jollof!",
+  "Naming ceremony coming up? I fit recommend photographers wey specialize in capturing those intimate family moments!",
+  "Need makeup artist for your owanmbe? I get contacts from budget-friendly to celebrity MUAs across Lagos and Abuja!"
 ];
 
-const JaraBot = () => {
+const Chief = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
@@ -37,7 +38,7 @@ const JaraBot = () => {
     {
       id: "welcome",
       type: "bot",
-      content: "Heyyy! JaraBot don land! How I fit help you plan your next lit event?",
+      content: "How far! Na Chief dey here! 🎉 I sabi everything about Nigerian events - from aso-ebi to venue booking. Wetin you wan plan today?",
       timestamp: new Date()
     }
   ]);
@@ -144,15 +145,15 @@ const JaraBot = () => {
           <div className="flex items-center justify-between p-4 border-b">
             <div className="flex items-center gap-3">
               <Avatar className="h-10 w-10 border-2 border-jara-green">
-                 <AvatarImage src="/src/assets/bot-avatar.jpg" alt="JaraBot" />
-                <AvatarFallback className="bg-jara-green text-white">JB</AvatarFallback>
+                 <AvatarImage src="/src/assets/bot-avatar.jpg" alt="Chief" />
+                <AvatarFallback className="bg-jara-green text-white">CH</AvatarFallback>
               </Avatar>
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="font-bold text-gray-900">JaraBot</h3>
-                  <Badge className="bg-jara-purple">Beta</Badge>
+                  <h3 className="font-bold text-gray-900">Chief</h3>
+                  <Badge className="bg-jara-purple">AI</Badge>
                 </div>
-                <p className="text-xs text-gray-500">Your Nigerian event assistant</p>
+                <p className="text-xs text-gray-500">Your Nigerian event expert</p>
               </div>
             </div>
             <div className="flex gap-1">
@@ -196,10 +197,10 @@ const JaraBot = () => {
                   message.type === "user" ? "ml-auto" : ""
                 )}
               >
-                {message.type === "bot" && (
+              {message.type === "bot" && (
                   <Avatar className="h-8 w-8 mt-1 flex-shrink-0">
-                     <AvatarImage src="/src/assets/bot-avatar.jpg" alt="JaraBot" />
-                    <AvatarFallback className="bg-jara-green text-white text-xs">JB</AvatarFallback>
+                     <AvatarImage src="/src/assets/bot-avatar.jpg" alt="Chief" />
+                    <AvatarFallback className="bg-jara-green text-white text-xs">CH</AvatarFallback>
                   </Avatar>
                 )}
                 <div 
@@ -231,8 +232,8 @@ const JaraBot = () => {
             {isProcessing && (
               <div className="flex gap-3">
                 <Avatar className="h-8 w-8 mt-1 flex-shrink-0">
-                  <AvatarImage src="/src/assets/bot-avatar.jpg" alt="JaraBot" />
-                  <AvatarFallback className="bg-jara-green text-white text-xs">JB</AvatarFallback>
+                  <AvatarImage src="/src/assets/bot-avatar.jpg" alt="Chief" />
+                  <AvatarFallback className="bg-jara-green text-white text-xs">CH</AvatarFallback>
                 </Avatar>
                 <div className="p-3 rounded-lg bg-gray-100 text-gray-800">
                   <div className="flex space-x-2">
@@ -267,7 +268,7 @@ const JaraBot = () => {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                   className="w-full rounded-full border border-gray-300 py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-jara-green"
-                  placeholder="Ask JaraBot for help..."
+                  placeholder="Ask Chief anything about your event..."
                 />
               </div>
               <Button 
@@ -279,7 +280,7 @@ const JaraBot = () => {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-2 text-center">
-              JaraBot speaks Pidgin and understands Nigerian events!
+              Chief speaks Pidgin, knows Nigerian vendors, and understands local event culture!
             </p>
           </div>
         </div>
@@ -288,4 +289,4 @@ const JaraBot = () => {
   );
 };
 
-export default JaraBot;
+export default Chief;
