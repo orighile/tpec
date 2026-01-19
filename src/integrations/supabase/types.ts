@@ -752,6 +752,107 @@ export type Database = {
         }
         Relationships: []
       }
+      prime_gallery: {
+        Row: {
+          caption: string | null
+          created_at: string | null
+          display_order: number | null
+          id: string
+          image_url: string
+          prime_member_id: string
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          image_url: string
+          prime_member_id: string
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string
+          prime_member_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prime_gallery_prime_member_id_fkey"
+            columns: ["prime_member_id"]
+            isOneToOne: false
+            referencedRelation: "prime_members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      prime_members: {
+        Row: {
+          business_description: string | null
+          business_name: string
+          category: string | null
+          contact_email: string | null
+          contact_phone: string | null
+          cover_image_url: string | null
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          is_featured: boolean | null
+          location: string | null
+          logo_url: string | null
+          membership_type: Database["public"]["Enums"]["prime_membership_type"]
+          price_range: string | null
+          services: string[] | null
+          updated_at: string | null
+          user_id: string
+          video_url: string | null
+          website: string | null
+        }
+        Insert: {
+          business_description?: string | null
+          business_name: string
+          category?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          cover_image_url?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          location?: string | null
+          logo_url?: string | null
+          membership_type: Database["public"]["Enums"]["prime_membership_type"]
+          price_range?: string | null
+          services?: string[] | null
+          updated_at?: string | null
+          user_id: string
+          video_url?: string | null
+          website?: string | null
+        }
+        Update: {
+          business_description?: string | null
+          business_name?: string
+          category?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          cover_image_url?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          location?: string | null
+          logo_url?: string | null
+          membership_type?: Database["public"]["Enums"]["prime_membership_type"]
+          price_range?: string | null
+          services?: string[] | null
+          updated_at?: string | null
+          user_id?: string
+          video_url?: string | null
+          website?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -1040,7 +1141,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      prime_membership_type: "vendor" | "planner"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1167,6 +1268,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      prime_membership_type: ["vendor", "planner"],
+    },
   },
 } as const
