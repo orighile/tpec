@@ -12,7 +12,7 @@ const RoadmapPage = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Track our progress as we build Nigeria's premier event planning platform
           </p>
-          <div className="mt-4 inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
+          <div className="mt-4 inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
             <CheckCircle className="h-4 w-4" /> Project Phase 1 Complete!
           </div>
           <div className="mt-4 flex flex-wrap justify-center gap-4">

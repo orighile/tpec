@@ -173,21 +173,21 @@ const GiftRegistryPage = () => {
                 
                 {/* Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div className="bg-gray-50 p-4 rounded-lg text-center">
+                  <div className="bg-muted p-4 rounded-lg text-center">
                     <div className="text-2xl font-bold text-primary">{giftList.length}</div>
-                    <div className="text-sm text-gray-600">Total Gifts</div>
+                    <div className="text-sm text-muted-foreground">Total Gifts</div>
                   </div>
-                  <div className="bg-gray-50 p-4 rounded-lg text-center">
-                    <div className="text-2xl font-bold text-green-600">{giftList.filter(g => g.purchased).length}</div>
-                    <div className="text-sm text-gray-600">Purchased</div>
+                  <div className="bg-muted p-4 rounded-lg text-center">
+                    <div className="text-2xl font-bold text-primary">{giftList.filter(g => g.purchased).length}</div>
+                    <div className="text-sm text-muted-foreground">Purchased</div>
                   </div>
-                  <div className="bg-gray-50 p-4 rounded-lg text-center">
-                    <div className="text-2xl font-bold text-blue-600">{completionPercentage}%</div>
-                    <div className="text-sm text-gray-600">Complete</div>
+                  <div className="bg-muted p-4 rounded-lg text-center">
+                    <div className="text-2xl font-bold text-primary">{completionPercentage}%</div>
+                    <div className="text-sm text-muted-foreground">Complete</div>
                   </div>
-                  <div className="bg-gray-50 p-4 rounded-lg text-center">
-                    <div className="text-xl font-bold text-purple-600">{formatPrice(totalValue)}</div>
-                    <div className="text-sm text-gray-600">Total Value</div>
+                  <div className="bg-muted p-4 rounded-lg text-center">
+                    <div className="text-xl font-bold text-accent-foreground">{formatPrice(totalValue)}</div>
+                    <div className="text-sm text-muted-foreground">Total Value</div>
                   </div>
                 </div>
               </CardContent>

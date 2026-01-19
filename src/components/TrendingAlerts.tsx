@@ -298,9 +298,9 @@ const TrendingAlerts = () => {
                   key={alert.id} 
                   className={`
                     relative rounded-lg border p-4 transition-all
-                    ${!alert.read ? 'bg-muted/50' : 'bg-white'}
-                    ${alert.importance === 'high' ? 'border-red-200' : 
-                      alert.importance === 'medium' ? 'border-amber-200' : 'border'}
+                    ${!alert.read ? 'bg-muted/50' : 'bg-background'}
+                    ${alert.importance === 'high' ? 'border-destructive/20' : 
+                      alert.importance === 'medium' ? 'border-secondary' : 'border'}
                   `}
                 >
                   {/* Dismiss button */}
@@ -324,11 +324,11 @@ const TrendingAlerts = () => {
                     <div className="flex-1">
                       {/* Alert header */}
                       <div className="flex items-center gap-2 mb-1">
-                        {alert.type === 'vendor' && <CheckCircle className="h-4 w-4 text-blue-500" />}
-                        {alert.type === 'venue' && <MapPin className="h-4 w-4 text-purple-500" />}
-                        {alert.type === 'trend' && <TrendUp className="h-4 w-4 text-green-500" />}
-                        {alert.type === 'date' && <Calendar className="h-4 w-4 text-red-500" />}
-                        {alert.type === 'discount' && <Sparkle className="h-4 w-4 text-amber-500" />}
+                        {alert.type === 'vendor' && <CheckCircle className="h-4 w-4 text-primary" />}
+                        {alert.type === 'venue' && <MapPin className="h-4 w-4 text-accent-foreground" />}
+                        {alert.type === 'trend' && <TrendUp className="h-4 w-4 text-primary" />}
+                        {alert.type === 'date' && <Calendar className="h-4 w-4 text-destructive" />}
+                        {alert.type === 'discount' && <Sparkle className="h-4 w-4 text-secondary-foreground" />}
                         
                         <h3 className="font-medium">{alert.title}</h3>
                         

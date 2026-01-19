@@ -203,21 +203,21 @@ const ContractManagement: React.FC = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'signed': return 'bg-green-100 text-green-800';
-      case 'sent': return 'bg-blue-100 text-blue-800';
-      case 'completed': return 'bg-purple-100 text-purple-800';
-      case 'cancelled': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'signed': return 'bg-primary/10 text-primary';
+      case 'sent': return 'bg-accent text-accent-foreground';
+      case 'completed': return 'bg-secondary text-secondary-foreground';
+      case 'cancelled': return 'bg-destructive/10 text-destructive';
+      default: return 'bg-muted text-muted-foreground';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'signed': return <CheckCircle className="h-4 w-4 text-green-600" />;
-      case 'sent': return <Send className="h-4 w-4 text-blue-600" />;
-      case 'completed': return <CheckCircle className="h-4 w-4 text-purple-600" />;
-      case 'cancelled': return <AlertCircle className="h-4 w-4 text-red-600" />;
-      default: return <Clock className="h-4 w-4 text-gray-600" />;
+      case 'signed': return <CheckCircle className="h-4 w-4 text-primary" />;
+      case 'sent': return <Send className="h-4 w-4 text-accent-foreground" />;
+      case 'completed': return <CheckCircle className="h-4 w-4 text-secondary-foreground" />;
+      case 'cancelled': return <AlertCircle className="h-4 w-4 text-destructive" />;
+      default: return <Clock className="h-4 w-4 text-muted-foreground" />;
     }
   };
 

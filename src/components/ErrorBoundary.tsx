@@ -97,12 +97,12 @@ class ErrorBoundary extends Component<Props, State> {
       } else {
         // Development: Developer-friendly error
         return (
-          <div className="min-h-screen bg-red-50 p-6">
+          <div className="min-h-screen bg-destructive/5 p-6">
             <div className="max-w-4xl mx-auto">
-              <div className="bg-white border border-red-200 rounded-lg p-6 shadow-sm">
+              <div className="bg-background border border-destructive/20 rounded-lg p-6 shadow-sm">
                 <div className="flex items-center mb-4">
-                  <Warning className="h-6 w-6 text-red-500 mr-2" />
-                  <h1 className="text-xl font-bold text-red-800">
+                  <Warning className="h-6 w-6 text-destructive mr-2" />
+                  <h1 className="text-xl font-bold text-destructive">
                     Development Error
                   </h1>
                 </div>
@@ -110,9 +110,9 @@ class ErrorBoundary extends Component<Props, State> {
                 <div className="space-y-6">
                   {this.state.error && (
                     <div>
-                      <h2 className="font-semibold text-gray-900 mb-2">Error Message:</h2>
-                      <div className="bg-red-100 border border-red-300 rounded p-3">
-                        <code className="text-red-800 text-sm">
+                      <h2 className="font-semibold text-foreground mb-2">Error Message:</h2>
+                      <div className="bg-destructive/10 border border-destructive/30 rounded p-3">
+                        <code className="text-destructive text-sm">
                           {this.state.error.message}
                         </code>
                       </div>
@@ -121,9 +121,9 @@ class ErrorBoundary extends Component<Props, State> {
                   
                   {this.state.error?.stack && (
                     <div>
-                      <h2 className="font-semibold text-gray-900 mb-2">Stack Trace:</h2>
-                      <div className="bg-gray-100 border rounded p-3 overflow-auto max-h-64">
-                        <pre className="text-xs text-gray-800 whitespace-pre-wrap">
+                      <h2 className="font-semibold text-foreground mb-2">Stack Trace:</h2>
+                      <div className="bg-muted border rounded p-3 overflow-auto max-h-64">
+                        <pre className="text-xs text-foreground whitespace-pre-wrap">
                           {this.state.error.stack}
                         </pre>
                       </div>
@@ -132,9 +132,9 @@ class ErrorBoundary extends Component<Props, State> {
                   
                   {this.state.errorInfo?.componentStack && (
                     <div>
-                      <h2 className="font-semibold text-gray-900 mb-2">Component Stack:</h2>
-                      <div className="bg-gray-100 border rounded p-3 overflow-auto max-h-64">
-                        <pre className="text-xs text-gray-800 whitespace-pre-wrap">
+                      <h2 className="font-semibold text-foreground mb-2">Component Stack:</h2>
+                      <div className="bg-muted border rounded p-3 overflow-auto max-h-64">
+                        <pre className="text-xs text-foreground whitespace-pre-wrap">
                           {this.state.errorInfo.componentStack}
                         </pre>
                       </div>
@@ -142,7 +142,7 @@ class ErrorBoundary extends Component<Props, State> {
                   )}
                 </div>
                 
-                <div className="mt-6 pt-4 border-t border-gray-200">
+                <div className="mt-6 pt-4 border-t border-border">
                   <div className="flex gap-4">
                     <Button onClick={this.handleRefresh}>
                       <ArrowsClockwise className="mr-2 h-4 w-4" />
