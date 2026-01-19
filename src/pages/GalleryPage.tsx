@@ -1,4 +1,4 @@
-import { Image, Heart, MessageCircle, Share2, Filter, Search, X, Upload } from "lucide-react";
+import { Image, Heart, MessageCircle, Share2, Filter, Search, X, Upload, Trash2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useLocalGallery, LocalGalleryItem } from "@/hooks/useLocalGallery";
+import { UploadDialog } from "@/components/gallery/UploadDialog";
 import traditionalWedding from "@/assets/gallery/nigerian-traditional-wedding.jpg";
 import birthdayCelebration from "@/assets/gallery/nigerian-birthday-celebration.jpg";
 import corporateEvent from "@/assets/gallery/nigerian-corporate-event.jpg";
@@ -24,7 +26,7 @@ import graduationParty from "@/assets/gallery/nigerian-graduation-party.jpg";
 import whiteWedding from "@/assets/gallery/nigerian-white-wedding.jpg";
 
 interface GalleryItem {
-  id: number;
+  id: number | string;
   image: string;
   title: string;
   eventType: string;
@@ -32,6 +34,7 @@ interface GalleryItem {
   comments: number;
   tags: string[];
   isLiked?: boolean;
+  isUserUpload?: boolean;
 }
 
 const GalleryPage = () => {
@@ -39,7 +42,9 @@ const GalleryPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
-  const [likedItems, setLikedItems] = useState<Set<number>>(new Set());
+  const [likedItems, setLikedItems] = useState<Set<number | string>>(new Set());
+  
+  const { userUploads, uploadPhoto, deleteUpload, isUploading } = useLocalGallery();
 
   const filters = ["All Events", "Weddings", "Birthdays", "Corporate", "Traditional", "Outdoor"];
 
@@ -127,7 +132,22 @@ const GalleryPage = () => {
     },
   ];
 
-  const filteredItems = galleryItems.filter(item => {
+  // Combine user uploads with static gallery items
+  const allGalleryItems: GalleryItem[] = [
+    ...userUploads.map((upload): GalleryItem => ({
+      id: upload.id,
+      image: upload.image,
+      title: upload.title,
+      eventType: upload.eventType,
+      likes: upload.likes,
+      comments: upload.comments,
+      tags: upload.tags,
+      isUserUpload: true,
+    })),
+    ...galleryItems,
+  ];
+
+  const filteredItems = allGalleryItems.filter(item => {
     const filterMatch = selectedFilter === "All Events" || item.eventType === selectedFilter;
     const searchMatch = searchQuery === "" || 
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -135,7 +155,7 @@ const GalleryPage = () => {
     return filterMatch && searchMatch;
   });
 
-  const handleLike = (itemId: number) => {
+  const handleLike = (itemId: number | string) => {
     setLikedItems(prev => {
       const newSet = new Set(prev);
       if (newSet.has(itemId)) {
@@ -147,6 +167,11 @@ const GalleryPage = () => {
       }
       return newSet;
     });
+  };
+
+  const handleDeleteUpload = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    deleteUpload(id);
   };
 
   const handleShare = async (item: GalleryItem) => {
@@ -174,10 +199,6 @@ const GalleryPage = () => {
 
   const handleComment = (item: GalleryItem) => {
     toast.info(`Comments for "${item.title}" - Feature coming soon!`);
-  };
-
-  const handleUploadClick = () => {
-    setIsUploadDialogOpen(true);
   };
 
   const getLikes = (item: GalleryItem) => {
@@ -261,9 +282,26 @@ const GalleryPage = () => {
                   alt={item.title}
                   className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                 />
-                <Badge className="absolute top-4 right-4 bg-primary/90 backdrop-blur-sm">
-                  {item.eventType}
-                </Badge>
+                <div className="absolute top-4 right-4 flex gap-2">
+                  {item.isUserUpload && (
+                    <Button
+                      variant="destructive"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={(e) => handleDeleteUpload(item.id as string, e)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  )}
+                  <Badge className="bg-primary/90 backdrop-blur-sm">
+                    {item.eventType}
+                  </Badge>
+                  {item.isUserUpload && (
+                    <Badge className="bg-green-500/90 backdrop-blur-sm">
+                      Your Upload
+                    </Badge>
+                  )}
+                </div>
               </div>
               <CardContent className="p-6">
                 <h3 className="font-bold text-lg mb-3 text-foreground">{item.title}</h3>
@@ -333,7 +371,7 @@ const GalleryPage = () => {
             <p className="text-lg text-muted-foreground mb-6 max-w-xl mx-auto">
               Celebrate your special day with the community and help inspire others planning their dream events!
             </p>
-            <Button variant="premium" size="lg" onClick={handleUploadClick}>
+            <Button variant="premium" size="lg" onClick={() => setIsUploadDialogOpen(true)}>
               Upload Photos
             </Button>
           </CardContent>
@@ -395,36 +433,12 @@ const GalleryPage = () => {
       </Dialog>
 
       {/* Upload Dialog */}
-      <Dialog open={isUploadDialogOpen} onOpenChange={setIsUploadDialogOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Upload Your Event Photos</DialogTitle>
-            <DialogDescription>
-              Share your amazing event with the TPEC community. Your photos could inspire thousands!
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4 py-4">
-            <div className="border-2 border-dashed border-muted-foreground/30 rounded-lg p-8 text-center">
-              <Upload className="h-10 w-10 text-muted-foreground mx-auto mb-4" />
-              <p className="text-sm text-muted-foreground mb-2">
-                Drag and drop your photos here, or click to browse
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Supported formats: JPG, PNG, WEBP (Max 10MB)
-              </p>
-            </div>
-            <Button 
-              className="w-full" 
-              onClick={() => {
-                toast.success("Thank you for your interest! Photo uploads coming soon.");
-                setIsUploadDialogOpen(false);
-              }}
-            >
-              Select Photos
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <UploadDialog
+        open={isUploadDialogOpen}
+        onOpenChange={setIsUploadDialogOpen}
+        onUpload={uploadPhoto}
+        isUploading={isUploading}
+      />
     </>
   );
 };
