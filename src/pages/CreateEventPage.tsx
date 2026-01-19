@@ -138,12 +138,12 @@ const CreateEventPage = () => {
       <div className="container mx-auto px-4 max-w-3xl">
           <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-bold mb-2">Create New Event</h1>
-            <p className="text-gray-600">
+            <p className="text-muted-foreground">
               Fill out the details below to create your Nigerian event
             </p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6 md:p-8">
+          <div className="bg-background rounded-lg shadow-sm p-6 md:p-8">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 {/* Event Title */}
@@ -322,14 +322,14 @@ const CreateEventPage = () => {
                 {/* Image Upload */}
                 <div className="space-y-3">
                   <FormLabel htmlFor="image">Event Image</FormLabel>
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 transition-colors hover:border-gray-400">
+                  <div className="border-2 border-dashed border-border rounded-lg p-6 transition-colors hover:border-muted-foreground">
                     {!imagePreview ? (
                       <div className="text-center">
-                        <UploadCloud className="mx-auto h-12 w-12 text-gray-400" />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                        <UploadCloud className="mx-auto h-12 w-12 text-muted-foreground" />
+                        <div className="mt-4 flex text-sm leading-6 text-muted-foreground">
                           <label
                             htmlFor="image-upload"
-                            className="relative cursor-pointer rounded-md bg-white font-semibold text-jara-green focus-within:outline-none hover:text-jara-green/80"
+                            className="relative cursor-pointer rounded-md bg-background font-semibold text-primary focus-within:outline-none hover:text-primary/80"
                           >
                             <span>Upload an image</span>
                             <input
@@ -343,7 +343,7 @@ const CreateEventPage = () => {
                           </label>
                           <p className="pl-1">or drag and drop</p>
                         </div>
-                        <p className="text-xs leading-5 text-gray-600">
+                        <p className="text-xs leading-5 text-muted-foreground">
                           PNG, JPG, GIF up to 5MB
                         </p>
                       </div>
@@ -357,9 +357,9 @@ const CreateEventPage = () => {
                         <button
                           type="button"
                           onClick={removeImage}
-                          className="absolute -top-2 -right-2 rounded-full bg-white p-1 shadow-md hover:bg-gray-100"
+                          className="absolute -top-2 -right-2 rounded-full bg-background p-1 shadow-md hover:bg-muted"
                         >
-                          <X className="h-5 w-5 text-gray-700" />
+                          <X className="h-5 w-5 text-muted-foreground" />
                         </button>
                       </div>
                     )}
@@ -373,7 +373,7 @@ const CreateEventPage = () => {
                 <div className="pt-4">
                   <Button
                     type="submit"
-                    className="w-full bg-jara-green hover:bg-jara-green/90 text-white py-6 h-auto text-lg"
+                    className="w-full bg-primary hover:bg-primary/90 py-6 h-auto text-lg"
                   >
                     Create Event
                   </Button>

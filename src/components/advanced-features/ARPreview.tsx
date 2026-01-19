@@ -54,7 +54,7 @@ const ARPreview: React.FC<ARPreviewProps> = ({
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center text-2xl">
-            <Package className="h-6 w-6 mr-2 text-jara-teal" />
+            <Package className="h-6 w-6 mr-2 text-primary" />
             AR Venue Preview Technology
           </CardTitle>
           <CardDescription>
@@ -63,7 +63,7 @@ const ARPreview: React.FC<ARPreviewProps> = ({
         </CardHeader>
         <CardContent>
           <div 
-            className="relative aspect-video rounded-lg overflow-hidden bg-gray-900 mb-6 cursor-pointer"
+            className="relative aspect-video rounded-lg overflow-hidden bg-foreground mb-6 cursor-pointer"
             onClick={handleInteraction}
           >
             {arModelLoaded ? (
@@ -75,18 +75,18 @@ const ARPreview: React.FC<ARPreviewProps> = ({
                   className="w-full h-full object-cover"
                 />
 
-                <div className={`absolute inset-0 flex items-center justify-center ${interactionActive ? 'bg-opacity-70 bg-gray-900' : 'bg-opacity-40 bg-gray-900'}`}>
+                <div className={`absolute inset-0 flex items-center justify-center ${interactionActive ? 'bg-opacity-70 bg-foreground' : 'bg-opacity-40 bg-foreground'}`}>
                   <div className="text-center">
-                    <Stack className="h-16 w-16 mx-auto mb-4 text-jara-teal" />
+                    <Stack className="h-16 w-16 mx-auto mb-4 text-primary" />
                     <h3 className="text-xl font-bold">Imperial Hall, Lagos</h3>
-                    <p className="text-gray-300 mt-2">AR Preview Active</p>
-                    <p className="text-gray-400 mt-1">
+                    <p className="text-background/80 mt-2">AR Preview Active</p>
+                    <p className="text-background/60 mt-1">
                       {interactionActive && !mappingComplete ? 'Scanning environment...' : 'Click to interact with the preview'}
                     </p>
                     {(interactionActive || mappingComplete) && (
                       <div className="mt-4 max-w-sm mx-auto">
                         <Progress value={envMappingProgress} className="h-2 mb-2" />
-                        <p className="text-sm text-gray-400">
+                        <p className="text-sm text-background/60">
                           Environment mapping: {Math.round(envMappingProgress)}%
                           {envMappingProgress === 100 && ' - Complete!'}
                         </p>
@@ -100,18 +100,18 @@ const ARPreview: React.FC<ARPreviewProps> = ({
                   <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute bottom-5 right-10 w-24 h-24 flex items-center justify-center">
                       <div className="relative">
-                        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 px-2 py-1 rounded text-xs text-white whitespace-nowrap">
+                        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-foreground/70 px-2 py-1 rounded text-xs text-background whitespace-nowrap">
                           Interactive Table
                         </div>
-                        <div className="w-16 h-16 border-2 border-jara-teal rounded-md opacity-80"></div>
+                        <div className="w-16 h-16 border-2 border-primary rounded-md opacity-80"></div>
                       </div>
                     </div>
                     <div className="absolute top-1/3 left-1/4 w-32 h-16 flex items-center justify-center">
                       <div className="relative">
-                        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 px-2 py-1 rounded text-xs text-white whitespace-nowrap">
+                        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-foreground/70 px-2 py-1 rounded text-xs text-background whitespace-nowrap">
                           Stage Area
                         </div>
-                        <div className="w-32 h-16 border-2 border-jara-orange rounded-md opacity-80"></div>
+                        <div className="w-32 h-16 border-2 border-secondary rounded-md opacity-80"></div>
                       </div>
                     </div>
                   </div>
@@ -123,11 +123,11 @@ const ARPreview: React.FC<ARPreviewProps> = ({
                   <div className="text-center w-3/4">
                     <p className="mb-2 font-medium">Loading AR Model...</p>
                     <Progress value={loadingProgress} className="h-2 mb-2" />
-                    <p className="text-sm text-gray-400">{Math.round(loadingProgress)}% - Preparing 3D environment</p>
+                    <p className="text-sm text-background/60">{Math.round(loadingProgress)}% - Preparing 3D environment</p>
                   </div>
                 ) : (
                   <div className="text-center">
-                    <Package className="h-16 w-16 mx-auto mb-4 text-gray-600" />
+                    <Package className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
                     <p>Load AR model to preview venues in augmented reality</p>
                   </div>
                 )}
@@ -136,49 +136,49 @@ const ARPreview: React.FC<ARPreviewProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div className="bg-gray-100 rounded-lg p-6">
+            <div className="bg-muted rounded-lg p-6">
               <h3 className="font-bold text-lg mb-3">Key Features</h3>
               <ul className="space-y-2">
                 <li className="flex items-center">
-                  <div className="text-jara-teal mr-3">•</div>
+                  <div className="text-primary mr-3">•</div>
                   <span>True-to-scale venue visualization</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="text-jara-teal mr-3">•</div>
+                  <div className="text-primary mr-3">•</div>
                   <span>Interactive furniture placement</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="text-jara-teal mr-3">•</div>
+                  <div className="text-primary mr-3">•</div>
                   <span>Lighting simulation at different times of day</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="text-jara-teal mr-3">•</div>
+                  <div className="text-primary mr-3">•</div>
                   <span>Capacity visualization with guest avatars</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="text-jara-teal mr-3">•</div>
+                  <div className="text-primary mr-3">•</div>
                   <span>Virtual walkthrough capability</span>
                 </li>
-              </ul>
+            </ul>
             </div>
-            <div className="bg-gray-100 rounded-lg p-6">
+            <div className="bg-muted rounded-lg p-6">
               <h3 className="font-bold text-lg mb-3">Supported Venues</h3>
-              <p className="text-sm text-gray-600 mb-4">These popular Nigerian venues have 3D models available:</p>
+              <p className="text-sm text-muted-foreground mb-4">These popular Nigerian venues have 3D models available:</p>
               <ul className="space-y-2">
                 <li className="flex items-center">
-                  <div className="text-jara-green mr-3">✓</div>
+                  <div className="text-green-500 mr-3">✓</div>
                   <span>Imperial Hall, Lagos</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="text-jara-green mr-3">✓</div>
+                  <div className="text-green-500 mr-3">✓</div>
                   <span>Bon Villa Events, Abuja</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="text-jara-green mr-3">✓</div>
+                  <div className="text-green-500 mr-3">✓</div>
                   <span>RadissonBlu Hotel, Victoria Island</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="text-jara-green mr-3">✓</div>
+                  <div className="text-green-500 mr-3">✓</div>
                   <span>The Pavilion, Port Harcourt</span>
                 </li>
               </ul>
@@ -217,7 +217,7 @@ const ARPreview: React.FC<ARPreviewProps> = ({
         </CardContent>
         <CardFooter>
           <Button 
-            className={`w-full ${arModelLoaded ? 'bg-red-500 hover:bg-red-600' : 'bg-jara-teal hover:bg-jara-teal/90'}`}
+            className={`w-full ${arModelLoaded ? 'bg-destructive hover:bg-destructive/90' : 'bg-primary hover:bg-primary/90'}`}
             onClick={loadArVenueModel}
             disabled={arModelLoading}
           >
@@ -225,7 +225,7 @@ const ARPreview: React.FC<ARPreviewProps> = ({
           </Button>
         </CardFooter>
       </Card>
-      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-amber-800">
+      <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 text-amber-800 dark:text-amber-400">
         <p className="font-medium">Device Requirements</p>
         <p className="text-sm mt-1">
           AR venue preview requires a device with ARCore (Android) or ARKit (iOS) support and an active camera.

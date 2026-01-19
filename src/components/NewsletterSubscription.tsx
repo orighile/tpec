@@ -56,7 +56,7 @@ const NewsletterSubscription = ({ className = "", variant = "default" }: Newslet
           <input 
             type="email" 
             placeholder="Your email address" 
-            className="bg-gray-800 text-white px-4 py-2 rounded border border-gray-700 focus:outline-none focus:border-primary"
+            className="bg-muted text-foreground px-4 py-2 rounded border border-border focus:outline-none focus:border-primary"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -81,14 +81,14 @@ const NewsletterSubscription = ({ className = "", variant = "default" }: Newslet
             <Envelope className="h-12 w-12 text-primary" />
           </div>
           <h2 className="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
-          <p className="text-gray-600 mb-8">
+          <p className="text-muted-foreground mb-8">
             Stay updated with the latest event planning tips, trends, and resources from TPEC
           </p>
           <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
             <input 
               type="email" 
               placeholder="Your email address" 
-              className="px-6 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary flex-grow"
+              className="px-6 py-3 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-primary flex-grow"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -118,19 +118,19 @@ const NewsletterSubscription = ({ className = "", variant = "default" }: Newslet
 
   // Default variant
   return (
-    <div className={`bg-white rounded-lg p-6 shadow-sm ${className}`}>
+    <div className={`bg-background rounded-lg p-6 shadow-sm ${className}`}>
       <div className="flex items-center mb-4">
         <Envelope className="h-6 w-6 text-primary mr-2" />
         <h3 className="text-lg font-semibold">Newsletter</h3>
       </div>
-      <p className="text-gray-600 mb-4 text-sm">
+      <p className="text-muted-foreground mb-4 text-sm">
         Get the latest event planning tips and updates delivered to your inbox.
       </p>
       <form onSubmit={handleSubscribe} className="space-y-3">
         <input 
           type="email" 
           placeholder="Enter your email" 
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required

@@ -191,7 +191,7 @@ const VendorDetails = ({ vendor = defaultVendor }: { vendor?: VendorDetailsProps
   };
   
   return (
-    <div className="bg-white rounded-lg shadow-sm">
+    <div className="bg-background rounded-lg shadow-sm">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
         <div>
           <div className="relative rounded-lg overflow-hidden aspect-[4/3] mb-4">
@@ -224,11 +224,11 @@ const VendorDetails = ({ vendor = defaultVendor }: { vendor?: VendorDetailsProps
           <div className="flex justify-between items-start">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <Badge variant="outline" className="bg-slate-100">
+              <Badge variant="outline" className="bg-muted">
                   {vendor.category}
                 </Badge>
                 {vendor.verified && (
-                  <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 flex items-center gap-1">
+                  <Badge variant="outline" className="bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/30 flex items-center gap-1">
                     <BadgeCheck className="h-3 w-3" />
                     Verified
                   </Badge>
@@ -242,52 +242,52 @@ const VendorDetails = ({ vendor = defaultVendor }: { vendor?: VendorDetailsProps
                       key={i} 
                       className={`h-4 w-4 ${
                         i < Math.floor(vendor.rating) 
-                          ? 'fill-yellow-400 text-yellow-400' 
+                        ? 'fill-amber-400 text-amber-400' 
                           : i < vendor.rating 
-                            ? 'fill-yellow-400 text-yellow-400 opacity-50' 
-                            : 'text-gray-300'
+                            ? 'fill-amber-400 text-amber-400 opacity-50' 
+                            : 'text-muted-foreground/30'
                       }`} 
                     />
                   ))}
                 </div>
                 <span className="font-medium">{vendor.rating}</span>
-                <span className="text-gray-500">({vendor.reviewCount} reviews)</span>
+                <span className="text-muted-foreground">({vendor.reviewCount} reviews)</span>
               </div>
             </div>
             <Button
               variant="ghost"
               size="icon"
-              className={`${isFavorite ? 'text-red-500 hover:text-red-600' : 'text-gray-400 hover:text-gray-500'}`}
+              className={`${isFavorite ? 'text-red-500 hover:text-red-600' : 'text-muted-foreground hover:text-foreground'}`}
               onClick={handleBookmark}
             >
               <Heart className={`h-5 w-5 ${isFavorite ? 'fill-current' : ''}`} />
             </Button>
           </div>
           
-          <p className="text-gray-700 mb-6">
+          <p className="text-muted-foreground mb-6">
             {vendor.description}
           </p>
           
           <div className="space-y-3 mb-6">
             <div className="flex items-start gap-3">
-              <MapPin className="h-5 w-5 text-gray-500 mt-0.5" />
+              <MapPin className="h-5 w-5 text-muted-foreground mt-0.5" />
               <span>{vendor.location}</span>
             </div>
             <div className="flex items-center gap-3">
-              <Phone className="h-5 w-5 text-gray-500" />
+              <Phone className="h-5 w-5 text-muted-foreground" />
               <a href={`tel:${vendor.phone}`} className="hover:text-primary">
                 {vendor.phone}
               </a>
             </div>
             <div className="flex items-center gap-3">
-              <Mail className="h-5 w-5 text-gray-500" />
+              <Mail className="h-5 w-5 text-muted-foreground" />
               <a href={`mailto:${vendor.email}`} className="hover:text-primary">
                 {vendor.email}
               </a>
             </div>
             {vendor.website && (
               <div className="flex items-center gap-3">
-                <Globe className="h-5 w-5 text-gray-500" />
+                <Globe className="h-5 w-5 text-muted-foreground" />
                 <a href={`https://${vendor.website}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary">
                   {vendor.website}
                 </a>
@@ -324,7 +324,7 @@ const VendorDetails = ({ vendor = defaultVendor }: { vendor?: VendorDetailsProps
               <div 
                 key={pkg.id} 
                 className={`border rounded-lg p-6 relative ${
-                  pkg.isPopular ? 'border-primary shadow-md' : 'border-gray-200'
+                  pkg.isPopular ? 'border-primary shadow-md' : 'border-border'
                 }`}
               >
                 {pkg.isPopular && (
@@ -336,7 +336,7 @@ const VendorDetails = ({ vendor = defaultVendor }: { vendor?: VendorDetailsProps
                 <div className="mb-4">
                   <span className="text-2xl font-bold text-primary">₦{pkg.price.toLocaleString()}</span>
                 </div>
-                <p className="text-gray-600 mb-4">{pkg.description}</p>
+                <p className="text-muted-foreground mb-4">{pkg.description}</p>
                 <ul className="space-y-2 mb-6">
                   {pkg.features.map((feature, index) => (
                     <li key={index} className="flex items-start gap-2">
@@ -346,7 +346,7 @@ const VendorDetails = ({ vendor = defaultVendor }: { vendor?: VendorDetailsProps
                   ))}
                 </ul>
                 <Button 
-                  className={`w-full ${pkg.isPopular ? 'bg-primary hover:bg-primary/90' : 'bg-gray-100 hover:bg-gray-200 text-gray-800'}`}
+                  className={`w-full ${pkg.isPopular ? 'bg-primary hover:bg-primary/90' : 'bg-muted hover:bg-muted/80 text-foreground'}`}
                   onClick={handleContactVendor}
                 >
                   Select Package
@@ -356,7 +356,7 @@ const VendorDetails = ({ vendor = defaultVendor }: { vendor?: VendorDetailsProps
           </div>
           
           <div className="text-center mt-8">
-            <p className="text-gray-600 mb-4">
+            <p className="text-muted-foreground mb-4">
               Need a custom package tailored to your specific event needs?
             </p>
             <Button 
@@ -370,7 +370,7 @@ const VendorDetails = ({ vendor = defaultVendor }: { vendor?: VendorDetailsProps
         </TabsContent>
         
         <TabsContent value="reviews" className="space-y-6">
-          <div className="bg-slate-50 p-4 rounded-lg mb-6">
+          <div className="bg-muted/50 p-4 rounded-lg mb-6">
             <h3 className="font-medium mb-4">Write a Review</h3>
             <div className="mb-4">
               <label className="block text-sm mb-2">Rating</label>
@@ -385,8 +385,8 @@ const VendorDetails = ({ vendor = defaultVendor }: { vendor?: VendorDetailsProps
                     <Star 
                       className={`h-6 w-6 ${
                         star <= newReview.rating 
-                          ? 'fill-yellow-400 text-yellow-400' 
-                          : 'text-gray-300'
+                          ? 'fill-amber-400 text-amber-400' 
+                          : 'text-muted-foreground/30'
                       }`} 
                     />
                   </button>
@@ -416,7 +416,7 @@ const VendorDetails = ({ vendor = defaultVendor }: { vendor?: VendorDetailsProps
                     </Avatar>
                     <div>
                       <div className="font-medium">{review.author}</div>
-                      <div className="text-sm text-gray-500">{review.date}</div>
+                      <div className="text-sm text-muted-foreground">{review.date}</div>
                     </div>
                   </div>
                   <div className="flex">
@@ -425,14 +425,14 @@ const VendorDetails = ({ vendor = defaultVendor }: { vendor?: VendorDetailsProps
                         key={i} 
                         className={`h-4 w-4 ${
                           i < review.rating 
-                            ? 'fill-yellow-400 text-yellow-400' 
-                            : 'text-gray-300'
+                            ? 'fill-amber-400 text-amber-400' 
+                            : 'text-muted-foreground/30'
                         }`} 
                       />
                     ))}
                   </div>
                 </div>
-                <p className="text-gray-700">{review.comment}</p>
+                <p className="text-muted-foreground">{review.comment}</p>
               </div>
             ))}
           </div>

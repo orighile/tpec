@@ -85,19 +85,19 @@ const NotFound = () => {
       <main className="flex-1 py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-12">
-            <h1 className="text-8xl font-bold text-gray-200 mb-4">404</h1>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Page Not Found</h2>
-            <p className="text-xl text-gray-600 mb-2">
-              The page <code className="bg-gray-100 px-2 py-1 rounded">{currentPath}</code> doesn't exist.
+            <h1 className="text-8xl font-bold text-muted mb-4">404</h1>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Page Not Found</h2>
+            <p className="text-xl text-muted-foreground mb-2">
+              The page <code className="bg-muted px-2 py-1 rounded">{currentPath}</code> doesn't exist.
             </p>
-            <p className="text-gray-500">
+            <p className="text-muted-foreground">
               Don't worry, let's get you back on track!
             </p>
           </div>
 
           {suggestions.length > 0 && (
             <div className="mb-12">
-              <h3 className="text-2xl font-bold mb-6 text-gray-900">Did you mean one of these?</h3>
+              <h3 className="text-2xl font-bold mb-6 text-foreground">Did you mean one of these?</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {suggestions.map((route) => {
                   const IconComponent = route.icon;
@@ -123,7 +123,7 @@ const NotFound = () => {
           )}
 
           <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4 text-gray-900">Popular Pages</h3>
+            <h3 className="text-xl font-semibold mb-4 text-foreground">Popular Pages</h3>
             <div className="flex flex-wrap justify-center gap-3">
               {popularPages.map((page) => {
                 const IconComponent = page.icon;

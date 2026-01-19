@@ -71,11 +71,11 @@ const ConsultationBooking = () => {
   };
   
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl font-bold mb-4">Contact Us</h2>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             Get in touch with our team for any inquiries
           </p>
         </div>

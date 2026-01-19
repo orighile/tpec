@@ -84,7 +84,7 @@ const VendorProfile = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+    <div className="bg-background rounded-lg shadow-sm overflow-hidden">
       {/* Vendor Header Section */}
       <div className="relative h-48 md:h-64 bg-gradient-to-r from-primary/10 to-primary/5">
         <img 
@@ -92,7 +92,7 @@ const VendorProfile = ({
           alt={vendor.name} 
           className="w-full h-full object-cover opacity-80"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 text-white">
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent flex flex-col justify-end p-6 text-background">
           <div className="flex justify-between items-end">
             <div>
               <h1 className="text-2xl md:text-3xl font-bold">{vendor.name}</h1>
@@ -175,7 +175,7 @@ const VendorProfile = ({
         <TabsContent value="about" className="space-y-6">
           <div>
             <h3 className="text-lg font-medium mb-2">Overview</h3>
-            <p className="text-gray-600">{vendor.description}</p>
+            <p className="text-muted-foreground">{vendor.description}</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -194,7 +194,7 @@ const VendorProfile = ({
               <h3 className="text-lg font-medium mb-3">Availability</h3>
               <div className="space-y-2">
                 {vendor.availability.map((time, index) => (
-                  <div key={index} className="flex items-center gap-2 text-gray-600">
+                  <div key={index} className="flex items-center gap-2 text-muted-foreground">
                     <Clock className="h-4 w-4 text-muted-foreground" />
                     <span>{time}</span>
                   </div>
@@ -206,7 +206,7 @@ const VendorProfile = ({
           {vendor.about && (
             <div>
               <h3 className="text-lg font-medium mb-2">About {vendor.name}</h3>
-              <p className="text-gray-600">{vendor.about}</p>
+              <p className="text-muted-foreground">{vendor.about}</p>
               
               {vendor.established && (
                 <div className="flex items-center gap-1 mt-3 text-sm text-muted-foreground">
@@ -229,22 +229,22 @@ const VendorProfile = ({
                         {[...Array(5)].map((_, i) => (
                           <Star 
                             key={i} 
-                            className={`h-4 w-4 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
+                            className={`h-4 w-4 ${i < review.rating ? 'text-amber-400 fill-amber-400' : 'text-muted-foreground/30'}`}
                           />
                         ))}
                       </div>
                       <p className="text-sm font-medium mt-1">Anonymous User</p>
                     </div>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-muted-foreground">
                       {format(new Date(review.createdAt), "MMMM d, yyyy")}
                     </p>
                   </div>
-                  <p className="text-gray-600">{review.review}</p>
+                  <p className="text-muted-foreground">{review.review}</p>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-8 text-gray-500">
+            <div className="text-center py-8 text-muted-foreground">
               <p>No reviews yet for this vendor.</p>
               <p className="text-sm mt-1">Be the first to leave a review after working with them!</p>
             </div>

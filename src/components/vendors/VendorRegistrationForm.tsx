@@ -86,7 +86,7 @@ const VendorRegistrationForm = () => {
   }
 
   return (
-    <div className="bg-white shadow-sm rounded-lg p-6 md:p-8">
+    <div className="bg-background shadow-sm rounded-lg p-6 md:p-8">
       <FormHeader />
 
       <Form {...form}>
@@ -95,15 +95,15 @@ const VendorRegistrationForm = () => {
           
           <LocationPriceFields form={form} />
 
-          <div className="border-t border-gray-200 pt-6">
+          <div className="border-t border-border pt-6">
             <ContactInfoFields form={form} />
           </div>
 
-          <div className="border-t border-gray-200 pt-6">
+          <div className="border-t border-border pt-6">
             <BusinessDetailsFields form={form} />
           </div>
 
-          <div className="border-t border-gray-200 pt-6">
+          <div className="border-t border-border pt-6">
             <TermsCheckbox form={form} />
           </div>
 

@@ -22,7 +22,7 @@ const VoiceCommands: React.FC<VoiceCommandsProps> = ({
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center text-2xl">
-            {isListening ? <Microphone className="h-6 w-6 mr-2 text-red-500 animate-pulse" /> : <Microphone className="h-6 w-6 mr-2 text-gray-500" />}
+            {isListening ? <Microphone className="h-6 w-6 mr-2 text-destructive animate-pulse" /> : <Microphone className="h-6 w-6 mr-2 text-muted-foreground" />}
             Voice Search & Commands
           </CardTitle>
           <CardDescription>
@@ -30,12 +30,11 @@ const VoiceCommands: React.FC<VoiceCommandsProps> = ({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="bg-gray-100 rounded-lg p-6 mb-6">
+          <div className="bg-muted rounded-lg p-6 mb-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-lg">Voice Command Center</h3>
               <Button 
                 variant={isListening ? "destructive" : "default"}
-                className={isListening ? "bg-red-500" : ""}
                 onClick={toggleVoiceRecognition}
               >
                 {isListening ? (
@@ -50,21 +49,21 @@ const VoiceCommands: React.FC<VoiceCommandsProps> = ({
               </Button>
             </div>
             
-            <div className="bg-white rounded-lg p-4 border border-gray-200 mb-4 min-h-[100px] flex items-center justify-center">
+            <div className="bg-background rounded-lg p-4 border border-border mb-4 min-h-[100px] flex items-center justify-center">
               {isListening ? (
                 <div className="text-center">
                   <div className="flex justify-center mb-2">
-                    <div className="bg-red-100 rounded-full p-3">
-                      <Microphone className="h-6 w-6 text-red-500" />
+                    <div className="bg-destructive/10 rounded-full p-3">
+                      <Microphone className="h-6 w-6 text-destructive" />
                     </div>
                   </div>
-                  <p className="text-gray-600 animate-pulse">Listening...</p>
+                  <p className="text-muted-foreground animate-pulse">Listening...</p>
                   {voiceCommand && (
                     <p className="font-medium text-lg mt-2">"{voiceCommand}"</p>
                   )}
                 </div>
               ) : (
-                <div className="text-center text-gray-500">
+                <div className="text-center text-muted-foreground">
                   <Microphone className="h-6 w-6 mx-auto mb-2 opacity-50" />
                   <p>Click "Start Listening" and speak your command</p>
                 </div>
@@ -74,10 +73,10 @@ const VoiceCommands: React.FC<VoiceCommandsProps> = ({
             <div>
               <h4 className="font-medium mb-2">Example Commands:</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                <div className="bg-gray-200 rounded-lg px-3 py-2">"Find venues in Lagos"</div>
-                <div className="bg-gray-200 rounded-lg px-3 py-2">"Set budget for catering to ₦250,000"</div>
-                <div className="bg-gray-200 rounded-lg px-3 py-2">"Add task to contact DJ by Friday"</div>
-                <div className="bg-gray-200 rounded-lg px-3 py-2">"Show me traditional wedding venues"</div>
+                <div className="bg-muted/70 rounded-lg px-3 py-2">"Find venues in Lagos"</div>
+                <div className="bg-muted/70 rounded-lg px-3 py-2">"Set budget for catering to ₦250,000"</div>
+                <div className="bg-muted/70 rounded-lg px-3 py-2">"Add task to contact DJ by Friday"</div>
+                <div className="bg-muted/70 rounded-lg px-3 py-2">"Show me traditional wedding venues"</div>
               </div>
             </div>
           </div>
@@ -87,11 +86,11 @@ const VoiceCommands: React.FC<VoiceCommandsProps> = ({
             {voiceResults.length > 0 ? (
               <div className="space-y-3">
                 {voiceResults.map((result, index) => (
-                  <div key={index} className="bg-white border border-gray-200 rounded-lg p-3 flex items-start">
-                    <Microphone className="h-4 w-4 text-gray-500 mt-1 mr-3 flex-shrink-0" />
+                  <div key={index} className="bg-background border border-border rounded-lg p-3 flex items-start">
+                    <Microphone className="h-4 w-4 text-muted-foreground mt-1 mr-3 flex-shrink-0" />
                     <div>
                       <p className="font-medium">"{result}"</p>
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="text-xs text-muted-foreground mt-1">
                         {index === 0 ? "Just now" : `${index + 1} ${index === 0 ? "minute" : "minutes"} ago`}
                       </p>
                     </div>
@@ -99,7 +98,7 @@ const VoiceCommands: React.FC<VoiceCommandsProps> = ({
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8 text-gray-500">
+              <div className="text-center py-8 text-muted-foreground">
                 <p>No recent commands</p>
                 <p className="text-sm mt-1">Try speaking a command to see it here</p>
               </div>
@@ -107,7 +106,7 @@ const VoiceCommands: React.FC<VoiceCommandsProps> = ({
           </div>
         </CardContent>
         <CardFooter className="flex flex-col">
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-blue-800 text-sm w-full">
+          <div className="bg-primary/10 border border-primary/30 rounded-lg p-3 text-primary text-sm w-full">
             <p className="font-medium">Voice Technology Powered by Chief AI</p>
             <p className="mt-1">
               Our voice recognition system is specifically trained on Nigerian accents and local terminology for accurate results.
