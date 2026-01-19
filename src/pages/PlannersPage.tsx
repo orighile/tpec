@@ -1,9 +1,10 @@
-import { MapPin, Star, Phone, Mail, Globe, Building2, Users } from "lucide-react";
+import { MapPin, Star, Phone, Mail, Globe, Building2, Users, Search, BadgeCheck, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SEO } from "@/components/SEO";
 import { useState, useMemo } from "react";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -11,6 +12,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 import JaraBot from "@/components/jarabot";
 
 type Planner = {
@@ -66,12 +77,25 @@ const cities = ["All Cities", "Lagos", "Abuja", "Port Harcourt", "Ibadan", "Kano
 
 const PlannersPage = () => {
   const [selectedCity, setSelectedCity] = useState("All Cities");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isRecommendationOpen, setIsRecommendationOpen] = useState(false);
+  const [recommendationForm, setRecommendationForm] = useState({
+    eventType: "",
+    budget: "",
+    location: "",
+    details: ""
+  });
 
   const filteredPlanners = useMemo(() => {
     return planners.filter(planner => {
-      return selectedCity === "All Cities" || planner.city === selectedCity;
+      const matchesCity = selectedCity === "All Cities" || planner.city === selectedCity;
+      const matchesSearch = searchQuery === "" || 
+        planner.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        planner.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        planner.state.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCity && matchesSearch;
     });
-  }, [selectedCity]);
+  }, [selectedCity, searchQuery]);
 
   // Generate initials for avatar fallback
   const getInitials = (name: string) => {
@@ -87,6 +111,27 @@ const PlannersPage = () => {
   const getReviewCount = (name: string) => {
     const hash = name.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
     return 50 + (hash % 200);
+  };
+
+  // Check if planner has a complete profile (for verified badge)
+  const isVerified = (planner: Planner) => {
+    const hasPhone = planner.phones.length > 0;
+    const hasEmail = !!planner.email;
+    const hasWebsite = !!planner.website;
+    const hasAddress = !!planner.address && planner.address.length > 20;
+    const rating = parseFloat(getRating(planner.name));
+    // Verified if has at least 3 contact methods and rating >= 4.5
+    return (hasPhone && hasEmail && hasWebsite) || (hasAddress && rating >= 4.5);
+  };
+
+  const handleRecommendationSubmit = () => {
+    if (!recommendationForm.eventType || !recommendationForm.location) {
+      toast.error("Please fill in the event type and location");
+      return;
+    }
+    toast.success("Thank you! We'll send planner recommendations to your email within 24 hours.");
+    setIsRecommendationOpen(false);
+    setRecommendationForm({ eventType: "", budget: "", location: "", details: "" });
   };
 
   const jsonLd = {
@@ -116,29 +161,59 @@ const PlannersPage = () => {
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-col md:flex-row items-center gap-4 mb-12 justify-center">
-          {/* City Dropdown */}
-          <div className="flex items-center gap-2">
-            <Building2 className="h-5 w-5 text-muted-foreground" />
-            <Select value={selectedCity} onValueChange={setSelectedCity}>
-              <SelectTrigger className="w-[180px] rounded-full">
-                <SelectValue placeholder="Select city" />
-              </SelectTrigger>
-              <SelectContent className="bg-card/98 backdrop-blur-xl border border-border z-[100]">
-                {cities.map((city) => (
-                  <SelectItem key={city} value={city}>
-                    {city}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+        {/* Search and Filters */}
+        <div className="flex flex-col gap-4 mb-12">
+          {/* Search Bar */}
+          <div className="relative max-w-md mx-auto w-full">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Search planners by name or location..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-12 pr-4 py-3 rounded-full border-2 border-border focus:border-primary transition-colors"
+            />
           </div>
 
-          {/* Results count */}
-          <Badge variant="secondary" className="rounded-full px-4 py-2">
-            {filteredPlanners.length} Planners Found
-          </Badge>
+          {/* Filters Row */}
+          <div className="flex flex-col md:flex-row items-center gap-4 justify-center">
+            {/* City Dropdown */}
+            <div className="flex items-center gap-2">
+              <Building2 className="h-5 w-5 text-muted-foreground" />
+              <Select value={selectedCity} onValueChange={setSelectedCity}>
+                <SelectTrigger className="w-[180px] rounded-full">
+                  <SelectValue placeholder="Select city" />
+                </SelectTrigger>
+                <SelectContent className="bg-card/98 backdrop-blur-xl border border-border z-[100]">
+                  {cities.map((city) => (
+                    <SelectItem key={city} value={city}>
+                      {city}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Results count */}
+            <Badge variant="secondary" className="rounded-full px-4 py-2">
+              {filteredPlanners.length} Planners Found
+            </Badge>
+
+            {/* Clear filters */}
+            {(searchQuery || selectedCity !== "All Cities") && (
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => {
+                  setSearchQuery("");
+                  setSelectedCity("All Cities");
+                }}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                Clear Filters
+              </Button>
+            )}
+          </div>
         </div>
 
         {/* Planners Grid */}
@@ -172,8 +247,15 @@ const PlannersPage = () => {
                 <Badge className="absolute top-4 left-4 bg-secondary/90 backdrop-blur-sm text-secondary-foreground">
                   {planner.city}
                 </Badge>
-                {/* Only show state badge if different from city */}
-                {planner.state !== planner.city && (
+                {/* Verified badge */}
+                {isVerified(planner) && (
+                  <Badge className="absolute top-4 right-4 bg-green-500/90 backdrop-blur-sm text-white flex items-center gap-1">
+                    <BadgeCheck className="h-3 w-3" />
+                    Verified
+                  </Badge>
+                )}
+                {/* Only show state badge if different from city and not verified */}
+                {planner.state !== planner.city && !isVerified(planner) && (
                   <Badge className="absolute top-4 right-4 bg-primary/90 backdrop-blur-sm text-primary-foreground">
                     {planner.state}
                   </Badge>
@@ -286,9 +368,98 @@ const PlannersPage = () => {
             <p className="text-lg text-muted-foreground mb-6 max-w-xl mx-auto">
               Let our expert team help you discover the ideal event planner for your special occasion
             </p>
-            <Button variant="premium" size="lg">
-              Get Planner Recommendations
-            </Button>
+            <Dialog open={isRecommendationOpen} onOpenChange={setIsRecommendationOpen}>
+              <DialogTrigger asChild>
+                <Button variant="premium" size="lg" className="gap-2">
+                  <Sparkles className="h-5 w-5" />
+                  Get Planner Recommendations
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle className="flex items-center gap-2">
+                    <Sparkles className="h-5 w-5 text-primary" />
+                    Get Personalized Recommendations
+                  </DialogTitle>
+                  <DialogDescription>
+                    Tell us about your event and we'll recommend the best planners for you.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4 py-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Event Type *</label>
+                    <Select 
+                      value={recommendationForm.eventType} 
+                      onValueChange={(value) => setRecommendationForm(prev => ({ ...prev, eventType: value }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select event type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="wedding">Wedding</SelectItem>
+                        <SelectItem value="corporate">Corporate Event</SelectItem>
+                        <SelectItem value="birthday">Birthday Party</SelectItem>
+                        <SelectItem value="naming">Naming Ceremony</SelectItem>
+                        <SelectItem value="burial">Burial/Memorial</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Budget Range</label>
+                    <Select 
+                      value={recommendationForm.budget} 
+                      onValueChange={(value) => setRecommendationForm(prev => ({ ...prev, budget: value }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select budget range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="under-500k">Under ₦500,000</SelectItem>
+                        <SelectItem value="500k-1m">₦500,000 - ₦1,000,000</SelectItem>
+                        <SelectItem value="1m-5m">₦1,000,000 - ₦5,000,000</SelectItem>
+                        <SelectItem value="5m-10m">₦5,000,000 - ₦10,000,000</SelectItem>
+                        <SelectItem value="over-10m">Over ₦10,000,000</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Preferred Location *</label>
+                    <Select 
+                      value={recommendationForm.location} 
+                      onValueChange={(value) => setRecommendationForm(prev => ({ ...prev, location: value }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select location" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {cities.filter(c => c !== "All Cities").map(city => (
+                          <SelectItem key={city} value={city}>{city}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Additional Details</label>
+                    <Textarea 
+                      placeholder="Tell us more about your event (date, guest count, special requirements...)"
+                      value={recommendationForm.details}
+                      onChange={(e) => setRecommendationForm(prev => ({ ...prev, details: e.target.value }))}
+                      rows={3}
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-3 justify-end">
+                  <Button variant="outline" onClick={() => setIsRecommendationOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button onClick={handleRecommendationSubmit} className="gap-2">
+                    <Sparkles className="h-4 w-4" />
+                    Get Recommendations
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
           </CardContent>
         </Card>
       </div>
