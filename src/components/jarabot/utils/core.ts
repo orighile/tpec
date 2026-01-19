@@ -15,15 +15,20 @@ export function createMessage(type: 'user' | 'bot', content: string): Message {
 export function startSpeechRecognition(
   onResult: (transcript: string) => void,
   onEnd: () => void
-): any {
-  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+): unknown {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const windowWithSpeech = window as any;
+
+  if (!windowWithSpeech.webkitSpeechRecognition && !windowWithSpeech.SpeechRecognition) {
     console.error("Speech recognition not supported");
     return null;
   }
   
   // Use the appropriate constructor
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const recognition = new SpeechRecognition();
+  const SpeechRecognitionConstructor = windowWithSpeech.SpeechRecognition || windowWithSpeech.webkitSpeechRecognition;
+  if (!SpeechRecognitionConstructor) return null;
+  
+  const recognition = new SpeechRecognitionConstructor();
   
   recognition.lang = 'en-NG';  // Nigerian English
   recognition.interimResults = false;

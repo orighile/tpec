@@ -51,14 +51,14 @@ const events = [
 
 const FeaturedEvents = () => {
   return (
-    <section className="py-10 bg-white">
+    <section className="py-10 bg-background">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-10">
           <div>
-            <h2 className="text-3xl font-bold">Featured Events</h2>
-            <p className="text-gray-600 mt-2">Discover the hottest events happening in Nigeria</p>
+            <h2 className="text-3xl font-bold text-foreground">Featured Events</h2>
+            <p className="text-muted-foreground mt-2">Discover the hottest events happening in Nigeria</p>
           </div>
-          <Button variant="link" className="text-jara-green font-medium hover:underline hidden md:block" asChild>
+          <Button variant="link" className="text-primary font-medium hover:underline hidden md:block" asChild>
             <Link to="/events">View All Events</Link>
           </Button>
         </div>
@@ -80,7 +80,7 @@ const FeaturedEvents = () => {
         </div>
         
         <div className="mt-8 text-center md:hidden">
-          <Button variant="link" className="text-jara-green font-medium hover:underline" asChild>
+          <Button variant="link" className="text-primary font-medium hover:underline" asChild>
             <Link to="/events">View All Events</Link>
           </Button>
         </div>
