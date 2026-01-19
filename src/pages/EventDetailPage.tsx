@@ -171,7 +171,7 @@ const EventDetailPage = () => {
           <div className="container mx-auto px-4">
             <div className="text-center py-12">
               <h1 className="text-3xl font-bold mb-4">Event Not Found</h1>
-              <p className="text-gray-600 mb-6">The event you're looking for doesn't exist or has been moved.</p>
+              <p className="text-muted-foreground mb-6">The event you're looking for doesn't exist or has been moved.</p>
               <Button asChild>
                 <Link to="/events">Back to Events</Link>
               </Button>
@@ -187,17 +187,17 @@ const EventDetailPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 py-12 bg-gray-50">
+        <main className="flex-1 py-12 bg-muted/30">
         <div className="container mx-auto px-4">
           <Button variant="ghost" asChild className="mb-6">
-            <Link to="/events" className="flex items-center gap-1 text-gray-600 hover:text-gray-900">
+            <Link to="/events" className="flex items-center gap-1 text-muted-foreground hover:text-foreground">
               <ChevronLeft className="h-4 w-4" />
               Back to Events
             </Link>
           </Button>
           
           {/* Event Header */}
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
+          <div className="bg-background rounded-lg shadow-sm overflow-hidden mb-8">
             <div className="h-72 md:h-96 relative">
               <img 
                 src={event.image} 
@@ -206,27 +206,27 @@ const EventDetailPage = () => {
               />
               {event.isFeatured && (
                 <div className="absolute top-4 left-4">
-                  <Badge className="bg-jara-gold text-black">Featured Event</Badge>
+                  <Badge className="bg-secondary text-secondary-foreground">Featured Event</Badge>
                 </div>
               )}
               <div className="absolute top-4 right-4 flex gap-2">
                 <Button 
                   variant="ghost" 
                   size="icon" 
-                  className="bg-white/80 hover:bg-white text-jara-purple rounded-full w-8 h-8"
+                  className="bg-background/80 hover:bg-background text-primary rounded-full w-8 h-8"
                 >
                   <Heart className="w-4 h-4" />
                 </Button>
                 <Button 
                   variant="ghost" 
                   size="icon" 
-                  className="bg-white/80 hover:bg-white text-jara-purple rounded-full w-8 h-8"
+                  className="bg-background/80 hover:bg-background text-primary rounded-full w-8 h-8"
                 >
                   <Share2 className="w-4 h-4" />
                 </Button>
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-transparent to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-background">
                 <Badge className="mb-3 bg-primary/90">{event.category}</Badge>
                 <h1 className="text-3xl md:text-4xl font-bold mb-2">{event.title}</h1>
                 <div className="flex flex-wrap gap-4 text-sm">
@@ -254,16 +254,16 @@ const EventDetailPage = () => {
           {/* Event Details */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+              <div className="bg-background rounded-lg shadow-sm p-6 mb-8">
                 <h2 className="text-2xl font-bold mb-4">About This Event</h2>
-                <p className="text-gray-700 mb-6">{event.description}</p>
+                <p className="text-muted-foreground mb-6">{event.description}</p>
                 
                 <h3 className="text-xl font-bold mb-3">Event Highlights</h3>
                 <ul className="space-y-2 mb-6">
                   {event.highlights.map((highlight, index) => (
                     <li key={index} className="flex items-start">
                       <span className="text-primary mr-2 font-bold">•</span>
-                      <span className="text-gray-700">{highlight}</span>
+                      <span className="text-muted-foreground">{highlight}</span>
                     </li>
                   ))}
                 </ul>
@@ -282,7 +282,7 @@ const EventDetailPage = () => {
                             />
                           </div>
                           <h4 className="font-bold text-center">{speaker.name}</h4>
-                          <p className="text-gray-600 text-sm text-center">{speaker.title}</p>
+                          <p className="text-muted-foreground text-sm text-center">{speaker.title}</p>
                         </div>
                       ))}
                     </div>
@@ -290,19 +290,19 @@ const EventDetailPage = () => {
                 )}
               </div>
               
-              <div className="bg-white rounded-lg shadow-sm p-6">
+              <div className="bg-background rounded-lg shadow-sm p-6">
                 <h2 className="text-2xl font-bold mb-4">Organized by</h2>
-                <p className="text-gray-700">{event.organizer}</p>
+                <p className="text-muted-foreground">{event.organizer}</p>
               </div>
             </div>
             
             <div>
-              <div className="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+              <div className="bg-background rounded-lg shadow-sm p-6 sticky top-4">
                 <h3 className="text-xl font-bold mb-4">Event Information</h3>
                 
                 <div className="space-y-4 mb-6">
                   <div>
-                    <p className="text-gray-600 text-sm">Date and Time</p>
+                    <p className="text-muted-foreground text-sm">Date and Time</p>
                     <div className="flex items-center gap-2 font-medium">
                       <Calendar className="w-4 h-4 text-primary" />
                       <span>{event.date}, {event.time}</span>
@@ -310,7 +310,7 @@ const EventDetailPage = () => {
                   </div>
                   
                   <div>
-                    <p className="text-gray-600 text-sm">Location</p>
+                    <p className="text-muted-foreground text-sm">Location</p>
                     <div className="flex items-center gap-2 font-medium">
                       <MapPin className="w-4 h-4 text-primary" />
                       <span>{event.location}</span>
@@ -318,7 +318,7 @@ const EventDetailPage = () => {
                   </div>
                   
                   <div>
-                    <p className="text-gray-600 text-sm">Ticket Price</p>
+                    <p className="text-muted-foreground text-sm">Ticket Price</p>
                     <div className="flex items-center gap-2 font-medium">
                       <TicketIcon className="w-4 h-4 text-primary" />
                       <span>{event.ticketPrice}</span>
@@ -326,7 +326,7 @@ const EventDetailPage = () => {
                   </div>
                 </div>
                 
-                <Button className="w-full bg-jara-green hover:bg-jara-green/90 text-white mb-3">
+                <Button className="w-full bg-primary hover:bg-primary/90 mb-3">
                   Get Tickets
                 </Button>
                 <Button 
@@ -341,7 +341,7 @@ const EventDetailPage = () => {
           </div>
           
           {/* Related Events */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="bg-background rounded-lg shadow-sm p-6">
             <h2 className="text-2xl font-bold mb-6">Similar Events You Might Like</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {eventsData
@@ -359,7 +359,7 @@ const EventDetailPage = () => {
                     <div className="p-4">
                       <Badge className="mb-2">{related.category}</Badge>
                       <h3 className="font-bold text-lg mb-2">{related.title}</h3>
-                      <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                         <Calendar className="w-4 h-4 text-primary" />
                         <span>{related.date}</span>
                       </div>

@@ -32,14 +32,14 @@ const FloatingVendorCTA = () => {
           <div className="relative">
             <button
               onClick={() => setVendorHidden(true)}
-              className="absolute -top-2 -right-2 w-5 h-5 bg-gray-800 text-white rounded-full text-xs hover:bg-gray-700 transition-colors flex items-center justify-center shadow-md z-10"
+              className="absolute -top-2 -right-2 w-5 h-5 bg-foreground text-background rounded-full text-xs hover:bg-foreground/80 transition-colors flex items-center justify-center shadow-md z-10"
               aria-label="Close"
             >
               <X size={12} weight="bold" />
             </button>
             <Button
               size="lg"
-              className="bg-gradient-to-r from-jara-gold via-amber-500 to-jara-gold text-white font-bold shadow-2xl hover:shadow-amber-500/30 hover:scale-105 transition-all py-5 px-6 rounded-full"
+              className="bg-gradient-to-r from-secondary via-amber-500 to-secondary text-secondary-foreground font-bold shadow-2xl hover:shadow-amber-500/30 hover:scale-105 transition-all py-5 px-6 rounded-full"
               asChild
             >
               <Link to="/vendor-onboarding">
@@ -62,14 +62,14 @@ const FloatingVendorCTA = () => {
           <div className="relative">
             <button
               onClick={() => setPlanningHidden(true)}
-              className="absolute -top-2 -right-2 w-5 h-5 bg-gray-800 text-white rounded-full text-xs hover:bg-gray-700 transition-colors flex items-center justify-center shadow-md z-10"
+              className="absolute -top-2 -right-2 w-5 h-5 bg-foreground text-background rounded-full text-xs hover:bg-foreground/80 transition-colors flex items-center justify-center shadow-md z-10"
               aria-label="Close"
             >
               <X size={12} weight="bold" />
             </button>
             <Button
               size="lg"
-              className="bg-jara-purple text-white font-bold shadow-2xl hover:bg-jara-purple/90 hover:scale-105 transition-all py-5 px-6 rounded-full"
+              className="bg-primary text-primary-foreground font-bold shadow-2xl hover:bg-primary/90 hover:scale-105 transition-all py-5 px-6 rounded-full"
               asChild
             >
               <Link to="/planning-tools">

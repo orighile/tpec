@@ -25,11 +25,11 @@ const VendorDetailPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 py-12 bg-gray-50">
+      <main className="flex-1 py-12 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="mb-6">
             <Button variant="ghost" asChild className="mb-4">
-              <Link to="/vendors" className="flex items-center gap-1 text-gray-600 hover:text-gray-900">
+              <Link to="/vendors" className="flex items-center gap-1 text-muted-foreground hover:text-foreground">
                 <ChevronLeft className="h-4 w-4" />
                 Back to Vendors
               </Link>
@@ -37,7 +37,7 @@ const VendorDetailPage = () => {
             
             <VendorDetails />
             
-            <div className="mt-8 bg-white p-6 rounded-lg shadow-sm">
+            <div className="mt-8 bg-background p-6 rounded-lg shadow-sm">
               <h2 className="text-2xl font-bold mb-4">Similar Vendors</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[1, 2, 3].map((item, index) => (
@@ -51,7 +51,7 @@ const VendorDetailPage = () => {
                     </div>
                     <div className="p-4">
                       <h3 className="font-bold text-lg mb-1">Creative Events Nigeria</h3>
-                      <p className="text-gray-500 text-sm mb-3">Event Planning & Decor</p>
+                      <p className="text-muted-foreground text-sm mb-3">Event Planning & Decor</p>
                       <Link 
                         to={`/vendors/${item}`}
                         className="text-primary hover:text-primary/90 font-medium flex items-center gap-1 text-sm"
@@ -67,10 +67,10 @@ const VendorDetailPage = () => {
             
             <div className="mt-12 text-center">
               <h3 className="text-2xl font-bold mb-4">Ready to Make Your Event Special?</h3>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
                 Contact our professional event consultants to help you find the perfect vendors for your event.
               </p>
-              <Button className="bg-jara-green hover:bg-jara-green/90 text-white px-6 py-6 h-auto text-lg">
+              <Button className="bg-primary hover:bg-primary/90 px-6 py-6 h-auto text-lg">
                 Book a Free Consultation
               </Button>
             </div>
