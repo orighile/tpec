@@ -238,7 +238,7 @@ export const UploadDialog = ({
           {/* Local Storage Notice */}
           <div className="bg-muted/50 rounded-lg p-3 text-sm text-muted-foreground">
             <ImageIcon className="h-4 w-4 inline mr-2" />
-            Photos are saved locally in your browser. They'll appear in your gallery but won't be visible to other users.
+            Photos are compressed and saved locally. Images are resized to max 1200px and optimized for storage.
           </div>
 
           {/* Submit Button */}
