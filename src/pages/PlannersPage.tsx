@@ -143,18 +143,41 @@ const PlannersPage = () => {
 
         {/* Planners Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredPlanners.length === 0 ? (
+            // Loading skeleton state
+            Array.from({ length: 6 }).map((_, idx) => (
+              <Card key={idx} className="tpec-card overflow-hidden animate-pulse">
+                <div className="h-48 bg-muted" />
+                <CardHeader>
+                  <div className="h-6 bg-muted rounded w-3/4 mb-2" />
+                  <div className="h-4 bg-muted rounded w-1/2" />
+                </CardHeader>
+                <CardContent>
+                  <div className="h-4 bg-muted rounded w-full mb-4" />
+                  <div className="flex gap-2 mb-4">
+                    <div className="h-6 bg-muted rounded w-16" />
+                    <div className="h-6 bg-muted rounded w-16" />
+                  </div>
+                  <div className="h-10 bg-muted rounded w-full" />
+                </CardContent>
+              </Card>
+            ))
+          ) : null}
           {filteredPlanners.map((planner, idx) => (
-            <Card key={`${planner.name}-${idx}`} className="tpec-card overflow-hidden group hover:shadow-[var(--shadow-elegant)] transition-all duration-300">
+            <Card key={`${planner.name}-${idx}`} className="tpec-card overflow-hidden group hover:shadow-[var(--shadow-elegant)] hover:-translate-y-1 transition-all duration-300">
               <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/20 via-secondary/20 to-primary/10 flex items-center justify-center">
-                <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center text-3xl font-bold text-primary">
+                <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
                   {getInitials(planner.name)}
                 </div>
                 <Badge className="absolute top-4 left-4 bg-secondary/90 backdrop-blur-sm text-secondary-foreground">
                   {planner.city}
                 </Badge>
-                <Badge className="absolute top-4 right-4 bg-primary/90 backdrop-blur-sm">
-                  {planner.state}
-                </Badge>
+                {/* Only show state badge if different from city */}
+                {planner.state !== planner.city && (
+                  <Badge className="absolute top-4 right-4 bg-primary/90 backdrop-blur-sm text-primary-foreground">
+                    {planner.state}
+                  </Badge>
+                )}
               </div>
 
               <CardHeader>
@@ -211,10 +234,30 @@ const PlannersPage = () => {
                     )}
                   </div>
 
-                  <Button className="w-full gap-2" variant="default">
-                    <Phone className="h-4 w-4" />
-                    Contact Planner
-                  </Button>
+                  {planner.phones.length > 0 ? (
+                    <Button 
+                      className="w-full gap-2" 
+                      variant="default"
+                      onClick={() => window.open(`tel:${planner.phones[0]}`, '_self')}
+                    >
+                      <Phone className="h-4 w-4" />
+                      Contact Planner
+                    </Button>
+                  ) : planner.email ? (
+                    <Button 
+                      className="w-full gap-2" 
+                      variant="default"
+                      onClick={() => window.open(`mailto:${planner.email}`, '_blank')}
+                    >
+                      <Mail className="h-4 w-4" />
+                      Email Planner
+                    </Button>
+                  ) : (
+                    <Button className="w-full gap-2" variant="secondary" disabled>
+                      <Phone className="h-4 w-4" />
+                      No Contact Available
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
