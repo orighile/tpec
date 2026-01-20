@@ -13,15 +13,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import traditionalWedding from "@/assets/gallery/nigerian-traditional-wedding.jpg";
-import birthdayCelebration from "@/assets/gallery/nigerian-birthday-celebration.jpg";
-import corporateEvent from "@/assets/gallery/nigerian-corporate-event.jpg";
-import igboCeremony from "@/assets/gallery/igbo-traditional-ceremony.jpg";
-import beachParty from "@/assets/gallery/nigerian-beach-party.jpg";
-import owambeParty from "@/assets/gallery/nigerian-owambe-party.jpg";
-import namingCeremony from "@/assets/gallery/nigerian-naming-ceremony.jpg";
-import graduationParty from "@/assets/gallery/nigerian-graduation-party.jpg";
-import whiteWedding from "@/assets/gallery/nigerian-white-wedding.jpg";
+import whiteWedding from "@/assets/gallery/nigerian-white-wedding-new.jpg";
+import birthdayCelebration from "@/assets/gallery/nigerian-birthday-new.jpg";
+import corporateEvent from "@/assets/gallery/nigerian-corporate-new.jpg";
+import beachParty from "@/assets/gallery/nigerian-beach-new.jpg";
+import namingCeremony from "@/assets/gallery/nigerian-naming-new.jpg";
 
 interface GalleryItem {
   id: number;
@@ -44,84 +40,48 @@ const GalleryPage = () => {
   const galleryItems: GalleryItem[] = [
     {
       id: 1,
-      image: traditionalWedding,
-      title: "Elegant Yoruba Traditional Wedding",
+      image: whiteWedding,
+      title: "Grand Wedding Reception",
       eventType: "Weddings",
       likes: 342,
       comments: 67,
-      tags: ["@LagosWeddingDecor", "@TraditionalGlamNG"],
+      tags: ["@WeddingDecorNG", "@TraditionalGlamNG"],
     },
     {
       id: 2,
-      image: whiteWedding,
-      title: "Luxury White Wedding Reception",
-      eventType: "Weddings",
-      likes: 298,
-      comments: 54,
-      tags: ["@ElegantVenuesNG", "@WeddingCakesLagos"],
-    },
-    {
-      id: 3,
-      image: igboCeremony,
-      title: "Traditional Igbo Wine Ceremony",
-      eventType: "Traditional",
-      likes: 276,
-      comments: 48,
-      tags: ["@IgboCultureEvents", "@TraditionalBeads"],
-    },
-    {
-      id: 4,
       image: birthdayCelebration,
-      title: "Outdoor Birthday Bash Lagos",
+      title: "Colorful Birthday Celebration",
       eventType: "Birthdays",
       likes: 412,
       comments: 89,
-      tags: ["@LagosPartyLife", "@OutdoorCatering"],
+      tags: ["@PartyPlannerNG", "@OutdoorCatering"],
     },
     {
-      id: 5,
+      id: 3,
       image: corporateEvent,
-      title: "Corporate Summit Abuja",
+      title: "Executive Business Summit",
       eventType: "Corporate",
       likes: 189,
       comments: 34,
       tags: ["@BusinessEventsNG", "@ConferenceHalls"],
     },
     {
-      id: 6,
+      id: 4,
       image: beachParty,
-      title: "Sunset Beach Party Lagos",
+      title: "Sunset Beach Celebration",
       eventType: "Outdoor",
       likes: 523,
       comments: 112,
       tags: ["@BeachVenueNG", "@SunsetCelebrations"],
     },
     {
-      id: 7,
-      image: owambeParty,
-      title: "Luxury Owambe Celebration",
-      eventType: "Traditional",
-      likes: 387,
-      comments: 78,
-      tags: ["@OwambeDecor", "@LuxuryEventsNG"],
-    },
-    {
-      id: 8,
+      id: 5,
       image: namingCeremony,
-      title: "Baby Naming Ceremony",
+      title: "Traditional Naming Ceremony",
       eventType: "Traditional",
       likes: 234,
       comments: 45,
       tags: ["@FamilyCelebrations", "@NamingCeremonyNG"],
-    },
-    {
-      id: 9,
-      image: graduationParty,
-      title: "University Graduation Party",
-      eventType: "Birthdays",
-      likes: 298,
-      comments: 61,
-      tags: ["@GraduationEvents", "@CelebrationCatering"],
     },
   ];
 
