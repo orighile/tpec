@@ -37,6 +37,7 @@ const GalleryPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
   const [likedItems, setLikedItems] = useState<Set<number>>(new Set());
+  const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
 
   const filters = ["All Events", "Weddings", "Pre-Wedding", "Corporate"];
 
@@ -241,7 +242,25 @@ const GalleryPage = () => {
               </div>
               <CardContent className="p-6">
                 <h3 className="font-bold text-lg mb-2 text-foreground">{item.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{item.description}</p>
+                <p className={`text-sm text-muted-foreground mb-2 transition-all duration-300 ${
+                  expandedItems.has(item.id) ? '' : 'line-clamp-2'
+                }`}>{item.description}</p>
+                <button
+                  onClick={() => {
+                    setExpandedItems(prev => {
+                      const newSet = new Set(prev);
+                      if (newSet.has(item.id)) {
+                        newSet.delete(item.id);
+                      } else {
+                        newSet.add(item.id);
+                      }
+                      return newSet;
+                    });
+                  }}
+                  className="text-xs text-primary hover:text-primary/80 font-medium mb-4 transition-colors"
+                >
+                  {expandedItems.has(item.id) ? 'Read Less' : 'Read More'}
+                </button>
                 
                 {/* Vendor Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
