@@ -39,10 +39,75 @@ export interface FixedElement {
 // In-memory storage for seating arrangements until table is created
 const seatingArrangements: Map<string, { tables: TableItem[]; fixedElements: FixedElement[] }> = new Map();
 
+// Demo data for first-time visitors
+const DEMO_TABLES: TableItem[] = [
+  {
+    id: 'demo-table-1',
+    name: 'Head Table',
+    x: 100,
+    y: 50,
+    rotation: 0,
+    shape: 'rectangle',
+    size: 1.2,
+    capacity: 8,
+    guests: ['demo-1', 'demo-5'],
+  },
+  {
+    id: 'demo-table-2',
+    name: 'Table 2 - Friends',
+    x: 100,
+    y: 200,
+    rotation: 0,
+    shape: 'round',
+    size: 1,
+    capacity: 10,
+    guests: ['demo-2'],
+  },
+  {
+    id: 'demo-table-3',
+    name: 'Table 3 - Colleagues',
+    x: 300,
+    y: 200,
+    rotation: 0,
+    shape: 'round',
+    size: 1,
+    capacity: 10,
+    guests: ['demo-3'],
+  },
+  {
+    id: 'demo-table-4',
+    name: 'Table 4 - VIPs',
+    x: 500,
+    y: 200,
+    rotation: 0,
+    shape: 'oval',
+    size: 1.1,
+    capacity: 6,
+    guests: ['demo-6'],
+  },
+];
+
+const DEMO_GUESTS: Guest[] = [
+  { id: 'demo-1', fullName: 'Adaeze Okonkwo', group: 'Family', tableId: 'demo-table-1', rsvpStatus: 'confirmed' },
+  { id: 'demo-2', fullName: 'Chukwuemeka Eze', group: 'Friends', tableId: 'demo-table-2', rsvpStatus: 'confirmed' },
+  { id: 'demo-3', fullName: 'Ngozi Abubakar', group: 'Work', tableId: 'demo-table-3', rsvpStatus: 'pending' },
+  { id: 'demo-4', fullName: 'Oluwaseun Adeleke', group: 'Family', tableId: null, rsvpStatus: 'declined' },
+  { id: 'demo-5', fullName: 'Funke Balogun', group: 'Friends', tableId: 'demo-table-1', rsvpStatus: 'confirmed' },
+  { id: 'demo-6', fullName: 'Ibrahim Yusuf', group: 'Work', tableId: 'demo-table-4', rsvpStatus: 'pending' },
+];
+
+const DEMO_FIXED_ELEMENTS: FixedElement[] = [
+  { id: 'demo-stage', name: 'Main Stage', type: 'stage', x: 250, y: 0, width: 200, height: 60, rotation: 0 },
+  { id: 'demo-dance', name: 'Dance Floor', type: 'danceFloor', x: 200, y: 350, width: 150, height: 100, rotation: 0 },
+];
+
 export const useSeatingChart = (eventId?: string) => {
   const { user } = useAuth();
   const { handleError, handleSuccess } = useErrorHandler();
   const queryClient = useQueryClient();
+
+  // Check if this is a demo/placeholder event
+  const isPlaceholderEvent = eventId === "sample-event-id" || !eventId || !user?.id;
 
   // Fetch seating arrangement for an event (using in-memory storage)
   const seatingQuery = useQuery({
@@ -83,6 +148,11 @@ export const useSeatingChart = (eventId?: string) => {
     },
     enabled: !!eventId && !!user?.id,
   });
+
+  // Use demo data for placeholder events, real data otherwise
+  const tables = isPlaceholderEvent ? DEMO_TABLES : (seatingQuery.data?.tables || []);
+  const fixedElements = isPlaceholderEvent ? DEMO_FIXED_ELEMENTS : (seatingQuery.data?.fixedElements || []);
+  const guests = isPlaceholderEvent ? DEMO_GUESTS : (guestsQuery.data || []);
 
   // Save seating arrangement (in-memory)
   const saveSeatingArrangement = useMutation({
@@ -195,10 +265,10 @@ export const useSeatingChart = (eventId?: string) => {
   });
 
   return {
-    tables: seatingQuery.data?.tables || [],
-    fixedElements: seatingQuery.data?.fixedElements || [],
-    guests: guestsQuery.data || [],
-    loading: seatingQuery.isLoading || guestsQuery.isLoading,
+    tables,
+    fixedElements,
+    guests,
+    loading: isPlaceholderEvent ? false : (seatingQuery.isLoading || guestsQuery.isLoading),
     addTable: (table: Omit<TableItem, 'id'>) => addTableMutation.mutate(table),
     removeTable: (id: string) => removeTableMutation.mutate(id),
     updateTable: ({ id, updates }: { id: string; updates: Partial<TableItem> }) => updateTableMutation.mutate({ id, updates }),
