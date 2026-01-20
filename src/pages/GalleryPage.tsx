@@ -13,11 +13,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import whiteWedding from "@/assets/gallery/nigerian-white-wedding-new.jpg";
-import birthdayCelebration from "@/assets/gallery/nigerian-birthday-new.jpg";
-import corporateEvent from "@/assets/gallery/nigerian-corporate-new.jpg";
-import beachParty from "@/assets/gallery/nigerian-beach-new.jpg";
-import namingCeremony from "@/assets/gallery/nigerian-naming-new.jpg";
+// Using Unsplash stock photos for Nigerian/African events
+const whiteWedding = "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80";
+const birthdayCelebration = "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80";
+const corporateEvent = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80";
+const beachParty = "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80";
+const namingCeremony = "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80";
 
 interface GalleryItem {
   id: number;
