@@ -25,6 +25,7 @@ interface GalleryItem {
   id: number;
   image: string;
   title: string;
+  description: string;
   eventType: string;
   likes: number;
   comments: number;
@@ -44,6 +45,7 @@ const GalleryPage = () => {
       id: 1,
       image: engagementParty,
       title: "Engagement Party",
+      description: "Celebrate the moment they said yes! An engagement party brings together loved ones to toast the couple's new journey with elegant décor, heartfelt speeches, and unforgettable memories.",
       eventType: "Pre-Wedding",
       likes: 412,
       comments: 89,
@@ -53,6 +55,7 @@ const GalleryPage = () => {
       id: 2,
       image: bridalShower,
       title: "Bridal Shower",
+      description: "A special gathering to pamper the bride-to-be! From spa treatments to gift unwrapping, bridal showers are all about celebrating friendship, love, and the exciting road to 'I do.'",
       eventType: "Pre-Wedding",
       likes: 523,
       comments: 112,
@@ -62,6 +65,7 @@ const GalleryPage = () => {
       id: 3,
       image: corporateEvent,
       title: "Executive Business Summit",
+      description: "Where industry leaders connect and ideas flourish. Executive summits combine professional networking with world-class presentations, creating impactful experiences that drive business forward.",
       eventType: "Corporate",
       likes: 189,
       comments: 34,
@@ -71,6 +75,7 @@ const GalleryPage = () => {
       id: 4,
       image: bachelorParty,
       title: "Bachelor Party",
+      description: "The ultimate send-off for the groom! Whether it's a night out with the boys or an adventure-packed weekend, bachelor parties celebrate friendship and the excitement of the big day ahead.",
       eventType: "Pre-Wedding",
       likes: 342,
       comments: 67,
@@ -80,6 +85,7 @@ const GalleryPage = () => {
       id: 5,
       image: destinationWedding,
       title: "Destination Wedding",
+      description: "Say 'I do' in paradise! Destination weddings combine romance with adventure, offering couples and their guests an unforgettable celebration in breathtaking locations across the globe.",
       eventType: "Weddings",
       likes: 634,
       comments: 145,
@@ -89,6 +95,7 @@ const GalleryPage = () => {
       id: 6,
       image: microWedding,
       title: "Micro & Elopement Wedding",
+      description: "Intimate, intentional, and deeply personal. Micro weddings focus on what matters most—the love between two people—with a close circle of guests and meaningful, heartfelt moments.",
       eventType: "Weddings",
       likes: 287,
       comments: 52,
@@ -233,7 +240,8 @@ const GalleryPage = () => {
                 </div>
               </div>
               <CardContent className="p-6">
-                <h3 className="font-bold text-lg mb-3 text-foreground">{item.title}</h3>
+                <h3 className="font-bold text-lg mb-2 text-foreground">{item.title}</h3>
+                <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{item.description}</p>
                 
                 {/* Vendor Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
