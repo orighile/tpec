@@ -13,12 +13,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-// Using Unsplash stock photos for Nigerian/African events
-const whiteWedding = "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80";
-const birthdayCelebration = "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80";
+// Using AI-generated images featuring Black/African people for cultural relevance
+import engagementParty from "@/assets/gallery/engagement-party.jpg";
+import bridalShower from "@/assets/gallery/bridal-shower.jpg";
+import bachelorParty from "@/assets/gallery/bachelor-party.jpg";
+import destinationWedding from "@/assets/gallery/destination-wedding.jpg";
 const corporateEvent = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80";
-const beachParty = "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80";
-const namingCeremony = "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80";
 const microWedding = "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80";
 
 interface GalleryItem {
@@ -37,26 +37,26 @@ const GalleryPage = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
   const [likedItems, setLikedItems] = useState<Set<number>>(new Set());
 
-  const filters = ["All Events", "Weddings", "Birthdays", "Corporate", "Traditional", "Outdoor"];
+  const filters = ["All Events", "Weddings", "Pre-Wedding", "Corporate"];
 
   const galleryItems: GalleryItem[] = [
     {
       id: 1,
-      image: whiteWedding,
-      title: "Grand Wedding Reception",
-      eventType: "Weddings",
-      likes: 342,
-      comments: 67,
-      tags: ["@WeddingDecorNG", "@TraditionalGlamNG"],
+      image: engagementParty,
+      title: "Engagement Party",
+      eventType: "Pre-Wedding",
+      likes: 412,
+      comments: 89,
+      tags: ["@EngagementPartyNG", "@ProposalGoals"],
     },
     {
       id: 2,
-      image: birthdayCelebration,
-      title: "Colorful Birthday Celebration",
-      eventType: "Birthdays",
-      likes: 412,
-      comments: 89,
-      tags: ["@PartyPlannerNG", "@OutdoorCatering"],
+      image: bridalShower,
+      title: "Bridal Shower",
+      eventType: "Pre-Wedding",
+      likes: 523,
+      comments: 112,
+      tags: ["@BridalShowerNG", "@BrideSquadGoals"],
     },
     {
       id: 3,
@@ -69,21 +69,21 @@ const GalleryPage = () => {
     },
     {
       id: 4,
-      image: beachParty,
-      title: "Sunset Beach Celebration",
-      eventType: "Outdoor",
-      likes: 523,
-      comments: 112,
-      tags: ["@BeachVenueNG", "@SunsetCelebrations"],
+      image: bachelorParty,
+      title: "Bachelor Party",
+      eventType: "Pre-Wedding",
+      likes: 342,
+      comments: 67,
+      tags: ["@GroomSquadNG", "@BachelorVibes"],
     },
     {
       id: 5,
-      image: namingCeremony,
-      title: "Traditional Naming Ceremony",
-      eventType: "Traditional",
-      likes: 234,
-      comments: 45,
-      tags: ["@FamilyCelebrations", "@NamingCeremonyNG"],
+      image: destinationWedding,
+      title: "Destination Wedding",
+      eventType: "Weddings",
+      likes: 634,
+      comments: 145,
+      tags: ["@DestinationWeddingNG", "@BeachWedding"],
     },
     {
       id: 6,
