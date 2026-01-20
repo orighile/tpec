@@ -19,6 +19,7 @@ const birthdayCelebration = "https://images.unsplash.com/photo-1530103862676-de8
 const corporateEvent = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80";
 const beachParty = "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80";
 const namingCeremony = "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80";
+const microWedding = "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80";
 
 interface GalleryItem {
   id: number;
@@ -83,6 +84,15 @@ const GalleryPage = () => {
       likes: 234,
       comments: 45,
       tags: ["@FamilyCelebrations", "@NamingCeremonyNG"],
+    },
+    {
+      id: 6,
+      image: microWedding,
+      title: "Micro & Elopement Wedding",
+      eventType: "Weddings",
+      likes: 287,
+      comments: 52,
+      tags: ["@IntimateWeddingsNG", "@ElopementCelebrations"],
     },
   ];
 
