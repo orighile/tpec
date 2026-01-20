@@ -13,11 +13,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-// Using AI-generated images featuring Black/African people for cultural relevance
-import engagementParty from "@/assets/gallery/engagement-party.jpg";
-import bridalShower from "@/assets/gallery/bridal-shower.jpg";
-import bachelorParty from "@/assets/gallery/bachelor-party.jpg";
-import destinationWedding from "@/assets/gallery/destination-wedding.jpg";
+// Using real stock photos featuring Black/African people for cultural relevance
+import engagementParty from "@/assets/gallery/engagement-party-real.jpg";
+import bridalShower from "@/assets/gallery/bridal-shower-real.jpg";
+import bachelorParty from "@/assets/gallery/bachelor-party-real.jpg";
+import destinationWedding from "@/assets/gallery/destination-wedding-real.jpg";
 const corporateEvent = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80";
 const microWedding = "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80";
 

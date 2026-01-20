@@ -187,7 +187,6 @@ const Hero = () => {
                 alt="Vibrant Nigerian event celebration with traditional decorations"
                 className="w-full h-auto object-cover"
                 loading="eager"
-                fetchPriority="high"
               />
             </div>
           </div>
