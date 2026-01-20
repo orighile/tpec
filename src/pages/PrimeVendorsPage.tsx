@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,12 +16,15 @@ import {
   ArrowRight,
   ShoppingBag,
   Filter,
+  CheckCircle,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { usePrimeMembership } from "@/hooks/usePrimeMembership";
 import { PrimeRegistrationForm } from "@/components/prime/PrimeRegistrationForm";
 import { PrimeProfileEditor } from "@/components/prime/PrimeProfileEditor";
 import { PrimeMemberCard } from "@/components/prime/PrimeMemberCard";
+import { PrimePaymentButton } from "@/components/prime/PrimePaymentButton";
+import { useToast } from "@/hooks/use-toast";
 
 const LOCATIONS = [
   "All Locations",
@@ -37,6 +40,8 @@ const LOCATIONS = [
 const PrimeVendorsPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("browse");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("All Locations");
@@ -55,7 +60,25 @@ const PrimeVendorsPage = () => {
     uploadVideo,
     addGalleryImage,
     deleteGalleryImage,
+    refetchMembership,
   } = usePrimeMembership("vendor");
+
+  // Handle payment callback
+  useEffect(() => {
+    const paymentStatus = searchParams.get("payment");
+    const tier = searchParams.get("tier");
+    
+    if (paymentStatus === "success" && tier) {
+      toast({
+        title: "Payment Successful!",
+        description: `Your ${tier} Prime Vendor subscription is now active.`,
+      });
+      refetchMembership();
+      setActiveTab("my-profile");
+      // Clean URL
+      navigate("/prime-vendors", { replace: true });
+    }
+  }, [searchParams]);
 
   const filteredMembers = allMembers.filter((member) => {
     const searchMatch =
@@ -77,7 +100,8 @@ const PrimeVendorsPage = () => {
     }
   };
 
-  // If not authenticated, show browse + CTA to join
+  // Check if membership needs payment
+  const needsPayment = membership && membership.payment_status !== "paid";
   const renderBrowseContent = () => (
     <div className="space-y-8">
       {/* Search & Filters */}
@@ -257,6 +281,44 @@ const PrimeVendorsPage = () => {
 
           {user && membership && (
             <TabsContent value="my-profile">
+              {/* Payment Required Banner */}
+              {needsPayment && (
+                <Card className="mb-6 border-amber-500/50 bg-amber-500/10">
+                  <CardContent className="p-6">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <Crown className="h-8 w-8 text-amber-500" />
+                        <div>
+                          <h3 className="font-semibold text-lg">Complete Your Prime Subscription</h3>
+                          <p className="text-muted-foreground">
+                            Subscribe to make your profile visible and unlock all Prime features.
+                          </p>
+                        </div>
+                      </div>
+                      <PrimePaymentButton membershipType="vendor">
+                        <Button variant="premium" size="lg">
+                          <Crown className="mr-2 h-4 w-4" />
+                          Subscribe Now
+                        </Button>
+                      </PrimePaymentButton>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Subscription Status */}
+              {membership.payment_status === "paid" && membership.subscription_end_date && (
+                <Card className="mb-6 border-green-500/50 bg-green-500/10">
+                  <CardContent className="p-4 flex items-center gap-3">
+                    <CheckCircle className="h-5 w-5 text-green-500" />
+                    <span className="font-medium">
+                      Active {membership.subscription_tier || "Prime"} subscription until{" "}
+                      {new Date(membership.subscription_end_date).toLocaleDateString()}
+                    </span>
+                  </CardContent>
+                </Card>
+              )}
+
               <PrimeProfileEditor
                 membership={membership}
                 galleryImages={galleryImages}

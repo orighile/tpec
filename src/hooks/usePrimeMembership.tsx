@@ -23,6 +23,12 @@ export interface PrimeMember {
   price_range: string | null;
   is_active: boolean;
   is_featured: boolean;
+  payment_status: string | null;
+  payment_reference: string | null;
+  payment_provider: string | null;
+  subscription_tier: string | null;
+  subscription_start_date: string | null;
+  subscription_end_date: string | null;
   created_at: string;
   updated_at: string;
 }

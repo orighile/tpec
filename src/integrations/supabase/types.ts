@@ -802,8 +802,14 @@ export type Database = {
           location: string | null
           logo_url: string | null
           membership_type: Database["public"]["Enums"]["prime_membership_type"]
+          payment_provider: string | null
+          payment_reference: string | null
+          payment_status: string | null
           price_range: string | null
           services: string[] | null
+          subscription_end_date: string | null
+          subscription_start_date: string | null
+          subscription_tier: string | null
           updated_at: string | null
           user_id: string
           video_url: string | null
@@ -823,8 +829,14 @@ export type Database = {
           location?: string | null
           logo_url?: string | null
           membership_type: Database["public"]["Enums"]["prime_membership_type"]
+          payment_provider?: string | null
+          payment_reference?: string | null
+          payment_status?: string | null
           price_range?: string | null
           services?: string[] | null
+          subscription_end_date?: string | null
+          subscription_start_date?: string | null
+          subscription_tier?: string | null
           updated_at?: string | null
           user_id: string
           video_url?: string | null
@@ -844,14 +856,73 @@ export type Database = {
           location?: string | null
           logo_url?: string | null
           membership_type?: Database["public"]["Enums"]["prime_membership_type"]
+          payment_provider?: string | null
+          payment_reference?: string | null
+          payment_status?: string | null
           price_range?: string | null
           services?: string[] | null
+          subscription_end_date?: string | null
+          subscription_start_date?: string | null
+          subscription_tier?: string | null
           updated_at?: string | null
           user_id?: string
           video_url?: string | null
           website?: string | null
         }
         Relationships: []
+      }
+      prime_payments: {
+        Row: {
+          amount: number
+          created_at: string | null
+          currency: string | null
+          id: string
+          metadata: Json | null
+          payment_provider: string
+          payment_reference: string | null
+          prime_member_id: string | null
+          status: string | null
+          subscription_tier: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          currency?: string | null
+          id?: string
+          metadata?: Json | null
+          payment_provider: string
+          payment_reference?: string | null
+          prime_member_id?: string | null
+          status?: string | null
+          subscription_tier: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          currency?: string | null
+          id?: string
+          metadata?: Json | null
+          payment_provider?: string
+          payment_reference?: string | null
+          prime_member_id?: string | null
+          status?: string | null
+          subscription_tier?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prime_payments_prime_member_id_fkey"
+            columns: ["prime_member_id"]
+            isOneToOne: false
+            referencedRelation: "prime_members"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
