@@ -13,11 +13,14 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-
+import DemoModeBanner from "@/components/common/DemoModeBanner";
+import { useAuth } from "@/contexts/AuthContext";
 const GuestManagementPage = () => {
   const { toast } = useToast();
+  const { user } = useAuth();
   const [isImporting, setIsImporting] = useState(false);
   const eventId = "sample-event-id";
+  const isDemo = !user || eventId === "sample-event-id";
   
   const handleExportGuestList = () => {
     toast({
@@ -55,6 +58,10 @@ const GuestManagementPage = () => {
               Organize your guest list, track RSVPs, and manage guest details
             </p>
           </div>
+          
+          {isDemo && (
+            <DemoModeBanner featureName="guest management" />
+          )}
           
           <div className="flex flex-wrap gap-4 mb-6">
             <Button variant="outline" className="flex gap-2 items-center" onClick={handleExportGuestList}>

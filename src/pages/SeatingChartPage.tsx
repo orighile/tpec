@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import SeatingPlanner from "@/components/SeatingPlanner";
 import { Button } from "@/components/ui/button";
@@ -15,12 +14,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import JaraBot from "@/components/jarabot";
+import DemoModeBanner from "@/components/common/DemoModeBanner";
+import { useAuth } from "@/contexts/AuthContext";
 
 const SeatingChartPage = () => {
   const { toast } = useToast();
+  const { user } = useAuth();
   const [shareEmail, setShareEmail] = useState("");
   const [isSharing, setIsSharing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const isDemo = !user;
 
   const handleShareSeatingChart = () => {
     if (!shareEmail || !shareEmail.includes('@')) {
@@ -83,6 +86,10 @@ const SeatingChartPage = () => {
               Design your event floor plan and arrange guests at tables
             </p>
           </div>
+          
+          {isDemo && (
+            <DemoModeBanner featureName="seating chart planning" />
+          )}
           
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <Button 
