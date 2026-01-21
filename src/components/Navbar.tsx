@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bell, CalendarPlus, User, Gear, List, X } from "phosphor-react";
+import { Bell, CalendarPlus, User, Gear, List, X, ShieldCheck } from "phosphor-react";
 import { Menu, ChevronDown } from "lucide-react";
 import {
   DropdownMenu,
@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import TPECLogo from "./TPECLogo";
 import { ThemeToggle } from "./theme-toggle";
 import {
@@ -38,6 +39,7 @@ import {
 
 const Navbar = () => {
   const { user, signOut } = useAuth();
+  const { isAdmin } = useAdminAuth();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [planningToolsOpen, setPlanningToolsOpen] = useState(false);
@@ -227,6 +229,17 @@ const Navbar = () => {
                     <Gear className="mr-2 h-4 w-4" />
                     Settings
                   </DropdownMenuItem>
+                  {isAdmin && (
+                    <DropdownMenuItem asChild>
+                      <Link
+                        to="/admin"
+                        className="flex items-center cursor-pointer hover:bg-primary/5 focus:bg-primary/5 w-full rounded-lg"
+                      >
+                        <ShieldCheck className="mr-2 h-4 w-4" />
+                        Admin Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuSeparator className="bg-border" />
                   <DropdownMenuItem
                     onClick={handleSignOut}
@@ -286,6 +299,16 @@ const Navbar = () => {
                       {link.title}
                     </Link>
                   ))}
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      onClick={handleMobileLinkClick}
+                      className="px-4 py-3 text-foreground hover:text-primary hover:bg-primary/5 rounded-lg font-medium transition-colors flex items-center gap-2"
+                    >
+                      <ShieldCheck className="h-4 w-4" />
+                      Admin Dashboard
+                    </Link>
+                  )}
                 </div>
 
                 {/* Mobile Auth & Actions */}
