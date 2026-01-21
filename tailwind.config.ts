@@ -72,7 +72,7 @@ export default {
 				green: 'hsl(145 83% 28%)', // Nigerian green
 				white: 'hsl(0 0% 100%)', // Nigerian white
 				gold: 'hsl(45 62% 52%)', // Updated rich gold for TPEC logo
-				purple: 'hsl(280 96% 39%)', // Rich purple for royal Ankara patterns
+				purple: 'hsl(277 88% 35%)', // Deep royal purple for brand consistency
 				orange: 'hsl(14 100% 60%)', // Vibrant Ankara orange
 				teal: 'hsl(192 95% 45%)', // Bright coastal blue
 				red: 'hsl(4 82% 57%)', // Alert red
