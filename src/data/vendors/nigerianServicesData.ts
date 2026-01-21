@@ -1,4 +1,16 @@
 import zapphaireLogo from "@/assets/vendors/zapphaire-events-logo.png";
+import eventfulNigeriaLogo from "@/assets/vendors/eventful-nigeria-logo.jpg";
+import elizabethREventsLogo from "@/assets/vendors/elizabeth-r-events-logo.jpg";
+import noSurprisesEventsLogo from "@/assets/vendors/no-surprises-events-logo.jpg";
+import gadielEventsLogo from "@/assets/vendors/gadiel-events-logo.jpg";
+import ballEventsLogo from "@/assets/vendors/ball-events-logo.jpg";
+import eliezerGroupLogo from "@/assets/vendors/eliezer-group-logo.jpg";
+import divineCaterersLogo from "@/assets/vendors/divine-caterers-logo.jpg";
+import alveenaEventsLogo from "@/assets/vendors/alveena-events-logo.jpg";
+import weddingGuruLogo from "@/assets/vendors/wedding-guru-logo.jpg";
+import events2706Logo from "@/assets/vendors/2706-events-logo.jpg";
+import eliteStudioLogo from "@/assets/vendors/elite-studio-logo.jpg";
+import tonydooVisualsLogo from "@/assets/vendors/tonydoo-visuals-logo.jpg";
 
 export interface NigerianService {
   category: string;
@@ -36,7 +48,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: "@eventfulnigeria",
     instagramUrl: "https://www.instagram.com/eventfulnigeria/",
     location: "Lagos",
-    website: "https://www.eventfulnigeria.com/"
+    website: "https://www.eventfulnigeria.com/",
+    localImage: eventfulNigeriaLogo
   },
   {
     category: "event-planning",
@@ -47,7 +60,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: "@elizabeth_r_events",
     instagramUrl: "https://www.instagram.com/elizabeth_r_events/",
     location: "Lagos",
-    website: "https://elizabethrevents.com.ng/"
+    website: "https://elizabethrevents.com.ng/",
+    localImage: elizabethREventsLogo
   },
   {
     category: "event-planning",
@@ -58,7 +72,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: "@nosurprisesevents",
     instagramUrl: "https://www.instagram.com/nosurprisesevents/",
     location: "Lagos",
-    website: null
+    website: null,
+    localImage: noSurprisesEventsLogo
   },
   {
     category: "event-planning",
@@ -69,7 +84,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: null,
     instagramUrl: null,
     location: "Lagos (Lekki)",
-    website: "https://gadieleventplanners.com.ng/"
+    website: "https://gadieleventplanners.com.ng/",
+    localImage: gadielEventsLogo
   },
   {
     category: "event-planning",
@@ -80,7 +96,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: "@balleventsconcepts",
     instagramUrl: "https://www.instagram.com/balleventsconcepts",
     location: "Lagos",
-    website: null
+    website: null,
+    localImage: ballEventsLogo
   },
   
   // CATERING SERVICES
@@ -93,7 +110,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: null,
     instagramUrl: null,
     location: "Lagos",
-    website: "https://eliezergroup.com/"
+    website: "https://eliezergroup.com/",
+    localImage: eliezerGroupLogo
   },
   {
     category: "catering",
@@ -104,7 +122,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: null,
     instagramUrl: null,
     location: "Lagos",
-    website: "https://www.divinecatererng.com/"
+    website: "https://www.divinecatererng.com/",
+    localImage: divineCaterersLogo
   },
   {
     category: "catering",
@@ -297,7 +316,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: null,
     instagramUrl: null,
     location: "Lagos",
-    website: "https://www.elitestudio.ng/"
+    website: "https://www.elitestudio.ng/",
+    localImage: eliteStudioLogo
   },
   {
     category: "video-photo",
@@ -319,7 +339,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: null,
     instagramUrl: null,
     location: "Lagos",
-    website: "https://tonydoovisuals.com/"
+    website: "https://tonydoovisuals.com/",
+    localImage: tonydooVisualsLogo
   },
   {
     category: "video-photo",
@@ -376,7 +397,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: "@alveenaevents",
     instagramUrl: "https://www.instagram.com/alveenaevents",
     location: "Lagos",
-    website: null
+    website: null,
+    localImage: alveenaEventsLogo
   },
   {
     category: "decoration",
@@ -387,7 +409,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: "@theweddingguruu",
     instagramUrl: "https://www.instagram.com/theweddingguruu/",
     location: "Lagos",
-    website: null
+    website: null,
+    localImage: weddingGuruLogo
   },
   {
     category: "decoration",
@@ -398,7 +421,8 @@ export const nigerianServices: NigerianService[] = [
     instagram: "@2706events",
     instagramUrl: "https://www.instagram.com/2706events/",
     location: "Lagos",
-    website: null
+    website: null,
+    localImage: events2706Logo
   },
   {
     category: "decoration",
