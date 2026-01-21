@@ -25,9 +25,9 @@ body {
     --popover-foreground: 220 15% 20%;
 
     /* Rich purple primary - brand color */
-    --primary: 277 88% 45%;
+    --primary: 277 88% 35%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 277 88% 65%;
+    --primary-glow: 277 88% 50%;
 
     /* Gold secondary - brand color */
     --secondary: 45 100% 51%;
@@ -37,7 +37,7 @@ body {
     --muted-foreground: 220 15% 40%;
 
     /* Deep purple accent */
-    --accent: 277 88% 45%;
+    --accent: 277 88% 35%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -50,14 +50,14 @@ body {
     --radius: 0.75rem;
 
     /* Purple and gold gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(277 88% 45%), hsl(277 88% 55%));
+    --gradient-primary: linear-gradient(135deg, hsl(277 88% 35%), hsl(277 88% 45%));
     --gradient-warm: linear-gradient(135deg, hsl(45 100% 51%), hsl(50 100% 58%));
-    --gradient-sunset: linear-gradient(135deg, hsl(277 88% 45%), hsl(45 100% 51%));
-    --gradient-royal: linear-gradient(135deg, hsl(277 88% 45%), hsl(280 85% 50%));
+    --gradient-sunset: linear-gradient(135deg, hsl(277 88% 35%), hsl(45 100% 51%));
+    --gradient-royal: linear-gradient(135deg, hsl(277 88% 35%), hsl(280 85% 42%));
 
     /* Elegant shadows with purple tint */
-    --shadow-elegant: 0 8px 24px -6px hsl(277 88% 45% / 0.25);
-    --shadow-glow: 0 0 32px hsl(277 88% 65% / 0.18);
+    --shadow-elegant: 0 8px 24px -6px hsl(277 88% 35% / 0.25);
+    --shadow-glow: 0 0 32px hsl(277 88% 50% / 0.18);
     --shadow-card: 0 2px 16px -2px hsl(220 15% 20% / 0.08);
 
     /* Smooth transitions */
@@ -83,9 +83,9 @@ body {
     --popover: 220 20% 15%;
     --popover-foreground: 210 20% 92%;
 
-    --primary: 277 88% 50%;
+    --primary: 277 88% 42%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 277 88% 70%;
+    --primary-glow: 277 88% 58%;
 
     --secondary: 45 100% 55%;
     --secondary-foreground: 0 0% 0%;
@@ -93,7 +93,7 @@ body {
     --muted: 220 20% 20%;
     --muted-foreground: 220 15% 65%;
 
-    --accent: 277 88% 50%;
+    --accent: 277 88% 42%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
@@ -103,8 +103,8 @@ body {
     --input: 220 20% 25%;
     --ring: 277 88% 50%;
 
-    --shadow-elegant: 0 8px 24px -6px hsl(277 88% 50% / 0.35);
-    --shadow-glow: 0 0 32px hsl(277 88% 70% / 0.25);
+    --shadow-elegant: 0 8px 24px -6px hsl(277 88% 42% / 0.35);
+    --shadow-glow: 0 0 32px hsl(277 88% 58% / 0.25);
     --shadow-card: 0 2px 16px -2px hsl(0 0% 0% / 0.3);
     
     --sidebar-background: 220 20% 12%;

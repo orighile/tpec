@@ -57,7 +57,7 @@ const CommunityPage = () => {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
             Connect with fellow event planners, share experiences, and get advice from the TPEC community
           </p>
-          <Button size="lg" className="bg-primary hover:bg-primary/90">
+          <Button size="lg" className="bg-primary hover:bg-primary/90" onClick={() => alert("Discussion forum coming soon! This feature is under development.")}>
             <MessageSquare className="mr-2 h-4 w-4" />
             Start a Discussion
           </Button>
