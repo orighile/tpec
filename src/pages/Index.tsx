@@ -1,6 +1,7 @@
 import Hero from "../components/Hero";
 import BrowseCategories from "../components/BrowseCategories";
 import VendorHighlights from "../components/VendorHighlights";
+import TestimonialsCarousel from "../components/TestimonialsCarousel";
 import { Button } from "@/components/ui/button";
 import JaraBot from "../components/jarabot";
 import FeaturedEvents from "../components/FeaturedEvents";
@@ -73,6 +74,7 @@ const Index = () => {
       
       <FeaturedEvents />
       <VendorHighlights />
+      <TestimonialsCarousel />
       <CTA />
       <JaraBot />
     </>

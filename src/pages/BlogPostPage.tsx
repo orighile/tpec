@@ -4,162 +4,345 @@ import { ArrowLeft, User, Calendar, Clock, Share, BookOpen } from "phosphor-reac
 const blogPosts = [
   {
     id: 1,
-    title: "10 Essential Tips for Planning a Nigerian Wedding",
-    excerpt: "Discover the key elements to create a memorable Nigerian wedding celebration that honors traditions while embracing modern touches.",
+    title: "Planning a Beautiful Wedding on a Budget in Nigeria",
+    excerpt: "Smart strategies to create your dream wedding without breaking the bank. From venue selection to vendor negotiations, we've got you covered.",
     content: `
-      Planning a Nigerian wedding can be both exciting and overwhelming. With rich traditions to honor and modern elements to incorporate, couples often find themselves navigating a complex landscape of cultural expectations and personal preferences.
+Planning a beautiful wedding in Nigeria doesn't have to drain your savings. With smart planning and the right strategies, you can create a memorable celebration that reflects your love story without financial stress.
 
-      ## Understanding Traditional Elements
+## Set a Realistic Budget First
 
-      Nigerian weddings are deeply rooted in tradition, with each ethnic group bringing unique customs to the celebration. The Yoruba, Igbo, and Hausa cultures each have distinct wedding traditions that add depth and meaning to the ceremony.
+Before anything else, sit down with your partner and determine exactly how much you can afford to spend. Be honest about your finances and avoid the temptation to overspend just to impress guests.
 
-      ### 1. Choose Your Venue Wisely
+### The 50-30-20 Rule for Nigerian Weddings
 
-      The venue sets the tone for your entire celebration. Consider spaces that can accommodate both traditional ceremonies and modern receptions. Many couples opt for outdoor venues that allow for the flexibility needed for cultural performances.
+Consider allocating your budget this way:
+- **50%** for venue, catering, and drinks
+- **30%** for attire, photography, music, and decorations
+- **20%** for contingency and miscellaneous expenses
 
-      ### 2. Honor Your Heritage
+## Choose Your Venue Wisely
 
-      Incorporate traditional attire, music, and customs that reflect your cultural background. This might include the breaking of kola nut, traditional drumming, or specific ceremonial practices unique to your ethnic group.
+Venue costs can make or break your budget. Consider these money-saving options:
 
-      ### 3. Plan for Multiple Ceremonies
+### Off-Peak Timing
 
-      Nigerian weddings often involve multiple ceremonies - from the traditional wedding to the white wedding and sometimes additional religious or cultural ceremonies. Plan your timeline accordingly.
+Getting married on a Friday or Sunday instead of Saturday can save you 20-40% on venue costs. Similarly, dry season months (November-February) are peak wedding season - consider the shoulder months for better rates.
 
-      ### 4. Food and Catering Excellence
+### Alternative Venues
 
-      Nigerian cuisine should be the star of your wedding feast. Work with caterers who understand traditional dishes and can present them beautifully for your guests.
+Instead of expensive event centers, consider:
+- Church halls with reception space
+- Family compounds (especially for traditional weddings)
+- Hotel gardens during weekday afternoons
+- Community centers in upscale areas
 
-      ### 5. Photography and Videography
+## Negotiate with Vendors
 
-      Document every moment of your celebration. Nigerian weddings are rich with photogenic moments, from the colorful attire to the energetic dances.
+Nigerian vendors expect negotiation - it's part of the culture! Here are some tips:
 
-      ## Modern Touches
+### Bundle Services
 
-      While honoring tradition is important, don't be afraid to add personal touches that reflect your unique story as a couple. This balance between old and new creates truly memorable celebrations.
+Ask if vendors offer discounts when you book multiple services. A photographer who also does videography might give you a package deal.
 
-      ### 6. Technology Integration
+### Book Early
 
-      Consider live streaming for family members who cannot attend, or create a wedding hashtag for social media sharing.
+Give yourself 6-12 months to plan. This gives you time to compare prices and avoid last-minute premium charges.
 
-      ### 7. Sustainable Choices
+### Ask for Referrals
 
-      Make environmentally conscious decisions where possible, from digital invitations to locally-sourced decorations.
+Tell vendors you were referred by a previous client - they often offer referral discounts.
 
-      ### 8. Guest Experience
+## Smart Catering Strategies
 
-      Think about your guests' comfort and enjoyment throughout the extended celebration. Provide clear schedules and comfortable accommodations.
+Food is non-negotiable at Nigerian events, but you can be strategic:
 
-      ### 9. Budget Management
+### Right-Size Your Guest List
 
-      Nigerian weddings can be elaborate affairs. Set a realistic budget and prioritize elements that are most important to you as a couple.
+Be realistic about who truly needs to be there. A 200-guest wedding is significantly cheaper than 500 guests.
 
-      ### 10. Professional Planning
+### Choose Local Dishes
 
-      Consider hiring a wedding planner who understands both traditional requirements and modern wedding trends. They can help navigate the complexities while ensuring nothing is overlooked.
+Jollof rice, fried rice, and local delicacies are crowd favorites and more affordable than "continental" options.
 
-      ## Conclusion
+### Limit the Bar
 
-      Your Nigerian wedding should be a beautiful reflection of your love story, cultural heritage, and personal style. With careful planning and attention to both traditional and modern elements, you can create a celebration that honors the past while embracing the future.
+Instead of an open bar all night, consider serving drinks only during the first few hours or offering signature cocktails only.
+
+## DIY Where Possible
+
+Some things you can do yourself:
+
+- **Invitations**: Use digital invitations or print locally
+- **Souvenirs**: Source directly from Aba or local markets
+- **Makeup trials**: Practice with YouTube tutorials before the big day
+
+## Final Thoughts
+
+A beautiful wedding is about the love you're celebrating, not the money you spend. Focus on what truly matters - the commitment you're making and the joy of having loved ones around you.
+
+With careful planning and these budget-smart strategies, you can have the Nigerian wedding of your dreams without starting your marriage in debt.
     `,
-    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
+    image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800",
     category: "Wedding Planning",
-    author: "Chioma Okonkwo",
-    date: "June 15, 2023",
-    readTime: "8 min read",
-    tags: ["Wedding", "Nigerian Culture", "Planning", "Traditions"]
+    author: "Adaeze Nwosu",
+    date: "December 15, 2025",
+    readTime: "7 min read",
+    tags: ["Budget Wedding", "Nigerian Wedding", "Planning Tips", "Money-Saving"]
   },
   {
     id: 2,
-    title: "How to Create an Event Budget That Actually Works",
-    excerpt: "Learn practical strategies for creating and sticking to an event budget that ensures financial success without compromising on quality.",
+    title: "The Rise of Micro Weddings in Nigeria: Intimate Celebrations That Make a Big Impact",
+    excerpt: "Discover why more Nigerian couples are choosing smaller, more meaningful celebrations over large traditional weddings.",
     content: `
-      Creating a realistic event budget is one of the most crucial aspects of successful event planning. Whether you're organizing a wedding, corporate event, or birthday celebration, a well-planned budget serves as your roadmap to financial success.
+The traditional Nigerian wedding with 500+ guests is getting a modern makeover. Enter the micro wedding - an intimate celebration typically hosting 20-50 guests that's gaining popularity among Nigerian millennials and Gen Z couples.
 
-      ## Understanding Budget Fundamentals
+## What is a Micro Wedding?
 
-      Before diving into specific numbers, it's important to understand the key components that make up any event budget. These include fixed costs, variable costs, and contingency funds.
+A micro wedding is a scaled-down celebration that maintains all the essential elements of a traditional wedding - just with fewer guests. Think of it as a wedding that prioritizes quality over quantity.
 
-      ### Setting Your Overall Budget
+## Why Micro Weddings Are Trending in Nigeria
 
-      Start by determining your total available funds. This should be money you can comfortably spend without affecting your essential expenses or long-term financial goals.
+### Post-Pandemic Perspective Shift
 
-      ### The 50-30-20 Rule for Events
+The COVID-19 era changed how Nigerians view large gatherings. Many couples discovered the beauty of intimate celebrations during lockdown-era weddings.
 
-      Consider allocating your budget using this modified approach:
-      - 50% for venue and catering
-      - 30% for entertainment, decoration, and services
-      - 20% for contingency and miscellaneous expenses
+### Financial Freedom
 
-      ## Major Budget Categories
+With rising costs of living, couples are prioritizing financial stability over impressive guest counts. A micro wedding allows you to:
+- Invest more per guest for a premium experience
+- Start married life without event-related debt
+- Redirect savings toward a home, business, or investments
 
-      ### Venue and Catering (40-50% of budget)
+### Meaningful Connections
 
-      This is typically your largest expense. Research multiple venues and get detailed quotes that include all fees, taxes, and service charges.
+Large Nigerian weddings often mean the couple barely interacts with most guests. Micro weddings allow you to:
+- Spend quality time with each attendee
+- Have meaningful conversations
+- Create deeper memories
 
-      ### Entertainment and Music (10-15% of budget)
+## Planning a Micro Wedding in Nigeria
 
-      Whether it's a DJ, live band, or traditional performers, entertainment is crucial for guest experience.
+### Venue Options
 
-      ### Photography and Videography (8-12% of budget)
+Intimate venues work perfectly for micro weddings:
+- Boutique hotels with private gardens
+- Rooftop restaurants with city views
+- Beach resorts in Lagos or Calabar
+- Vineyard-style settings in Jos or Obudu
 
-      Don't compromise on capturing memories. These are investments that provide lasting value.
+### The Guest List Challenge
 
-      ### Decorations and Flowers (8-10% of budget)
+This is the hardest part for Nigerian couples. Here's how to handle it:
 
-      Create ambiance without overspending. Consider DIY options for certain decorative elements.
+**Be Firm**: Decide on your number and stick to it. "Immediate family and closest friends only" is a valid boundary.
 
-      ### Attire and Beauty (5-10% of budget)
+**Communicate Early**: Let extended family know early that you're having an intimate celebration. Most will understand.
 
-      Include outfits, accessories, hair, and makeup in your calculations.
+**Consider a Reception Later**: Some couples have a micro wedding ceremony and a larger casual reception weeks later.
 
-      ## Cost-Saving Strategies
+## Making It Special
 
-      ### Off-Peak Timing
+With fewer guests, you can splurge on:
 
-      Schedule your event during off-peak seasons or days of the week for significant savings.
+### Elevated Dining
 
-      ### Multi-Purpose Items
+Instead of buffet-style serving, consider a plated multi-course meal with wine pairings.
 
-      Choose decorations and arrangements that can serve multiple functions throughout your event.
+### Premium Entertainment
 
-      ### Local Sourcing
+Hire a live band or acoustic performers instead of a loud DJ.
 
-      Support local vendors and reduce transportation costs by sourcing locally.
+### Personalized Touches
 
-      ### Group Negotiations
+- Handwritten notes for each guest
+- Customized place settings
+- Unique, high-quality souvenirs
 
-      Bundle services with the same vendor for potential discounts.
+### Destination Possibility
 
-      ## Tracking and Management
+A smaller guest list makes destination weddings feasible. Consider beautiful Nigerian locations like:
+- Obudu Mountain Resort
+- La Campagne Tropicana
+- Transcorp Calabar
 
-      ### Use Technology
+## Handling Cultural Expectations
 
-      Leverage budgeting apps and spreadsheets to track expenses in real-time.
+Nigerian families can be... opinionated about weddings. Here's how to navigate:
 
-      ### Regular Reviews
+### Present It as Intentional
 
-      Schedule weekly budget reviews to ensure you're staying on track.
+Frame your micro wedding as a deliberate choice, not a budget constraint. Emphasize the intimacy and meaning.
 
-      ### Vendor Communication
+### Include Key Family Elements
 
-      Maintain clear communication with all vendors about budget constraints and expectations.
+Even in a small setting, include important cultural elements - palm wine ceremony, kola nut breaking, or traditional prayers.
 
-      ## Emergency Planning
+### Host a Separate Family Gathering
 
-      Always set aside 10-15% of your total budget for unexpected expenses. This contingency fund will save you from stress when surprises arise.
+Consider hosting a casual "thank you" dinner for extended family after the wedding.
 
-      ## Final Tips
+## The Bottom Line
 
-      Remember that a successful event isn't necessarily the most expensive one. Focus on creating meaningful experiences for your guests while staying within your financial comfort zone.
+Micro weddings aren't about having less - they're about experiencing more. More connection, more meaning, more memories, and more financial peace as you start your journey together.
 
-      With careful planning, realistic expectations, and disciplined tracking, you can create memorable events that don't break the bank.
+Whether you choose 20 guests or 500, what matters most is that your wedding reflects your values and celebrates your love authentically.
     `,
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
-    category: "Event Management",
-    author: "Tunde Adeleke",
-    date: "May 22, 2023",
-    readTime: "5 min read",
-    tags: ["Budget", "Planning", "Finance", "Tips"]
+    image: "https://images.unsplash.com/photo-1529636798458-92182e662485?w=800",
+    category: "Wedding Trends",
+    author: "Folake Adeleke",
+    date: "January 10, 2026",
+    readTime: "6 min read",
+    tags: ["Micro Wedding", "Intimate Wedding", "Wedding Trends", "Modern Nigerian Wedding"]
+  },
+  {
+    id: 3,
+    title: "How to Identify a Reliable Event Planner: 7 Key Signs to Look For",
+    excerpt: "Hiring the right event planner can make or break your celebration. Learn the essential qualities that separate professionals from amateurs.",
+    content: `
+Choosing the right event planner is one of the most important decisions you'll make for your wedding or celebration. A great planner makes the process seamless; a bad one creates stress and disappointment. Here are seven key signs that identify a reliable event planner.
+
+## 1. They Have a Professional Portfolio
+
+A serious event planner can show you their work. Look for:
+
+### Visual Evidence
+
+- High-quality photos of past events
+- Videos showing event flow and execution
+- Before-and-after transformation shots
+
+### Diversity of Work
+
+A good portfolio shows versatility - corporate events, weddings, birthday parties, cultural celebrations. This demonstrates adaptability.
+
+### Client Testimonials
+
+Real reviews from real clients, ideally with names and photos. Be wary of planners who can't provide references.
+
+## 2. They Listen More Than They Talk
+
+The best planners prioritize understanding your vision over pushing their own ideas.
+
+### Red Flags to Watch For
+
+- Constantly interrupting you
+- Dismissing your ideas as "not possible"
+- Pushing specific vendors without explaining why
+
+### Green Flags
+
+- Asking detailed questions about your preferences
+- Taking notes during conversations
+- Repeating back your requirements to confirm understanding
+
+## 3. They're Transparent About Pricing
+
+Reliable planners don't hide costs or surprise you with fees later.
+
+### What to Expect
+
+- Clear breakdown of their service fee
+- Itemized vendor quotes
+- Explanation of what's included and what costs extra
+- Written contracts before any money changes hands
+
+### Warning Signs
+
+- "We'll figure out pricing later"
+- Reluctance to provide written quotes
+- Vague responses about total costs
+
+## 4. They Have Strong Vendor Relationships
+
+Event planning is about connections. A good planner knows the best vendors and has working relationships with them.
+
+### Ask About
+
+- How long they've worked with their recommended vendors
+- Whether they get preferential treatment or pricing
+- If they have backup vendors for each category
+
+### Benefits of Strong Relationships
+
+- Priority booking during peak seasons
+- Better negotiating power on your behalf
+- Vendors who go the extra mile because of the relationship
+
+## 5. They Handle Pressure Gracefully
+
+Events never go exactly as planned. What matters is how your planner handles the unexpected.
+
+### Questions to Ask
+
+- "Tell me about a time an event had a major problem. How did you handle it?"
+- "What's your backup plan if a vendor cancels last minute?"
+- "How do you handle difficult guests or family members?"
+
+### Look For
+
+- Calm, solution-focused responses
+- Examples of creative problem-solving
+- Confidence without arrogance
+
+## 6. They're Organized and Communicative
+
+A reliable planner keeps you informed without overwhelming you.
+
+### Expect
+
+- Regular updates on planning progress
+- Shared timelines and checklists
+- Prompt responses to your questions (within 24-48 hours)
+- Clear communication channels (WhatsApp, email, calls)
+
+### Tools of the Trade
+
+Professional planners often use:
+- Project management software
+- Shared planning documents
+- Budget tracking tools
+- Event management apps
+
+## 7. They Know Nigerian Event Culture
+
+If you're planning a Nigerian event, your planner must understand our unique cultural elements.
+
+### Cultural Competence Includes
+
+- Understanding different ethnic wedding traditions
+- Knowledge of proper cultural protocols
+- Familiarity with local vendor markets
+- Experience with large-scale Nigerian celebrations
+
+### Questions to Ask
+
+- "Have you planned Yoruba/Igbo/Hausa traditional ceremonies?"
+- "How do you handle extended family dynamics?"
+- "What's your experience with owambe-style events?"
+
+## Final Checklist Before Hiring
+
+Before signing any contract, ensure you:
+
+✅ Have seen their portfolio and verified references
+✅ Received a detailed written quote
+✅ Understand exactly what's included in their fee
+✅ Feel comfortable communicating with them
+✅ Trust their ability to handle your specific event type
+✅ Have everything in a signed contract
+
+## The Bottom Line
+
+Your event planner should reduce your stress, not add to it. Trust your instincts - if something feels off during initial meetings, it probably is. The right planner will feel like a partner who genuinely cares about making your event special.
+
+Take your time with this decision. Interview multiple planners, check references, and choose someone whose style and personality align with yours.
+    `,
+    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800",
+    category: "Planning Tips",
+    author: "Tunde Okonkwo",
+    date: "January 25, 2026",
+    readTime: "8 min read",
+    tags: ["Event Planner", "Hiring Tips", "Wedding Planning", "Vendor Selection"]
   },
 ];
 

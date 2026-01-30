@@ -77,6 +77,7 @@ const Footer = () => {
               <li><Link to="/vendors/marketplace" className="hover:text-background transition-colors">Vendors</Link></li>
               <li><Link to="/venues" className="hover:text-background transition-colors">Venues</Link></li>
               <li><Link to="/chief" className="hover:text-background transition-colors">Chief AI</Link></li>
+              <li><Link to="/blog" className="hover:text-background transition-colors">Blog</Link></li>
               <li><Link to="/community" className="hover:text-background transition-colors">Community</Link></li>
               <li><Link to="/faq" className="hover:text-background transition-colors">FAQ</Link></li>
             </ul>

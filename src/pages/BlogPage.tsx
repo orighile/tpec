@@ -5,63 +5,33 @@ import { Link } from "react-router-dom";
 const blogPosts = [
   {
     id: 1,
-    title: "10 Essential Tips for Planning a Nigerian Wedding",
-    excerpt: "Discover the key elements to create a memorable Nigerian wedding celebration that honors traditions while embracing modern touches.",
-    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
+    title: "Planning a Beautiful Wedding on a Budget in Nigeria",
+    excerpt: "Smart strategies to create your dream wedding without breaking the bank. From venue selection to vendor negotiations, we've got you covered.",
+    image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800",
     category: "Wedding Planning",
-    author: "Chioma Okonkwo",
-    date: "June 15, 2023",
-    readTime: "8 min read"
-  },
-  {
-    id: 2,
-    title: "How to Create an Event Budget That Actually Works",
-    excerpt: "Learn practical strategies for creating and sticking to an event budget that ensures financial success without compromising on quality.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
-    category: "Event Management",
-    author: "Tunde Adeleke",
-    date: "May 22, 2023",
-    readTime: "5 min read"
-  },
-  {
-    id: 3,
-    title: "The Rise of Virtual Events in Africa",
-    excerpt: "Explore how virtual and hybrid events are transforming the event landscape across Africa, creating new opportunities for connection.",
-    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
-    category: "Industry Trends",
-    author: "Zainab Ibrahim",
-    date: "April 10, 2023",
-    readTime: "6 min read"
-  },
-  {
-    id: 4,
-    title: "Corporate Event Planning: From Concept to Execution",
-    excerpt: "A comprehensive guide to planning successful corporate events that strengthen brand image and achieve business objectives.",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-    category: "Corporate Events",
-    author: "David Olawale",
-    date: "March 5, 2023",
-    readTime: "10 min read"
-  },
-  {
-    id: 5,
-    title: "Incorporating African Culture in Modern Events",
-    excerpt: "Discover creative ways to celebrate African heritage through thoughtful cultural elements in contemporary event design.",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-    category: "Cultural Events",
-    author: "Amara Nwosu",
-    date: "February 18, 2023",
+    author: "Adaeze Nwosu",
+    date: "December 15, 2025",
     readTime: "7 min read"
   },
   {
-    id: 6,
-    title: "Sustainable Event Planning: Reducing Environmental Impact",
-    excerpt: "Learn how to create eco-friendly events that minimize waste and environmental impact while maximizing guest experience.",
-    image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b",
-    category: "Sustainability",
-    author: "Folake Adeyemi",
-    date: "January 30, 2023",
-    readTime: "9 min read"
+    id: 2,
+    title: "The Rise of Micro Weddings in Nigeria: Intimate Celebrations That Make a Big Impact",
+    excerpt: "Discover why more Nigerian couples are choosing smaller, more meaningful celebrations over large traditional weddings.",
+    image: "https://images.unsplash.com/photo-1529636798458-92182e662485?w=800",
+    category: "Wedding Trends",
+    author: "Folake Adeleke",
+    date: "January 10, 2026",
+    readTime: "6 min read"
+  },
+  {
+    id: 3,
+    title: "How to Identify a Reliable Event Planner: 7 Key Signs to Look For",
+    excerpt: "Hiring the right event planner can make or break your celebration. Learn the essential qualities that separate professionals from amateurs.",
+    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800",
+    category: "Planning Tips",
+    author: "Tunde Okonkwo",
+    date: "January 25, 2026",
+    readTime: "8 min read"
   }
 ];
 
@@ -73,7 +43,7 @@ const BlogPage = () => {
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog & Resources</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Event planning tips, industry insights, and expert advice
+              Event planning tips, industry insights, and expert advice for Nigerian celebrations
             </p>
           </div>
         </div>
