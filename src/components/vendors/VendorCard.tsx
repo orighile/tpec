@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Star, MapPin, Calendar, Heart, Info } from "lucide-react";
+import { Star, MapPin, Calendar, Heart, BadgeCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -72,12 +72,13 @@ const VendorCard = ({
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <div className="absolute top-2 right-2 bg-green-500 text-white p-1 rounded-full">
-                  <Info className="h-4 w-4" />
+                <div className="absolute top-2 right-2 bg-emerald-500 text-white px-2 py-1 rounded-full flex items-center gap-1 shadow-md">
+                  <BadgeCheck className="h-4 w-4" />
+                  <span className="text-xs font-semibold">Verified</span>
                 </div>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Verified Vendor - Background checked and reviewed</p>
+                <p>✓ Background checked & reviewed by TPEC</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
