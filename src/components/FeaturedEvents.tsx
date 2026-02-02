@@ -9,9 +9,9 @@ import gtcoFoodFestivalImg from "@/assets/events/gtco-food-festival.jpg";
 const events = [
   {
     id: 1,
-    title: "Lagos Fashion Week 2024",
+    title: "Lagos Fashion Week 2026",
     image: lagosFashionWeekImg,
-    date: "Oct 29 - Nov 2, 2024",
+    date: "Oct 28 - Nov 1, 2026",
     location: "Federal Palace Hotel, Victoria Island",
     attendees: 5000,
     category: "Fashion",
@@ -19,9 +19,9 @@ const events = [
   },
   {
     id: 2,
-    title: "ART X Lagos",
+    title: "ART X Lagos 2026",
     image: artXLagosImg,
-    date: "Nov 6-9, 2024",
+    date: "Nov 5-8, 2026",
     location: "Federal Palace Hotel, Lagos",
     attendees: 3500,
     category: "Art Fair",
@@ -29,9 +29,9 @@ const events = [
   },
   {
     id: 3,
-    title: "Felabration 2024",
+    title: "Felabration 2026",
     image: felabrationImg,
-    date: "Oct 14-20, 2024",
+    date: "Oct 12-18, 2026",
     location: "New Afrika Shrine, Lagos",
     attendees: 50000,
     category: "Music Festival",
@@ -39,9 +39,9 @@ const events = [
   },
   {
     id: 4,
-    title: "GTCO Food & Drink Festival",
+    title: "GTCO Food & Drink Festival 2026",
     image: gtcoFoodFestivalImg,
-    date: "May 1-2, 2024",
+    date: "Apr 30 - May 1, 2026",
     location: "Federal Palace Hotel, Lagos",
     attendees: 25000,
     category: "Food Festival",
