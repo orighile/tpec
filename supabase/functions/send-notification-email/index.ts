@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { SMTPClient } from "https://deno.land/x/denomailer@1.6.0/mod.ts";
+import nodemailer from "npm:nodemailer@6.9.10";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -27,12 +27,16 @@ const handler = async (req: Request): Promise<Response> => {
     console.log(`Processing email request: type=${type}, to=${to}`);
 
     const smtpHost = Deno.env.get("SMTP_HOST");
-    const smtpPort = parseInt(Deno.env.get("SMTP_PORT") || "587");
+    const smtpPort = parseInt(Deno.env.get("SMTP_PORT") || "465");
     const smtpUser = Deno.env.get("SMTP_USER");
     const smtpPassword = Deno.env.get("SMTP_PASSWORD");
 
     if (!smtpHost || !smtpUser || !smtpPassword) {
-      console.error("Missing SMTP configuration");
+      console.error("Missing SMTP configuration:", { 
+        hasHost: !!smtpHost, 
+        hasUser: !!smtpUser, 
+        hasPassword: !!smtpPassword 
+      });
       return new Response(
         JSON.stringify({ error: "Email configuration is incomplete" }),
         { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
@@ -178,6 +182,55 @@ const handler = async (req: Request): Promise<Response> => {
           </html>
         `,
       },
+      password_reset: {
+        subject: "Reset Your Password - TPEC Events",
+        html: `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <style>
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+              .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+              .header { background: linear-gradient(135deg, #8B5CF6, #D946EF); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+              .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+              .reset-button { display: inline-block; background: linear-gradient(135deg, #8B5CF6, #D946EF); color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 20px 0; }
+              .expiry-notice { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; font-size: 14px; }
+              .footer { text-align: center; margin-top: 20px; color: #666; font-size: 14px; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>Password Reset Request</h1>
+                <p>TPEC Events Account</p>
+              </div>
+              <div class="content">
+                <p>Hello,</p>
+                <p>We received a request to reset the password for your TPEC Events account associated with this email address.</p>
+                
+                <p style="text-align: center;">
+                  <a href="${data.resetLink}" class="reset-button" style="color: white;">Reset Your Password</a>
+                </p>
+                
+                <div class="expiry-notice">
+                  <strong>⏰ This link expires in 1 hour.</strong> If you didn't request this password reset, you can safely ignore this email.
+                </div>
+                
+                <p>If the button above doesn't work, copy and paste this link into your browser:</p>
+                <p style="word-break: break-all; color: #8B5CF6; font-size: 14px;">${data.resetLink}</p>
+                
+                <p>If you have any questions, please contact us at info@tpecflowers.com or call +234 9053065636.</p>
+                
+                <div class="footer">
+                  <p>TPEC Events - Creating Memorable Experiences</p>
+                  <p>Lagos, Nigeria | info@tpecflowers.com | +234 9053065636</p>
+                </div>
+              </div>
+            </div>
+          </body>
+          </html>
+        `,
+      },
       order_confirmation: {
         subject: "Order Confirmation - Your Tickets are Ready!",
         html: `
@@ -219,42 +272,46 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    console.log(`Sending email via SMTP: ${smtpHost}:${smtpPort}`);
+    console.log(`Connecting to SMTP: ${smtpHost}:${smtpPort}`);
 
-    // Port 587 uses STARTTLS, port 465 uses direct TLS
-    const useTls = smtpPort === 465;
-    
-    const client = new SMTPClient({
-      connection: {
-        hostname: smtpHost,
-        port: smtpPort,
-        tls: useTls,
-        auth: {
-          username: smtpUser,
-          password: smtpPassword,
-        },
+    // Create nodemailer transporter with proper TLS settings for IONOS
+    const transporter = nodemailer.createTransport({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpPort === 465, // true for 465 (SSL/TLS), false for 587 (STARTTLS)
+      auth: {
+        user: smtpUser,
+        pass: smtpPassword,
+      },
+      tls: {
+        // Required for IONOS - don't fail on invalid certs in some edge cases
+        rejectUnauthorized: true,
+        minVersion: 'TLSv1.2',
       },
     });
 
-    await client.send({
-      from: smtpUser,
+    console.log(`Sending email to ${to} with subject: ${template.subject}`);
+
+    const info = await transporter.sendMail({
+      from: `"TPEC Events" <${smtpUser}>`,
       to: to,
       subject: template.subject,
-      content: "Please view this email in an HTML-capable email client.",
+      text: "Please view this email in an HTML-capable email client.",
       html: template.html,
     });
 
-    await client.close();
-
-    console.log(`Email sent successfully to ${to}`);
+    console.log(`Email sent successfully to ${to}, messageId: ${info.messageId}`);
 
     return new Response(
-      JSON.stringify({ success: true, message: "Email sent successfully" }),
+      JSON.stringify({ success: true, message: "Email sent successfully", messageId: info.messageId }),
       { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error: unknown) {
     console.error("Email sending error:", error);
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    const errorStack = error instanceof Error ? error.stack : "";
+    console.error("Error stack:", errorStack);
+    
     return new Response(
       JSON.stringify({ error: `Failed to send email: ${errorMessage}` }),
       { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
