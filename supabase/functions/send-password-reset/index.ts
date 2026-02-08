@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 import nodemailer from "npm:nodemailer@6.9.10";
 
 const corsHeaders = {
@@ -8,7 +9,6 @@ const corsHeaders = {
 
 interface PasswordResetRequest {
   email: string;
-  resetLink: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -22,16 +22,70 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { email, resetLink }: PasswordResetRequest = await req.json();
-    console.log(`Processing password reset email for: ${email}`);
+    const { email }: PasswordResetRequest = await req.json();
+    console.log(`Processing password reset request for: ${email}`);
 
-    if (!email || !resetLink) {
+    if (!email) {
       return new Response(
-        JSON.stringify({ error: "Missing required fields: email and resetLink" }),
+        JSON.stringify({ error: "Missing required field: email" }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
+    // Create Supabase admin client to generate password reset link
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
+    if (!supabaseUrl || !supabaseServiceRoleKey) {
+      console.error("Missing Supabase configuration");
+      return new Response(
+        JSON.stringify({ error: "Server configuration error" }),
+        { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    });
+
+    // Generate password reset link using Supabase Admin API
+    const redirectTo = `${supabaseUrl.replace('.supabase.co', '.lovable.app').replace('https://xnunwgrtiffwqhechnwf', 'https://tpec-64110')}/auth?type=recovery`;
+    
+    console.log(`Generating reset link with redirect to: ${redirectTo}`);
+
+    const { data: linkData, error: linkError } = await supabaseAdmin.auth.admin.generateLink({
+      type: "recovery",
+      email: email,
+      options: {
+        redirectTo: redirectTo,
+      },
+    });
+
+    if (linkError) {
+      console.error("Error generating reset link:", linkError);
+      // Don't reveal if email exists or not for security
+      return new Response(
+        JSON.stringify({ success: true, message: "If an account exists with this email, a password reset link has been sent." }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const resetLink = linkData.properties?.action_link;
+    
+    if (!resetLink) {
+      console.error("No reset link generated");
+      return new Response(
+        JSON.stringify({ error: "Failed to generate reset link" }),
+        { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    console.log(`Reset link generated successfully`);
+
+    // SMTP Configuration
     const smtpHost = Deno.env.get("SMTP_HOST");
     const smtpPort = parseInt(Deno.env.get("SMTP_PORT") || "465");
     const smtpUser = Deno.env.get("SMTP_USER");
@@ -55,7 +109,7 @@ const handler = async (req: Request): Promise<Response> => {
     const transporter = nodemailer.createTransport({
       host: smtpHost,
       port: smtpPort,
-      secure: smtpPort === 465, // true for 465 (SSL/TLS), false for 587 (STARTTLS)
+      secure: smtpPort === 465,
       auth: {
         user: smtpUser,
         pass: smtpPassword,
@@ -134,7 +188,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log(`Password reset email sent successfully to ${email}, messageId: ${info.messageId}`);
 
     return new Response(
-      JSON.stringify({ success: true, message: "Password reset email sent successfully", messageId: info.messageId }),
+      JSON.stringify({ success: true, message: "Password reset email sent successfully" }),
       { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error: unknown) {

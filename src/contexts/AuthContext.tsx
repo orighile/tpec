@@ -211,26 +211,37 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const resetPassword = async (email: string) => {
     try {
-      // Use Supabase's built-in password reset which will trigger the custom edge function
-      // The redirect URL includes type=recovery so the Auth page shows the update password form
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth?type=recovery`,
+      // Call our custom edge function that generates reset link and sends via IONOS SMTP
+      const response = await supabase.functions.invoke('send-password-reset', {
+        body: { email },
       });
+
+      if (response.error) {
+        toast({
+          title: "Error resetting password",
+          description: response.error.message || "Failed to send password reset email",
+          variant: "destructive",
+        });
+        return { error: response.error };
+      }
+
+      const data = response.data;
       
-      if (!error) {
+      if (data?.success) {
         toast({
           title: "Password reset email sent",
           description: "Please check your email for the password reset link.",
         });
+        return { error: null };
       } else {
+        const errorMsg = data?.error || "Failed to send password reset email";
         toast({
           title: "Error resetting password",
-          description: error.message,
+          description: errorMsg,
           variant: "destructive",
         });
+        return { error: new Error(errorMsg) };
       }
-      
-      return { error };
     } catch (error: any) {
       toast({
         title: "Error resetting password",
