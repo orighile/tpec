@@ -131,28 +131,88 @@ const Auth = () => {
   useEffect(() => {
     const checkForResetToken = async () => {
       const hash = location.hash;
-      
-      if (hash && hash.includes('access_token') && hash.includes('type=recovery')) {
-        console.log("Password reset token detected in hash");
-        setActiveTab('updatePassword');
-        toast({
-          title: "Update your password",
-          description: "Please enter a new password below.",
-        });
-        return;
-      }
-      
       const query = new URLSearchParams(location.search);
       const type = query.get('type');
       const tab = query.get('tab');
       
+      // Check for recovery token in hash (from Supabase redirect)
+      if (hash && hash.includes('access_token')) {
+        console.log("Access token detected in hash, processing...");
+        
+        // Parse the hash to extract tokens
+        const hashParams = new URLSearchParams(hash.substring(1));
+        const accessToken = hashParams.get('access_token');
+        const refreshToken = hashParams.get('refresh_token');
+        const tokenType = hashParams.get('type');
+        
+        if (accessToken && refreshToken) {
+          try {
+            // Set the session using the tokens from the URL
+            const { data, error } = await supabase.auth.setSession({
+              access_token: accessToken,
+              refresh_token: refreshToken
+            });
+            
+            if (error) {
+              console.error("Error setting session from recovery token:", error);
+              toast({
+                title: "Session Error",
+                description: "Unable to verify your identity. Please request a new password reset link.",
+                variant: "destructive",
+              });
+              setActiveTab('forgot');
+              return;
+            }
+            
+            if (data.session) {
+              console.log("Session established from recovery token");
+              // Clean up the URL
+              window.history.replaceState(null, '', window.location.pathname + '?type=recovery');
+              setActiveTab('updatePassword');
+              toast({
+                title: "Update your password",
+                description: "Please enter a new password below.",
+              });
+              return;
+            }
+          } catch (err) {
+            console.error("Error processing recovery token:", err);
+          }
+        }
+        
+        // If it's a recovery type, still show the update password form
+        if (tokenType === 'recovery' || hash.includes('type=recovery')) {
+          setActiveTab('updatePassword');
+          toast({
+            title: "Update your password",
+            description: "Please enter a new password below.",
+          });
+          return;
+        }
+      }
+      
+      // Check for recovery type in query params (after redirect cleanup)
       if (type === 'recovery') {
-        console.log("Password reset token detected in query params");
-        setActiveTab('updatePassword');
-        toast({
-          title: "Update your password",
-          description: "Please enter a new password below.",
-        });
+        console.log("Recovery mode detected in query params");
+        // Verify we have an active session before showing update form
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (session) {
+          console.log("Active session found, showing password update form");
+          setActiveTab('updatePassword');
+          toast({
+            title: "Update your password",
+            description: "Please enter a new password below.",
+          });
+        } else {
+          console.log("No active session for password recovery");
+          toast({
+            title: "Session Expired",
+            description: "Your password reset link has expired. Please request a new one.",
+            variant: "destructive",
+          });
+          setActiveTab('forgot');
+        }
       } else if (tab === 'signup') {
         setActiveTab('signup');
       }
@@ -248,6 +308,20 @@ const Auth = () => {
   const onUpdatePasswordSubmit = async (values: UpdatePasswordFormValues) => {
     setIsLoading(true);
     try {
+      // First verify we have a valid session
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        toast({
+          title: "Session Expired",
+          description: "Your password reset session has expired. Please request a new reset link.",
+          variant: "destructive",
+        });
+        setActiveTab('forgot');
+        setIsLoading(false);
+        return;
+      }
+      
       const { error } = await supabase.auth.updateUser({
         password: values.password
       });
@@ -261,13 +335,17 @@ const Auth = () => {
         description: "You can now log in with your new password.",
       });
       updatePasswordForm.reset();
+      
+      // Sign out after password update so user logs in fresh
+      await supabase.auth.signOut();
       setActiveTab("login");
       
       window.history.replaceState(null, '', window.location.pathname);
     } catch (error: any) {
+      console.error("Password update error:", error);
       toast({
         title: "Error updating password",
-        description: error.message,
+        description: error.message || "Failed to update password. Please try again.",
         variant: "destructive",
       });
     } finally {
