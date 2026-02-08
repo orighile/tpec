@@ -211,8 +211,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const resetPassword = async (email: string) => {
     try {
+      // Use Supabase's built-in password reset which will trigger the custom edge function
+      // The redirect URL includes type=recovery so the Auth page shows the update password form
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth`,
+        redirectTo: `${window.location.origin}/auth?type=recovery`,
       });
       
       if (!error) {
