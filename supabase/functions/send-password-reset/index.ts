@@ -108,12 +108,12 @@ const handler = async (req: Request): Promise<Response> => {
             <p>If the button above doesn't work, copy and paste this link into your browser:</p>
             <div class="link-fallback">${resetLink}</div>
             
-            <p>Need help? Contact us at <a href="mailto:info@tpecflowers.com" style="color: #8B5CF6;">info@tpecflowers.com</a> or call <strong>+234 9053065636</strong>.</p>
+            <p>Need help? Contact us at <a href="mailto:info@tpecevents.com" style="color: #8B5CF6;">info@tpecevents.com</a> or call <strong>+234 9053065636</strong>.</p>
             
             <div class="footer">
               <p><strong>TPEC Events</strong> - Creating Memorable Experiences</p>
               <p>Lagos, Nigeria</p>
-              <p><a href="mailto:info@tpecflowers.com">info@tpecflowers.com</a> | +234 9053065636</p>
+              <p><a href="mailto:info@tpecevents.com">info@tpecevents.com</a> | +234 9053065636</p>
             </div>
           </div>
         </div>
