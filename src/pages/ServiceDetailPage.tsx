@@ -152,13 +152,13 @@ const servicesData = {
 };
 
 const ServiceDetailPage = () => {
-  const { serviceType } = useParams<{ serviceType: string }>();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const service = serviceType ? servicesData[serviceType as keyof typeof servicesData] : null;
+  const service = id ? servicesData[id as keyof typeof servicesData] : null;
   
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [serviceType]);
+  }, [id]);
   
   if (!service) {
     return (

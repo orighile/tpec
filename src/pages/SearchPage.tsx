@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, MapPin, Tag } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import JaraBot from "../components/jarabot";
 import { performSearch, SearchResultItem, getTypeColor } from "@/utils/SearchUtils";
 import { Badge } from "@/components/ui/badge";
@@ -58,6 +58,26 @@ const SearchPage: React.FC = () => {
         return <Tag className="h-4 w-4 mr-1" />;
       default:
         return null;
+    }
+  };
+
+  // Generate the correct URL based on result type
+  const getResultUrl = (result: SearchResultItem): string => {
+    switch (result.type) {
+      case 'venue':
+        return '/venues';
+      case 'vendor':
+        return `/vendors/${result.id}`;
+      case 'blog':
+        return result.id.startsWith('blog-') ? `/blog/${result.id.replace('blog-', '')}` : '/blog';
+      case 'event':
+        return '/events';
+      case 'cultural':
+        return '/gallery';
+      case 'service':
+        return '/services';
+      default:
+        return '/';
     }
   };
 
@@ -134,7 +154,7 @@ const SearchPage: React.FC = () => {
                       </CardContent>
                       <CardFooter className="px-6 py-3 bg-muted/30 border-t">
                         <Button variant="link" className="p-0 h-auto text-primary" asChild>
-                          <a href="#">View Details</a>
+                          <Link to={getResultUrl(result)}>View Details</Link>
                         </Button>
                       </CardFooter>
                     </Card>

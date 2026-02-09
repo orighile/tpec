@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Calendar, MapPin, Users, Heart } from "phosphor-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { OptimizedImage } from "@/components/ui/optimized-image";
+import { useToast } from "@/hooks/use-toast";
 
 type EventCardProps = {
   id: number;
@@ -27,6 +29,20 @@ const EventCard = ({
   isFeatured = false,
   className
 }: EventCardProps) => {
+  const [isFavorited, setIsFavorited] = useState(false);
+  const { toast } = useToast();
+
+  const handleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsFavorited(!isFavorited);
+    toast({
+      title: isFavorited ? "Removed from favorites" : "Added to favorites",
+      description: isFavorited 
+        ? `${title} has been removed from your favorites.`
+        : `${title} has been added to your favorites.`,
+    });
+  };
   return (
     <div className={cn(
       "tpec-card group h-full bg-card",
@@ -50,9 +66,13 @@ const EventCard = ({
         <Button 
           variant="ghost" 
           size="icon" 
-          className="absolute top-3 right-3 bg-background/80 hover:bg-background text-primary rounded-full w-8 h-8"
+          className={cn(
+            "absolute top-3 right-3 bg-background/80 hover:bg-background rounded-full w-8 h-8",
+            isFavorited ? "text-red-500" : "text-primary"
+          )}
+          onClick={handleFavorite}
         >
-          <Heart className="w-4 h-4" />
+          <Heart className="w-4 h-4" weight={isFavorited ? "fill" : "regular"} />
         </Button>
         
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/70 to-transparent p-4">
