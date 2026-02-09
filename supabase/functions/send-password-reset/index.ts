@@ -25,9 +25,10 @@ const handler = async (req: Request): Promise<Response> => {
     const { email }: PasswordResetRequest = await req.json();
     console.log(`Processing password reset request for: ${email}`);
 
-    if (!email) {
+    // Enhanced email validation
+    if (!email || !email.includes('@')) {
       return new Response(
-        JSON.stringify({ error: "Missing required field: email" }),
+        JSON.stringify({ error: "Missing or invalid email address" }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
@@ -51,8 +52,9 @@ const handler = async (req: Request): Promise<Response> => {
       },
     });
 
-    // Generate password reset link using Supabase Admin API
-    const redirectTo = `${supabaseUrl.replace('.supabase.co', '.lovable.app').replace('https://xnunwgrtiffwqhechnwf', 'https://tpec-64110')}/auth?type=recovery`;
+    // Use APP_URL environment variable with fallback
+    const appUrl = Deno.env.get("APP_URL") || "https://tpec-64110.lovable.app";
+    const redirectTo = `${appUrl}/auth?type=recovery`;
     
     console.log(`Generating reset link with redirect to: ${redirectTo}`);
 
@@ -66,7 +68,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     if (linkError) {
       console.error("Error generating reset link:", linkError);
-      // Don't reveal if email exists or not for security
+      // Don't reveal if email exists or not for security - return success
       return new Response(
         JSON.stringify({ success: true, message: "If an account exists with this email, a password reset link has been sent." }),
         { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
@@ -78,16 +80,16 @@ const handler = async (req: Request): Promise<Response> => {
     if (!resetLink) {
       console.error("No reset link generated");
       return new Response(
-        JSON.stringify({ error: "Failed to generate reset link" }),
-        { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        JSON.stringify({ success: true, message: "If an account exists with this email, a password reset link has been sent." }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
     console.log(`Reset link generated successfully`);
 
-    // SMTP Configuration
+    // SMTP Configuration - Use port 587 (STARTTLS) as default for better reliability
     const smtpHost = Deno.env.get("SMTP_HOST");
-    const smtpPort = parseInt(Deno.env.get("SMTP_PORT") || "465");
+    const smtpPort = parseInt(Deno.env.get("SMTP_PORT") || "587");
     const smtpUser = Deno.env.get("SMTP_USER");
     const smtpPassword = Deno.env.get("SMTP_PASSWORD");
 
@@ -105,7 +107,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log(`Connecting to SMTP: ${smtpHost}:${smtpPort}`);
 
-    // Create nodemailer transporter with proper TLS settings for IONOS
+    // Create nodemailer transporter with proper TLS settings and timeouts
     const transporter = nodemailer.createTransport({
       host: smtpHost,
       port: smtpPort,
@@ -118,7 +120,22 @@ const handler = async (req: Request): Promise<Response> => {
         rejectUnauthorized: true,
         minVersion: 'TLSv1.2',
       },
+      connectionTimeout: 30000,
+      greetingTimeout: 30000,
+      socketTimeout: 45000,
     });
+
+    // Verify SMTP connection before sending
+    try {
+      await transporter.verify();
+      console.log('SMTP connection verified successfully');
+    } catch (verifyError) {
+      console.error('SMTP verification failed:', verifyError);
+      return new Response(
+        JSON.stringify({ success: true, message: "If an account exists with this email, a password reset link has been sent." }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
 
     const htmlContent = `
       <!DOCTYPE html>
@@ -175,31 +192,48 @@ const handler = async (req: Request): Promise<Response> => {
       </html>
     `;
 
-    console.log(`Sending password reset email to ${email}`);
-
-    const info = await transporter.sendMail({
+    const mailOptions = {
       from: `"TPEC Events" <${smtpUser}>`,
       to: email,
       subject: "Reset Your Password - TPEC Events",
       text: `You requested to reset your password. Click this link to reset it: ${resetLink}\n\nThis link expires in 1 hour.\n\nIf you didn't request this, you can safely ignore this email.\n\nTPEC Events - Creating Memorable Experiences`,
       html: htmlContent,
-    });
+    };
 
-    console.log(`Password reset email sent successfully to ${email}, messageId: ${info.messageId}`);
+    console.log(`Sending password reset email to ${email}`);
 
-    return new Response(
-      JSON.stringify({ success: true, message: "Password reset email sent successfully" }),
-      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    // Use Promise.race for timeout protection
+    const emailPromise = transporter.sendMail(mailOptions);
+    const timeoutPromise = new Promise<never>((_, reject) => 
+      setTimeout(() => reject(new Error('Email send timeout after 40 seconds')), 40000)
     );
+
+    try {
+      const info = await Promise.race([emailPromise, timeoutPromise]);
+      console.log(`Password reset email sent successfully to ${email}, messageId: ${info.messageId}`);
+
+      return new Response(
+        JSON.stringify({ success: true, message: "Password reset email sent successfully" }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    } catch (sendError) {
+      console.error("Email send failed or timed out:", sendError);
+      // Return success for security (don't reveal email delivery issues)
+      return new Response(
+        JSON.stringify({ success: true, message: "If an account exists with this email, a password reset link has been sent." }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
   } catch (error: unknown) {
     console.error("Password reset email error:", error);
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     const errorStack = error instanceof Error ? error.stack : "";
     console.error("Error stack:", errorStack);
     
+    // Return success for security (prevent email enumeration)
     return new Response(
-      JSON.stringify({ error: `Failed to send password reset email: ${errorMessage}` }),
-      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      JSON.stringify({ success: true, message: "If an account exists with this email, a password reset link has been sent." }),
+      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
 };
