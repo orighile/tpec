@@ -92,7 +92,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("prime_members")
         .select("*")
         .eq("user_id", user.id)
