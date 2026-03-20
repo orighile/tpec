@@ -25,10 +25,10 @@ export const useVendors = () => {
     setLoading(true);
     try {
       // Fetch vendors directly from the vendors table
-      let query = supabase
+      let query = (supabase as any)
         .from('vendors')
         .select('*')
-        .eq('is_verified', true);
+        .eq('verified', true);
 
       const { data, error } = await query;
 
