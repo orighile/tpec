@@ -271,13 +271,13 @@ export function useDiscussions() {
       if (!user) throw new Error("Must be logged in");
 
       if (hasLiked) {
-        await supabase
+        await (supabase as any)
           .from("discussion_likes")
           .delete()
           .eq("user_id", user.id)
           .eq("discussion_id", discussionId);
       } else {
-        await supabase.from("discussion_likes").insert({
+        await (supabase as any).from("discussion_likes").insert({
           user_id: user.id,
           discussion_id: discussionId,
         });
