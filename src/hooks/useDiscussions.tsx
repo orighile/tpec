@@ -169,10 +169,10 @@ export function useDiscussions() {
         }
 
         const profileMap = new Map(
-          (profiles || []).map((p) => [p.user_id, p])
+          (profiles || []).map((p: any) => [p.id, p])
         );
 
-        return replies.map((r) => {
+        return (replies || []).map((r: any) => {
           const profile = profileMap.get(r.user_id);
           return {
             ...r,
