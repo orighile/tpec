@@ -160,7 +160,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
     }
 
     try {
-      const { data: newMember, error } = await supabase
+      const { data: newMember, error } = await (supabase as any)
         .from("prime_members")
         .insert({
           ...data,
