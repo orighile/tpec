@@ -53,7 +53,7 @@ export function useDiscussions() {
   const { data: discussions = [], isLoading, refetch } = useQuery({
     queryKey: ["discussions"],
     queryFn: async () => {
-      const { data: discussionsData, error } = await supabase
+      const { data: discussionsData, error } = await (supabase as any)
         .from("discussions")
         .select("*")
         .order("created_at", { ascending: false });
