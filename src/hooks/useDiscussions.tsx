@@ -99,7 +99,7 @@ export function useDiscussions() {
     return useQuery({
       queryKey: ["discussion", discussionId],
       queryFn: async () => {
-        const { data: discussion, error } = await supabase
+        const { data: discussion, error } = await (supabase as any)
           .from("discussions")
           .select("*")
           .eq("id", discussionId)
