@@ -46,13 +46,13 @@ export const useAdminData = () => {
   const { data: bookings = [], isLoading: bookingsLoading } = useQuery({
     queryKey: ['admin-bookings'],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('consultation_bookings')
         .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      return data as ConsultationBooking[];
+      return (data || []) as ConsultationBooking[];
     },
   });
 
@@ -66,7 +66,7 @@ export const useAdminData = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      return data as UserProfile[];
+      return (data || []) as unknown as UserProfile[];
     },
   });
 
@@ -74,20 +74,20 @@ export const useAdminData = () => {
   const { data: primeMembers = [], isLoading: primeMembersLoading } = useQuery({
     queryKey: ['admin-prime-members'],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('prime_members')
         .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      return data as PrimeMember[];
+      return (data || []) as PrimeMember[];
     },
   });
 
   // Update booking status
   const updateBookingStatus = useMutation({
     mutationFn: async ({ id, status }: { id: string; status: string }) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('consultation_bookings')
         .update({ status })
         .eq('id', id);
@@ -106,7 +106,7 @@ export const useAdminData = () => {
   // Delete booking
   const deleteBooking = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('consultation_bookings')
         .delete()
         .eq('id', id);
@@ -125,7 +125,7 @@ export const useAdminData = () => {
   // Toggle prime member active status
   const togglePrimeMemberStatus = useMutation({
     mutationFn: async ({ id, isActive }: { id: string; isActive: boolean }) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('prime_members')
         .update({ is_active: isActive })
         .eq('id', id);

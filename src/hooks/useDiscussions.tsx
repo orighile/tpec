@@ -53,7 +53,7 @@ export function useDiscussions() {
   const { data: discussions = [], isLoading, refetch } = useQuery({
     queryKey: ["discussions"],
     queryFn: async () => {
-      const { data: discussionsData, error } = await supabase
+      const { data: discussionsData, error } = await (supabase as any)
         .from("discussions")
         .select("*")
         .order("created_at", { ascending: false });
@@ -62,15 +62,15 @@ export function useDiscussions() {
 
       // Fetch author profiles
       const userIds = [...new Set(discussionsData.map((d) => d.user_id))];
-      const { data: profiles } = await supabase
+      const { data: profiles } = await (supabase as any)
         .from("profiles")
-        .select("user_id, full_name, avatar_url")
-        .in("user_id", userIds);
+        .select("id, full_name, avatar_url")
+        .in("id", userIds);
 
       // Check which discussions user has liked
       let likedDiscussionIds: string[] = [];
       if (user) {
-        const { data: likes } = await supabase
+        const { data: likes } = await (supabase as any)
           .from("discussion_likes")
           .select("discussion_id")
           .eq("user_id", user.id)
@@ -79,15 +79,15 @@ export function useDiscussions() {
       }
 
       const profileMap = new Map(
-        (profiles || []).map((p) => [p.user_id, p])
+        (profiles || []).map((p: any) => [p.id, p])
       );
 
-      return discussionsData.map((d) => {
+      return (discussionsData || []).map((d: any) => {
         const profile = profileMap.get(d.user_id);
         return {
           ...d,
-          author_name: profile?.full_name || "Anonymous",
-          author_avatar: profile?.avatar_url,
+          author_name: (profile as any)?.full_name || "Anonymous",
+          author_avatar: (profile as any)?.avatar_url,
           has_liked: likedDiscussionIds.includes(d.id),
         };
       }) as Discussion[];
@@ -99,7 +99,7 @@ export function useDiscussions() {
     return useQuery({
       queryKey: ["discussion", discussionId],
       queryFn: async () => {
-        const { data: discussion, error } = await supabase
+        const { data: discussion, error } = await (supabase as any)
           .from("discussions")
           .select("*")
           .eq("id", discussionId)
@@ -108,16 +108,16 @@ export function useDiscussions() {
         if (error) throw error;
 
         // Fetch author profile
-        const { data: authorProfile } = await supabase
+        const { data: authorProfile } = await (supabase as any)
           .from("profiles")
           .select("full_name, avatar_url")
-          .eq("user_id", discussion.user_id)
+          .eq("id", discussion.user_id)
           .single();
 
         // Check if user liked this discussion
         let hasLiked = false;
         if (user) {
-          const { data: like } = await supabase
+          const { data: like } = await (supabase as any)
             .from("discussion_likes")
             .select("id")
             .eq("user_id", user.id)
@@ -142,7 +142,7 @@ export function useDiscussions() {
     return useQuery({
       queryKey: ["discussion-replies", discussionId],
       queryFn: async () => {
-        const { data: replies, error } = await supabase
+        const { data: replies, error } = await (supabase as any)
           .from("discussion_replies")
           .select("*")
           .eq("discussion_id", discussionId)
@@ -151,16 +151,16 @@ export function useDiscussions() {
         if (error) throw error;
 
         // Fetch author profiles
-        const userIds = [...new Set(replies.map((r) => r.user_id))];
-        const { data: profiles } = await supabase
+        const userIds = [...new Set((replies || []).map((r: any) => r.user_id))];
+        const { data: profiles } = await (supabase as any)
           .from("profiles")
-          .select("user_id, full_name, avatar_url")
-          .in("user_id", userIds);
+          .select("id, full_name, avatar_url")
+          .in("id", userIds);
 
         // Check which replies user has liked
         let likedReplyIds: string[] = [];
         if (user) {
-          const { data: likes } = await supabase
+          const { data: likes } = await (supabase as any)
             .from("discussion_likes")
             .select("reply_id")
             .eq("user_id", user.id)
@@ -169,15 +169,15 @@ export function useDiscussions() {
         }
 
         const profileMap = new Map(
-          (profiles || []).map((p) => [p.user_id, p])
+          (profiles || []).map((p: any) => [p.id, p])
         );
 
-        return replies.map((r) => {
+        return (replies || []).map((r: any) => {
           const profile = profileMap.get(r.user_id);
           return {
             ...r,
-            author_name: profile?.full_name || "Anonymous",
-            author_avatar: profile?.avatar_url,
+            author_name: (profile as any)?.full_name || "Anonymous",
+            author_avatar: (profile as any)?.avatar_url,
             has_liked: likedReplyIds.includes(r.id),
           };
         }) as DiscussionReply[];
@@ -199,7 +199,7 @@ export function useDiscussions() {
     }) => {
       if (!user) throw new Error("Must be logged in");
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("discussions")
         .insert({
           user_id: user.id,
@@ -233,7 +233,7 @@ export function useDiscussions() {
     }) => {
       if (!user) throw new Error("Must be logged in");
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("discussion_replies")
         .insert({
           discussion_id: discussionId,
@@ -248,7 +248,7 @@ export function useDiscussions() {
       // Increment replies count
       const currentDiscussion = discussions.find(d => d.id === discussionId);
       const newCount = (currentDiscussion?.replies_count ?? 0) + 1;
-      await supabase
+      await (supabase as any)
         .from("discussions")
         .update({ replies_count: newCount })
         .eq("id", discussionId);
@@ -271,13 +271,13 @@ export function useDiscussions() {
       if (!user) throw new Error("Must be logged in");
 
       if (hasLiked) {
-        await supabase
+        await (supabase as any)
           .from("discussion_likes")
           .delete()
           .eq("user_id", user.id)
           .eq("discussion_id", discussionId);
       } else {
-        await supabase.from("discussion_likes").insert({
+        await (supabase as any).from("discussion_likes").insert({
           user_id: user.id,
           discussion_id: discussionId,
         });
@@ -287,7 +287,7 @@ export function useDiscussions() {
       const newCount = hasLiked ? -1 : 1;
       const discussion = discussions.find((d) => d.id === discussionId);
       if (discussion) {
-        await supabase
+        await (supabase as any)
           .from("discussions")
           .update({ likes_count: Math.max(0, discussion.likes_count + newCount) })
           .eq("id", discussionId);
@@ -314,19 +314,19 @@ export function useDiscussions() {
       if (!user) throw new Error("Must be logged in");
 
       if (hasLiked) {
-        await supabase
+        await (supabase as any)
           .from("discussion_likes")
           .delete()
           .eq("user_id", user.id)
           .eq("reply_id", replyId);
       } else {
-        await supabase.from("discussion_likes").insert({
+        await (supabase as any).from("discussion_likes").insert({
           user_id: user.id,
           reply_id: replyId,
         });
       }
 
-      await supabase
+      await (supabase as any)
         .from("discussion_replies")
         .update({ likes_count: Math.max(0, currentLikes + (hasLiked ? -1 : 1)) })
         .eq("id", replyId);
@@ -339,7 +339,7 @@ export function useDiscussions() {
   // Delete discussion
   const deleteDiscussion = useMutation({
     mutationFn: async (discussionId: string) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("discussions")
         .delete()
         .eq("id", discussionId);
@@ -354,7 +354,7 @@ export function useDiscussions() {
   // Delete reply
   const deleteReply = useMutation({
     mutationFn: async ({ replyId, discussionId }: { replyId: string; discussionId: string }) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("discussion_replies")
         .delete()
         .eq("id", replyId);

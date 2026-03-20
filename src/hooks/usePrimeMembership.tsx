@@ -92,7 +92,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("prime_members")
         .select("*")
         .eq("user_id", user.id)
@@ -117,7 +117,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
   // Fetch all active members (for public listing)
   const fetchAllMembers = async () => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("prime_members")
         .select("*")
         .eq("membership_type", membershipType)
@@ -135,7 +135,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
   // Fetch gallery images for a member
   const fetchGalleryImages = async (memberId: string) => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("prime_gallery")
         .select("*")
         .eq("prime_member_id", memberId)
@@ -160,7 +160,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
     }
 
     try {
-      const { data: newMember, error } = await supabase
+      const { data: newMember, error } = await (supabase as any)
         .from("prime_members")
         .insert({
           ...data,
@@ -202,7 +202,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
     if (!membership?.id) return false;
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("prime_members")
         .update(data)
         .eq("id", membership.id);
@@ -309,7 +309,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
     if (!url) return false;
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("prime_gallery")
         .insert({
           prime_member_id: membership.id,
@@ -342,7 +342,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
   // Delete gallery image
   const deleteGalleryImage = async (imageId: string): Promise<boolean> => {
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("prime_gallery")
         .delete()
         .eq("id", imageId);

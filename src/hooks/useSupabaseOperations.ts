@@ -50,7 +50,7 @@ export const useSupabaseOperations = () => {
     return useQuery({
       queryKey: ["events"],
       queryFn: async (): Promise<Event[]> => {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("events")
           .select("*")
           .eq("is_public", true)
@@ -66,7 +66,7 @@ export const useSupabaseOperations = () => {
       queryKey: ["user-events", user?.id],
       queryFn: async (): Promise<Event[]> => {
         if (!user?.id) return [];
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("events")
           .select("*")
           .eq("user_id", user.id)
@@ -132,10 +132,10 @@ export const useSupabaseOperations = () => {
       queryKey: ["user-vendors", user?.id],
       queryFn: async (): Promise<Vendor[]> => {
         if (!user?.id) return [];
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("vendors")
           .select("*")
-          .eq("user_id", user.id)
+          .eq("owner_user_id", user.id)
           .order("created_at", { ascending: false });
         if (error) throw error;
         return data || [];
@@ -147,11 +147,11 @@ export const useSupabaseOperations = () => {
   const createVendor = useMutation({
     mutationFn: async (vendorData: CreateVendorForm) => {
       if (!user?.id) throw new Error("You must be signed in to create a vendor.");
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("vendors")
         .insert({
           ...vendorData,
-          user_id: user.id,
+          owner_user_id: user.id,
         })
         .select()
         .single();
@@ -220,12 +220,12 @@ export const useSupabaseOperations = () => {
       const priceMap = new Map(eventTickets.map((t) => [t.id, t.price]));
       const amount = orderData.items.reduce((sum, it) => sum + (priceMap.get(it.ticket_id) || 0) * it.quantity, 0);
 
-      const { data: order, error: orderErr } = await supabase
+      const { data: order, error: orderErr } = await (supabase as any)
         .from("orders")
         .insert({
           user_id: user.id,
           event_id: orderData.event_id,
-          total_amount: amount,
+          amount: amount,
           status: 'pending',
         })
         .select()

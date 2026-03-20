@@ -41,7 +41,7 @@ export const useVendorBookings = () => {
       queryFn: async (): Promise<VendorBooking[]> => {
         if (!user?.id) return [];
         
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("vendor_bookings")
           .select("*")
           .eq("user_id", user.id)
@@ -85,13 +85,12 @@ export const useVendorBookings = () => {
       let eventId = bookingData.event_id;
       
       if (!eventId) {
-        const { data: tempEvent, error: eventError } = await supabase
+        const { data: tempEvent, error: eventError } = await (supabase as any)
           .from("events")
           .insert({
             title: `Booking with vendor - ${new Date().toISOString()}`,
             description: `Temporary event for vendor booking`,
-            user_id: user.id,
-            is_public: false,
+            owner_user_id: user.id,
             event_date: bookingData.booking_details.event_date,
             location: bookingData.booking_details.location,
           })
@@ -103,14 +102,12 @@ export const useVendorBookings = () => {
       }
 
       // Create the vendor booking
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("vendor_bookings")
         .insert({
           vendor_id: bookingData.vendor_id,
-          user_id: user.id,
-          event_date: bookingData.booking_details.event_date,
-          event_type: 'booking',
-          total_amount: bookingData.amount,
+          event_id: eventId,
+          amount: bookingData.amount,
           status: 'pending',
           notes: JSON.stringify(bookingData.booking_details),
         })

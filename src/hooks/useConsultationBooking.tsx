@@ -48,7 +48,7 @@ export const useConsultationBooking = () => {
   const { toast } = useToast();
 
   const fetchAvailability = async (): Promise<BookingAvailability[]> => {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from("booking_availability")
       .select("*")
       .eq("is_available", true);
@@ -58,11 +58,11 @@ export const useConsultationBooking = () => {
       return [];
     }
 
-    return data || [];
+    return (data || []) as BookingAvailability[];
   };
 
   const fetchBlockedDates = async (): Promise<BlockedDate[]> => {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from("blocked_dates")
       .select("*");
 
@@ -71,13 +71,13 @@ export const useConsultationBooking = () => {
       return [];
     }
 
-    return data || [];
+    return (data || []) as BlockedDate[];
   };
 
   const fetchExistingBookings = async (date: Date): Promise<ConsultationBooking[]> => {
     const dateStr = format(date, "yyyy-MM-dd");
     
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from("consultation_bookings")
       .select("*")
       .eq("booking_date", dateStr)
@@ -186,7 +186,7 @@ export const useConsultationBooking = () => {
         status: "pending",
       };
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("consultation_bookings")
         .insert(bookingData)
         .select()
