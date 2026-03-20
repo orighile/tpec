@@ -309,7 +309,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
     if (!url) return false;
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("prime_gallery")
         .insert({
           prime_member_id: membership.id,
