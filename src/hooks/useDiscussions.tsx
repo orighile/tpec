@@ -233,7 +233,7 @@ export function useDiscussions() {
     }) => {
       if (!user) throw new Error("Must be logged in");
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("discussion_replies")
         .insert({
           discussion_id: discussionId,
