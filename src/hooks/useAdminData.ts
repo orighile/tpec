@@ -46,13 +46,13 @@ export const useAdminData = () => {
   const { data: bookings = [], isLoading: bookingsLoading } = useQuery({
     queryKey: ['admin-bookings'],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('consultation_bookings')
         .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      return data as ConsultationBooking[];
+      return (data || []) as ConsultationBooking[];
     },
   });
 
