@@ -151,11 +151,11 @@ export function useDiscussions() {
         if (error) throw error;
 
         // Fetch author profiles
-        const userIds = [...new Set(replies.map((r) => r.user_id))];
-        const { data: profiles } = await supabase
+        const userIds = [...new Set((replies || []).map((r: any) => r.user_id))];
+        const { data: profiles } = await (supabase as any)
           .from("profiles")
-          .select("user_id, full_name, avatar_url")
-          .in("user_id", userIds);
+          .select("id, full_name, avatar_url")
+          .in("id", userIds);
 
         // Check which replies user has liked
         let likedReplyIds: string[] = [];
