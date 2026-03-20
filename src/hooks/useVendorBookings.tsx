@@ -41,7 +41,7 @@ export const useVendorBookings = () => {
       queryFn: async (): Promise<VendorBooking[]> => {
         if (!user?.id) return [];
         
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("vendor_bookings")
           .select("*")
           .eq("user_id", user.id)
