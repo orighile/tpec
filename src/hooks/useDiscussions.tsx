@@ -176,8 +176,8 @@ export function useDiscussions() {
           const profile = profileMap.get(r.user_id);
           return {
             ...r,
-            author_name: profile?.full_name || "Anonymous",
-            author_avatar: profile?.avatar_url,
+            author_name: (profile as any)?.full_name || "Anonymous",
+            author_avatar: (profile as any)?.avatar_url,
             has_liked: likedReplyIds.includes(r.id),
           };
         }) as DiscussionReply[];

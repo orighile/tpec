@@ -40,17 +40,17 @@ export const useVendorMarketplace = () => {
 
         if (error) throw error;
 
-        const formattedVendors: Vendor[] = (data || []).map(v => ({
+        const formattedVendors: Vendor[] = (data || []).map((v: any) => ({
           id: v.id,
           name: v.name,
           category: v.category || 'Other',
           description: v.description || '',
-          imageUrl: v.image_url || '/placeholder.svg',
+          imageUrl: v.cover_image_path || v.image_url || '/placeholder.svg',
           location: v.location || 'Nigeria',
           priceRange: v.price_range || '$$',
           rating: v.rating || 4.5,
           reviewCount: v.review_count || 0,
-          verified: v.is_verified || false,
+          verified: v.verified || v.is_verified || false,
           availability: ['Weekdays', 'Weekends'],
           specialties: [],
           contactInfo: {
@@ -65,7 +65,7 @@ export const useVendorMarketplace = () => {
           price_max: undefined,
           short_description: v.description,
           profile_url: v.website,
-          images: v.image_url ? [v.image_url] : [],
+          images: v.cover_image_path ? [v.cover_image_path] : (v.image_url ? [v.image_url] : []),
           slug: v.id
         }));
 

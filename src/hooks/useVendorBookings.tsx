@@ -102,14 +102,12 @@ export const useVendorBookings = () => {
       }
 
       // Create the vendor booking
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("vendor_bookings")
         .insert({
           vendor_id: bookingData.vendor_id,
-          user_id: user.id,
-          event_date: bookingData.booking_details.event_date,
-          event_type: 'booking',
-          total_amount: bookingData.amount,
+          event_id: eventId,
+          amount: bookingData.amount,
           status: 'pending',
           notes: JSON.stringify(bookingData.booking_details),
         })

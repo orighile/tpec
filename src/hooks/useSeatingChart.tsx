@@ -250,7 +250,7 @@ export const useSeatingChart = (eventId?: string) => {
       
       const { error } = await supabase
         .from("guests")
-        .update({ table_number: tableNumber })
+        .update({ table_assignment: tableNumber?.toString() || null } as any)
         .eq("id", guestId);
 
       if (error) throw error;

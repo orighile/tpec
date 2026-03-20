@@ -113,9 +113,9 @@ export const useVendors = () => {
         throw new Error('User must be authenticated to create a vendor');
       }
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('vendors')
-        .insert([{ ...vendorData, user_id: user.id }])
+        .insert([{ ...vendorData, owner_user_id: user.id }])
         .select()
         .single();
 

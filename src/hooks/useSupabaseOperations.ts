@@ -66,7 +66,7 @@ export const useSupabaseOperations = () => {
       queryKey: ["user-events", user?.id],
       queryFn: async (): Promise<Event[]> => {
         if (!user?.id) return [];
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("events")
           .select("*")
           .eq("user_id", user.id)
