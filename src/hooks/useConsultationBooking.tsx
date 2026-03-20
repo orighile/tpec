@@ -48,7 +48,7 @@ export const useConsultationBooking = () => {
   const { toast } = useToast();
 
   const fetchAvailability = async (): Promise<BookingAvailability[]> => {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from("booking_availability")
       .select("*")
       .eq("is_available", true);
@@ -58,7 +58,7 @@ export const useConsultationBooking = () => {
       return [];
     }
 
-    return data || [];
+    return (data || []) as BookingAvailability[];
   };
 
   const fetchBlockedDates = async (): Promise<BlockedDate[]> => {
