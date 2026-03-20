@@ -52,22 +52,22 @@ export const useVendors = () => {
       }
 
       // Transform the data to match the frontend Vendor type
-      const transformedVendors: Vendor[] = filteredData.map(vendor => ({
+      const transformedVendors: Vendor[] = filteredData.map((vendor: any) => ({
         id: vendor.id,
         name: vendor.name,
         category: vendor.category || 'Other',
         description: vendor.description || '',
-        imageUrl: vendor.image_url || '/placeholder.svg',
+        imageUrl: vendor.cover_image_path || vendor.image_url || '/placeholder.svg',
         location: vendor.location || '',
         priceRange: vendor.price_range || '$$',
         rating: vendor.rating || 4.5,
         reviewCount: vendor.review_count || 0,
-        verified: vendor.is_verified || false,
+        verified: vendor.verified || vendor.is_verified || false,
         availability: ['Weekdays', 'Weekends'],
         specialties: [],
         contactInfo: {
-          email: '', // Hidden from public for security
-          phone: '', // Hidden from public for security
+          email: '',
+          phone: '',
           website: vendor.website || ''
         },
         established: '2020',
@@ -78,7 +78,7 @@ export const useVendors = () => {
         price_max: undefined,
         short_description: vendor.description,
         profile_url: vendor.website,
-        images: vendor.image_url ? [vendor.image_url] : [],
+        images: vendor.cover_image_path ? [vendor.cover_image_path] : (vendor.image_url ? [vendor.image_url] : []),
         slug: vendor.id
       }));
 
