@@ -77,7 +77,7 @@ export const useConsultationBooking = () => {
   const fetchExistingBookings = async (date: Date): Promise<ConsultationBooking[]> => {
     const dateStr = format(date, "yyyy-MM-dd");
     
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from("consultation_bookings")
       .select("*")
       .eq("booking_date", dateStr)
