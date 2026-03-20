@@ -79,7 +79,7 @@ export function useDiscussions() {
       }
 
       const profileMap = new Map(
-        (profiles || []).map((p) => [p.user_id, p])
+        (profiles || []).map((p: any) => [p.id, p])
       );
 
       return discussionsData.map((d) => {
