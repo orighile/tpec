@@ -49,18 +49,17 @@ export const useSupabaseGuests = (eventId?: string) => {
     mutationFn: async (guestData: CreateGuestForm) => {
       if (!user?.id) throw new Error("You must be signed in to add guests.");
       const dbData = {
-        name: guestData.full_name,
+        full_name: guestData.full_name,
         email: guestData.email,
         phone: guestData.phone,
         rsvp_status: guestData.rsvp_status,
         plus_one: guestData.plus_one,
-        dietary_requirements: guestData.meal_preference,
+        meal_preference: guestData.meal_preference,
         notes: guestData.notes,
-        table_number: guestData.table_assignment ? parseInt(guestData.table_assignment) : null,
+        table_assignment: guestData.table_assignment || null,
         event_id: guestData.event_id,
-        user_id: user.id,
       };
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("guests")
         .insert(dbData)
         .select()

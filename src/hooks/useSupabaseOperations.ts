@@ -220,12 +220,12 @@ export const useSupabaseOperations = () => {
       const priceMap = new Map(eventTickets.map((t) => [t.id, t.price]));
       const amount = orderData.items.reduce((sum, it) => sum + (priceMap.get(it.ticket_id) || 0) * it.quantity, 0);
 
-      const { data: order, error: orderErr } = await supabase
+      const { data: order, error: orderErr } = await (supabase as any)
         .from("orders")
         .insert({
           user_id: user.id,
           event_id: orderData.event_id,
-          total_amount: amount,
+          amount: amount,
           status: 'pending',
         })
         .select()
