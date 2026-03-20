@@ -354,7 +354,7 @@ export function useDiscussions() {
   // Delete reply
   const deleteReply = useMutation({
     mutationFn: async ({ replyId, discussionId }: { replyId: string; discussionId: string }) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("discussion_replies")
         .delete()
         .eq("id", replyId);

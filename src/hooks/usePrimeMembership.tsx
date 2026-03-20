@@ -342,7 +342,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
   // Delete gallery image
   const deleteGalleryImage = async (imageId: string): Promise<boolean> => {
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("prime_gallery")
         .delete()
         .eq("id", imageId);
