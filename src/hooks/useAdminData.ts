@@ -74,13 +74,13 @@ export const useAdminData = () => {
   const { data: primeMembers = [], isLoading: primeMembersLoading } = useQuery({
     queryKey: ['admin-prime-members'],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('prime_members')
         .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      return data as PrimeMember[];
+      return (data || []) as PrimeMember[];
     },
   });
 
