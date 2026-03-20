@@ -62,10 +62,10 @@ export function useDiscussions() {
 
       // Fetch author profiles
       const userIds = [...new Set(discussionsData.map((d) => d.user_id))];
-      const { data: profiles } = await supabase
+      const { data: profiles } = await (supabase as any)
         .from("profiles")
-        .select("user_id, full_name, avatar_url")
-        .in("user_id", userIds);
+        .select("id, full_name, avatar_url")
+        .in("id", userIds);
 
       // Check which discussions user has liked
       let likedDiscussionIds: string[] = [];
