@@ -136,11 +136,11 @@ export const useSeatingChart = (eventId?: string) => {
 
       if (error) throw error;
 
-      return data.map(guest => ({
+      return data.map((guest: any) => ({
         id: guest.id,
-        fullName: guest.name || "Unknown",
+        fullName: guest.full_name || guest.name || "Unknown",
         group: "General",
-        tableId: guest.table_number ? `table-${guest.table_number}` : null,
+        tableId: guest.table_assignment ? `table-${guest.table_assignment}` : null,
         email: guest.email || undefined,
         phone: guest.phone || undefined,
         rsvpStatus: guest.rsvp_status as 'pending' | 'confirmed' | 'declined',
