@@ -106,7 +106,7 @@ export const useAdminData = () => {
   // Delete booking
   const deleteBooking = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('consultation_bookings')
         .delete()
         .eq('id', id);
