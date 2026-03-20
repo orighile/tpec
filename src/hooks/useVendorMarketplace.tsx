@@ -33,10 +33,10 @@ export const useVendorMarketplace = () => {
     const fetchVendors = async () => {
       try {
         setIsLoading(true);
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from('vendors')
           .select('*')
-          .eq('is_verified', true);
+          .eq('verified', true);
 
         if (error) throw error;
 
