@@ -82,7 +82,7 @@ export function useDiscussions() {
         (profiles || []).map((p: any) => [p.id, p])
       );
 
-      return discussionsData.map((d) => {
+      return (discussionsData || []).map((d: any) => {
         const profile = profileMap.get(d.user_id);
         return {
           ...d,
