@@ -339,7 +339,7 @@ export function useDiscussions() {
   // Delete discussion
   const deleteDiscussion = useMutation({
     mutationFn: async (discussionId: string) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("discussions")
         .delete()
         .eq("id", discussionId);
