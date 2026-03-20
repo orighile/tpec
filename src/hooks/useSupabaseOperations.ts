@@ -132,10 +132,10 @@ export const useSupabaseOperations = () => {
       queryKey: ["user-vendors", user?.id],
       queryFn: async (): Promise<Vendor[]> => {
         if (!user?.id) return [];
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("vendors")
           .select("*")
-          .eq("user_id", user.id)
+          .eq("owner_user_id", user.id)
           .order("created_at", { ascending: false });
         if (error) throw error;
         return data || [];
