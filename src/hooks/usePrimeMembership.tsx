@@ -202,7 +202,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
     if (!membership?.id) return false;
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from("prime_members")
         .update(data)
         .eq("id", membership.id);
