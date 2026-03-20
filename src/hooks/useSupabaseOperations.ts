@@ -147,11 +147,11 @@ export const useSupabaseOperations = () => {
   const createVendor = useMutation({
     mutationFn: async (vendorData: CreateVendorForm) => {
       if (!user?.id) throw new Error("You must be signed in to create a vendor.");
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("vendors")
         .insert({
           ...vendorData,
-          user_id: user.id,
+          owner_user_id: user.id,
         })
         .select()
         .single();
