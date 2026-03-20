@@ -108,10 +108,10 @@ export function useDiscussions() {
         if (error) throw error;
 
         // Fetch author profile
-        const { data: authorProfile } = await supabase
+        const { data: authorProfile } = await (supabase as any)
           .from("profiles")
           .select("full_name, avatar_url")
-          .eq("user_id", discussion.user_id)
+          .eq("id", discussion.user_id)
           .single();
 
         // Check if user liked this discussion
