@@ -135,7 +135,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
   // Fetch gallery images for a member
   const fetchGalleryImages = async (memberId: string) => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("prime_gallery")
         .select("*")
         .eq("prime_member_id", memberId)
