@@ -56,20 +56,12 @@ export const useBlogManagement = () => {
         const { data, error } = await supabase
           .from("blog_posts")
           .select("*")
-          .eq("status", "published")
+          .eq("published", true)
           .order("published_at", { ascending: false });
 
         if (error) throw error;
         
-        // Fetch categories separately to avoid type issues
-        const posts = data || [];
-        return posts.map(post => ({
-          ...post,
-          published: post.status === 'published',
-          featured: false,
-          cover_image_path: post.featured_image,
-          read_time: 5,
-        })) as unknown as BlogPost[];
+        return (data || []) as unknown as BlogPost[];
       },
     });
   };
