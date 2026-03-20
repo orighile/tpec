@@ -87,7 +87,7 @@ export const useAdminData = () => {
   // Update booking status
   const updateBookingStatus = useMutation({
     mutationFn: async ({ id, status }: { id: string; status: string }) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('consultation_bookings')
         .update({ status })
         .eq('id', id);
