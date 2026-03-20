@@ -326,7 +326,7 @@ export function useDiscussions() {
         });
       }
 
-      await supabase
+      await (supabase as any)
         .from("discussion_replies")
         .update({ likes_count: Math.max(0, currentLikes + (hasLiked ? -1 : 1)) })
         .eq("id", replyId);
