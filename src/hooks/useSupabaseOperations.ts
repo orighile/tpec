@@ -50,7 +50,7 @@ export const useSupabaseOperations = () => {
     return useQuery({
       queryKey: ["events"],
       queryFn: async (): Promise<Event[]> => {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from("events")
           .select("*")
           .eq("is_public", true)
