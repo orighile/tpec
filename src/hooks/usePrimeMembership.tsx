@@ -117,7 +117,7 @@ export const usePrimeMembership = (membershipType: PrimeMembershipType) => {
   // Fetch all active members (for public listing)
   const fetchAllMembers = async () => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("prime_members")
         .select("*")
         .eq("membership_type", membershipType)
