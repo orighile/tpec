@@ -70,7 +70,7 @@ export function useDiscussions() {
       // Check which discussions user has liked
       let likedDiscussionIds: string[] = [];
       if (user) {
-        const { data: likes } = await supabase
+        const { data: likes } = await (supabase as any)
           .from("discussion_likes")
           .select("discussion_id")
           .eq("user_id", user.id)
