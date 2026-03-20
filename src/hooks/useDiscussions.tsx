@@ -117,7 +117,7 @@ export function useDiscussions() {
         // Check if user liked this discussion
         let hasLiked = false;
         if (user) {
-          const { data: like } = await supabase
+          const { data: like } = await (supabase as any)
             .from("discussion_likes")
             .select("id")
             .eq("user_id", user.id)
