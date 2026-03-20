@@ -248,7 +248,7 @@ export function useDiscussions() {
       // Increment replies count
       const currentDiscussion = discussions.find(d => d.id === discussionId);
       const newCount = (currentDiscussion?.replies_count ?? 0) + 1;
-      await supabase
+      await (supabase as any)
         .from("discussions")
         .update({ replies_count: newCount })
         .eq("id", discussionId);
