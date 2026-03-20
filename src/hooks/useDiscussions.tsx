@@ -287,7 +287,7 @@ export function useDiscussions() {
       const newCount = hasLiked ? -1 : 1;
       const discussion = discussions.find((d) => d.id === discussionId);
       if (discussion) {
-        await supabase
+        await (supabase as any)
           .from("discussions")
           .update({ likes_count: Math.max(0, discussion.likes_count + newCount) })
           .eq("id", discussionId);
