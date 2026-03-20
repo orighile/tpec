@@ -62,7 +62,7 @@ export const useConsultationBooking = () => {
   };
 
   const fetchBlockedDates = async (): Promise<BlockedDate[]> => {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from("blocked_dates")
       .select("*");
 
@@ -71,7 +71,7 @@ export const useConsultationBooking = () => {
       return [];
     }
 
-    return data || [];
+    return (data || []) as BlockedDate[];
   };
 
   const fetchExistingBookings = async (date: Date): Promise<ConsultationBooking[]> => {
