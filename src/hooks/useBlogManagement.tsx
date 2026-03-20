@@ -91,7 +91,7 @@ export const useBlogManagement = () => {
           .from("blog_posts")
           .select("*")
           .eq("slug", slug)
-          .eq("status", "published")
+          .eq("published", true)
           .maybeSingle();
 
         if (error) throw error;
@@ -103,13 +103,7 @@ export const useBlogManagement = () => {
           .update({ views: (data.views || 0) + 1 })
           .eq("id", data.id);
 
-        return {
-          ...data,
-          published: data.status === 'published',
-          featured: false,
-          cover_image_path: data.featured_image,
-          read_time: 5,
-        } as unknown as BlogPost;
+        return data as unknown as BlogPost;
       },
       enabled: !!slug,
     });

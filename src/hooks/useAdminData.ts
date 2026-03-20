@@ -125,7 +125,7 @@ export const useAdminData = () => {
   // Toggle prime member active status
   const togglePrimeMemberStatus = useMutation({
     mutationFn: async ({ id, isActive }: { id: string; isActive: boolean }) => {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('prime_members')
         .update({ is_active: isActive })
         .eq('id', id);

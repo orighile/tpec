@@ -186,7 +186,7 @@ export const useConsultationBooking = () => {
         status: "pending",
       };
 
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("consultation_bookings")
         .insert(bookingData)
         .select()

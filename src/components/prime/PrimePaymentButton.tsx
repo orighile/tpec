@@ -145,7 +145,7 @@ export const PrimePaymentButton: React.FC<PrimePaymentButtonProps> = ({
 
     try {
       // Create payment record in database
-      const { data: payment, error: paymentError } = await supabase
+      const { data: payment, error: paymentError } = await (supabase as any)
         .from('prime_payments')
         .insert({
           user_id: user.id,
