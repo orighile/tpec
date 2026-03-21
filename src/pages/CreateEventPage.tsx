@@ -75,6 +75,8 @@ type EventFormValues = z.infer<typeof formSchema>;
 
 const CreateEventPage = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
