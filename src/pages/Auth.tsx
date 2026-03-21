@@ -634,32 +634,10 @@ const Auth = () => {
                               <div className="relative">
                                 <Input 
                                   placeholder="Enter your email" 
-                                  className={`h-11 transition-all focus:ring-2 focus:ring-primary/20 ${
-                                    emailCheckResult === 'checking' ? 'pr-10' : ''
-                                  }`}
-                                  disabled={fieldsDisabled}
+                                  className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
                                   {...field}
-                                  onBlur={(e) => {
-                                    field.onBlur();
-                                    handleEmailBlur(e.target.value);
-                                  }}
                                 />
-                                {emailCheckResult === 'checking' && (
-                                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                                    <div className="animate-spin h-4 w-4 border-2 border-primary border-t-transparent rounded-full"></div>
-                                  </div>
-                                )}
-                                {emailCheckResult === 'available' && (
-                                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                                    <CheckCircle className="h-4 w-4 text-green-500" />
-                                  </div>
-                                )}
                               </div>
-                            </FormControl>
-                            <FormMessage />
-                            {emailCheckResult === 'available' && (
-                              <p className="text-xs text-green-600 mt-1">Email is available!</p>
-                            )}
                           </FormItem>
                         )}
                       />
