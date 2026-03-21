@@ -6,14 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { User, Envelope, Calendar, PencilSimple, FloppyDisk, X, ArrowLeft } from "phosphor-react";
+import { Envelope, Calendar, PencilSimple, FloppyDisk, X, ArrowLeft } from "phosphor-react";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
+import { AvatarUpload } from "@/components/profile/AvatarUpload";
+import { MyEventsSection } from "@/components/profile/MyEventsSection";
 
 const ProfilePage = () => {
   const { user } = useAuth();
