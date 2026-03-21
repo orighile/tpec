@@ -638,6 +638,8 @@ const Auth = () => {
                                   {...field}
                                 />
                               </div>
+                            </FormControl>
+                            <FormMessage />
                           </FormItem>
                         )}
                       />
