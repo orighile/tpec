@@ -648,7 +648,7 @@ const Auth = () => {
                           <FormItem>
                             <FormLabel>Account Type</FormLabel>
                             <FormControl>
-                              <Select 
+                              <Select
                                 value={field.value} 
                                 onValueChange={field.onChange}
                                 disabled={fieldsDisabled}
