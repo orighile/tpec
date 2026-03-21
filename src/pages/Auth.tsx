@@ -391,12 +391,14 @@ const Auth = () => {
           {/* Authentication Tabs */}
           <Tabs defaultValue="login" value={activeTab} onValueChange={(value) => {
             setActiveTab(value);
-            // Reset email check state when switching tabs
-            if (value !== 'signup') {
-              setEmailCheckResult(null);
-              setFieldsDisabled(false);
-            }
           }} className="w-full">
+            <TabsList className="grid w-full grid-cols-3 bg-gray-100 p-1 rounded-lg">
+              <TabsTrigger 
+                value="login" 
+                className="data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all"
+              >
+                Login
+              </TabsTrigger>
               <TabsTrigger 
                 value="signup"
                 className="data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all"
