@@ -118,23 +118,57 @@ const CreateEventPage = () => {
     }
   };
 
-  const onSubmit = (data: EventFormValues) => {
+  const onSubmit = async (data: EventFormValues) => {
+    if (!user) {
+      toast.error("Please sign in to create an event");
+      navigate("/auth");
+      return;
+    }
+
     if (!imageFile) {
       toast.error("Please upload an event image");
       return;
     }
 
-    // Combine form data with image for submission
-    const eventData = {
-      ...data,
-      image: imageFile,
-    };
+    setIsSubmitting(true);
+    try {
+      // Upload image to storage
+      const fileExt = imageFile.name.split(".").pop();
+      const filePath = `${user.id}/${crypto.randomUUID()}.${fileExt}`;
 
-    console.log("Submit event data:", eventData);
-    
-    // Show success toast and redirect
-    toast.success("Event created successfully!");
-    setTimeout(() => navigate("/events"), 1500);
+      const { error: uploadError } = await supabase.storage
+        .from("event-images")
+        .upload(filePath, imageFile, { upsert: true });
+
+      if (uploadError) throw uploadError;
+
+      const { data: urlData } = supabase.storage
+        .from("event-images")
+        .getPublicUrl(filePath);
+
+      // Insert event
+      const { error: insertError } = await supabase.from("events").insert({
+        title: data.title,
+        description: data.description,
+        starts_at: data.date.toISOString(),
+        location: data.location,
+        capacity: data.capacity,
+        category: data.category,
+        cover_image_path: urlData.publicUrl,
+        owner_user_id: user.id,
+        published: true,
+      });
+
+      if (insertError) throw insertError;
+
+      toast.success("Event created successfully!");
+      setTimeout(() => navigate("/events"), 1000);
+    } catch (error: any) {
+      console.error("Error creating event:", error);
+      toast.error(error.message || "Failed to create event");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
