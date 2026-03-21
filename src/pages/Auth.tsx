@@ -616,7 +616,7 @@ const Auth = () => {
                               <Input 
                                 placeholder="Enter your full name" 
                                 className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
-                                disabled={fieldsDisabled}
+                                className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
                                 {...field} 
                               />
                             </FormControl>
