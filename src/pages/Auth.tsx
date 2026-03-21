@@ -50,9 +50,6 @@ type UpdatePasswordFormValues = z.infer<typeof updatePasswordSchema>;
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("login");
-  const [isCheckingEmail, setIsCheckingEmail] = useState(false);
-  const [fieldsDisabled, setFieldsDisabled] = useState(false);
-  const [emailCheckResult, setEmailCheckResult] = useState<'checking' | 'exists' | 'available' | null>(null);
   const [showPasswords, setShowPasswords] = useState({
     login: false,
     signupPassword: false,
