@@ -616,7 +616,6 @@ const Auth = () => {
                               <Input 
                                 placeholder="Enter your full name" 
                                 className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
-                                className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
                                 {...field} 
                               />
                             </FormControl>
@@ -631,13 +630,11 @@ const Auth = () => {
                           <FormItem>
                             <FormLabel>Email Address</FormLabel>
                             <FormControl>
-                              <div className="relative">
-                                <Input 
-                                  placeholder="Enter your email" 
-                                  className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
-                                  {...field}
-                                />
-                              </div>
+                              <Input 
+                                placeholder="Enter your email" 
+                                className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -653,7 +650,6 @@ const Auth = () => {
                               <Select
                                 value={field.value} 
                                 onValueChange={field.onChange}
-                                disabled={fieldsDisabled}
                               >
                                 <SelectTrigger className="h-11">
                                   <SelectValue placeholder="Select account type" />
@@ -664,7 +660,7 @@ const Auth = () => {
                                       <UserCheck className="h-4 w-4" />
                                       <div>
                                         <div className="font-medium">Regular User</div>
-                                        <div className="text-xs text-gray-500">Plan and manage events</div>
+                                        <div className="text-xs text-muted-foreground">Plan and manage events</div>
                                       </div>
                                     </div>
                                   </SelectItem>
@@ -673,7 +669,7 @@ const Auth = () => {
                                       <Store className="h-4 w-4" />
                                       <div>
                                         <div className="font-medium">Vendor</div>
-                                        <div className="text-xs text-gray-500">Offer services to event planners</div>
+                                        <div className="text-xs text-muted-foreground">Offer services to event planners</div>
                                       </div>
                                     </div>
                                   </SelectItem>
@@ -696,7 +692,6 @@ const Auth = () => {
                                   type={showPasswords.signupPassword ? "text" : "password"} 
                                   placeholder="Create a password" 
                                   className="h-11 transition-all focus:ring-2 focus:ring-primary/20 pr-10"
-                                  disabled={fieldsDisabled}
                                   {...field} 
                                 />
                                 <Button
@@ -705,12 +700,11 @@ const Auth = () => {
                                   size="sm"
                                   className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                                   onClick={() => togglePasswordVisibility('signupPassword')}
-                                  disabled={fieldsDisabled}
                                 >
                                   {showPasswords.signupPassword ? (
-                                    <EyeOff className="h-4 w-4 text-gray-500" />
+                                    <EyeOff className="h-4 w-4 text-muted-foreground" />
                                   ) : (
-                                    <Eye className="h-4 w-4 text-gray-500" />
+                                    <Eye className="h-4 w-4 text-muted-foreground" />
                                   )}
                                 </Button>
                               </div>
@@ -731,7 +725,6 @@ const Auth = () => {
                                   type={showPasswords.signupConfirm ? "text" : "password"} 
                                   placeholder="Confirm your password" 
                                   className="h-11 transition-all focus:ring-2 focus:ring-primary/20 pr-10"
-                                  disabled={fieldsDisabled}
                                   {...field} 
                                 />
                                 <Button
@@ -740,12 +733,11 @@ const Auth = () => {
                                   size="sm"
                                   className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                                   onClick={() => togglePasswordVisibility('signupConfirm')}
-                                  disabled={fieldsDisabled}
                                 >
                                   {showPasswords.signupConfirm ? (
-                                    <EyeOff className="h-4 w-4 text-gray-500" />
+                                    <EyeOff className="h-4 w-4 text-muted-foreground" />
                                   ) : (
-                                    <Eye className="h-4 w-4 text-gray-500" />
+                                    <Eye className="h-4 w-4 text-muted-foreground" />
                                   )}
                                 </Button>
                               </div>
@@ -757,11 +749,9 @@ const Auth = () => {
                       <Button 
                         type="submit" 
                         className="w-full h-11 bg-primary hover:bg-primary/90 transition-all transform hover:scale-[1.02]" 
-                        disabled={isLoading || fieldsDisabled || emailCheckResult === 'exists'}
+                        disabled={isLoading}
                       >
-                        {isLoading ? "Creating account..." : 
-                         emailCheckResult === 'checking' ? "Checking email..." :
-                         "Create account"}
+                        {isLoading ? "Creating account..." : "Create account"}
                       </Button>
                     </form>
                   </Form>
