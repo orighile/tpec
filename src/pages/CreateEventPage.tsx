@@ -412,8 +412,9 @@ const CreateEventPage = () => {
                   <Button
                     type="submit"
                     className="w-full bg-primary hover:bg-primary/90 py-6 h-auto text-lg"
+                    disabled={isSubmitting}
                   >
-                    Create Event
+                    {isSubmitting ? "Creating Event..." : "Create Event"}
                   </Button>
                 </div>
               </form>
