@@ -101,12 +101,13 @@ const ProfilePage = () => {
           <div className="lg:col-span-1">
             <Card>
               <CardHeader className="text-center">
-                <Avatar className="h-24 w-24 mx-auto mb-4">
-                  <AvatarImage src={profile?.avatar_url || "/placeholder.svg"} alt="Profile" />
-                  <AvatarFallback className="bg-primary text-primary-foreground text-2xl">
-                    {userInitials}
-                  </AvatarFallback>
-                </Avatar>
+                <AvatarUpload
+                  avatarUrl={profile?.avatar_url}
+                  userInitials={userInitials}
+                  onUpload={(url) => {
+                    refetchProfile();
+                  }}
+                />
                 <CardTitle>{profile?.full_name || "User"}</CardTitle>
                 <CardDescription>{user?.email}</CardDescription>
               </CardHeader>
