@@ -6,18 +6,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { User, Envelope, Calendar, PencilSimple, FloppyDisk, X, ArrowLeft } from "phosphor-react";
+import { Envelope, Calendar, PencilSimple, FloppyDisk, X, ArrowLeft } from "phosphor-react";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
+import { AvatarUpload } from "@/components/profile/AvatarUpload";
+import { MyEventsSection } from "@/components/profile/MyEventsSection";
 
 const ProfilePage = () => {
   const { user } = useAuth();
-  const { profile, isLoading, updateProfile } = useProfile();
+  const { profile, isLoading, updateProfile, refetchProfile } = useProfile();
   const { toast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -100,12 +101,13 @@ const ProfilePage = () => {
           <div className="lg:col-span-1">
             <Card>
               <CardHeader className="text-center">
-                <Avatar className="h-24 w-24 mx-auto mb-4">
-                  <AvatarImage src={profile?.avatar_url || "/placeholder.svg"} alt="Profile" />
-                  <AvatarFallback className="bg-primary text-primary-foreground text-2xl">
-                    {userInitials}
-                  </AvatarFallback>
-                </Avatar>
+                <AvatarUpload
+                  avatarUrl={profile?.avatar_url}
+                  userInitials={userInitials}
+                  onUpload={(url) => {
+                    refetchProfile();
+                  }}
+                />
                 <CardTitle>{profile?.full_name || "User"}</CardTitle>
                 <CardDescription>{user?.email}</CardDescription>
               </CardHeader>
@@ -226,6 +228,9 @@ const ProfilePage = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* My Events */}
+            <MyEventsSection />
           </div>
         </div>
       </div>
