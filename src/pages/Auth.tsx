@@ -50,9 +50,6 @@ type UpdatePasswordFormValues = z.infer<typeof updatePasswordSchema>;
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("login");
-  const [isCheckingEmail, setIsCheckingEmail] = useState(false);
-  const [fieldsDisabled, setFieldsDisabled] = useState(false);
-  const [emailCheckResult, setEmailCheckResult] = useState<'checking' | 'exists' | 'available' | null>(null);
   const [showPasswords, setShowPasswords] = useState({
     login: false,
     signupPassword: false,
@@ -72,61 +69,6 @@ const Auth = () => {
     }));
   };
 
-  // Email checking functionality
-  const checkEmailExists = async (email: string) => {
-    if (!email || !email.includes('@')) return;
-    
-    setIsCheckingEmail(true);
-    setFieldsDisabled(true);
-    setEmailCheckResult('checking');
-    
-    try {
-      // Use a simple approach to check if email exists
-      // Try to sign in with a dummy password to see if email exists
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: 'dummy_password_for_check_12345'
-      });
-      
-      // If error says "Invalid login credentials", email likely exists
-      // If error mentions other issues, email might not exist
-      const emailExists = signInError?.message?.includes('Invalid login credentials') || 
-                         signInError?.message?.includes('Email not confirmed') ||
-                         signInError?.message?.includes('Too many requests');
-      
-      if (emailExists) {
-        setEmailCheckResult('exists');
-        setFieldsDisabled(true);
-        toast({
-          title: "Email already registered",
-          description: "This email is already associated with an account. Switching to login tab.",
-          variant: "default",
-        });
-        setTimeout(() => {
-          setActiveTab('login');
-          loginForm.setValue('email', email);
-          setFieldsDisabled(false);
-          setEmailCheckResult(null);
-        }, 2000);
-      } else {
-        setEmailCheckResult('available');
-        setFieldsDisabled(false);
-      }
-    } catch (error) {
-      console.error('Email check error:', error);
-      setEmailCheckResult('available');
-      setFieldsDisabled(false);
-    } finally {
-      setIsCheckingEmail(false);
-    }
-  };
-
-  // Debounced email check
-  const handleEmailBlur = (email: string) => {
-    if (activeTab === 'signup' && email && email.includes('@')) {
-      checkEmailExists(email);
-    }
-  };
 
   useEffect(() => {
     const checkForResetToken = async () => {
@@ -449,11 +391,6 @@ const Auth = () => {
           {/* Authentication Tabs */}
           <Tabs defaultValue="login" value={activeTab} onValueChange={(value) => {
             setActiveTab(value);
-            // Reset email check state when switching tabs
-            if (value !== 'signup') {
-              setEmailCheckResult(null);
-              setFieldsDisabled(false);
-            }
           }} className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-gray-100 p-1 rounded-lg">
               <TabsTrigger 
@@ -679,7 +616,6 @@ const Auth = () => {
                               <Input 
                                 placeholder="Enter your full name" 
                                 className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
-                                disabled={fieldsDisabled}
                                 {...field} 
                               />
                             </FormControl>
@@ -694,35 +630,13 @@ const Auth = () => {
                           <FormItem>
                             <FormLabel>Email Address</FormLabel>
                             <FormControl>
-                              <div className="relative">
-                                <Input 
-                                  placeholder="Enter your email" 
-                                  className={`h-11 transition-all focus:ring-2 focus:ring-primary/20 ${
-                                    emailCheckResult === 'checking' ? 'pr-10' : ''
-                                  }`}
-                                  disabled={fieldsDisabled}
-                                  {...field}
-                                  onBlur={(e) => {
-                                    field.onBlur();
-                                    handleEmailBlur(e.target.value);
-                                  }}
-                                />
-                                {emailCheckResult === 'checking' && (
-                                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                                    <div className="animate-spin h-4 w-4 border-2 border-primary border-t-transparent rounded-full"></div>
-                                  </div>
-                                )}
-                                {emailCheckResult === 'available' && (
-                                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                                    <CheckCircle className="h-4 w-4 text-green-500" />
-                                  </div>
-                                )}
-                              </div>
+                              <Input 
+                                placeholder="Enter your email" 
+                                className="h-11 transition-all focus:ring-2 focus:ring-primary/20"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
-                            {emailCheckResult === 'available' && (
-                              <p className="text-xs text-green-600 mt-1">Email is available!</p>
-                            )}
                           </FormItem>
                         )}
                       />
@@ -733,10 +647,9 @@ const Auth = () => {
                           <FormItem>
                             <FormLabel>Account Type</FormLabel>
                             <FormControl>
-                              <Select 
+                              <Select
                                 value={field.value} 
                                 onValueChange={field.onChange}
-                                disabled={fieldsDisabled}
                               >
                                 <SelectTrigger className="h-11">
                                   <SelectValue placeholder="Select account type" />
@@ -747,7 +660,7 @@ const Auth = () => {
                                       <UserCheck className="h-4 w-4" />
                                       <div>
                                         <div className="font-medium">Regular User</div>
-                                        <div className="text-xs text-gray-500">Plan and manage events</div>
+                                        <div className="text-xs text-muted-foreground">Plan and manage events</div>
                                       </div>
                                     </div>
                                   </SelectItem>
@@ -756,7 +669,7 @@ const Auth = () => {
                                       <Store className="h-4 w-4" />
                                       <div>
                                         <div className="font-medium">Vendor</div>
-                                        <div className="text-xs text-gray-500">Offer services to event planners</div>
+                                        <div className="text-xs text-muted-foreground">Offer services to event planners</div>
                                       </div>
                                     </div>
                                   </SelectItem>
@@ -779,7 +692,6 @@ const Auth = () => {
                                   type={showPasswords.signupPassword ? "text" : "password"} 
                                   placeholder="Create a password" 
                                   className="h-11 transition-all focus:ring-2 focus:ring-primary/20 pr-10"
-                                  disabled={fieldsDisabled}
                                   {...field} 
                                 />
                                 <Button
@@ -788,12 +700,11 @@ const Auth = () => {
                                   size="sm"
                                   className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                                   onClick={() => togglePasswordVisibility('signupPassword')}
-                                  disabled={fieldsDisabled}
                                 >
                                   {showPasswords.signupPassword ? (
-                                    <EyeOff className="h-4 w-4 text-gray-500" />
+                                    <EyeOff className="h-4 w-4 text-muted-foreground" />
                                   ) : (
-                                    <Eye className="h-4 w-4 text-gray-500" />
+                                    <Eye className="h-4 w-4 text-muted-foreground" />
                                   )}
                                 </Button>
                               </div>
@@ -814,7 +725,6 @@ const Auth = () => {
                                   type={showPasswords.signupConfirm ? "text" : "password"} 
                                   placeholder="Confirm your password" 
                                   className="h-11 transition-all focus:ring-2 focus:ring-primary/20 pr-10"
-                                  disabled={fieldsDisabled}
                                   {...field} 
                                 />
                                 <Button
@@ -823,12 +733,11 @@ const Auth = () => {
                                   size="sm"
                                   className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                                   onClick={() => togglePasswordVisibility('signupConfirm')}
-                                  disabled={fieldsDisabled}
                                 >
                                   {showPasswords.signupConfirm ? (
-                                    <EyeOff className="h-4 w-4 text-gray-500" />
+                                    <EyeOff className="h-4 w-4 text-muted-foreground" />
                                   ) : (
-                                    <Eye className="h-4 w-4 text-gray-500" />
+                                    <Eye className="h-4 w-4 text-muted-foreground" />
                                   )}
                                 </Button>
                               </div>
@@ -840,11 +749,9 @@ const Auth = () => {
                       <Button 
                         type="submit" 
                         className="w-full h-11 bg-primary hover:bg-primary/90 transition-all transform hover:scale-[1.02]" 
-                        disabled={isLoading || fieldsDisabled || emailCheckResult === 'exists'}
+                        disabled={isLoading}
                       >
-                        {isLoading ? "Creating account..." : 
-                         emailCheckResult === 'checking' ? "Checking email..." :
-                         "Create account"}
+                        {isLoading ? "Creating account..." : "Create account"}
                       </Button>
                     </form>
                   </Form>

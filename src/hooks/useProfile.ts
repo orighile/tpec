@@ -60,7 +60,7 @@ export function useProfile() {
         .update(updates)
         .eq('id', user.id)
         .select()
-        .single();
+        .maybeSingle();
 
       if (error) {
         throw error;
