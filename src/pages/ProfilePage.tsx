@@ -18,7 +18,7 @@ import { MyEventsSection } from "@/components/profile/MyEventsSection";
 
 const ProfilePage = () => {
   const { user } = useAuth();
-  const { profile, isLoading, updateProfile } = useProfile();
+  const { profile, isLoading, updateProfile, refetchProfile } = useProfile();
   const { toast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
