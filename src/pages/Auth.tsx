@@ -397,13 +397,6 @@ const Auth = () => {
               setFieldsDisabled(false);
             }
           }} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-gray-100 p-1 rounded-lg">
-              <TabsTrigger 
-                value="login" 
-                className="data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all"
-              >
-                Login
-              </TabsTrigger>
               <TabsTrigger 
                 value="signup"
                 className="data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all"
