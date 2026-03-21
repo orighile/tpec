@@ -228,6 +228,9 @@ const ProfilePage = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* My Events */}
+            <MyEventsSection />
           </div>
         </div>
       </div>
