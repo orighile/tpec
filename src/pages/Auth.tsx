@@ -69,61 +69,6 @@ const Auth = () => {
     }));
   };
 
-  // Email checking functionality
-  const checkEmailExists = async (email: string) => {
-    if (!email || !email.includes('@')) return;
-    
-    setIsCheckingEmail(true);
-    setFieldsDisabled(true);
-    setEmailCheckResult('checking');
-    
-    try {
-      // Use a simple approach to check if email exists
-      // Try to sign in with a dummy password to see if email exists
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: 'dummy_password_for_check_12345'
-      });
-      
-      // If error says "Invalid login credentials", email likely exists
-      // If error mentions other issues, email might not exist
-      const emailExists = signInError?.message?.includes('Invalid login credentials') || 
-                         signInError?.message?.includes('Email not confirmed') ||
-                         signInError?.message?.includes('Too many requests');
-      
-      if (emailExists) {
-        setEmailCheckResult('exists');
-        setFieldsDisabled(true);
-        toast({
-          title: "Email already registered",
-          description: "This email is already associated with an account. Switching to login tab.",
-          variant: "default",
-        });
-        setTimeout(() => {
-          setActiveTab('login');
-          loginForm.setValue('email', email);
-          setFieldsDisabled(false);
-          setEmailCheckResult(null);
-        }, 2000);
-      } else {
-        setEmailCheckResult('available');
-        setFieldsDisabled(false);
-      }
-    } catch (error) {
-      console.error('Email check error:', error);
-      setEmailCheckResult('available');
-      setFieldsDisabled(false);
-    } finally {
-      setIsCheckingEmail(false);
-    }
-  };
-
-  // Debounced email check
-  const handleEmailBlur = (email: string) => {
-    if (activeTab === 'signup' && email && email.includes('@')) {
-      checkEmailExists(email);
-    }
-  };
 
   useEffect(() => {
     const checkForResetToken = async () => {
