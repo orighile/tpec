@@ -188,7 +188,7 @@ const Navbar = () => {
                     className="relative h-10 w-10 rounded-full ring-2 ring-border hover:ring-primary/40 transition-all duration-200"
                   >
                     <Avatar className="h-10 w-10">
-                      <AvatarImage src="/src/assets/avatar-1.jpg" alt="User" />
+                      <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground font-semibold">{userInitials}</AvatarFallback>
                       <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground font-semibold">
                         {userInitials}
                       </AvatarFallback>
