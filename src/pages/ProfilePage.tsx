@@ -17,6 +17,44 @@ import { Link } from "react-router-dom";
 import { AvatarUpload } from "@/components/profile/AvatarUpload";
 import { MyEventsSection } from "@/components/profile/MyEventsSection";
 
+const AccountStats = ({ userId }: { userId?: string }) => {
+  const [stats, setStats] = useState({ events: 0, vendors: 0, reviews: 0 });
+
+  useEffect(() => {
+    if (!userId) return;
+    const fetchStats = async () => {
+      const [eventsRes, vendorsRes, reviewsRes] = await Promise.all([
+        supabase.from("events").select("id", { count: "exact", head: true }).eq("owner_user_id", userId),
+        supabase.from("saved_vendors").select("vendor_id", { count: "exact", head: true }).eq("user_id", userId),
+        supabase.from("reviews").select("id", { count: "exact", head: true }).eq("user_id", userId),
+      ]);
+      setStats({
+        events: eventsRes.count ?? 0,
+        vendors: vendorsRes.count ?? 0,
+        reviews: reviewsRes.count ?? 0,
+      });
+    };
+    fetchStats();
+  }, [userId]);
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+      <div className="p-4 bg-muted rounded-lg">
+        <div className="text-2xl font-bold text-primary">{stats.events}</div>
+        <div className="text-sm text-muted-foreground">Events Created</div>
+      </div>
+      <div className="p-4 bg-muted rounded-lg">
+        <div className="text-2xl font-bold text-primary">{stats.vendors}</div>
+        <div className="text-sm text-muted-foreground">Vendors Saved</div>
+      </div>
+      <div className="p-4 bg-muted rounded-lg">
+        <div className="text-2xl font-bold text-primary">{stats.reviews}</div>
+        <div className="text-sm text-muted-foreground">Reviews Written</div>
+      </div>
+    </div>
+  );
+};
+
 const ProfilePage = () => {
   const { user } = useAuth();
   const { profile, isLoading, updateProfile, refetchProfile } = useProfile();
