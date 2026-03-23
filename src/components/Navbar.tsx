@@ -205,7 +205,16 @@ const Navbar = () => {
                       <p className="text-xs leading-none text-muted-foreground">{userEmail}</p>
                     </div>
                   </DropdownMenuLabel>
-                  <DropdownMenuSeparator className="bg-border" />
+                   <DropdownMenuSeparator className="bg-border" />
+                  <DropdownMenuItem asChild>
+                    <Link
+                      to="/profile"
+                      className="flex items-center cursor-pointer hover:bg-primary/5 focus:bg-primary/5 w-full rounded-lg font-semibold"
+                    >
+                      <List className="mr-2 h-4 w-4" />
+                      My Dashboard
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={handleProfileClick}
                     className="cursor-pointer hover:bg-primary/5 focus:bg-primary/5 rounded-lg"

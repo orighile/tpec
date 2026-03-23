@@ -125,10 +125,7 @@ const CreateEventPage = () => {
       return;
     }
 
-    if (!imageFile) {
-      toast.error("Please upload an event image");
-      return;
-    }
+    // Image is optional
 
     setIsSubmitting(true);
     try {
