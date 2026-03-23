@@ -188,7 +188,6 @@ const Navbar = () => {
                     className="relative h-10 w-10 rounded-full ring-2 ring-border hover:ring-primary/40 transition-all duration-200"
                   >
                     <Avatar className="h-10 w-10">
-                      <AvatarImage src="/src/assets/avatar-1.jpg" alt="User" />
                       <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground font-semibold">
                         {userInitials}
                       </AvatarFallback>
@@ -205,7 +204,16 @@ const Navbar = () => {
                       <p className="text-xs leading-none text-muted-foreground">{userEmail}</p>
                     </div>
                   </DropdownMenuLabel>
-                  <DropdownMenuSeparator className="bg-border" />
+                   <DropdownMenuSeparator className="bg-border" />
+                  <DropdownMenuItem asChild>
+                    <Link
+                      to="/profile"
+                      className="flex items-center cursor-pointer hover:bg-primary/5 focus:bg-primary/5 w-full rounded-lg font-semibold"
+                    >
+                      <List className="mr-2 h-4 w-4" />
+                      My Dashboard
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={handleProfileClick}
                     className="cursor-pointer hover:bg-primary/5 focus:bg-primary/5 rounded-lg"
@@ -299,6 +307,16 @@ const Navbar = () => {
                       {link.title}
                     </Link>
                   ))}
+                  {user && (
+                    <Link
+                      to="/profile"
+                      onClick={handleMobileLinkClick}
+                      className="px-4 py-3 text-foreground hover:text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors flex items-center gap-2"
+                    >
+                      <List className="h-4 w-4" />
+                      My Dashboard
+                    </Link>
+                  )}
                   {isAdmin && (
                     <Link
                       to="/admin"

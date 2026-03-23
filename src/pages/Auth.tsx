@@ -201,7 +201,7 @@ const Auth = () => {
     setIsLoading(true);
     try {
       await signIn(values.email, values.password);
-      navigate("/");
+      navigate("/profile");
     } finally {
       setIsLoading(false);
     }

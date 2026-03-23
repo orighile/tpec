@@ -125,26 +125,27 @@ const CreateEventPage = () => {
       return;
     }
 
-    if (!imageFile) {
-      toast.error("Please upload an event image");
-      return;
-    }
-
+    // Image is optional
     setIsSubmitting(true);
     try {
-      // Upload image to storage
-      const fileExt = imageFile.name.split(".").pop();
-      const filePath = `${user.id}/${crypto.randomUUID()}.${fileExt}`;
+      let coverImageUrl: string | null = null;
 
-      const { error: uploadError } = await supabase.storage
-        .from("event-images")
-        .upload(filePath, imageFile, { upsert: true });
+      if (imageFile) {
+        const fileExt = imageFile.name.split(".").pop();
+        const filePath = `${user.id}/${crypto.randomUUID()}.${fileExt}`;
 
-      if (uploadError) throw uploadError;
+        const { error: uploadError } = await supabase.storage
+          .from("event-images")
+          .upload(filePath, imageFile, { upsert: true });
 
-      const { data: urlData } = supabase.storage
-        .from("event-images")
-        .getPublicUrl(filePath);
+        if (uploadError) throw uploadError;
+
+        const { data: urlData } = supabase.storage
+          .from("event-images")
+          .getPublicUrl(filePath);
+
+        coverImageUrl = urlData.publicUrl;
+      }
 
       // Insert event
       const { error: insertError } = await supabase.from("events").insert({
@@ -154,7 +155,7 @@ const CreateEventPage = () => {
         location: data.location,
         capacity: data.capacity,
         category: data.category,
-        cover_image_path: urlData.publicUrl,
+        cover_image_path: coverImageUrl,
         owner_user_id: user.id,
         published: true,
       });
