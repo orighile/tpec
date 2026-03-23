@@ -307,6 +307,16 @@ const Navbar = () => {
                       {link.title}
                     </Link>
                   ))}
+                  {user && (
+                    <Link
+                      to="/profile"
+                      onClick={handleMobileLinkClick}
+                      className="px-4 py-3 text-foreground hover:text-primary hover:bg-primary/5 rounded-lg font-semibold transition-colors flex items-center gap-2"
+                    >
+                      <List className="h-4 w-4" />
+                      My Dashboard
+                    </Link>
+                  )}
                   {isAdmin && (
                     <Link
                       to="/admin"
