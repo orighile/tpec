@@ -213,20 +213,7 @@ const ProfilePage = () => {
                 <CardDescription>Your event planning activity overview</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                  <div className="p-4 bg-muted rounded-lg">
-                    <div className="text-2xl font-bold text-primary">0</div>
-                    <div className="text-sm text-muted-foreground">Events Created</div>
-                  </div>
-                  <div className="p-4 bg-muted rounded-lg">
-                    <div className="text-2xl font-bold text-primary">0</div>
-                    <div className="text-sm text-muted-foreground">Vendors Saved</div>
-                  </div>
-                  <div className="p-4 bg-muted rounded-lg">
-                    <div className="text-2xl font-bold text-primary">0</div>
-                    <div className="text-sm text-muted-foreground">Reviews Written</div>
-                  </div>
-                </div>
+                <AccountStats userId={user?.id} />
               </CardContent>
             </Card>
 
