@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import TPECLogo from "./TPECLogo";
+import NotificationBell from "./notifications/NotificationBell";
 import { ThemeToggle } from "./theme-toggle";
 import {
   NavigationMenu,
