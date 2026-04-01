@@ -61,6 +61,7 @@ import PlannerBenefitsPage from "./pages/PlannerBenefitsPage";
 import PrimeVendorsPage from "./pages/PrimeVendorsPage";
 import PrimePlannersPage from "./pages/PrimePlannersPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
+import MyBookingsPage from "./pages/MyBookingsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
