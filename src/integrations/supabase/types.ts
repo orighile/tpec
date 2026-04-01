@@ -852,6 +852,8 @@ export type Database = {
           created_at: string
           full_name: string | null
           id: string
+          phone: string | null
+          preferences: Json | null
           provider: string | null
           provider_id: string | null
           role: Database["public"]["Enums"]["app_role"]
@@ -863,6 +865,8 @@ export type Database = {
           created_at?: string
           full_name?: string | null
           id: string
+          phone?: string | null
+          preferences?: Json | null
           provider?: string | null
           provider_id?: string | null
           role?: Database["public"]["Enums"]["app_role"]
@@ -874,6 +878,8 @@ export type Database = {
           created_at?: string
           full_name?: string | null
           id?: string
+          phone?: string | null
+          preferences?: Json | null
           provider?: string | null
           provider_id?: string | null
           role?: Database["public"]["Enums"]["app_role"]

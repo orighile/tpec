@@ -64,6 +64,7 @@ const ProfilePage = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     username: "",
+    phone: "",
   });
 
   // Update form data when profile loads
@@ -72,6 +73,7 @@ const ProfilePage = () => {
       setFormData({
         fullName: profile.full_name || "",
         username: profile.username || "",
+        phone: (profile as any).phone || "",
       });
     }
   }, [profile]);
@@ -88,7 +90,8 @@ const ProfilePage = () => {
       await updateProfile({
         full_name: formData.fullName,
         username: formData.username,
-      });
+        phone: formData.phone,
+      } as any);
       setIsEditing(false);
     } catch (error) {
       // Error is handled in the hook
@@ -101,6 +104,7 @@ const ProfilePage = () => {
     setFormData({
       fullName: profile?.full_name || "",
       username: profile?.username || "",
+      phone: (profile as any)?.phone || "",
     });
     setIsEditing(false);
   };
@@ -213,6 +217,16 @@ const ProfilePage = () => {
                       onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
                       disabled={!isEditing}
                       placeholder="Enter your username"
+                    />
+                  </div>
+                  <div className="space-y-2 md:col-span-2">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      id="phone"
+                      value={formData.phone}
+                      onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                      disabled={!isEditing}
+                      placeholder="Enter your phone number"
                     />
                   </div>
                   <div className="space-y-2 md:col-span-2">

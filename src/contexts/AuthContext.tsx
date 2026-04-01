@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useSessionTimeout } from "@/hooks/useSessionTimeout";
 
 interface Profile {
   id: string;
@@ -35,6 +36,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+  useSessionTimeout();
 
   // Function to fetch user profile
   const fetchProfile = async (userId: string) => {
