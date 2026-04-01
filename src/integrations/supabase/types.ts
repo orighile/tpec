@@ -751,6 +751,69 @@ export type Database = {
         }
         Relationships: []
       }
+      messages: {
+        Row: {
+          attachment_path: string | null
+          content: string
+          created_at: string
+          id: string
+          read: boolean
+          recipient_id: string
+          sender_id: string
+        }
+        Insert: {
+          attachment_path?: string | null
+          content: string
+          created_at?: string
+          id?: string
+          read?: boolean
+          recipient_id: string
+          sender_id: string
+        }
+        Update: {
+          attachment_path?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          read?: boolean
+          recipient_id?: string
+          sender_id?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          message: string | null
+          metadata: Json | null
+          read: boolean
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          metadata?: Json | null
+          read?: boolean
+          title: string
+          type?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          metadata?: Json | null
+          read?: boolean
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       order_items: {
         Row: {
           created_at: string
@@ -1313,6 +1376,7 @@ export type Database = {
       vendor_bookings: {
         Row: {
           amount: number | null
+          booking_details: Json | null
           created_at: string
           currency: string | null
           event_id: string
@@ -1321,10 +1385,12 @@ export type Database = {
           package_id: string | null
           status: string
           updated_at: string
+          user_id: string | null
           vendor_id: string
         }
         Insert: {
           amount?: number | null
+          booking_details?: Json | null
           created_at?: string
           currency?: string | null
           event_id: string
@@ -1333,10 +1399,12 @@ export type Database = {
           package_id?: string | null
           status?: string
           updated_at?: string
+          user_id?: string | null
           vendor_id: string
         }
         Update: {
           amount?: number | null
+          booking_details?: Json | null
           created_at?: string
           currency?: string | null
           event_id?: string
@@ -1345,6 +1413,7 @@ export type Database = {
           package_id?: string | null
           status?: string
           updated_at?: string
+          user_id?: string | null
           vendor_id?: string
         }
         Relationships: [
