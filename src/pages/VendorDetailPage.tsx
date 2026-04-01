@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ChevronLeft, ArrowRight, Star } from "lucide-react";
+import { ChevronLeft, Star } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import VendorDetails from "@/components/VendorDetails";
