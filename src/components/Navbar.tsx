@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Bell, CalendarPlus, User, Gear, List, X, ShieldCheck } from "phosphor-react";
-import { Menu, ChevronDown } from "lucide-react";
+import { CalendarPlus, User, Gear, List, X, ShieldCheck } from "phosphor-react";
+import { Menu, ChevronDown, ShoppingBag } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
