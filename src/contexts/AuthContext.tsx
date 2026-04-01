@@ -36,6 +36,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+  useSessionTimeout();
 
   // Function to fetch user profile
   const fetchProfile = async (userId: string) => {

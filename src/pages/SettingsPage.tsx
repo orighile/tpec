@@ -1,41 +1,30 @@
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { 
-  Bell, 
-  Mail, 
-  Shield, 
-  Trash2, 
-  Download, 
-  Eye, 
-  Globe,
-  Moon,
-  Sun,
-  AlertTriangle
+  Bell, Shield, Trash2, Download, Eye, AlertTriangle, Lock
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,
+  AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
 const SettingsPage = () => {
   const { user, signOut } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const [settings, setSettings] = useState({
     emailNotifications: true,
@@ -48,6 +37,13 @@ const SettingsPage = () => {
     dataCollection: true,
   });
 
+  const [passwordForm, setPasswordForm] = useState({
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
+
   const handleSettingChange = (key: string, value: boolean) => {
     setSettings(prev => ({ ...prev, [key]: value }));
     toast({
@@ -56,229 +52,177 @@ const SettingsPage = () => {
     });
   };
 
+  const handleChangePassword = async () => {
+    if (passwordForm.newPassword.length < 8) {
+      toast({ title: "Password too short", description: "Password must be at least 8 characters.", variant: "destructive" });
+      return;
+    }
+    if (!/[A-Z]/.test(passwordForm.newPassword) || !/[a-z]/.test(passwordForm.newPassword) || !/[0-9]/.test(passwordForm.newPassword) || !/[^A-Za-z0-9]/.test(passwordForm.newPassword)) {
+      toast({ title: "Weak password", description: "Password must include uppercase, lowercase, number, and special character.", variant: "destructive" });
+      return;
+    }
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      toast({ title: "Passwords don't match", variant: "destructive" });
+      return;
+    }
+
+    setIsChangingPassword(true);
+    try {
+      const { error } = await supabase.auth.updateUser({ password: passwordForm.newPassword });
+      if (error) throw error;
+      toast({ title: "Password updated", description: "Your password has been changed successfully." });
+      setPasswordForm({ newPassword: "", confirmPassword: "" });
+    } catch (error: any) {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
+    } finally {
+      setIsChangingPassword(false);
+    }
+  };
+
   const handleDeleteAccount = async () => {
-    // In a real app, you'd implement account deletion logic here
-    toast({
-      title: "Account deletion requested",
-      description: "Your account deletion request has been submitted. You'll receive an email confirmation.",
-      variant: "destructive",
-    });
+    setIsDeletingAccount(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('delete-account');
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      
+      await signOut();
+      toast({ title: "Account deleted", description: "Your account has been permanently deleted." });
+      navigate("/");
+    } catch (error: any) {
+      toast({ title: "Error", description: error.message || "Failed to delete account.", variant: "destructive" });
+    } finally {
+      setIsDeletingAccount(false);
+    }
   };
 
   const handleExportData = () => {
-    // In a real app, you'd implement data export logic here
     toast({
       title: "Data export initiated",
       description: "Your data export will be emailed to you within 24 hours.",
     });
   };
 
+  const SettingRow = ({ id, label, description, checked, onChange }: { id: string; label: string; description: string; checked: boolean; onChange: (v: boolean) => void }) => (
+    <div className="flex items-center justify-between">
+      <div className="space-y-0.5">
+        <Label htmlFor={id}>{label}</Label>
+        <p className="text-sm text-muted-foreground">{description}</p>
+      </div>
+      <Switch id={id} checked={checked} onCheckedChange={onChange} />
+    </div>
+  );
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-          <p className="text-gray-600 mt-2">Manage your account preferences and privacy settings</p>
+          <h1 className="text-3xl font-bold">Settings</h1>
+          <p className="text-muted-foreground mt-2">Manage your account preferences and privacy settings</p>
         </div>
 
         <div className="space-y-6">
-          {/* Notification Settings */}
+          {/* Notifications */}
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Bell className="h-5 w-5" />
-                Notifications
-              </CardTitle>
-              <CardDescription>
-                Choose how you want to be notified about events and updates
-              </CardDescription>
+              <CardTitle className="flex items-center gap-2"><Bell className="h-5 w-5" />Notifications</CardTitle>
+              <CardDescription>Choose how you want to be notified</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="email-notifications">Email Notifications</Label>
-                  <p className="text-sm text-gray-500">Receive notifications via email</p>
-                </div>
-                <Switch
-                  id="email-notifications"
-                  checked={settings.emailNotifications}
-                  onCheckedChange={(checked) => handleSettingChange('emailNotifications', checked)}
-                />
-              </div>
-              
+              <SettingRow id="email-notifications" label="Email Notifications" description="Receive notifications via email" checked={settings.emailNotifications} onChange={v => handleSettingChange('emailNotifications', v)} />
               <Separator />
-              
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="push-notifications">Push Notifications</Label>
-                  <p className="text-sm text-gray-500">Receive push notifications in your browser</p>
-                </div>
-                <Switch
-                  id="push-notifications"
-                  checked={settings.pushNotifications}
-                  onCheckedChange={(checked) => handleSettingChange('pushNotifications', checked)}
-                />
-              </div>
-              
+              <SettingRow id="push-notifications" label="Push Notifications" description="Receive push notifications in your browser" checked={settings.pushNotifications} onChange={v => handleSettingChange('pushNotifications', v)} />
               <Separator />
-              
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="event-reminders">Event Reminders</Label>
-                  <p className="text-sm text-gray-500">Get reminded about upcoming events</p>
-                </div>
-                <Switch
-                  id="event-reminders"
-                  checked={settings.eventReminders}
-                  onCheckedChange={(checked) => handleSettingChange('eventReminders', checked)}
-                />
-              </div>
-              
+              <SettingRow id="event-reminders" label="Event Reminders" description="Get reminded about upcoming events" checked={settings.eventReminders} onChange={v => handleSettingChange('eventReminders', v)} />
               <Separator />
-              
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="vendor-updates">Vendor Updates</Label>
-                  <p className="text-sm text-gray-500">Notifications from your saved vendors</p>
-                </div>
-                <Switch
-                  id="vendor-updates"
-                  checked={settings.vendorUpdates}
-                  onCheckedChange={(checked) => handleSettingChange('vendorUpdates', checked)}
-                />
-              </div>
-              
+              <SettingRow id="vendor-updates" label="Vendor Updates" description="Notifications from your saved vendors" checked={settings.vendorUpdates} onChange={v => handleSettingChange('vendorUpdates', v)} />
               <Separator />
-              
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="marketing-emails">Marketing Emails</Label>
-                  <p className="text-sm text-gray-500">Receive promotional emails and newsletters</p>
-                </div>
-                <Switch
-                  id="marketing-emails"
-                  checked={settings.marketingEmails}
-                  onCheckedChange={(checked) => handleSettingChange('marketingEmails', checked)}
-                />
-              </div>
+              <SettingRow id="marketing-emails" label="Marketing Emails" description="Receive promotional emails and newsletters" checked={settings.marketingEmails} onChange={v => handleSettingChange('marketingEmails', v)} />
             </CardContent>
           </Card>
 
-          {/* Privacy Settings */}
+          {/* Privacy */}
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Shield className="h-5 w-5" />
-                Privacy & Security
-              </CardTitle>
-              <CardDescription>
-                Control your privacy and data sharing preferences
-              </CardDescription>
+              <CardTitle className="flex items-center gap-2"><Shield className="h-5 w-5" />Privacy & Security</CardTitle>
+              <CardDescription>Control your privacy and data sharing preferences</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="public-profile">Public Profile</Label>
-                  <p className="text-sm text-gray-500">Make your profile visible to other users</p>
-                </div>
-                <Switch
-                  id="public-profile"
-                  checked={settings.publicProfile}
-                  onCheckedChange={(checked) => handleSettingChange('publicProfile', checked)}
-                />
-              </div>
-              
+              <SettingRow id="public-profile" label="Public Profile" description="Make your profile visible to other users" checked={settings.publicProfile} onChange={v => handleSettingChange('publicProfile', v)} />
               <Separator />
-              
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="data-collection">Data Collection</Label>
-                  <p className="text-sm text-gray-500">Allow data collection for analytics and improvements</p>
-                </div>
-                <Switch
-                  id="data-collection"
-                  checked={settings.dataCollection}
-                  onCheckedChange={(checked) => handleSettingChange('dataCollection', checked)}
-                />
-              </div>
+              <SettingRow id="data-collection" label="Data Collection" description="Allow data collection for analytics" checked={settings.dataCollection} onChange={v => handleSettingChange('dataCollection', v)} />
             </CardContent>
           </Card>
 
-          {/* Appearance Settings */}
+          {/* Change Password */}
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Eye className="h-5 w-5" />
-                Appearance
-              </CardTitle>
-              <CardDescription>
-                Customize how the application looks and feels
-              </CardDescription>
+              <CardTitle className="flex items-center gap-2"><Lock className="h-5 w-5" />Change Password</CardTitle>
+              <CardDescription>Update your account password</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="dark-mode">Dark Mode</Label>
-                  <p className="text-sm text-gray-500">Switch to dark theme</p>
-                </div>
-                <Switch
-                  id="dark-mode"
-                  checked={settings.darkMode}
-                  onCheckedChange={(checked) => handleSettingChange('darkMode', checked)}
-                />
+              <div className="space-y-2">
+                <Label htmlFor="new-password">New Password</Label>
+                <Input id="new-password" type="password" value={passwordForm.newPassword} onChange={e => setPasswordForm(p => ({ ...p, newPassword: e.target.value }))} placeholder="Min 8 chars, uppercase, lowercase, number, special" />
               </div>
+              <div className="space-y-2">
+                <Label htmlFor="confirm-password">Confirm New Password</Label>
+                <Input id="confirm-password" type="password" value={passwordForm.confirmPassword} onChange={e => setPasswordForm(p => ({ ...p, confirmPassword: e.target.value }))} placeholder="Re-enter new password" />
+              </div>
+              <Button onClick={handleChangePassword} disabled={isChangingPassword || !passwordForm.newPassword}>
+                {isChangingPassword ? "Updating..." : "Update Password"}
+              </Button>
             </CardContent>
           </Card>
 
-          {/* Data & Privacy Actions */}
+          {/* Appearance */}
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Download className="h-5 w-5" />
-                Data Management
-              </CardTitle>
-              <CardDescription>
-                Manage your personal data and account
-              </CardDescription>
+              <CardTitle className="flex items-center gap-2"><Eye className="h-5 w-5" />Appearance</CardTitle>
+              <CardDescription>Customize how the application looks</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent>
+              <SettingRow id="dark-mode" label="Dark Mode" description="Switch to dark theme" checked={settings.darkMode} onChange={v => handleSettingChange('darkMode', v)} />
+            </CardContent>
+          </Card>
+
+          {/* Data Management */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2"><Download className="h-5 w-5" />Data Management</CardTitle>
+              <CardDescription>Manage your personal data</CardDescription>
+            </CardHeader>
+            <CardContent>
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Export Your Data</Label>
-                  <p className="text-sm text-gray-500">Download a copy of all your data</p>
+                  <p className="text-sm text-muted-foreground">Download a copy of all your data</p>
                 </div>
                 <Button variant="outline" onClick={handleExportData}>
-                  <Download className="h-4 w-4 mr-2" />
-                  Export
+                  <Download className="h-4 w-4 mr-2" />Export
                 </Button>
               </div>
             </CardContent>
           </Card>
 
           {/* Danger Zone */}
-          <Card className="border-red-200">
+          <Card className="border-destructive/50">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-red-600">
-                <AlertTriangle className="h-5 w-5" />
-                Danger Zone
-              </CardTitle>
-              <CardDescription>
-                Irreversible and destructive actions
-              </CardDescription>
+              <CardTitle className="flex items-center gap-2 text-destructive"><AlertTriangle className="h-5 w-5" />Danger Zone</CardTitle>
+              <CardDescription>Irreversible and destructive actions</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label className="text-red-600">Delete Account</Label>
-                  <p className="text-sm text-gray-500">Permanently delete your account and all data</p>
+                  <Label className="text-destructive">Delete Account</Label>
+                  <p className="text-sm text-muted-foreground">Permanently delete your account and all data</p>
                 </div>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button variant="destructive">
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Delete Account
+                    <Button variant="destructive" disabled={isDeletingAccount}>
+                      <Trash2 className="h-4 w-4 mr-2" />Delete Account
                     </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
@@ -286,17 +230,13 @@ const SettingsPage = () => {
                       <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                       <AlertDialogDescription>
                         This action cannot be undone. This will permanently delete your account
-                        and remove all your data from our servers, including all events, saved vendors,
-                        and personal information.
+                        and remove all your data from our servers.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction 
-                        onClick={handleDeleteAccount}
-                        className="bg-red-600 hover:bg-red-700"
-                      >
-                        Yes, delete my account
+                      <AlertDialogAction onClick={handleDeleteAccount} className="bg-destructive hover:bg-destructive/90">
+                        {isDeletingAccount ? "Deleting..." : "Yes, delete my account"}
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
