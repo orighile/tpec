@@ -64,6 +64,7 @@ const ProfilePage = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     username: "",
+    phone: "",
   });
 
   // Update form data when profile loads
