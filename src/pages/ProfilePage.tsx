@@ -90,7 +90,8 @@ const ProfilePage = () => {
       await updateProfile({
         full_name: formData.fullName,
         username: formData.username,
-      });
+        phone: formData.phone,
+      } as any);
       setIsEditing(false);
     } catch (error) {
       // Error is handled in the hook
