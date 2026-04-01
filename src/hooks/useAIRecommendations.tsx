@@ -34,13 +34,11 @@ export const useAIRecommendations = (_eventId?: string) => {
     
     try {
       // Query real vendors from Supabase
-      const { data: vendors, error } = await supabase.rpc("get_public_vendors");
+      const { data: vendors } = await supabase.rpc("get_public_vendors");
       
       const newRecommendations: AIRecommendation[] = [];
       
       if (vendors && vendors.length > 0) {
-        // Category-based recommendations
-        const categories = [...new Set(vendors.map((v: any) => v.category))];
         
         for (const vendor of vendors.slice(0, 6)) {
           newRecommendations.push({

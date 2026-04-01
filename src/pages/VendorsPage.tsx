@@ -1,4 +1,4 @@
-import { MapPin, Star, Phone, Mail, Calendar, Building2, Tag, Search, SlidersHorizontal } from "lucide-react";
+import { MapPin, Star, Calendar, Building2, Tag, Search } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";

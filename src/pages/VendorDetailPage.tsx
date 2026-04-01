@@ -14,7 +14,7 @@ const VendorDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [vendorData, setVendorData] = useState<any>(null);
-  const [reviews, setReviews] = useState<any[]>([]);
+  const [_reviews, setReviews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
