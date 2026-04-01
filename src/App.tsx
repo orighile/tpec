@@ -109,6 +109,7 @@ const App = () => (
               <Route path="/ai-recommendations" element={<Layout><AIRecommendationsPage /></Layout>} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/profile" element={<ProtectedRoute><Layout><ProfilePage /></Layout></ProtectedRoute>} />
+              <Route path="/my-bookings" element={<ProtectedRoute><Layout><MyBookingsPage /></Layout></ProtectedRoute>} />
               <Route path="/settings" element={<Layout><SettingsPage /></Layout>} />
               <Route path="/privacy" element={<Layout><PrivacyPolicyPage /></Layout>} />
               <Route path="/terms" element={<Layout><TermsOfServicePage /></Layout>} />

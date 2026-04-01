@@ -222,6 +222,15 @@ const Navbar = () => {
                       My Tasks
                     </Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      to="/my-bookings"
+                      className="flex items-center cursor-pointer hover:bg-primary/5 focus:bg-primary/5 w-full rounded-lg"
+                    >
+                      <ShoppingBag className="mr-2 h-4 w-4" />
+                      My Bookings
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={handleSettingsClick}
                     className="cursor-pointer hover:bg-primary/5 focus:bg-primary/5 rounded-lg"
