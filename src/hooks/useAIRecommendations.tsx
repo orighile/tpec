@@ -1,78 +1,95 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { AIRecommendation } from "@/components/jarabot";
+import { supabase } from "@/integrations/supabase/client";
+
+export interface AIRecommendation {
+  id: string;
+  category: string;
+  title: string;
+  description: string;
+  confidence: number;
+  reasoning: string;
+  createdAt: Date;
+  applied?: boolean;
+  vendorId?: string;
+  vendorName?: string;
+  vendorImage?: string;
+  vendorRating?: number;
+  vendorLocation?: string;
+}
 
 export interface RecommendationFilters {
   category?: string;
   confidence?: number;
 }
 
-export const useAIRecommendations = (eventId?: string) => {
+export const useAIRecommendations = (_eventId?: string) => {
   const { toast } = useToast();
   const [recommendations, setRecommendations] = useState<AIRecommendation[]>([]);
   const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState<RecommendationFilters>({});
 
-  // Generate intelligent recommendations based on event data
-  const generateRecommendations = async (eventData: any) => {
+  const generateRecommendations = async (eventData?: any) => {
     setLoading(true);
     
     try {
-      // In a real implementation, this would call an AI service
-      // For now, we'll generate contextual recommendations based on the event data
+      // Query real vendors from Supabase
+      const { data: vendors } = await supabase.rpc("get_public_vendors");
+      
       const newRecommendations: AIRecommendation[] = [];
       
-      // Budget-based recommendations
-      if (eventData?.budget) {
-        if (eventData.budget < 100000) {
+      if (vendors && vendors.length > 0) {
+        
+        for (const vendor of vendors.slice(0, 6)) {
           newRecommendations.push({
-            id: `rec-budget-${Date.now()}`,
-            category: "budget",
-            title: "Consider buffet service to reduce costs",
-            description: "A buffet service typically costs 30-40% less than plated meals while still providing variety for your guests.",
-            confidence: 85,
-            reasoning: "Your current budget suggests cost efficiency is important. Buffet service reduces labor costs and food waste.",
+            id: `rec-vendor-${vendor.id}`,
+            category: vendor.category?.toLowerCase() || "vendor",
+            title: `Recommended: ${vendor.name}`,
+            description: vendor.short_description || vendor.description || `Top-rated ${vendor.category} vendor in ${vendor.city || vendor.location || "Nigeria"}`,
+            confidence: vendor.verified ? 90 : 75,
+            reasoning: `${vendor.verified ? "Verified vendor" : "Popular vendor"} in the ${vendor.category} category${vendor.city ? ` based in ${vendor.city}` : ""}.`,
             createdAt: new Date(),
+            vendorId: vendor.id,
+            vendorName: vendor.name,
+            vendorImage: vendor.cover_image_path || "/placeholder.svg",
+            vendorRating: 4.5,
+            vendorLocation: vendor.location || vendor.city || "",
           });
         }
       }
-      
-      // Guest count recommendations
-      if (eventData?.guestCount) {
-        if (eventData.guestCount > 200) {
-          newRecommendations.push({
-            id: `rec-venue-${Date.now()}`,
-            category: "venue",
-            title: "Consider outdoor venue for large gatherings",
-            description: "For events with 200+ guests, outdoor venues often provide better space utilization and atmosphere.",
-            confidence: 80,
-            reasoning: "Large guest counts require significant space. Outdoor venues typically offer more flexibility and better cost per square meter.",
-            createdAt: new Date(),
-          });
-        }
-      }
-      
-      // Seasonal recommendations
-      const currentMonth = new Date().getMonth();
-      if (currentMonth >= 11 || currentMonth <= 2) { // Dry season in Nigeria
+
+      // Add contextual recommendations
+      const month = new Date().getMonth();
+      if (month >= 11 || month <= 2) {
         newRecommendations.push({
           id: `rec-season-${Date.now()}`,
           category: "timing",
           title: "Perfect timing for outdoor events",
-          description: "The dry season (November-March) is ideal for outdoor events in Nigeria with minimal rain risk.",
+          description: "The dry season (November-March) is ideal for outdoor events in Nigeria.",
           confidence: 95,
-          reasoning: "Weather data shows less than 5% chance of rain during this period, making outdoor events more reliable.",
+          reasoning: "Weather data shows minimal rain risk during this period.",
           createdAt: new Date(),
         });
       }
 
-      setRecommendations(prev => [...prev, ...newRecommendations]);
+      if (eventData?.budget && eventData.budget < 100000) {
+        newRecommendations.push({
+          id: `rec-budget-${Date.now()}`,
+          category: "budget",
+          title: "Consider buffet service to reduce costs",
+          description: "A buffet service typically costs 30-40% less than plated meals.",
+          confidence: 85,
+          reasoning: "Your budget suggests cost efficiency is important.",
+          createdAt: new Date(),
+        });
+      }
+
+      setRecommendations(newRecommendations);
       
       toast({
-        title: "New Recommendations",
-        description: `Generated ${newRecommendations.length} new recommendations for your event`,
+        title: "Recommendations Ready",
+        description: `Found ${newRecommendations.length} recommendations for you`,
       });
-      
     } catch (error) {
       console.error("Error generating recommendations:", error);
       toast({
@@ -87,24 +104,17 @@ export const useAIRecommendations = (eventId?: string) => {
 
   const dismissRecommendation = (id: string) => {
     setRecommendations(prev => prev.filter(rec => rec.id !== id));
-    
-    toast({
-      title: "Recommendation dismissed",
-      description: "The recommendation has been removed from your list",
-    });
   };
 
   const applyRecommendation = async (id: string) => {
     const recommendation = recommendations.find(rec => rec.id === id);
     if (!recommendation) return;
-
-    // In a real implementation, this would apply the recommendation to the event
+    
     toast({
       title: "Recommendation Applied",
       description: `Applied: ${recommendation.title}`,
     });
     
-    // Mark as applied (could add an 'applied' field to the recommendation)
     setRecommendations(prev => prev.map(rec => 
       rec.id === id ? { ...rec, applied: true } : rec
     ));
@@ -118,26 +128,10 @@ export const useAIRecommendations = (eventId?: string) => {
     });
   };
 
-  // Load recommendations from localStorage for demo
+  // Auto-load on mount
   useEffect(() => {
-    if (!eventId) return;
-    
-    const stored = localStorage.getItem(`recommendations-${eventId}`);
-    if (stored) {
-      try {
-        setRecommendations(JSON.parse(stored));
-      } catch (error) {
-        console.error("Error loading recommendations:", error);
-      }
-    }
-  }, [eventId]);
-
-  // Save recommendations to localStorage
-  useEffect(() => {
-    if (eventId && recommendations.length > 0) {
-      localStorage.setItem(`recommendations-${eventId}`, JSON.stringify(recommendations));
-    }
-  }, [eventId, recommendations]);
+    generateRecommendations();
+  }, []);
 
   return {
     recommendations: getFilteredRecommendations(),

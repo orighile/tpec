@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Bell, CalendarPlus, User, Gear, List, X, ShieldCheck } from "phosphor-react";
-import { Menu, ChevronDown } from "lucide-react";
+import { CalendarPlus, User, Gear, List, X, ShieldCheck } from "phosphor-react";
+import { Menu, ChevronDown, ShoppingBag } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import TPECLogo from "./TPECLogo";
+import NotificationBell from "./notifications/NotificationBell";
 import { ThemeToggle } from "./theme-toggle";
 import {
   NavigationMenu,
@@ -169,16 +170,7 @@ const Navbar = () => {
               <Link to="/create-event">Create Event</Link>
             </Button>
 
-            {user && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="relative text-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-full"
-              >
-                <Bell className="h-5 w-5" />
-                <span className="absolute top-2 right-2 w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-              </Button>
-            )}
+            {user && <NotificationBell />}
 
             {user && (
               <DropdownMenu>
@@ -228,6 +220,15 @@ const Navbar = () => {
                     >
                       <CalendarPlus className="mr-2 h-4 w-4" />
                       My Tasks
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      to="/my-bookings"
+                      className="flex items-center cursor-pointer hover:bg-primary/5 focus:bg-primary/5 w-full rounded-lg"
+                    >
+                      <ShoppingBag className="mr-2 h-4 w-4" />
+                      My Bookings
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem
