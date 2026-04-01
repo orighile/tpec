@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import VendorDetails from "@/components/VendorDetails";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+
 import JaraBot from "@/components/jarabot";
 import { supabase } from "@/integrations/supabase/client";
 import { vendors as localVendors } from "@/data/vendors/vendorsList";
