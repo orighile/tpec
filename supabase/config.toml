@@ -25,4 +25,6 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.prime-stripe-webhook]
+
+[functions.delete-account]
 verify_jwt = false
