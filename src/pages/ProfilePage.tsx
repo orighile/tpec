@@ -220,6 +220,16 @@ const ProfilePage = () => {
                     />
                   </div>
                   <div className="space-y-2 md:col-span-2">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      id="phone"
+                      value={formData.phone}
+                      onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                      disabled={!isEditing}
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+                  <div className="space-y-2 md:col-span-2">
                     <Label htmlFor="email">Email Address</Label>
                     <Input
                       id="email"
