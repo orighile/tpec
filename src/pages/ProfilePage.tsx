@@ -73,6 +73,7 @@ const ProfilePage = () => {
       setFormData({
         fullName: profile.full_name || "",
         username: profile.username || "",
+        phone: (profile as any).phone || "",
       });
     }
   }, [profile]);
