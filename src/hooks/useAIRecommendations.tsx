@@ -23,7 +23,7 @@ export interface RecommendationFilters {
   confidence?: number;
 }
 
-export const useAIRecommendations = (eventId?: string) => {
+export const useAIRecommendations = (_eventId?: string) => {
   const { toast } = useToast();
   const [recommendations, setRecommendations] = useState<AIRecommendation[]>([]);
   const [loading, setLoading] = useState(false);
