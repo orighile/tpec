@@ -143,7 +143,7 @@ const GuestManagementPage = () => {
                 <div className="space-y-4 py-4">
                   <div className="space-y-2">
                     <Label htmlFor="file">File</Label>
-                    <Input id="file" type="file" />
+                    <Input id="file" type="file" accept=".csv" ref={fileInputRef} />
                   </div>
                 </div>
                 <div className="flex justify-end">
