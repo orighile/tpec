@@ -1564,6 +1564,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      create_notification: {
+        Args: {
+          _message?: string
+          _metadata?: Json
+          _title: string
+          _type?: string
+          _user_id: string
+        }
+        Returns: string
+      }
       get_current_user_role: { Args: never; Returns: string }
       get_public_vendors: {
         Args: never
