@@ -261,6 +261,47 @@ serve(async (req) => {
   }
 
   try {
+    // Authenticate caller and verify admin role
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader?.startsWith('Bearer ')) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Unauthorized' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 401 }
+      );
+    }
+
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!;
+    const authClient = createClient(supabaseUrl, supabaseAnonKey, {
+      global: { headers: { Authorization: authHeader } },
+    });
+
+    const token = authHeader.replace('Bearer ', '');
+    const { data: claimsData, error: claimsError } = await authClient.auth.getClaims(token);
+    if (claimsError || !claimsData?.claims) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Unauthorized' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 401 }
+      );
+    }
+
+    const userId = claimsData.claims.sub;
+
+    // Check admin role using service client
+    const serviceClient = createClient(supabaseUrl, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
+    const { data: roleData } = await serviceClient
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', userId)
+      .eq('role', 'admin')
+      .maybeSingle();
+
+    if (!roleData) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Forbidden: admin role required' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 403 }
+      );
+    }
     const body = await req.json().catch(() => ({}));
     const csvContent = body.csvContent;
     const stats = await importVendorsFromCSV(csvContent);
