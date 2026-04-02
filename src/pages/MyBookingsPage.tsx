@@ -56,7 +56,7 @@ const MyBookingsPage = () => {
             {bookings.map((booking: any) => {
               let details: any = {};
               try {
-                details = typeof booking.notes === "string" ? JSON.parse(booking.notes) : (booking.booking_details || {});
+                details = booking.booking_details || (typeof booking.notes === "string" ? JSON.parse(booking.notes) : {});
               } catch { details = {}; }
 
               return (
