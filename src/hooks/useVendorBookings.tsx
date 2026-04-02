@@ -91,7 +91,7 @@ export const useVendorBookings = () => {
             title: `Booking with vendor - ${new Date().toISOString()}`,
             description: `Temporary event for vendor booking`,
             owner_user_id: user.id,
-            event_date: bookingData.booking_details.event_date,
+            starts_at: bookingData.booking_details.event_date,
             location: bookingData.booking_details.location,
           })
           .select()
