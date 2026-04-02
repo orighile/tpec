@@ -107,9 +107,11 @@ export const useVendorBookings = () => {
         .insert({
           vendor_id: bookingData.vendor_id,
           event_id: eventId,
+          user_id: user.id,
           amount: bookingData.amount,
           status: 'pending',
-          notes: JSON.stringify(bookingData.booking_details),
+          booking_details: bookingData.booking_details,
+          notes: bookingData.booking_details.special_requests || null,
         })
         .select()
         .single();
