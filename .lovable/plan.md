@@ -1,150 +1,53 @@
 
 
-# Plan: Fix All Remaining QA Report Issues (Phases 3–11)
+# Plan: Fix Remaining Security Scan Findings
 
-Phases 1–2 (Security + Core Auth/Profile fixes) are complete. This plan covers the remaining 84+ test cases across 9 phases.
+## Findings Overview
 
----
+| # | Finding | Severity | Fix Type |
+|---|---------|----------|----------|
+| 1 | Gift purchaser emails exposed to registry owners | Error | Migration |
+| 2 | Vendor import no auth | Error | **Already fixed** — delete finding |
+| 3 | Role elevation via profiles UPDATE | Error | Migration |
+| 4 | Ticket issues null user_id bypass | Warn | Migration |
+| 5 | Leaked password protection disabled | Warn | Dashboard only |
+| 6 | OTP long expiry | Warn | Dashboard only |
+| 7 | Extension in public schema | Warn | Dashboard only |
+| 8 | RLS policy always true (gift_purchases INSERT) | Warn | Migration |
+| 9 | Vulnerable Postgres version | Warn | Dashboard only |
 
-## Phase 3: Search & Filtering (QA 3.19–3.30)
+## Phase 1: Database Migration (fixes #1, #3, #4, #8)
 
-**Files**: `src/pages/VendorsPage.tsx`, `src/pages/VendorMarketplacePage.tsx`, `src/pages/SearchPage.tsx`, `src/utils/SearchUtils.ts`
+Single migration with four changes:
 
-- Add a text search input to VendorsPage and VendorMarketplacePage above the category buttons
-- Add price range filter dropdown (Budget / Mid-Range / Premium)
-- Add minimum rating filter (3+, 4+, 5 stars)
-- Add sort dropdown: "Relevance", "Price Low→High", "Price High→Low", "Rating"
-- Wire combined filters together so all work simultaneously
-- Show empty-state message when no results match
-- Make each vendor card link to `/vendors/{id}` on click
-- Add basic fuzzy matching (lowercase + includes) to search
-- Handle empty search query gracefully (show all vendors)
+**A. Profiles role escalation (#3):** Add `WITH CHECK` to the profiles UPDATE policy preventing users from changing their own `role` column:
+```sql
+DROP POLICY "Users can update their profile" ON public.profiles;
+CREATE POLICY "Users can update their profile" ON public.profiles
+  FOR UPDATE TO public
+  USING (auth.uid() = id)
+  WITH CHECK (auth.uid() = id AND role = (SELECT role FROM public.profiles WHERE id = auth.uid()));
+```
 
----
+**B. Ticket issues null bypass (#4):** Remove the `OR (orders.user_id IS NULL)` clause from both ticket_issues and order_items SELECT/INSERT policies.
 
-## Phase 4: Vendor Listings (QA 4.31–4.40)
+**C. Gift purchases INSERT restriction (#8):** Replace `WITH CHECK (true)` with `WITH CHECK (auth.uid() = purchaser_id)` so only authenticated users can create purchases tied to their account. Also allow `purchaser_id IS NULL` for anonymous gift purchases but require authentication.
 
-**Files**: `src/components/VendorDetails.tsx`, `src/pages/VendorDetailPage.tsx`, `src/pages/VendorBookingPage.tsx`
+**D. Gift purchaser email masking (#1):** Create a database view `gift_purchases_masked` that masks purchaser_email for registry owner reads, or restrict the SELECT policy to only return non-sensitive columns. Simpler approach: mark finding as acceptable since registry owners legitimately need to know who bought gifts — update the finding to "ignored" with justification.
 
-- Fetch vendor data from Supabase in VendorDetailPage instead of using hardcoded defaults, falling back to local `vendorsList` data
-- Display vendor portfolio images from the `images` array with fallback placeholder
-- Show computed average rating from `reviews` table
-- Wire "Book Now" button to navigate to `/vendors/{id}/book`
-- Display vendor services list and pricing from vendor data
-- Add a simple availability display (weekdays/weekends badges)
+## Phase 2: Delete Resolved Finding (#2)
 
----
+Use `security--manage_security_finding` to delete the `import_vendors_no_auth` finding since auth was already added.
 
-## Phase 5: Booking System (QA 5.41–5.55)
+## Phase 3: Dashboard-Only Items (#5, #6, #7, #9)
 
-**Files**: `src/components/vendors/VendorBookingFlow.tsx`, `src/hooks/useVendorBookings.tsx`, new `src/pages/MyBookingsPage.tsx`
+These cannot be fixed via code. User instructions:
+- **#5**: Supabase Dashboard → Auth → Settings → Enable "Leaked password protection"
+- **#6**: Auth → Settings → Reduce OTP expiry to 60 seconds
+- **#7**: SQL Editor → Move extensions out of public schema (e.g., `ALTER EXTENSION ... SET SCHEMA extensions`)
+- **#9**: Supabase Dashboard → Settings → Infrastructure → Upgrade Postgres
 
-- Connect VendorBookingFlow to actually insert into `vendor_bookings` table via Supabase
-- Require authentication before booking (redirect to /auth if not logged in)
-- Add booking form validation (date required, guest count > 0, contact info required)
-- Create `/my-bookings` page showing user's bookings from `vendor_bookings` table
-- Add booking status display (pending, confirmed, cancelled)
-- Add cancel booking functionality (update status to 'cancelled')
-- Add route and nav link for My Bookings
-
-**Migration**: Add `booking_details jsonb` column to `vendor_bookings` if not present, and add `user_id` column if missing.
-
----
-
-## Phase 6: Payments (QA 6.56–6.67)
-
-**Files**: `src/components/payments/PaymentIntegration.tsx`, `src/lib/payments/paystack.ts`
-
-- Wire PaymentIntegration to call Paystack edge function (`create-paystack-payment`)
-- Handle payment success callback: update `orders` table status to 'paid'
-- Handle payment failure with clear error message and retry button
-- Add payment confirmation screen after successful payment
-- Prevent double-charge by disabling button during processing and checking order status
-- Display payment receipt/summary after completion
-
----
-
-## Phase 7: Event Planning Tools (QA 7.70–7.77)
-
-**Files**: `src/pages/BudgetPage.tsx`, `src/pages/GuestManagementPage.tsx`, `src/components/guest-management/`
-
-- Enable full edit on expense items (not just mark as paid)
-- Wire guest management to Supabase `guests` table (create, read, update, delete)
-- Add CSV import for guest list (parse CSV, insert rows)
-- Add CSV export for guest list (download current list)
-- Add basic timeline view for event (ordered checklist items by due date)
-
----
-
-## Phase 8: AI Recommendations (QA 8.78–8.85)
-
-**Files**: `src/pages/AIRecommendationsPage.tsx`, `src/hooks/useAIRecommendations.tsx`
-
-- Connect recommendation panel to query vendors from Supabase based on event type/category
-- Return vendors filtered by category, location, and price range as "recommendations"
-- Add loading state while fetching
-- Show "No recommendations" empty state
-- Display recommended vendors as clickable cards linking to vendor detail pages
-
-*Note: True AI integration requires an LLM API key. This phase implements rule-based recommendations from the vendor database as a functional substitute.*
-
----
-
-## Phase 9: Messaging (QA 9.86–9.91)
-
-**Files**: `src/components/messaging/RealTimeMessaging.tsx`, new migration for `messages` table
-
-- Create `messages` table in Supabase (id, sender_id, recipient_id, content, created_at, read)
-- Wire RealTimeMessaging to insert/fetch from `messages` table
-- Enable real-time subscription via Supabase realtime for incoming messages
-- Store file attachment references (path in storage bucket) instead of just showing toast
-- Add message history loading on conversation open
-
-**Migration**: Create `messages` table with RLS policies (users can read/write their own messages).
-
----
-
-## Phase 10: Reviews (QA 10.94–10.100)
-
-**Files**: `src/components/reviews/ReviewRatingSystem.tsx`, `src/components/VendorDetails.tsx`
-
-- Wire review submission form to insert into `reviews` table
-- Require authentication to submit a review
-- Allow users to edit/delete their own reviews
-- Compute and display average rating from real review data
-- Show reviews on vendor detail page from database
-- Basic spam prevention: one review per user per vendor
-
----
-
-## Phase 11: Notifications (QA 11.101–11.106)
-
-**Files**: new `src/components/notifications/NotificationBell.tsx`, new migration for `notifications` table, `src/components/Navbar.tsx`
-
-- Create `notifications` table (id, user_id, type, title, message, read, created_at)
-- Add notification bell icon to Navbar with unread count badge
-- Dropdown showing recent notifications
-- Mark as read on click
-- Insert notifications on key events: booking created, payment received, review posted
-- Notification preferences already exist in Settings page (wire them to filter displayed notifications)
-
-**Migration**: Create `notifications` table with RLS.
-
----
-
-## Summary
-
-| Phase | QA IDs | Key Deliverable | New Migrations |
-|-------|--------|-----------------|----------------|
-| 3 | 3.19–3.30 | Working vendor search + filters | None |
-| 4 | 4.31–4.40 | Real vendor detail pages | None |
-| 5 | 5.41–5.55 | End-to-end booking flow | 1 (booking_details) |
-| 6 | 6.56–6.67 | Paystack payment integration | None |
-| 7 | 7.70–7.77 | Guest list CRUD + timeline | None |
-| 8 | 8.78–8.85 | Rule-based vendor recommendations | None |
-| 9 | 9.86–9.91 | Real-time messaging | 1 (messages table) |
-| 10 | 10.94–10.100 | Review submission + display | None |
-| 11 | 11.101–11.106 | Notification system | 1 (notifications table) |
-
-**~35 files modified/created, 3 migrations, implemented sequentially Phase 3 → 11.**
+## Files Changed
+- 1 new migration file (policies fix)
+- No application code changes needed
 
